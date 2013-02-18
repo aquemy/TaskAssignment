@@ -1,19 +1,13 @@
 \documentclass[a4paper,12pt]{report}
-\usepackage{rap}
-
-\title{Projet de C++}
-\author{Adeline Bailly, Gabrielle Diaferia, Pauline Hubert \& Alexandre Quemy - GM4}
-\titlepic{%
- \vspace{3.5cm}
-% \includegraphics[scale=1]{Img/leChat.png}\\
- \vspace{6cm}
- \large{Année 2012-2013}
-}%
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{insa}
 
 % --------------------------------------------------------------------
 \begin{document}
-\date{}
-\maketitle
+\pageDeGarde{Département Génie Mathématique}{Affectation spatiale sous contraintes}{}{Adeline Bailly, Gabrielle Diaferia,\\ Pauline Hubert \& Alexandre Quemy}{\textbf{Rapport de projet C++} \\Janvier 2013 - Juin 2013}
+\pageINSA
+
 \thispagestyle{empty}
 
 %%- Table des matières
@@ -24,8 +18,17 @@
 \chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}
 \input{intro.tex}
 
+\chapter{Méthodologie}
+\input{methodologie.tex}
+
 \chapter{Modélisation}
 \input{modelisation.tex}
+
+\chapter{Implémentation}
+\input{implementation.tex}
+
+\chapter{Application}
+\input{application.tex}
 
 \chapter{Livrable}
 \input{livrable.tex}
