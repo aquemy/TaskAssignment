@@ -1,9 +1,44 @@
 \section{Analyse fonctionnelle}
 \subsection{Introduction}
+Nous avons un monde clos qui peut être totalement observable ou partiellement observable. Le monde est modélisé par un plan sur lequel nous avons des objets avec deux états possibles : bloquant ou non. Certains objets représentent des tâches qui mettent un certain temps à s'accomplir (et donc disparaître). Une tâche permet d'augmenter une quantité et plusieurs quantités sont disponibles (classiquement un type de tâche augmente une certaine quantité mais on peut imaginer une tâche qui augmente plusieurs quantités).\\
+On dispose d'un certain nombre de ressources capable d'être affectées à différente tâche. Chaque ressource dispose d'une vitesse pour se déplacer dans le monde, mais également d'une vitesse d'exécution pour chaque tâche (on peut avoir une vitesse de 0, auquel cas il est impossible d'effectuer la tâche par une telle ressource). Les ressources peuvent elle même apparaître ou disparaître selon certains évènements.\\\\
+
+L'IA observe le monde et doit en temps réel respecter des contraintes, voire réaliser des objectifs. Une contrainte s'exprime sur les quantités. Il peut s'agir d'un seuil minimal, ou d'un ratio rapport aux autres quantités.\\
+Un objectif est une contrainte ponctuelle qui doit être réalisé au plus vite sans tenir compte des contraintes.\\\\
+
+L'IA dispose d'une ou plusieurs stratégies qui peuvent s'interchanger via un DP Strategy et qui résolvent certaines contraintes.
+L'IA dispose également d'un opérateur de partitionnement spacial et un d'un opérateur d'indexation spatial qui permettent respectivement la séparation du monde en sous blocs, facilitant l'application des diverses heuristiques utilisées par la suite, et le repérage spatial toujours dans l'objectif de faciliter l'application des méthodes d'affectation.\\
+
+La stratégie tourne en parallèle de la mise à jour fréquente de la perception du monde par l'IA. Elle est composée de diverses heuristiques qui conjointement vont permettrent l'affecation des ressources aux tâches.
+Chaque stratégie est propre et plusieurs approches peuvent être envisagées comme nous le verrons par la suite. De manière générale, des algorithmes de plus court chemin sont utilisés, selon diverses métriques. Ces algorithmes servent à évaluer chaque individu en vue d'appliquer un algorithme d'affectation (soit déterministe, soit via une métaheuristique).\\\\
+
+On peut imaginer plusieurs modes d'apprentissage. Dans un premier temps, on peut imaginer aucun apprentissage. On considère que l'on fait toujours le meilleur des choix et l'on n'évalue pas les actions entreprises.\\
+Il peut être intéressant également de pouvoir se placer dans un système où l'on est incertain sur les résultats des actions puisque le système étant en temps réel, il est toujours possible qu'un évènement survienne avant la fin d'une action, perturbant alors son résultat. On pourra alors modéliser tout le processus de décision par un Processus de décision markovien et des algorithmes d'apprentissage par renforcement.\\\\
+
+Dans un premier temps on essayera de se ramener à de l'optimisation mono-objectif (en sommant par exemple les fonctions de coût), et dans un second temps on essayera de faire de l'optimisation multi-objectif à base de front de Pareto.
 \subsection{Cas d'utilisation}
 \subsection{Scénarios}
 %
 \section{Briques logicielles}
+\subsection{L'environnement}
+\subsubsection{Le terrain}
+\subsubsection{Les tâches}
+\subsubsection{Les ressources}
+\subsection{Les stratégies}
+\subsubsection{Les contraintes \& objectifs}
+\subsection{L'IA}
+\subsubsection{Design Pattern Observateur}
+Observe le monde
+\subsubsection{Design Pattern Etat et Strategie}
+Changement d'état
+\subsubsection{Design Pattern Interpreteur}
+Interprétation des contraintes
+\subsection{Module graphes}
+\subsubsection{Design Pattern Décorateur}
+\subsubsection{Design Pattern Fabrique et Fabrique Abstraite}
+Pour la création des différents graphes selon les thématiques
+\subsection{Module Plus Court Chemin}
+\subsection{Module Affectation}
 
 %
 \section{Partitionnement et indexation spatial}
@@ -39,12 +74,23 @@
 \section{Moteur de contraintes et plannification}
 \subsection{STRIPS}
 \subsection{Graphplan}
-\subsection{Modèle de Markov Caché}
-\subsection{Processus de décision markovien partiellement observable}
+\subsection{Processus de décision markovien}
+Algorithmes d'apprentissage par renforcement
+Modèle de Markov Caché
+Processus de décision markovien partiellement observable
 
-\section{Vrac}
+\section{Divers}
 \subsection{Métriques}
 \subsubsection{Distance euclidienne}
 \subsubsection{Distance de Manhattan}
 \subsubsection{Distance de Hamming}
 \subsubsection{Distance de Mahalanobis}
+\subsubsection{Distance de Hausdorff}
+\subsubsection{Distance de Levenshtein}
+
+\subsection{Logger}
+\subsubsection{Présentation}
+Dans un framework où de nombreux composants vont être manipulé par un client final, il est important de pouvoir laisser une trace de chaque opération effectuée, surtout lorsque le flux d'exécution peut être complexe voire non déterministe.
+\subsubsection{Design Pattern Chaine de responsabilité}
+
+\subsection{Modèle parallèle}
