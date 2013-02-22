@@ -25,8 +25,6 @@ After unpacking the archive file, you should end up with the following structure
    |
    +-- CMakeLists.txt			  For building process
    |
-   +-- CTestConfig.cmake		  For testing process
-   |
    +-- doc                        Documentation and presentations directory
    |
    +-- include                    Include directory 

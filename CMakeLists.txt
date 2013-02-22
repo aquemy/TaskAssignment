@@ -52,14 +52,16 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Macro.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake)
 
 ######################################################################################
-### 4) Define and add module paths : EO, MO, MOEO
+### 4) Define and add module paths
 ######################################################################################
 
 ## Paths
-set(SIF_SRC_DIR "${CMAKE_SOURCE_DIR}/src" CACHE INTERNAL "SIF source directory" FORCE)
-set(SIF_BIN_DIR "${CMAKE_BINARY_DIR}/src" CACHE INTERNAL "SIF binary directory" FORCE)
+set(SIF_SRC_DIR "${CMAKE_SOURCE_DIR}/src/SIF" CACHE INTERNAL "SIF source directory" FORCE)
+set(SIF_BIN_DIR "${CMAKE_BINARY_DIR}" CACHE INTERNAL "SIF binary directory" FORCE)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_subdirectory(${SIF_SRC_DIR})
+add_subdirectory(test)
 
 ######################################################################################
 ### 5) Packaging : only in release !

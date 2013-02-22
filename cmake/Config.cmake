@@ -38,8 +38,8 @@ else(DEBUG)
 endif(DEBUG)
 
 add_definitions(-DDEPRECATED_MESSAGES)
-set(CMAKE_CXX_FLAGS_DEBUG  "-Wunknown-pragmas -O0 -g -Wall -Wextra -ansi -pedantic" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_RELEASE  "-Wunknown-pragmas -O2" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS_DEBUG "-std=c+11 -Wunknown-pragmas -O0 -g -Wall -Wextra -ansi -pedantic" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS_RELEASE "-std=c++11 -Wunknown-pragmas -O2" CACHE STRING "" FORCE)
 
 ######################################################################################
 ### 1) Define installation type
@@ -48,11 +48,11 @@ set(CMAKE_CXX_FLAGS_RELEASE  "-Wunknown-pragmas -O2" CACHE STRING "" FORCE)
 if(INSTALL_TYPE STREQUAL full)
     set(ENABLE_CMAKE_EXAMPLE "true" CACHE BOOL "SIF examples")
     set(ENABLE_CMAKE_TESTING "true" CACHE BOOL "SIF tests")
-    set(ENABLE_CMAKE_TESTING "true" CACHE BOOL "SIF applications")
+    set(ENABLE_CMAKE_APP     "true" CACHE BOOL "SIF applications")
 elseif(INSTALL_TYPE STREQUAL min OR NOT DEFINED INSTALL_TYPE)
     set(ENABLE_CMAKE_EXAMPLE "false" CACHE BOOL "SIF examples")
     set(ENABLE_CMAKE_TESTING "false" CACHE BOOL "SIF tests")
-    set(ENABLE_CMAKE_TESTING "false" CACHE BOOL "SIF applications")
+    set(ENABLE_CMAKE_APP     "false" CACHE BOOL "SIF applications")
 endif()
 
 ######################################################################################
