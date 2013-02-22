@@ -93,11 +93,6 @@ void Logger::setVerbose(int _level)
     loggerChain->setVerbose(_level);
 }
     
-void Logger::setStatus(int _level, bool _quiet)
-{
-    loggerChain->setStatus(_level, _quiet);
-}
-    
 int Logger::getCurrentLevel() const
 {
     return currentLevel;

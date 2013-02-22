@@ -33,16 +33,16 @@
 
 #include <SIF/utils/baseLogger.hpp>
 
-/** Logger : Logger class
+namespace sif
+{
+
+/** Logger : Logging interface
 
 The Logger class is based on a Chain of Responsability pattern using logging level.
 It defines 5 levels of logging that can be manipulated separatly through its interface.
 
 @see sif::BaseLogger
 */
-
-namespace sif
-{
 
 class Logger
 {
@@ -72,14 +72,14 @@ public :
     
     /**
      * Start to serialize (all levels)
-     * @param Log file for serialization
+     * @param _logFile Log file for serialization
      */
     void startSerialize(std::string _logFile);
     
     /**
      * Start to serialize
-     * @param Level of logging
-     * @param Log file for serialization
+     * @param _level Level of logging
+     * @param _logFile Log file for serialization
      */
     void startSerialize(int _level, std::string _logFile);
     
@@ -90,7 +90,7 @@ public :
     
     /**
      * Stop to serialize
-     * @param Level of logging
+     * @param _level Level of logging
      */
     void stopSerialize(int _level);
     
@@ -101,7 +101,7 @@ public :
     
     /**
      * Stop writting on printing stream
-     * @param Level of logging
+     * @param _level Level of logging
      */ 
     void setQuiet(int _level);
     
@@ -112,25 +112,25 @@ public :
     
     /**
      * Start writting on printing stream
-     * @param Level of logging
+     * @param _level Level of logging
      */  
     void setVerbose(int _level);
     
     /**
      * Return the current level of log
-     * @return Level of log
+     * @return _level Level of log
      */  
     int getCurrentLevel() const;
     
     /**
      * Set the current level of log
-     * @param Level of log
+     * @param _level Level of log
      */  
     void setCurrentLevel(int _level);
     
     /**
      * Set the current level of log (better user interface)
-     * @param Level of log
+     * @param _level Level of log
      */      
     Logger& operator()(int _level);
     

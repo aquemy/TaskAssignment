@@ -61,6 +61,7 @@ set(SIF_BIN_DIR "${CMAKE_BINARY_DIR}" CACHE INTERNAL "SIF binary directory" FORC
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_subdirectory(${SIF_SRC_DIR})
+add_subdirectory(doc)
 add_subdirectory(test)
 
 ######################################################################################
