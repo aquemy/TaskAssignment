@@ -34,6 +34,10 @@
 namespace sif
 {
 
+/**
+* Get the current time
+* @return String according to the current time
+*/  
 const std::string currentTime();
 
 }

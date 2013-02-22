@@ -37,73 +37,54 @@ namespace sif
 {
 
 BaseLogger::BaseLogger(int _level, std::string _label, std::ostream& _os, bool _quiet) :
-        level(_level),
-        next(nullptr),
-        os(&_os),
-        quiet(_quiet),
-        logFile(""),
-        of(nullptr),
-        serialize(false)
-    {
-        std::transform(_label.begin(), _label.end(), _label.begin(), (int (*)(int))std::toupper);
-        label = _label.substr(0,5);
-    };
+    level(_level),
+    next(nullptr),
+    os(&_os),
+    quiet(_quiet),
+    logFile(""),
+    of(nullptr),
+    serialize(false)
+{
+    std::transform(_label.begin(), _label.end(), _label.begin(), (int (*)(int))std::toupper);
+    label = _label.substr(0,5);
+};
     
 BaseLogger::BaseLogger(int _level, std::string _label,  std::string _logFile, std::ostream& _os
 , bool _quiet) :
-        BaseLogger(_level,_label, _os, _quiet)
-    {
-        logFile = _logFile;
-        of = new std::ofstream(logFile, std::ios_base::ate | std::ios_base::app);
-        serialize = true;
-    }
+    BaseLogger(_level,_label, _os, _quiet)
+{
+    logFile = _logFile;
+     of = new std::ofstream(logFile, std::ios_base::ate | std::ios_base::app);
+    serialize = true;
+}
     
 BaseLogger::~BaseLogger()
-    {
-        delete of;
-    }
+{
+    delete of;
+}
  
 BaseLogger* BaseLogger::setNext(BaseLogger* _next)
-    {
-        next = _next;
-        return getNext();
-    }
+{
+    next = _next;
+    return getNext();
+}
         
 BaseLogger* BaseLogger::getNext() const
-    {
-        return next;
-    }
+{
+    return next;
+}
  
-    void BaseLogger::handle(const std::string msg, int priority)
-    {
-        if (priority <= level)
-            *this << msg;
-        else if (next != nullptr)
-            next->handle(msg, priority);
-    }
+void BaseLogger::handle(const std::string msg, int priority)
+{
+    if (priority <= level)
+        *this << msg;
+    else if (next != nullptr)
+         next->handle(msg, priority);
+}
     
-    void BaseLogger::startSerialize(int _level, std::string _logFile)
-    {
-        if (_level <= level)
-        {
-            if(!_logFile.empty())
-            {
-                if(logFile != _logFile)
-                {
-                    logFile = _logFile;
-                    if(of != nullptr)
-                        delete of;
-                        
-                    of = new std::ofstream(logFile, std::ios_base::ate | std::ios_base::app);
-                    serialize = true;
-                }
-            }
-        }
-        else if (next != nullptr)
-            next->startSerialize(_level, _logFile);
-    }
-    
-    void BaseLogger::startSerialize(std::string _logFile)
+void BaseLogger::startSerialize(int _level, std::string _logFile)
+{
+    if (_level <= level)
     {
         if(!_logFile.empty())
         {
@@ -117,86 +98,97 @@ BaseLogger* BaseLogger::getNext() const
                 serialize = true;
             }
         }
-        if (next != nullptr)
-            next->startSerialize(_logFile);
     }
+    else if (next != nullptr)
+        next->startSerialize(_level, _logFile);
+}
     
-    void BaseLogger::stopSerialize(int _level)
+void BaseLogger::startSerialize(std::string _logFile)
+{
+    if(!_logFile.empty())
     {
-        if (_level <= level)
-            serialize = false;
-        else if (next != nullptr)
-            next->stopSerialize(_level);
+        if(logFile != _logFile)
+        {
+            logFile = _logFile;
+            if(of != nullptr)
+                delete of;
+                        
+            of = new std::ofstream(logFile, std::ios_base::ate | std::ios_base::app);
+            serialize = true;
+        }
     }
+    if (next != nullptr)
+        next->startSerialize(_logFile);
+}
     
-    void BaseLogger::stopSerialize()
-    {
+void BaseLogger::stopSerialize(int _level)
+{
+    if (_level <= level)
+        serialize = false;
+    else if (next != nullptr)
+        next->stopSerialize(_level);
+}
+    
+void BaseLogger::stopSerialize()
+{
         serialize = false; 
         if (next != nullptr)
             next->stopSerialize();
-    }
+}
         
-    void BaseLogger::setQuiet()
-    {
+void BaseLogger::setQuiet()
+{
+    quiet = true;
+    if (next != nullptr)
+        next->setQuiet();
+}
+    
+void BaseLogger::setQuiet(int _level)
+{
+    if (_level <= level)
         quiet = true;
-        if (next != nullptr)
-            next->setQuiet();
-    }
-    
-    void BaseLogger::setQuiet(int _level)
-    {
-        if (_level <= level)
-            quiet = true;
-        else if (next != nullptr)
-            next->setQuiet(_level);
-    }
+    else if (next != nullptr)
+        next->setQuiet(_level);
+}
         
-    void BaseLogger::setVerbose()
-    {
+void BaseLogger::setVerbose()
+{
+    quiet = false;
+    if (next != nullptr)
+        next->setVerbose();
+}
+    
+void BaseLogger::setVerbose(int _level)
+{
+    if (_level <= level)
         quiet = false;
-        if (next != nullptr)
-            next->setVerbose();
-    }
-    
-    void BaseLogger::setVerbose(int _level)
-    {
-        if (_level <= level)
-            quiet = false;
-        else if (next != nullptr)
-            next->setVerbose(_level);
-    }
+    else if (next != nullptr)
+        next->setVerbose(_level);
+}
         
-    void BaseLogger::setStatus(int _level, bool _status)
-    {
-        if (_level <= level)
-            quiet = _status;
-        else if (next != nullptr)
-            next->setStatus(_level, _status);
-    }
-        
-    void BaseLogger::print(const std::string _msg, std::ostream* _stream)
-    {
-        *_stream << currentTime()
-           << " - ["
-           << std::setw (5)
-           << std::setiosflags (std::ios::right)
-           << label
-           << "] : "
-           << _msg 
-           << std::endl;
-    }
+void BaseLogger::print(const std::string _msg, std::ostream* _stream)
+{
+    *_stream << currentTime()
+             << " - ["
+             << std::setw (5)
+             << std::setiosflags (std::ios::right)
+             << label
+             << "] : "
+             << _msg 
+             << std::endl;
+}
     
-    void BaseLogger::log(std::string _msg)
-    {
-        if(!quiet)
-            print(_msg, os);
-        if(serialize && of != nullptr)
-            print(_msg, of);
-    }
+void BaseLogger::log(std::string _msg)
+{
+    if(!quiet)
+        print(_msg, os);
+    if(serialize && of != nullptr)
+        print(_msg, of);
+}
  
-    BaseLogger& operator<<(BaseLogger& _logger, const std::string _msg)
-    {
-        _logger.log(_msg);
-    }
+BaseLogger& operator<<(BaseLogger& _logger, const std::string _msg)
+{
+    _logger.log(_msg);
+}
 
 }

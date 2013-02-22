@@ -30,93 +30,94 @@
 
 namespace sif
 {
-    Logger::Logger()
-    {
-        loggerChain = new BaseLogger(Logger::INFO, "INFO");
-        BaseLogger* p = loggerChain;
-        p = p->setNext(new BaseLogger(Logger::PROGRESS, "PROG"));
-        p = p->setNext(new BaseLogger(Logger::WARNING, "WARN"));
-        p = p->setNext(new BaseLogger(Logger::ERROR, "ERROR", std::cerr));
-        p = p->setNext(new BaseLogger(Logger::DEBUG, "DEBUG"));
-    }
+
+Logger::Logger()
+{
+    loggerChain = new BaseLogger(Logger::INFO, "INFO");
+    BaseLogger* p = loggerChain;
+    p = p->setNext(new BaseLogger(Logger::PROGRESS, "PROG"));
+    p = p->setNext(new BaseLogger(Logger::WARNING, "WARN"));
+    p = p->setNext(new BaseLogger(Logger::ERROR, "ERROR", std::cerr));
+    p = p->setNext(new BaseLogger(Logger::DEBUG, "DEBUG"));
+}
     
-    Logger::~Logger()
+Logger::~Logger()
+{
+    BaseLogger* p = loggerChain;
+    BaseLogger* q = p;
+    while(p != nullptr)
     {
-        BaseLogger* p = loggerChain;
-        BaseLogger* q = p;
-        while(p != nullptr)
-        {
-            p = p->getNext();
-            delete q;
-            q = p;
-        }
+        p = p->getNext();
+        delete q;
+        q = p;
     }
+}
     
-    void Logger::startSerialize(std::string _logFile)
-    {
-        loggerChain->startSerialize(_logFile);
-    }
+void Logger::startSerialize(std::string _logFile)
+{
+    loggerChain->startSerialize(_logFile);
+}
     
-    void Logger::startSerialize(int _level, std::string _logFile)
-    {
-        loggerChain->startSerialize(_level, _logFile);
-    }
+void Logger::startSerialize(int _level, std::string _logFile)
+{
+    loggerChain->startSerialize(_level, _logFile);
+}
     
-    void Logger::stopSerialize()
-    {
-        loggerChain->stopSerialize();
-    }
+void Logger::stopSerialize()
+{
+    loggerChain->stopSerialize();
+}
     
-    void Logger::stopSerialize(int _level)
-    {
-        loggerChain->stopSerialize(_level);
-    }
+void Logger::stopSerialize(int _level)
+{
+    loggerChain->stopSerialize(_level);
+}
     
-    void Logger::setQuiet()
-    {
-        loggerChain->setQuiet();
-    }
+void Logger::setQuiet()
+{
+    loggerChain->setQuiet();
+}
     
-    void Logger::setQuiet(int _level)
-    {
-        loggerChain->setQuiet(_level);
-    }
+void Logger::setQuiet(int _level)
+{
+    loggerChain->setQuiet(_level);
+}
     
-    void Logger::setVerbose()
-    {
-        loggerChain->setVerbose();
-    }
+void Logger::setVerbose()
+{
+    loggerChain->setVerbose();
+}
     
-    void Logger::setVerbose(int _level)
-    {
-        loggerChain->setVerbose(_level);
-    }
+void Logger::setVerbose(int _level)
+{
+    loggerChain->setVerbose(_level);
+}
     
-    void Logger::setStatus(int _level, bool _quiet)
-    {
-        loggerChain->setStatus(_level, _quiet);
-    }
+void Logger::setStatus(int _level, bool _quiet)
+{
+    loggerChain->setStatus(_level, _quiet);
+}
     
-    int Logger::getCurrentLevel() const
-    {
-        return currentLevel;
-    }
+int Logger::getCurrentLevel() const
+{
+    return currentLevel;
+}
     
-    void Logger::setCurrentLevel(int _level)
-    {
-        currentLevel = _level;
-    }
+void Logger::setCurrentLevel(int _level)
+{
+    currentLevel = _level;
+}
         
-    Logger& Logger::operator()(int _level)
-    {
-        setCurrentLevel(_level);
-        return *this;
-    }
+Logger& Logger::operator()(int _level)
+{
+    setCurrentLevel(_level);
+    return *this;
+}
     
-    Logger& operator<<(Logger& _logger, const std::string _msg)
-    {
-        _logger.loggerChain->handle(_msg, _logger.getCurrentLevel());
-    }
+Logger& operator<<(Logger& _logger, const std::string _msg)
+{
+    _logger.loggerChain->handle(_msg, _logger.getCurrentLevel());
+}
 
 }
 

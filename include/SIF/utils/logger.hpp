@@ -33,12 +33,23 @@
 
 #include <SIF/utils/baseLogger.hpp>
 
+/** Logger : Logger class
+
+The Logger class is based on a Chain of Responsability pattern using logging level.
+It defines 5 levels of logging that can be manipulated separatly through its interface.
+
+@see sif::BaseLogger
+*/
+
 namespace sif
 {
 
 class Logger
 {
 public :
+    /**
+     * Logger Levels
+     */
     enum
     {
         INFO,
@@ -48,32 +59,79 @@ public :
         DEBUG,
     };
     
+    /**
+     * Constructor
+     * The constructor creates a BaseLogger for each level and chains them
+     */
     Logger();
     
+    /**
+     * Destructor
+     */
     ~Logger();
     
+    /**
+     * Start to serialize (all levels)
+     * @param Log file for serialization
+     */
     void startSerialize(std::string _logFile);
     
+    /**
+     * Start to serialize
+     * @param Level of logging
+     * @param Log file for serialization
+     */
     void startSerialize(int _level, std::string _logFile);
     
+     /**
+     * Start to serialize (all levels)
+     */
     void stopSerialize();
     
+    /**
+     * Stop to serialize
+     * @param Level of logging
+     */
     void stopSerialize(int _level);
     
+    /**
+     * Stop writting on printing stream (all levels)
+     */   
     void setQuiet();
     
+    /**
+     * Stop writting on printing stream
+     * @param Level of logging
+     */ 
     void setQuiet(int _level);
     
+    /**
+     * Start writting on printing stream (all levels)
+     */    
     void setVerbose();
     
+    /**
+     * Start writting on printing stream
+     * @param Level of logging
+     */  
     void setVerbose(int _level);
     
-    void setStatus(int _level, bool _quiet);
-    
+    /**
+     * Return the current level of log
+     * @return Level of log
+     */  
     int getCurrentLevel() const;
     
+    /**
+     * Set the current level of log
+     * @param Level of log
+     */  
     void setCurrentLevel(int _level);
-        
+    
+    /**
+     * Set the current level of log (better user interface)
+     * @param Level of log
+     */      
     Logger& operator()(int _level);
     
     friend Logger& operator<<(Logger& _logger, const std::string _msg);

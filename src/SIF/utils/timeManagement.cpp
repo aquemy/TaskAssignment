@@ -31,7 +31,8 @@
 namespace sif
 {
 
-const std::string currentTime() {
+const std::string currentTime() 
+{
     time_t     now = time(0);
     struct tm  tstruct;
     char       buf[80];

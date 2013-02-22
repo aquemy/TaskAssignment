@@ -35,41 +35,118 @@
 namespace sif
 {
 
+/** BaseLogger : Element of the reponsability chain of logging
+
+The BaseLogger class define an element of the logger. It defines a level of logging
+and have two streams, one for printing and one for serialize logs in a specified file.
+
+@see sif::Logger
+*/
+
 class BaseLogger
 {
 public:
+    /**
+     * Constructor
+     * @param Level of logging
+     * @param Label of the level
+     * @param Printing stream
+     * @param Quiet mode
+     */
     BaseLogger(int _level, std::string _label, std::ostream& _os = std::clog, bool _quiet = false);
     
+    /**
+     * Constructor
+     * @param Level of logging
+     * @param Label of the level
+     * @param Log file for serialization
+     * @param Printing stream
+     * @param Quiet mode
+     */
     BaseLogger(int _level, std::string _label,  std::string _logFile, std::ostream& _os = std::clog, bool _quiet = false);
     
+    /**
+     * Destructor
+     */
     ~BaseLogger();
  
+    /**
+     * Set next element in reponsability chain
+     * @param Pointer on next element
+     * @return This element
+     */
     BaseLogger* setNext(BaseLogger* _next);
-        
+    
+    /**
+     * Get next element in reponsability chain
+     * @return Pointer on next element
+     */
     BaseLogger* getNext() const;
  
-    void handle(const std::string msg, int priority);
+    /**
+     * Try to handle the message
+     * @param Message to handle
+     * @param Level of the message
+     */
+    void handle(const std::string _msg, int priority);
     
+    /**
+     * Start to serialize
+     * @param Level of logging
+     * @param Log file for serialization
+     */
     void startSerialize(int _level, std::string _logFile);
     
+    /**
+     * Start to serialize (all levels)
+     * @param Log file for serialization
+     */
     void startSerialize(std::string _logFile);
     
+    /**
+     * Stop to serialize
+     * @param Level of logging
+     */
     void stopSerialize(int _level);
     
+    /**
+     * Start to serialize (all levels)
+     */
     void stopSerialize();
-        
+     
+    /**
+     * Stop writting on printing stream (all levels)
+     */   
     void setQuiet();
     
+    /**
+     * Stop writting on printing stream
+     * @param Level of logging
+     */ 
     void setQuiet(int _level);
-        
+    
+    /**
+     * Start writting on printing stream (all levels)
+     */       
     void setVerbose();
     
+    /**
+     * Start writting on printing stream
+     * @param Level of logging
+     */  
     void setVerbose(int _level);
-        
-    void setStatus(int _level, bool _status);
-        
+    
+    /**
+     * Print message on the specified stream
+     * @param Message to write
+     * @param Stream
+     */     
     void print(const std::string _msg, std::ostream* _stream);
     
+    /**
+     * Log the message and dispatch on streams
+     * @param Message to log
+     */ 
     void log(std::string _msg);
  
     friend BaseLogger& operator<<(BaseLogger& _logger, const std::string _msg);
