@@ -12,14 +12,6 @@
 \#*\#
 
 # excepted these manually configured files
-!CMakeLists.txt
-!README
-!app
-!doc/
-!lib/
-!src/
-!test/
-
 
 # ignore built files
 build/
