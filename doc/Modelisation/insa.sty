@@ -1,0 +1,83 @@
+\usepackage[left=2cm, right=2cm, top=2.75cm, bottom=2cm]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{ifthen}
+\usepackage{geometry,listings}
+\usepackage{color,moreverb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz,graphicx}
+\usepackage{caption}
+\usepackage{colortbl}
+\usepackage{amsfonts}
+\renewcommand{\familydefault}{ppl}
+
+\definecolor{GRIS}{cmyk}{0.7,0.6,0.5,0.3}
+\definecolor{BLEU}{cmyk}{1,0.9,0.1,0}
+\definecolor{GM-ASI}{cmyk}{0.6,0,0,0}
+\definecolor{EP-MEKA}{cmyk}{0.3,1,0,0}
+\definecolor{CP-MRIE}{cmyk}{0.3,0,1,0}
+\definecolor{GCCD}{cmyk}{0,0.5,1,0}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+%
+\definecolor{grisclair}{rgb}{0.93,0.93,0.93}
+\definecolor{darkgreen}{rgb}{0.15,0.8,0.15}
+
+
+\lstset{emph={%  
+    COMPONENTS%
+    },emphstyle={\bfseries}%
+}%
+  
+\lstset{
+basicstyle=\small,
+numbers=left,	numberstyle=\footnotesize,
+stepnumber=3,	numbersep=7pt,
+backgroundcolor=\color{grisclair},
+frame=single,	tabsize=4,	captionpos=b,
+breaklines=true,	breakatwhitespace=false,
+title=\lstname,
+commentstyle=\itshape \color{ForestGreen},
+keywordstyle=\color{RoyalBlue}\bfseries, %\underline,
+morekeywords={*,...},
+}
+
+  \lstset{emph={%  
+    find_package, include_directories, target_link_libraries,set,template,class,public,unsigned,this,struct,typedef,rpotected,void,operator,const,typename%
+    },emphstyle={\color{RoyalBlue}\bfseries}%
+}%
+
+\newcommand{\pageDeGarde}[6][rien.png]{
+\thispagestyle{empty}
+\begin{picture}(0,0)
+	\put(-150,-510){\includegraphics[width=280mm]{images/{#1}}} %pour mettre une image de fond qui sera recouverte.
+	\put(-72,-755){\includegraphics[width=210mm]{images/couverture.png}}
+	\put(-30,-130){\color{BLEU}{\begin{minipage}{17cm}\huge #2 \\ \Huge \textbf{#3} \end{minipage}}}
+	\put(-65,-652){\color{GRIS}\begin{minipage}{6.3cm} \Large \raggedleft #4 \end{minipage}}
+	\put(-130,-680){\color{GRIS}{\begin{minipage}{20.5cm} \raggedleft \large #5\end{minipage}}}
+	\put(-130,-630){\color{GRIS}{\begin{minipage}{20.5cm} \raggedleft \Large #6\end{minipage}}}
+\end{picture}
+
+\thispagestyle{empty}
+\null
+\newpage
+}
+
+\newcommand{\pageINSA}[1][]{
+\fancyhead[LO,LE]{\begin{picture}(0,0) \put(-57,-28){\includegraphics[width=210mm]{images/header.png}}\end{picture}}
+\fancyhead[CO,CE]{}
+\fancyhead[RO,RE]{\scshape\leftmark}
+\fancyfoot[LE,LO,RE,RO]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\ifthenelse{\equal{#1}{}}{%
+\fancyfoot[CO,CE]{\begin{picture}(0,0)\put(125,10){\color{GRIS}{\thepage}}\put(-330,-45){\includegraphics[width=300mm,height=25mm]{images/volutebas.png}} \end{picture}}%
+}{%
+\fancyfoot[CO]{\begin{picture}(0,0)\put(125,10){\color{GRIS}{\thepage}}\put(-330,-45){\includegraphics[width=300mm,height=25mm]{images/volutebas.png}} \end{picture}}%
+\fancyfoot[CE]{\begin{picture}(0,0)\put(-117,10){\color{GRIS}{\thepage}}\put(-524,-45){\includegraphics[width=300mm,height=25mm]{images/volutebasVerso.png}} \end{picture}}%
+}
+}
