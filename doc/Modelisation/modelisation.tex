@@ -8,7 +8,7 @@
 %
 \subsubsection{Module d'IA et d'environnement}
 
-Dans ce module on distingue plusieurs entités~:
+Dans ce module, on distingue plusieurs entités~:
 \renewcommand{\labelitemi}{$\bullet$}
 \begin{itemize}
 \setlength{\itemsep}{5pt}
@@ -42,14 +42,22 @@ Les entités de ce module sont simplement les algorithmes travaillant sur l'envi
 
 %
 \subsubsection{Module d'affectation}
+%TODO
+% Passage en paramètre ressources dispo.
+% 1. Fonction d'évaluation qui crée matrice
+% 2. Algo
 
 %
 \subsection{Cas d'utilisation}
 
 \subsubsection{Module d'IA et d'environnement}
+%TODO
 \subsubsection{Module d'indexation spatiale et de partitionnement spatial}
+%TODO
 \subsubsection{Module d'algorithmes de plus court chemin}
+%TODO
 \subsubsection{Module d'affectation}
+%TODO
 
 %
 \subsection{Scénario}
@@ -67,11 +75,13 @@ Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à 
 \setlength{\itemsep}{5pt}
 \item L'utilisateur définit ses tâches
 	\begin{itemize}
+	\setlength{\itemsep}{2pt}
 	\item Définition des contraintes liées à chaque tâches
 	\item Définition des contraintes générales (applicables à chaque tâches ou inter-tâches)
 	\end{itemize}
 \item L'utilisateur définit l'environnement
 	\begin{itemize}
+	\setlength{\itemsep}{2pt}
 	\item Définition de l'espace (dimensions, frontières)
 	\item Définition des objets statiques (obstacles)
 	\item Définition des objets dynamiques
@@ -92,6 +102,7 @@ Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à 
 	\end{itemize}
 \item Création des stratégies
 	\begin{itemize}
+	\setlength{\itemsep}{2pt}
 	\item Définition de la fonction de coût globale
 	\item Définition de l'algorithme d'affectation
 	\end{itemize}
@@ -102,16 +113,92 @@ Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à 
 \item Ajout des stratégies
 \item Paramétrage de l'IA
 	\begin{itemize}
-	\item Délais entre chaque cycle « observation – apprentissage – prise de décision - affectation »
+	\item Délais entre chaque cycle \og observation – apprentissage – prise de décision - affectation \fg
 	\end{itemize}
 \item Lancement de la simulation / résolution par le contrôleur du framework.
 \end{itemize} %\vspace{4mm}
 
 
-\subsubsection{Scénario annexe}
+\subsubsection{Scénarios annexes}
 
-Déroulement de la simulation / résolution
+\begin{enumerate}
+\setlength{\itemsep}{8pt}
+%
+\item Initialisation
+\item[]
+	\begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item Partionnement de l'espace
+	\item Indexation sous forme d'arbres %Listage
+		\begin{itemize}
+		\item Des ressources
+		\item Des emplacements de travail
+		\item Des tâches
+		\item Des obstacles
+		\end{itemize}
+	\end{itemize}
+%
+\item Déroulement de la simulation / résolution
+\item[]
+	\begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item Le contrôleur principal appelle le contrôleur de l'IA si la contrainte de temps est respectée
+	\item Le contrôleur de l'IA~:
+		\begin{itemize}
+		\setlength{\itemsep}{2pt}
+		\item Observation du monde
+		\item Apprentissage (non étudié ici)
+		\item Prise de décision (non étudié ici - peut être effectué manuellement par l'utilisateur)
+		\item Affectation
+			\begin{itemize}
+			\item Appelle un algorithme de réaffectation pour les ressources disponibles
+			% Passage en paramètre des ressources disponibles
+			% 1. Fonction d'évaluation
+			% 2. Algo en lui-même
+			\end{itemize}
+		\end{itemize}
+	\item Le contrôleur principal appelle le contrôleur de l'environnement si la contrainte de temps est respectée
+	\item Le contrôleur de l'environnement~:
+		\begin{itemize}
+		\item Mise à jour des objets dynamiques (Ressources / Unités \ldots)
+		\end{itemize}
+	\item Le contrôleur principal met à jour l'affichage
+	\item La boucle recommence tant que les conditions sont respectées
+	\end{itemize}
+%
+\item Observation du monde
+\item[]
+	\begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item Observation des contraintes / objectifs
+	\item Observation de l'environnement~: les objets dynamiques
+		\begin{itemize}
+		\setlength{\itemsep}{2pt}
+		\item Ressources
+		\item Emplacements de travail
+		\end{itemize}
+	\end{itemize}
+%
+\item Affectation
+\item[]
+	\begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item Algorithme d'affectation appelé, exemple~:
+		\begin{itemize}
+		\setlength{\itemsep}{2pt}
+		\item Méthode hongroise
+		\item Recherche des voisins les plus proches
+		\end{itemize}
+		\item %TODO à préciser - ade
+	\item Attribution d'une tâche à chaque ressource
+	\end{itemize}
+\end{enumerate} %\vspace{4mm}
 
+%
+\subsection{Diagramme de séquence}
+%TODO
+
+%
 \subsection{Modélisation des entités}
 
 \subsubsection*{Tâche}
@@ -124,20 +211,20 @@ Une contrainte est une assertion.
 Il existe plusieurs types de contraintes ayant plusieurs fonctionnement. Chacune possède une priorité. \\
 
 \textbf{Note}~: Il serait intéressant de pouvoirs détecter les contraintes impossibles à tenir en fonction de l'environnement ou tout simplement parce que deux contraintes s'opposent. Le problème de satisfaction de contraintes est à lui tout seul un problème NP-difficile dans la plupart des cas.\\
-On supposera durant ce projet que ce point ne pose pas de soucis et que l'utilisateur n'entrera pas des contraintes qui pourront amener le système à se bloquer ou à ne pouvoir satisfaire l'ensemble des contraintes dans un temps raisonnable.\\
-Par la suite il pourra néanmoins être intéressant de proposer des algorithmes de déduction de contraintes et de résolution du problème CSP (Constraint satisfaction problem).
+\indent On supposera durant ce projet que ce point ne pose pas de soucis et que l'utilisateur n'entrera pas des contraintes qui pourront amener le système à se bloquer ou à ne pouvoir satisfaire l'ensemble des contraintes dans un temps raisonnable.\\
+\indent Par la suite il pourra néanmoins être intéressant de proposer des algorithmes de déduction de contraintes et de résolution du problème CSP (Constraint satisfaction problem).
 
 \subsubsection*{Contraintes de seuils}
 
 Une contrainte de seuil (appliquée à une tâche) est composée d'une opérande $\leq$ ou $\geq$, et d'une valeur numérique.\\
-Ces contraintes possèdent deux fonctions de callback qui doivent se déclencher lorsque l'on franchi le seuil défini, d'un côté et de l'autre (ie, cela implique de garder en mémoire la valeur lors de la vérification précédente).\\
-Optionnellement, on peut définir un intervalle de tolérance.
+\indent Ces contraintes possèdent deux fonctions de callback qui doivent se déclencher lorsque l'on franchi le seuil défini, d'un côté et de l'autre (ie, cela implique de garder en mémoire la valeur lors de la vérification précédente).\\
+\indent Optionnellement, on peut définir un intervalle de tolérance.
 
 \subsubsection*{Contraintes de de proportionnalité}
 
 Défini une relation de proportionnalité entre 2 ou plusieurs tâches.
 On peut imaginer par exemple vouloir 30 \% de pierres contre 70 \% d'or dans le cadre d'un jeu de statégie.\\
-Là encore, on peut définir de manière optionnelle un intervalle de tolérance et deux fonctions de rappel qui seront appelées en cas de changement de statut de la contrainte (passage du respect ou non respect et inversement).
+\indent Là encore, on peut définir de manière optionnelle un intervalle de tolérance et deux fonctions de rappel qui seront appelées en cas de changement de statut de la contrainte (passage du respect ou non respect et inversement).
 
 \subsubsection*{Contraintes personnalisées}
 
@@ -150,7 +237,7 @@ Ces contraintes portent également deux fonctions de rappel pour le changement d
 Il s'agit d'un système comprenant les tâches ainsi que les contraintes. Les  tâches / contraintes sont potentiellement indépendantes de l'IA qui va résoudre le problème puisqu'elles appartiennent au problème lui même.\\
 
 Ainsi le but du système de contraintes de centraliser les tâches et les contraintes pour en faciliter l'accès par l'utilisateur et l'IA.\\
-Le système pourra également proposer des méthodes de résolution du CSP évoquées plus haut.\\
+\indent Le système pourra également proposer des méthodes de résolution du CSP évoquées plus haut.
 De plus, le système impose une représentation homogène pour l'ensemble des tâches.\\
 
 {\color{blue}{
@@ -161,24 +248,24 @@ Schéma d’interaction avec l'IA.
 
 \subsubsection*{L'environnement}
 
-Il est composé d'un espace au sens mathématique, ainsi que de 3 types d'objets~: les obstacles, les points de travail et les ressources. Il a donc principalement un rôle de conteneur\\
+Il est composé d'un espace au sens mathématique, ainsi que de 3 types d'objets~: les obstacles, les points de travail et les ressources. Il a donc principalement un rôle de conteneur.\\
 
 \'Etant donné que la création de l'environnement peut très vite devenir complexe, un design pattern builder est envisagé, permettant par exemple de charger un fichier d'environnement depuis différents types de fichiers.
 Ce sera d'ailleurs le cas pour l'application d'exemple.
 
 \subsubsection*{L'espace}
 
-L'espace est simplement défini par un nombre de dimensions et le type de ses coordonnées.\\
+L'espace est simplement défini par un nombre de dimensions et le type de ses coordonnées.
 Il contient également les limites de l'espace. L'espace peut donc être imaginé comme un parallélotope droit.
 
 \subsubsection*{Les coordonnées}
 
-Les coordonnées permettent de localiser l'ensemble des objets dans l'espace. Elles présentent deux caractéristiques~: le nombre de composantes et le type de ces composantes. Il s'agit d'un vecteur stockant $n$ composantes d'un type numérique.\\
+Les coordonnées permettent de localiser l'ensemble des objets dans l'espace. Elles présentent deux caractéristiques~: le nombre de composantes et le type de ces composantes. Il s'agit d'un vecteur stockant $n$ composantes d'un type numérique.
 
 \subsubsection*{Les objets}
 
 Les objets évoluent dans l'environnement et plus particulièrement dans l'espace qu'il contient. Ainsi, tous les objets possèdent des coordonnées qui doivent être du même type que ceux de l'espace considéré.\\
-Il existe deux types d'objets (pour le moment)~: les objets statiques et les objets dynamiques. Chacun de ces deux types donnent lieu à une hiérarchie d'objets.\\
+\indent Il existe deux types d'objets (pour le moment)~: les objets statiques et les objets dynamiques. Chacun de ces deux types donnent lieu à une hiérarchie d'objets.\\
 
 Tous les objets implémentent une géométrie qui permettra d'effectuer des calculs de collision selon diverses techniques. Par exemple on peut définir un objet par un polygone convexe, un polygone quelconque, un carré, un cercle. Chaque représentation à ses avantages et inconvénients sur les méthodes de collisions~: algorithme du point dans un polygone (convexe), Bounding-Box, rayon de collision, etc.\\
 
@@ -199,21 +286,22 @@ Ce sont des objets qui sont capables de bouger dans l'espace.\\
 \textbf{$\hookrightarrow$ Les ressources}\\
 
 Elles représentent des objets dont l'IA dispose pour pouvoir les affecter à diverses tâches en vu de satisfaire les contraintes du système de contraintes. Il s'agit encore d'une classe abstraite dont le but est de clarifier l'architecture des objets. On retrouvera différents types de ressources ayant des comportements différents.\\
-Ainsi on peut imaginer une ressources qui n'est pas réaffectable lorsqu'elle commence une tâche qui lui est donnée par l'IA, on peut imaginer une ressource qui n'accepte qu'un seul type de tâche, etc. Toutes ses variantes dépendent du problème et seront rajoutées à mesure que le besoin s'en fera sentir.\\
-Dans notre cas on n'envisagera qu'une unité simple qui pourra être réaffectée n'importe quand, et une unité qui ne pourra pas être réaffectée.
 
-\subsubsection*{Les emplacements de travail}
+Ainsi on peut imaginer une ressources qui n'est pas réaffectable lorsqu'elle commence une tâche qui lui est donnée par l'IA, on peut imaginer une ressource qui n'accepte qu'un seul type de tâche, etc. Toutes ses variantes dépendent du problème et seront rajoutées à mesure que le besoin s'en fera sentir.\\
+\indent Dans notre cas on n'envisagera qu'une unité simple qui pourra être réaffectée n'importe quand, et une unité qui ne pourra pas être réaffectée.\\
+
+\textbf{$\hookrightarrow$ Les emplacements de travail}\\
 
 Ce sont les représentations physiques d'une tâche. C'est à dire des objets qui vont pouvoir modifier une tâche (son \og compteur \fg ) en fonction de certaines conditions.\\
-Ainsi, ce sont des observateurs d'une tâche particulière qu'elle notifie en cas de changement.\\
+\indent Ainsi, ce sont des observateurs d'une tâche particulière qu'elle notifie en cas de changement.\\
 
 Là encore, on peut imaginer beaucoup de variantes~: des emplacements temporaires – l'emplacement est détruit au bout de tant de temps d'utilisation, des emplacements avec un compteur – l'emplacement se détruit après tant d'utilisation, etc.
 
 \subsubsection*{Les politiques de chevauchement}
 
 Les objets sont paramétrés par une politique de chevauchement~: certains objets peuvent ne pas en chevaucher d'autres.\\
-Il s'agit concrètement d'un entier qui permet de définir une priorité sur le chevauchement. Un objet ne peux pas surpasser un objet ayant une valeur plus haute que la sienne.\\
-Des constantes sont prévues pour définir des objets \og fantômes \fg et des objets que l'on ne peut pas chevaucher, comme les obstacles par exemple.
+\indent Il s'agit concrètement d'un entier qui permet de définir une priorité sur le chevauchement. Un objet ne peux pas surpasser un objet ayant une valeur plus haute que la sienne.\\
+\indent Des constantes sont prévues pour définir des objets \og fantômes \fg ~et des objets que l'on ne peut pas chevaucher, comme les obstacles par exemple.
 
 \subsubsection*{Les fonctions de coûts}
 
@@ -225,12 +313,12 @@ L'implémentation est très libre et souple au vu de ce que le C++ permet de fai
 
 \subsubsection*{Les stratégies}
 
-Il s'agit d'une manière de résoudre le problème d'affectation pour satisfaire les contraintes. Elle comporte une manière d'évaluer la situation (fonction de coût globale) et un algorithme d'affectation.
+Il s'agit d'une manière de résoudre le problème d'affectation pour satisfaire les contraintes. Elle comporte une manière d'évaluer la situation (fonction de coût globale), un algorithme d'affectation et une fonction de coût locale (manière d'évaluer une ressource selon ces caractéristiques).
 
 \subsubsection*{L'IA}
 
 Il s'agit d'un conteneur de stratégies qui sont organisées selon un modèle (couple d'un modèle de décision et d'observation).\\
-L'IA défini également un algorithme de partitionnement spatial et un algorithme d'indexation.
+\indent L'IA défini également un algorithme de partitionnement spatial et un algorithme d'indexation.
 Pour pouvoir plus facilement traiter le problème d'affectation, l'IA possède également 3 structures de données qui indexent la topographie de l'espace (donc les objets statiques), les tâches et les ressources à partir des conteneurs basiques de l'environnement.
 
 \subsubsection*{Arbres}
@@ -260,15 +348,15 @@ Cette section s'attele à décrire l'architecture globale du framework~:
 \subsubsection*{Contrôleur}
 
 Le contrôleur principal gère le déroulement globale de la simulation. Il s'agit d'une boucle principale avec des critères d'arrêt définis par l'utilisateur (nous proposerons un critère temporel).\\
-La boucle principale va effectuer en permanence les même actions, dans le même ordre. Ces actions sont des appels à des contrôleurs locaux ou des actions définis par l'utilisateur parce qu'il en a besoin dans son application~: interception et traitement des entrées claviers, affichage, \ldots \\
-Par défaut, seules deux actions sont présentes: l'appel au contrôleur local de l'IA et au contrôleur local de l'environnement.\\
+\indent La boucle principale va effectuer en permanence les même actions, dans le même ordre. Ces actions sont des appels à des contrôleurs locaux ou des actions définis par l'utilisateur parce qu'il en a besoin dans son application~: interception et traitement des entrées claviers, affichage \ldots \\
+\indent Par défaut, seules deux actions sont présentes: l'appel au contrôleur local de l'IA et au contrôleur local de l'environnement.\\
 
 Ces actions seront modélisés sous forme d'un deque de fonctions à appeler dans l'ordre. Chaque fonction sera assortie d'un délais d'activation~: toutes les 100ms par exemple.
 
 \subsubsection*{Logger}
 Un logger est absolument nécessaire pour un framework afin de repérer le déroulement du flux d'exécution et localiser d'éventuel(s) problème(s) ou simplement visualiser le processus de calcul. C'est d'ailleurs très utile pour faire des tests unitaires ou d'intégration.\\
-Nous mettrons en place un logger sous forme de Design Pattern Chaine de Responsabilité. Chaque maillon de la chaîne sera un logger avec un niveau de log différent (DEBUG, INFO, ERROR \ldots ) et le message transite de maillon en maillon jusqu'à ce que le bon niveau soit atteint.\\
-On pourra utiliser une sérialisation dans un fichier texte ou non.\\
+\indent Nous mettrons en place un logger sous forme de Design Pattern Chaine de Responsabilité. Chaque maillon de la chaîne sera un logger avec un niveau de log différent (DEBUG, INFO, ERROR \ldots ) et le message transite de maillon en maillon jusqu'à ce que le bon niveau soit atteint.\\
+\indent On pourra utiliser une sérialisation dans un fichier texte ou non.\\
 
 Il existera une instance statique du logger pour permettre une utilisation globale. On n'utilisera pas de DP Singleton d'une part parce qu'il est très dur à rendre thread-safe et d'autre part parce pour une raison ou une autre, l'utilisateur final trouvera peut être une utilité à avoir plusieurs loggers.
 
@@ -281,8 +369,11 @@ Pour rendre l'application thread-safe à un niveau de granularité plus fin, on 
 
 \subsection{Description du système et objectifs}
 
-L'application servira de démonstration à l'IA construite avec le Framework. Il s'agira d'un petit jeu de stratégies en temps réel.\\
-L'environnement sera une carte 2D avec des murs (les obstacles), des ouvriers (les ressources), ainsi que des mines d'or et de pierres (les tâches, qui sont donc au nombre de deux). L'action de miner durera un certain temps qui occupera un ouvrier et lui permettra de faire augmenter le compteur général d'or ou de pierres.\\
+L'application servira de démonstration à l'IA construite avec le Framework. Il s'agira d'un petit jeu de stratégie en temps réel.\\
+
+L'environnement sera une carte 2D avec des murs (les obstacles), des ouvriers (les ressources), ainsi que des mines d'or et de pierres (les tâches sont donc au nombre de deux). L'action de miner durera un certain temps qui occupera un ouvrier et lui permettra de faire augmenter le compteur général d'or ou de pierres.\\
+
+L'application permettra donc à l'utilisateur d'avoir un exemple concret d'utilisation du Framework.\\
 
 Les fonctionnalités suivantes permettront à l'utilisateur d'interagir avec le monde pour voir la réaction de l'IA~:
 \begin{itemize}
