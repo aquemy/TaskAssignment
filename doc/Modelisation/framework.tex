@@ -45,19 +45,19 @@ Les entités de ce module sont simplement les algorithmes travaillant sur l'envi
 %
 \section{Cas d'utilisation}
 
-\subsection{Environnement & IA}
+\subsection{Environnement et IA}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.8]{images/uc_main.png}
+   \includegraphics[scale=0.5]{images/uc_main.png}
    \caption{\label{uc_main} Cas d'utilisation généraux}
 \end{figure}
 \subsection{Ressources}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.8]{images/uc_ressources.png}
+   \includegraphics[scale=0.5]{images/uc_ressource.png}
    \caption{\label{uc_main} Cas d'utilisation liés aux ressources}
 \end{figure}
 \subsection{Framework}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.8]{images/uc_framework.png}
+   \includegraphics[scale=0.5]{images/uc_framework.png}
    \caption{\label{uc_main} Cas d'utilisation liés au framework}
 \end{figure}
 %
@@ -383,3 +383,27 @@ On retrouve ce comportement au niveau du couple Emplacement / Tâche où l'empla
 La politique passive consiste pour l'observé à simplement changer son état indiquant qu'il a changé et préparer le message qui doit être transmis à l'observateur. C'est donc l'observateur qui est actif et va explicitement demander la notification d'état et récuperer les messages des observables qui ont indiqués qu'ils étaient modifiés.\\\\
 Ce comportement apparaît par exemple au niveau de l'observation de l'environnement par l'IA. L'IA va périodiquement choisir de regarder l'état de l'environnement.
 
+\section{Diagramme de classes}
+\subsection{Algorithmes}
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/c_algo.png}
+   \caption{\label{c_algo} Diagramme de classes des algorithmes}
+\end{figure}
+
+\subsection{Arbres}
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/c_arbre.png}
+   \caption{\label{c_arbre} Diagramme de classes des arbres}
+\end{figure}
+
+\subsection{Framework}
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/c_framework.png}
+   \caption{\label{c_framework} Diagramme de classes du framework}
+\end{figure}
+
+\subsection{IA \& Contraintes}
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/c_ia_contraintes.png}
+   \caption{\label{c_ia_contraintes} Diagramme de classes d'IA et contraintes}
+\end{figure}
