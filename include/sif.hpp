@@ -3,7 +3,7 @@
 // <SIF.hpp>
 // Copyright (C), 2013
 //
-// Adeline Bailly, Gabrielle Diaferia, Pauline Hubert, Alexandre Quemy
+// Adeline Bailly, Alexandre Quemy
 //
 // This software is governed by the CeCILL license under French law and
 // abiding by the rules of distribution of free software.  You can  ue,
