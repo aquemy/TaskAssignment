@@ -72,14 +72,14 @@ public :
     
     /**
      * Start to serialize (all levels)
-     * @param Log file for serialization
+     * @param _logFile Log file for serialization
      */
     void startSerialize(std::string _logFile);
     
     /**
      * Start to serialize
-     * @param Level of logging
-     * @param Log file for serialization
+     * @param _level Level of logging
+     * @param _logFileLog file for serialization
      */
     void startSerialize(int _level, std::string _logFile);
     
@@ -90,7 +90,7 @@ public :
     
     /**
      * Stop to serialize
-     * @param Level of logging
+     * @param _level Level of logging
      */
     void stopSerialize(int _level);
     
@@ -101,7 +101,7 @@ public :
     
     /**
      * Stop writting on printing stream
-     * @param Level of logging
+     * @param _level Level of logging
      */ 
     void setQuiet(int _level);
     
@@ -112,7 +112,7 @@ public :
     
     /**
      * Start writting on printing stream
-     * @param Level of logging
+     * @param _level Level of logging
      */  
     void setVerbose(int _level);
     
@@ -124,16 +124,23 @@ public :
     
     /**
      * Set the current level of log
-     * @param Level of log
+     * @param _level Level of log
      */  
     void setCurrentLevel(int _level);
     
     /**
      * Set the current level of log (better user interface)
-     * @param Level of log
+     * @param _level Level of log
+     * @return Reference on the Logger
      */      
     Logger& operator()(int _level);
     
+    /**
+     * User friendly use
+     * @param _logger Reference on the Logger
+     * @param _msg Message to show
+     * @return Reference on the Logger
+     */   
     friend Logger& operator<<(Logger& _logger, const std::string _msg);
         
 protected :

@@ -33,10 +33,13 @@ Les entités de ce module sont~:
 %
 \subsection{Module d'algorithmes de plus court chemin}
 
-Les entités de ce module sont simplement les algorithmes travaillant sur l'environnement transformé grâce aux techniques d'indexation et partitionnement spatial.
+Les entités de ce module sont simplement les algorithmes travaillant sur l'environnement transformé grâce aux techniques d'indexation et de partitionnement spatial.
 
 %
 \subsection{Module d'affectation}
+
+Les entités de ce module sont simplement les algorithmes qui doivent permettre la résolution de l'affectation. 
+
 %TODO
 % Passage en paramètre ressources dispo.
 % 1. Fonction d'évaluation qui crée matrice
@@ -101,6 +104,8 @@ Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à 
 		\item Délais de mise à jour
 		\end{itemize}
 	\end{itemize}
+\item Définition de l'algorithme de partitionnement de l'espace
+\item Définition de l'algorithme d'indexation des objets dynamiques	
 \item Création des stratégies
 	\begin{itemize}
 	\setlength{\itemsep}{2pt}
@@ -109,8 +114,6 @@ Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à 
 	\end{itemize}
 \item Création de l'IA
 \item Définition du modèle de décision et d'observation
-\item Définition de l'algorithme de partitionnement de l'espace
-\item Définition de l'algorithme d'indexation des objets dynamiques
 \item Ajout des stratégies
 \item Paramétrage de l'IA
 	\begin{itemize}
@@ -238,7 +241,9 @@ Ces contraintes portent également deux fonctions de rappel pour le changement d
 Il s'agit d'un système comprenant les tâches ainsi que les contraintes. Les  tâches / contraintes sont potentiellement indépendantes de l'IA qui va résoudre le problème puisqu'elles appartiennent au problème lui même.\\
 
 Ainsi le but du système de contraintes de centraliser les tâches et les contraintes pour en faciliter l'accès par l'utilisateur et l'IA.\\
-\indent Le système pourra également proposer des méthodes de résolution du CSP évoquées plus haut.
+\indent Le système pourra également proposer des méthodes de résolution du CSP évoquées plus haut.\\\\
+
+Note : La description des contraintes peut se faire de manière plus générale et plus souple par l'utilisateur grâce à un design pattern interpréteur (que nous n'implémenterons pas dans l'immédiat).
 
 
 \subsection{L'environnement}
@@ -278,14 +283,17 @@ Il s'agit du seul objet statique concret dont nous avons perçu l’intérêt po
 
 \subsection{\textbullet ~Les objets dynamiques}
 
-Ce sont des objets qui sont capables de bouger dans l'espace.\\
+Ce sont des objets qui sont capables d'évoluer.\\
 
 \textbf{$\hookrightarrow$ Les ressources}\\
 
 Elles représentent des objets dont l'IA dispose pour pouvoir les affecter à diverses tâches en vu de satisfaire les contraintes du système de contraintes. Il s'agit encore d'une classe abstraite dont le but est de clarifier l'architecture des objets. On retrouvera différents types de ressources ayant des comportements différents.\\
 
 Ainsi on peut imaginer une ressources qui n'est pas réaffectable lorsqu'elle commence une tâche qui lui est donnée par l'IA, on peut imaginer une ressource qui n'accepte qu'un seul type de tâche, etc. Toutes ses variantes dépendent du problème et seront rajoutées à mesure que le besoin s'en fera sentir.\\
-\indent Dans notre cas on n'envisagera qu'une unité simple qui pourra être réaffectée n'importe quand, et une unité qui ne pourra pas être réaffectée.\\
+\indent Dans notre cas on n'envisagera qu'une unité simple qui pourra être réaffectée n'importe quand, et une unité qui ne pourra pas être réaffectée.\\\\
+
+Chaque ressource est un agent au sens où il est partiellement autonome. Il évolue indépendamment de l'IA qui ne fait que lui communiquer un ordre (une affectation). C'est la ressource qui se déplace de son propre chef pour se déplacer vers l'objectif. Ainsi chaque ressource possède un algorithme de plus court chemin ainsi qu'une vitesse de déplacement.\\
+Comme l'intérêt du partionnement spatial et de l'indexation astucieuse des objets réside dans la diminution du temps de calcul des algorithmes en général, cela implique que les ressources doivent accéder aux structures de partitionnement et d'indexation. Ainsi ce n'est pas l'IA qui s'occupe de stocker ces structures (on peut imaginer dans un jeu vidéo que l'IA soit remplacé par un joueur).
 
 \textbf{$\hookrightarrow$ Les emplacements de travail}\\
 
@@ -318,7 +326,7 @@ Une stratégie très simple consiste à ne traiter la satisfaction que d'une con
 
 Il s'agit d'un conteneur de stratégies qui sont organisées selon un modèle (couple d'un modèle de décision et d'observation).\\
 \indent L'IA défini également un algorithme de partitionnement spatial et un algorithme d'indexation.
-Pour pouvoir plus facilement traiter le problème d'affectation, l'IA possède également 3 structures de données qui indexent la topographie de l'espace (donc les objets statiques), les tâches et les ressources à partir des conteneurs basiques de l'environnement.
+Pour pouvoir plus facilement traiter le problème d'affectation.
 
 \subsection{Arbres}
 
@@ -339,6 +347,27 @@ Utilisés pour indexer les objets, pour partitionner l'espace. On retrouve beauc
 \item Hilbert R-Tree
 \item UB-Tree
 \end{itemize}
+
+\subsection{Données spatiales}
+
+Etant donné que plusieurs objets qui ne se connaissent pas doivent accéder aux structures de données spatiales (que ce soit la partition de l'espace ou l'index des objets dynamiques), il nous faut une classe dédié à cela.\\
+Cet objet possède 3 structures de données qui indexent la structure de l'espace (donc les objets statiques), les tâches et les ressources à partir des conteneurs basiques (des tableaux) de l'environnement.\\\\
+
+Lors de l'initialisation, le contrôleur créera cet objet automatiquement et passera passera une référence aux ressources (en passant par l'environnement) et à l'IA.
+
+\subsection{Les algorithmes}
+Chaque type d'algorithme définit une hiérarchie de classes héritant toutes d'une classe abstraite définissant l'interface de ce type d'algorithme.\\
+On utilisera un design pattern Factory pour permettre une instanciation aisée pour l'utilisateur.
+
+\subsubsection{Algorithmes de plus court chemin}
+
+Les algorithmes de plus court chemin renvoient une liste de noeuds à parcourir pour une ressource pour arriver à son objectif. Il se peut qu'il y ait des déplacement à prévoir au sein d'un noeud mais c'est à la ressource de s'en occuper.
+
+\subsubsection{Algorithmes d'affectation}
+
+Les algorithmes d'affectation prennent en entrée les emplacements de travail 
+
+Etant donné que les algorithmes ne travaillent pas nécessairement sur le même type de données (par exemple la méthode hongroise travaille sur une matrice alors que la recherche du plus proche voisin peut faire appel à des structures d'arbre, etc.), une étape de transformation des données peut avoir lieu.
 
 \section{Architecture du framework}
 

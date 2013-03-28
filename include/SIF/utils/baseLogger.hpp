@@ -48,20 +48,20 @@ class BaseLogger
 public:
     /**
      * Constructor
-     * @param Level of logging
-     * @param Label of the level
-     * @param Printing stream
-     * @param Quiet mode
+     * @param _level Level of logging
+     * @param _label Label of the level
+     * @param _os Printing stream
+     * @param _quiet Quiet mode
      */
     BaseLogger(int _level, std::string _label, std::ostream& _os = std::clog, bool _quiet = false);
     
     /**
      * Constructor
-     * @param Level of logging
-     * @param Label of the level
-     * @param Log file for serialization
-     * @param Printing stream
-     * @param Quiet mode
+     * @param _level Level of logging
+     * @param _label Label of the level
+     * @param _logFile Log file for serialization
+     * @param _os Printing stream
+     * @param _quiet Quiet mode
      */
     BaseLogger(int _level, std::string _label,  std::string _logFile, std::ostream& _os = std::clog, bool _quiet = false);
     
@@ -72,7 +72,7 @@ public:
  
     /**
      * Set next element in reponsability chain
-     * @param Pointer on next element
+     * @param _next Pointer on next element
      * @return This element
      */
     BaseLogger* setNext(BaseLogger* _next);
@@ -85,27 +85,27 @@ public:
  
     /**
      * Try to handle the message
-     * @param Message to handle
-     * @param Level of the message
+     * @param _msg Message to handle
+     * @param _priority Level of the message
      */
-    void handle(const std::string _msg, int priority);
+    void handle(const std::string _msg, int _priority);
     
     /**
      * Start to serialize
-     * @param Level of logging
-     * @param Log file for serialization
+     * @param _level Level of logging
+     * @param _logFile Log file for serialization
      */
     void startSerialize(int _level, std::string _logFile);
     
     /**
      * Start to serialize (all levels)
-     * @param Log file for serialization
+     * @param _logFile Log file for serialization
      */
     void startSerialize(std::string _logFile);
     
     /**
      * Stop to serialize
-     * @param Level of logging
+     * @param _level Level of logging
      */
     void stopSerialize(int _level);
     
@@ -121,7 +121,7 @@ public:
     
     /**
      * Stop writting on printing stream
-     * @param Level of logging
+     * @param _level Level of logging
      */ 
     void setQuiet(int _level);
     
@@ -132,20 +132,20 @@ public:
     
     /**
      * Start writting on printing stream
-     * @param Level of logging
+     * @param _level Level of logging
      */  
     void setVerbose(int _level);
     
     /**
      * Print message on the specified stream
-     * @param Message to write
-     * @param Stream
+     * @param _msg Message to write
+     * @param _stream Stream
      */     
     void print(const std::string _msg, std::ostream* _stream);
     
     /**
      * Log the message and dispatch on streams
-     * @param Message to log
+     * @param _msg Message to log
      */ 
     void log(std::string _msg);
  
