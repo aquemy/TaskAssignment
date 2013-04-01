@@ -1,0 +1,14 @@
+Stratégie simple
+
+Contrainte 1 non satisfaite :
+
+--> Evaluation de l'intérêt des taskSpots
+# Version simple taskSpots 1 : valeur 1, autre taskSpots valeur 0
+--> Evaluation d'un individu :
+# Version simple : distance des couples (Indi , TaskSpot)
+
+--> Evaluation globale d'individu
+# Version simple : evalIndi * evalTaskSpot
+
+--> Evaluation situation
+# Somme des évaluations globales des individus

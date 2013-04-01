@@ -46,6 +46,7 @@ Les entités de ce module sont simplement les algorithmes qui doivent permettre 
 % 2. Algo
 
 %
+\newpage
 \section{Cas d'utilisation}
 
 \subsection{Environnement et IA}
@@ -64,145 +65,7 @@ Les entités de ce module sont simplement les algorithmes qui doivent permettre 
    \caption{\label{uc_main} Cas d'utilisation liés au framework}
 \end{figure}
 %
-\section{Scénario}
-
-On peut distinguer plusieurs scénarios pour notre application. Le scénario utilisateur où l'acteur principal est l'utilisateur final, c'est à dire celui qui va utiliser le framework pour résoudre un problème en fonction de son contexte.\\
-
-Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à l’interaction entre ses composants. Le principal est celui qui intervient durant toute la simulation / résolution et dont l'acteur principal est le contrôleur du framework.
-
-%
-\subsection{Scénario principal}
-
-\renewcommand{\labelitemii}{$\hookrightarrow$}
-\renewcommand{\labelitemiii}{$\circ$}
-\begin{itemize}
-\setlength{\itemsep}{5pt}
-\item L'utilisateur définit ses tâches
-	\begin{itemize}
-	\setlength{\itemsep}{2pt}
-	\item Définition des contraintes liées à chaque tâches
-	\item Définition des contraintes générales (applicables à chaque tâches ou inter-tâches)
-	\end{itemize}
-\item L'utilisateur définit l'environnement
-	\begin{itemize}
-	\setlength{\itemsep}{2pt}
-	\item Définition de l'espace (dimensions, frontières)
-	\item Définition des objets statiques (obstacles)
-	\item Définition des objets dynamiques
-		\begin{itemize}
-		\item Définition des ressources
-			\begin{itemize}
-			\item Définition d'une fonction de coût
-			\end{itemize}
-		\item Définition des emplacements de travail
-			\begin{itemize}
-			\item Observation de l'emplacement par un type de tâche
-			\end{itemize}
-		\end{itemize}
-	\item Paramétrage de l'environnement
-		\begin{itemize}
-		\item Délais de mise à jour
-		\end{itemize}
-	\end{itemize}
-\item Définition de l'algorithme de partitionnement de l'espace
-\item Définition de l'algorithme d'indexation des objets dynamiques	
-\item Création des stratégies
-	\begin{itemize}
-	\setlength{\itemsep}{2pt}
-	\item Définition de la fonction de coût globale
-	\item Définition de l'algorithme d'affectation
-	\end{itemize}
-\item Création de l'IA
-\item Définition du modèle de décision et d'observation
-\item Ajout des stratégies
-\item Paramétrage de l'IA
-	\begin{itemize}
-	\item Délais entre chaque cycle \og observation – apprentissage – prise de décision - affectation \fg
-	\end{itemize}
-\item Lancement de la simulation / résolution par le contrôleur du framework.
-\end{itemize} %\vspace{4mm}
-
-
-\subsection{Scénarios annexes}
-
-\begin{enumerate}
-\setlength{\itemsep}{8pt}
-%
-\item Initialisation
-\item[]
-	\begin{itemize}
-	\setlength{\itemsep}{5pt}
-	\item Partionnement de l'espace
-	\item Indexation sous forme d'arbres %Listage
-		\begin{itemize}
-		\item Des ressources
-		\item Des emplacements de travail
-		\item Des tâches
-		\item Des obstacles
-		\end{itemize}
-	\end{itemize}
-%
-\item Déroulement de la simulation / résolution
-\item[]
-	\begin{itemize}
-	\setlength{\itemsep}{5pt}
-	\item Le contrôleur principal appelle le contrôleur de l'IA si la contrainte de temps est respectée
-	\item Le contrôleur de l'IA~:
-		\begin{itemize}
-		\setlength{\itemsep}{2pt}
-		\item Observation du monde
-		\item Apprentissage (non étudié ici)
-		\item Prise de décision (non étudié ici - peut être effectué manuellement par l'utilisateur)
-		\item Affectation
-			\begin{itemize}
-			\item Appelle un algorithme de réaffectation pour les ressources disponibles
-			% Passage en paramètre des ressources disponibles
-			% 1. Fonction d'évaluation
-			% 2. Algo en lui-même
-			\end{itemize}
-		\end{itemize}
-	\item Le contrôleur principal appelle le contrôleur de l'environnement si la contrainte de temps est respectée
-	\item Le contrôleur de l'environnement~:
-		\begin{itemize}
-		\item Mise à jour des objets dynamiques (Ressources / Unités \ldots)
-		\end{itemize}
-	\item Le contrôleur principal met à jour l'affichage
-	\item La boucle recommence tant que les conditions sont respectées
-	\end{itemize}
-%
-\item Observation du monde
-\item[]
-	\begin{itemize}
-	\setlength{\itemsep}{5pt}
-	\item Observation des contraintes / objectifs
-	\item Observation de l'environnement~: les objets dynamiques
-		\begin{itemize}
-		\setlength{\itemsep}{2pt}
-		\item Ressources
-		\item Emplacements de travail
-		\end{itemize}
-	\end{itemize}
-%
-\item Affectation
-\item[]
-	\begin{itemize}
-	\setlength{\itemsep}{5pt}
-	\item Algorithme d'affectation appelé, exemple~:
-		\begin{itemize}
-		\setlength{\itemsep}{2pt}
-		\item Méthode hongroise
-		\item Recherche des voisins les plus proches
-		\end{itemize}
-		\item %TODO à préciser - ade
-	\item Attribution d'une tâche à chaque ressource
-	\end{itemize}
-\end{enumerate} %\vspace{4mm}
-
-%
-\section{Diagramme de séquence}
-%TODO
-
-%
+\newpage
 \section{Modélisation des entités}
 
 \subsection{Tâche}
@@ -310,22 +173,44 @@ Les objets sont paramétrés par une politique de chevauchement~: certains objet
 
 \subsection{Les fonctions de coûts}
 
-Il existe deux types de fonctions de coûts~: les fonctions locales et les fonctions globales. La première est propre à l'évaluation d'une ressource par rapport à un emplacement de travail.
-La fonction de coût global qui évalue à un instant donné la qualité de la situation observable par l'IA. Elle est très dépendante du problème et de la stratégie adoptée. Il peut s'agir d'une simple somme des distances des ressources par rapport aux tâches, mais on peut également vouloir prendre en compte la satisfaction des contraintes, ou les tâches en cours avec un poids important, etc.
-Elle servira donc plus pour le modèle d'apprentissage, mais comme ce point n'est pas abordé durant ce projet, il s'agira plus d'une fonction annexe ou indicatrice.\\
+Il existe plusieurs types de fonctions de coûts dont le rôle est similaire : évaluer un objet ou une quantité en fonction de différent paramètres. Classiquement, on peut évaluer la satisfaction d'une contrainte, les paires (ressource / emplacement de travail), la situation globale.\\
+La manière dont l'évaluation est faite dépend de la stratégie adoptée.\\\\
 
 L'implémentation est très libre et souple au vu de ce que le C++ permet de faire, surtout avec le nouveau standard.
 
 \subsection{Les stratégies}
 
-Il s'agit d'une manière de résoudre le problème d'affectation pour satisfaire les contraintes. Elle comporte une manière d'évaluer la situation (fonction de coût globale), un algorithme d'affectation et une fonction de coût locale (manière d'évaluer une ressource selon ces caractéristiques).\\\\
+Il s'agit d'une manière de résoudre le problème d'affectation pour satisfaire les contraintes. Elle comporte une manière d'évaluer la situation et un algorithme d'affectation.\\\\
 
-Une stratégie très simple consiste à ne traiter la satisfaction que d'une contrainte à la fois. Il s'agira de la seule stratégie que nous implémenterons.
+Une stratégie très simple consiste à ne traiter la satisfaction que d'une contrainte à la fois. Il s'agira de la seule stratégie que nous implémenterons.\\\\
+
+L'évaluation de la situation est faite en fonction de la stratégie. Voici la stratégie que nous implémenterons (visible également sur le diagramme de séquence du contrôleur de l'IA):
+\begin{itemize}
+\item Evaluation des contraintes
+\item Evaluation des paires ressource / emplacement
+\item Evaluation globale des ressources
+\item Evaluation de la situation
+\end{itemize}
+
+Voici un exemple concret des fonctions de coûts associés :
+La contrainte $x$ non satisfaite : cette contrainte portait sur la tâche $y$ dont la valeur est trop faible.\\
+
+\\--> Evaluation de l'intérêt des taskSpots
+\\# Le coût des taskSpots rattachés à $y$ est $1$, sinon $0$.
+\\--> Evaluation d'un individu :
+\\# Distance des couples (Indi , TaskSpot)
+\\--> Evaluation globale d'individu
+\\# evalIndi * evalTaskSpot
+\\--> Evaluation situation
+\\# Somme des évaluations globales des individus
+
+Dans cet exemple très simple on ne veut affecter des ressources qu'aux emplacements susceptibles de faire augmenter la quantité non satisfaite. Ainsi dans l'algorithme d'affectation, les couples (individu, emplacement) où l'emplacement n'est pas rattaché à cette quantité seront nuls et donc ne pourront être choisi.\\\\
+L'évaluation de la situation est un indicateur pour l'IA afin qu'elle puisse décider si elle doit changer de stratégie ou non.
+
 
 \subsection{L'IA}
 
 Il s'agit d'un conteneur de stratégies qui sont organisées selon un modèle (couple d'un modèle de décision et d'observation).\\
-\indent L'IA défini également un algorithme de partitionnement spatial et un algorithme d'indexation.
 Pour pouvoir plus facilement traiter le problème d'affectation.
 
 \subsection{Arbres}
@@ -379,7 +264,7 @@ Le contrôleur principal gère le déroulement globale de la simulation. Il s'ag
 \indent La boucle principale va effectuer en permanence les même actions, dans le même ordre. Ces actions sont des appels à des contrôleurs locaux ou des actions définis par l'utilisateur parce qu'il en a besoin dans son application~: interception et traitement des entrées claviers, affichage \ldots \\
 \indent Par défaut, seules deux actions sont présentes: l'appel au contrôleur local de l'IA et au contrôleur local de l'environnement.\\
 
-Ces actions seront modélisés sous forme d'un deque de fonctions à appeler dans l'ordre. Chaque fonction sera assortie d'un délais d'activation~: toutes les 100ms par exemple.
+Ces actions seront modélisés sous forme d'une liste de fonctions à appeler dans l'ordre. Chaque fonction sera assortie d'un délais d'activation~: toutes les 100ms par exemple.
 
 \subsection{Logger}
 Un logger est absolument nécessaire pour un framework afin de repérer le déroulement du flux d'exécution et localiser d'éventuel(s) problème(s) ou simplement visualiser le processus de calcul. C'est d'ailleurs très utile pour faire des tests unitaires ou d'intégration.\\
@@ -440,3 +325,138 @@ Certains arbres peuvent se constuire de plusieurs manières, c'est pourquoi on p
    \includegraphics[scale=0.5]{images/c_ia_contraintes.png}
    \caption{\label{c_ia_contraintes} Diagramme de classes d'IA et contraintes}
 \end{figure}
+%
+\section{Scénario et diagrammes de séquences}
+
+On peut distinguer plusieurs scénarios pour notre application. Le scénario utilisateur où l'acteur principal est l'utilisateur final, c'est à dire celui qui va utiliser le framework pour résoudre un problème en fonction de son contexte.\\
+
+Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à l’interaction entre ses composants. Le principal est celui qui intervient durant toute la simulation / résolution et dont l'acteur principal est le contrôleur du framework.
+
+\subsection{Scénario principal}
+
+\renewcommand{\labelitemii}{$\hookrightarrow$}
+\renewcommand{\labelitemiii}{$\circ$}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+\item L'utilisateur définit ses tâches
+	\begin{itemize}
+	\setlength{\itemsep}{2pt}
+	\item Définition des contraintes
+	\end{itemize}
+\item L'utilisateur définit l'environnement
+	\begin{itemize}
+	\setlength{\itemsep}{2pt}
+	\item Définition de l'espace (dimensions, frontières)
+	\item Définition des objets statiques (obstacles)
+	\item Définition des objets dynamiques
+		\begin{itemize}
+		\item Définition des ressources
+			\begin{itemize}
+			\item Définition d'une fonction de coût
+			\end{itemize}
+		\item Définition des emplacements de travail
+			\begin{itemize}
+			\item Observation de l'emplacement par un type de tâche
+			\end{itemize}
+		\end{itemize}
+	\item Paramétrage de l'environnement
+		\begin{itemize}
+		\item Délais de mise à jour
+		\end{itemize}
+	\end{itemize}
+\item Définition de l'algorithme de partitionnement de l'espace
+\item Définition de l'algorithme d'indexation des objets dynamiques	
+\item Création des stratégies
+	\begin{itemize}
+	\setlength{\itemsep}{2pt}
+	\item Définition des fonctions d'évaluation
+	\item Définition de l'algorithme d'affectation
+	\end{itemize}
+\item Création de l'IA
+\item Définition du modèle de décision et d'observation
+\item Ajout des stratégies
+\item Paramétrage de l'IA
+	\begin{itemize}
+	\item Délais entre chaque cycle \og observation – apprentissage – prise de décision - affectation \fg
+	\end{itemize}
+\item Lancement de la simulation / résolution par le contrôleur du framework.
+\end{itemize} %\vspace{4mm}
+
+
+\subsection{Scénarios annexes}
+
+\subsubsection{Initialisation}
+
+L'initialisation est la première étape effectuée lors de l'exécution. Elle se déroule comme suit :
+
+	\begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item Création de l'objet contenant les données spatiales
+	\item Partionnement de l'espace
+	\item Indexation : %Listage
+		\begin{itemize}
+		\item Des ressources
+		\item Des emplacements de travail
+		\item Des obstacles
+		\end{itemize}
+    \item Donne un accès en lecture aux données spatiales
+	\end{itemize}
+
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/seq_init.png}
+   \caption{\label{seq_init} Séquence d'initialisation}
+\end{figure}
+
+%
+\subsubsection{Contrôleur principal}
+
+	\begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item Le contrôleur principal appelle le contrôleur de l'IA si la contrainte de temps est respectée
+	\item Le contrôleur de l'IA~:
+		\begin{itemize}
+		\setlength{\itemsep}{2pt}
+		\item Observation du monde par la stratégie courante
+		    \begin{itemize}
+		    \item Récupération des changements
+		    \item Evaluation de la situation
+		    \end{itemize}
+		\item Apprentissage (non étudié ici)
+		\item Prise de décision (non étudié ici - peut être effectué manuellement par l'utilisateur)
+		\item Affectation par la stratégie courante
+		\item Notification aux ressources des nouvelles affectations
+		\end{itemize}
+	\item Le contrôleur principal appelle le contrôleur de l'environnement si la contrainte de temps est respectée
+	\item Le contrôleur de l'environnement~:
+		\begin{itemize}
+		\item Mise à jour des ressources
+		    \begin{itemize}
+		    \item Si pas d'affectation : ne rien faire
+		    \item Si affectation : calcul du chemin le plus court
+		    \item Si chemin connu : déplacement et calcul de collisions
+		    \item ...
+		    \end{itemize}
+		\end{itemize}
+	\item La boucle recommence tant que les conditions sont respectées
+	\end{itemize}
+%
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/seq_simu.png}
+   \caption{\label{seq_init} Séquence de simulation}
+\end{figure}
+\subsubsection{Contrôleur IA}
+
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/seq_ia.png}
+   \caption{\label{seq_init} Séquence du contrôleur de l'IA : cycle \og observation – apprentissage – prise de décision - affectation \fg}
+\end{figure}
+%
+\subsubsection{Contrôleur Environnement}
+
+\begin{figure}[!h]\centering
+   \includegraphics[scale=0.5]{images/seq_environnement.png}
+   \caption{\label{seq_init} Séquence de mise à jour de l'environnement}
+\end{figure}
+
+
+
