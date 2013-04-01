@@ -27,7 +27,7 @@ Les entités de ce module sont~:
 \begin{itemize}
 \setlength{\itemsep}{5pt}
 \item Les arbres, servant à stocker l'information spatiale et y accéder rapidemment.
-\item Les techniques de construction de ces arbres. Il s'agit principalement d'algorithmes qui sont plus spécifique à chaque structure de données et qui peuvent les améliorer. On peut citer par exemple le Z-order qui permet de construire de manière efficace des Quadtree ou des arbres de Hilbert.
+\item Les techniques de construction de ces arbres. Il s'agit principalement d'algorithmes qui sont plus spécifiques à chaque structure de données et qui peuvent les améliorer. On peut citer par exemple le Z-order qui permet de construire de manière efficace des Quadtree ou des arbres de Hilbert.
 \end{itemize}
 
 %
@@ -56,12 +56,12 @@ Les entités de ce module sont simplement les algorithmes qui doivent permettre 
 \end{figure}
 \subsection{Ressources}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/uc_ressource.png}
+   \includegraphics[scale=0.6]{images/uc_ressource.png}
    \caption{\label{uc_main} Cas d'utilisation liés aux ressources}
 \end{figure}
 \subsection{Framework}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/uc_framework.png}
+   \includegraphics[scale=0.6]{images/uc_framework.png}
    \caption{\label{uc_main} Cas d'utilisation liés au framework}
 \end{figure}
 %
@@ -75,25 +75,25 @@ Une tâche est définie par une représentation numérique. Ne doit pas être co
 \subsection{Contraintes}
 
 Une contrainte est une assertion et sera modélisée sous forme de foncteur renvoyant vrai ou faux.
-Il existe plusieurs types de contraintes ayant plusieurs fonctionnement. Chacune possède une priorité qui pourra représenter soit un ordre de traitement par l'IA ou une pénalité lors de l'évaluation. \\
+Il existe plusieurs types de contraintes ayant plusieurs fonctionnements. Chacune possède une priorité qui pourra représenter soit un ordre de traitement par l'IA soit une pénalité lors de l'évaluation. \\
 
 \textbf{Note}~: Il serait intéressant de pouvoirs détecter les contraintes impossibles à tenir en fonction de l'environnement ou tout simplement parce que deux contraintes s'opposent. Le problème de satisfaction de contraintes est à lui tout seul un problème NP-difficile dans la plupart des cas.\\
 \indent On supposera durant ce projet que ce point ne pose pas de soucis et que l'utilisateur n'entrera pas des contraintes qui pourront amener le système à se bloquer ou à ne pouvoir satisfaire l'ensemble des contraintes dans un temps raisonnable.\\
 \indent Par la suite il pourra néanmoins être intéressant de proposer des algorithmes de déduction de contraintes et de résolution du problème CSP (Constraint satisfaction problem).
 
-\subsection{Contraintes de seuils}
+\subsubsection{Contraintes de seuils}
 
 Une contrainte de seuil (appliquée à une tâche) est composée d'un opérateur $\leq$ ou $\geq$, et d'une valeur numérique.\\
 \indent Ces contraintes possèdent deux fonctions de callback qui doivent se déclencher lorsque l'on franchi le seuil défini, d'un côté et de l'autre (ie, cela implique de garder en mémoire la valeur lors de la vérification précédente).\\
 \indent Optionnellement, on peut définir un intervalle de tolérance non nécessairement symétrique.
 
-\subsection{Contraintes de de proportionnalité}
+\subsubsection{Contraintes de de proportionnalité}
 
 Défini une relation de proportionnalité entre 2 ou plusieurs tâches.
 On peut imaginer par exemple vouloir 30 \% de pierres contre 70 \% d'or dans le cadre d'un jeu de statégie.\\
-\indent Là encore, on peut définir de manière optionnelle un intervalle de tolérance et deux fonctions de rappel qui seront appelées en cas de changement de statut de la contrainte (passage du respect ou non respect et inversement).
+\indent Là encore, on peut définir de manière optionnelle un intervalle de tolérance et deux fonctions de rappel qui seront appelées en cas de changement de statut de la contrainte (passage du respect au non respect et inversement).
 
-\subsection{Contraintes personnalisées}
+\subsubsection{Contraintes personnalisées}
 
 Une contrainte personnalisée est une contrainte modélisée par une fonction renvoyant un booléen~: vrai si la condition est vérifiée, faux sinon.
 Elles servent à exprimer des contraintes diverses sur les tâches mais aussi sur d'autres éléments de l'environnement en fonction du problème de l'utilisateur.\\
@@ -103,10 +103,10 @@ Ces contraintes portent également deux fonctions de rappel pour le changement d
 \subsection{Système de contraintes}
 Il s'agit d'un système comprenant les tâches ainsi que les contraintes. Les  tâches / contraintes sont potentiellement indépendantes de l'IA qui va résoudre le problème puisqu'elles appartiennent au problème lui même.\\
 
-Ainsi le but du système de contraintes de centraliser les tâches et les contraintes pour en faciliter l'accès par l'utilisateur et l'IA.\\
+Ainsi le but du système de contraintes est de centraliser les tâches et les contraintes pour en faciliter l'accès par l'utilisateur et l'IA.\\
 \indent Le système pourra également proposer des méthodes de résolution du CSP évoquées plus haut.\\\\
 
-Note : La description des contraintes peut se faire de manière plus générale et plus souple par l'utilisateur grâce à un design pattern interpréteur (que nous n'implémenterons pas dans l'immédiat).
+Note~: La description des contraintes peut se faire de manière plus générale et plus souple par l'utilisateur grâce à un design pattern interpréteur (que nous n'implémenterons pas dans l'immédiat).
 
 
 \subsection{L'environnement}
@@ -136,7 +136,7 @@ Tous les objets implémentent une géométrie qui permettra d'effectuer des calc
 
 Tous les objets possèdent également une fonction update qui sert à mettre à jour leur état interne régulièrement.
 
-\subsection{\textbullet ~Les objets statiques}
+\subsubsection{Les objets statiques}
 
 Il s'agit des objets de l'environnement qui ne peuvent pas bouger. Leur intérêt principal est de définir des obstacles dans l'espace, bloquant le passage aux ressources.\\
 
@@ -144,7 +144,7 @@ Il s'agit des objets de l'environnement qui ne peuvent pas bouger. Leur intérê
 
 Il s'agit du seul objet statique concret dont nous avons perçu l’intérêt pour l'instant. Il est là pour modéliser, comme son nom l'indique, un obstacle dans l'espace.
 
-\subsection{\textbullet ~Les objets dynamiques}
+\subsubsection{Les objets dynamiques}
 
 Ce sont des objets qui sont capables d'évoluer.\\
 
@@ -152,11 +152,12 @@ Ce sont des objets qui sont capables d'évoluer.\\
 
 Elles représentent des objets dont l'IA dispose pour pouvoir les affecter à diverses tâches en vu de satisfaire les contraintes du système de contraintes. Il s'agit encore d'une classe abstraite dont le but est de clarifier l'architecture des objets. On retrouvera différents types de ressources ayant des comportements différents.\\
 
-Ainsi on peut imaginer une ressources qui n'est pas réaffectable lorsqu'elle commence une tâche qui lui est donnée par l'IA, on peut imaginer une ressource qui n'accepte qu'un seul type de tâche, etc. Toutes ses variantes dépendent du problème et seront rajoutées à mesure que le besoin s'en fera sentir.\\
+Ainsi on peut imaginer une ressource qui n'est pas réaffectable lorsqu'elle commence une tâche qui lui est donnée par l'IA, on peut imaginer une ressource qui n'accepte qu'un seul type de tâche, etc. Toutes ses variantes dépendent du problème et seront rajoutées à mesure que le besoin s'en fera sentir.\\
 \indent Dans notre cas on n'envisagera qu'une unité simple qui pourra être réaffectée n'importe quand, et une unité qui ne pourra pas être réaffectée.\\\\
 
-Chaque ressource est un agent au sens où il est partiellement autonome. Il évolue indépendamment de l'IA qui ne fait que lui communiquer un ordre (une affectation). C'est la ressource qui se déplace de son propre chef pour se déplacer vers l'objectif. Ainsi chaque ressource possède un algorithme de plus court chemin ainsi qu'une vitesse de déplacement.\\
-Comme l'intérêt du partionnement spatial et de l'indexation astucieuse des objets réside dans la diminution du temps de calcul des algorithmes en général, cela implique que les ressources doivent accéder aux structures de partitionnement et d'indexation. Ainsi ce n'est pas l'IA qui s'occupe de stocker ces structures (on peut imaginer dans un jeu vidéo que l'IA soit remplacé par un joueur).
+Chaque ressource est un agent au sens où il est partiellement autonome. Il évolue indé\-pendamment de l'IA qui ne fait que lui communiquer un ordre (une affectation). C'est la ressource qui se déplace de son propre chef pour se déplacer vers l'objectif. Ainsi chaque ressource possède un algorithme de plus court chemin ainsi qu'une vitesse de déplacement.\\
+
+Comme l'intérêt du partionnement spatial et de l'indexation astucieuse des objets réside dans la diminution du temps de calcul des algorithmes en général, cela implique que les ressources doivent accéder aux structures de partitionnement et d'indexation. Ainsi ce n'est pas l'IA qui s'occupe de stocker ces structures (on peut imaginer dans un jeu vidéo que l'IA soit remplacé par un joueur).\\
 
 \textbf{$\hookrightarrow$ Les emplacements de travail}\\
 
@@ -173,36 +174,38 @@ Les objets sont paramétrés par une politique de chevauchement~: certains objet
 
 \subsection{Les fonctions de coûts}
 
-Il existe plusieurs types de fonctions de coûts dont le rôle est similaire : évaluer un objet ou une quantité en fonction de différent paramètres. Classiquement, on peut évaluer la satisfaction d'une contrainte, les paires (ressource / emplacement de travail), la situation globale.\\
-La manière dont l'évaluation est faite dépend de la stratégie adoptée.\\\\
+Il existe plusieurs types de fonctions de coûts dont le rôle est similaire : évaluer un objet ou une quantité en fonction de différents paramètres. Classiquement, on peut évaluer la satisfaction d'une contrainte, les paires (ressource / emplacement de travail), la situation globale.\\
+La manière dont l'évaluation est faite dépend de la stratégie adoptée.\\
 
 L'implémentation est très libre et souple au vu de ce que le C++ permet de faire, surtout avec le nouveau standard.
 
 \subsection{Les stratégies}
 
-Il s'agit d'une manière de résoudre le problème d'affectation pour satisfaire les contraintes. Elle comporte une manière d'évaluer la situation et un algorithme d'affectation.\\\\
+Il s'agit d'une manière de résoudre le problème d'affectation pour satisfaire les contraintes. Elle comporte une manière d'évaluer la situation et un algorithme d'affectation.\\
 
-Une stratégie très simple consiste à ne traiter la satisfaction que d'une contrainte à la fois. Il s'agira de la seule stratégie que nous implémenterons.\\\\
+Une stratégie très simple consiste à ne traiter la satisfaction que d'une contrainte à la fois. Il s'agira de la seule stratégie que nous implémenterons.\\
 
 L'évaluation de la situation est faite en fonction de la stratégie. Voici la stratégie que nous implémenterons (visible également sur le diagramme de séquence du contrôleur de l'IA):
 \begin{itemize}
 \item Evaluation des contraintes
 \item Evaluation des paires ressource / emplacement
 \item Evaluation globale des ressources
-\item Evaluation de la situation
+\item Evaluation de la situation \\
 \end{itemize}
 
 Voici un exemple concret des fonctions de coûts associés :
 La contrainte $x$ non satisfaite : cette contrainte portait sur la tâche $y$ dont la valeur est trop faible.\\
 
-\\--> Evaluation de l'intérêt des taskSpots
-\\# Le coût des taskSpots rattachés à $y$ est $1$, sinon $0$.
-\\--> Evaluation d'un individu :
-\\# Distance des couples (Indi , TaskSpot)
-\\--> Evaluation globale d'individu
-\\# evalIndi * evalTaskSpot
-\\--> Evaluation situation
-\\# Somme des évaluations globales des individus
+\begin{itemize}
+\item Evaluation de l'intérêt des taskSpots\\
+\indent \# Le coût des taskSpots rattachés à $y$ est $1$, sinon $0$.
+\item Evaluation d'un individu\\
+\indent \# Distance des couples (Indi , TaskSpot)
+\item Evaluation globale d'individu\\
+\indent \# evalIndi * evalTaskSpot
+\item Evaluation situation\\
+\indent \# Somme des évaluations globales des individus\\
+\end{itemize}
 
 Dans cet exemple très simple on ne veut affecter des ressources qu'aux emplacements susceptibles de faire augmenter la quantité non satisfaite. Ainsi dans l'algorithme d'affectation, les couples (individu, emplacement) où l'emplacement n'est pas rattaché à cette quantité seront nuls et donc ne pourront être choisi.\\\\
 L'évaluation de la situation est un indicateur pour l'IA afin qu'elle puisse décider si elle doit changer de stratégie ou non.
@@ -210,8 +213,7 @@ L'évaluation de la situation est un indicateur pour l'IA afin qu'elle puisse d�
 
 \subsection{L'IA}
 
-Il s'agit d'un conteneur de stratégies qui sont organisées selon un modèle (couple d'un modèle de décision et d'observation).\\
-Pour pouvoir plus facilement traiter le problème d'affectation.
+Il s'agit d'un conteneur de stratégies qui sont organisées selon un modèle (couple d'un modèle de décision et d'observation), pour pouvoir plus facilement traiter le problème d'affectation.
 
 \subsection{Arbres}
 
@@ -236,9 +238,9 @@ Utilisés pour indexer les objets, pour partitionner l'espace. On retrouve beauc
 \subsection{Données spatiales}
 
 Etant donné que plusieurs objets qui ne se connaissent pas doivent accéder aux structures de données spatiales (que ce soit la partition de l'espace ou l'index des objets dynamiques), il nous faut une classe dédié à cela.\\
-Cet objet possède 3 structures de données qui indexent la structure de l'espace (donc les objets statiques), les tâches et les ressources à partir des conteneurs basiques (des tableaux) de l'environnement.\\\\
+Cet objet possède 3 structures de données qui indexent la structure de l'espace (donc les objets statiques), les tâches et les ressources à partir des conteneurs basiques (des tableaux) de l'environnement.\\
 
-Lors de l'initialisation, le contrôleur créera cet objet automatiquement et passera passera une référence aux ressources (en passant par l'environnement) et à l'IA.
+Lors de l'initialisation, le contrôleur créera cet objet automatiquement et passera une référence aux ressources (en passant par l'environnement) et à l'IA.
 
 \subsection{Les algorithmes}
 Chaque type d'algorithme définit une hiérarchie de classes héritant toutes d'une classe abstraite définissant l'interface de ce type d'algorithme.\\
@@ -246,7 +248,7 @@ On utilisera un design pattern Factory pour permettre une instanciation aisée p
 
 \subsubsection{Algorithmes de plus court chemin}
 
-Les algorithmes de plus court chemin renvoient une liste de noeuds à parcourir pour une ressource pour arriver à son objectif. Il se peut qu'il y ait des déplacement à prévoir au sein d'un noeud mais c'est à la ressource de s'en occuper.
+Les algorithmes de plus court chemin renvoient une liste de noeuds à parcourir pour une ressource pour arriver à son objectif. Il se peut qu'il y ait des déplacements à prévoir au sein d'un noeud mais c'est à la ressource de s'en occuper.
 
 \subsubsection{Algorithmes d'affectation}
 
@@ -264,17 +266,18 @@ Le contrôleur principal gère le déroulement globale de la simulation. Il s'ag
 \indent La boucle principale va effectuer en permanence les même actions, dans le même ordre. Ces actions sont des appels à des contrôleurs locaux ou des actions définis par l'utilisateur parce qu'il en a besoin dans son application~: interception et traitement des entrées claviers, affichage \ldots \\
 \indent Par défaut, seules deux actions sont présentes: l'appel au contrôleur local de l'IA et au contrôleur local de l'environnement.\\
 
-Ces actions seront modélisés sous forme d'une liste de fonctions à appeler dans l'ordre. Chaque fonction sera assortie d'un délais d'activation~: toutes les 100ms par exemple.
+Ces actions seront modélisées sous forme d'une liste de fonctions à appeler dans l'ordre. Chaque fonction sera assortie d'un délais d'activation~: toutes les 100ms par exemple.
 
 \subsection{Logger}
-Un logger est absolument nécessaire pour un framework afin de repérer le déroulement du flux d'exécution et localiser d'éventuel(s) problème(s) ou simplement visualiser le processus de calcul. C'est d'ailleurs très utile pour faire des tests unitaires ou d'intégration.\\
+Un logger est absolument nécessaire pour un framework afin de repérer le déroulement du flux d'exécution et de localiser d'éventuel(s) problème(s) ou simplement visualiser le processus de calcul. C'est d'ailleurs très utile pour faire des tests unitaires ou d'intégration.\\
+
 \indent Nous mettrons en place un logger sous forme de Design Pattern Chaine de Responsabilité. Chaque maillon de la chaîne sera un logger avec un niveau de log différent (DEBUG, INFO, ERROR \ldots ) et le message transite de maillon en maillon jusqu'à ce que le bon niveau soit atteint.\\
 \indent On pourra utiliser une sérialisation dans un fichier texte ou non.\\
 
 Il existera une instance statique du logger pour permettre une utilisation globale. On n'utilisera pas de DP Singleton d'une part parce qu'il est très dur à rendre thread-safe et d'autre part parce pour une raison ou une autre, l'utilisateur final trouvera peut être une utilité à avoir plusieurs loggers.
 
 \subsection{Le modèle multi-thread}
-Nous n'implémenterons pas le modèle multithread pour des raisons de temps mais nous le rendrons facilement intégrable, notamment avec le fonction du contrôleur principal. En effet, les actions du contrôleur sont, normalement, toutes indépendantes et peuvent donc être lancées en parallèle.\\
+Nous n'implémenterons pas le modèle multithread pour des raisons de temps mais nous le rendrons facilement intégrable, notamment avec la fonction du contrôleur principal. En effet, les actions du contrôleur sont, normalement, toutes indépendantes et peuvent donc être lancées en parallèle.\\
 
 Pour rendre l'application thread-safe à un niveau de granularité plus fin, on utilisera le paramétrage par politique qui permettra de découpler totalement le modèle multi-thread du reste et d'activer / désactiver le support multi-thread à la volée.
 
@@ -288,9 +291,11 @@ On retrouve ce comportement au niveau du couple Emplacement / Tâche où l'empla
 
 \subsubsection{Politique passive}
 
-La politique passive consiste pour l'observé à simplement changer son état indiquant qu'il a changé et préparer le message qui doit être transmis à l'observateur. C'est donc l'observateur qui est actif et va explicitement demander la notification d'état et récuperer les messages des observables qui ont indiqués qu'ils étaient modifiés.\\\\
+La politique passive consiste pour l'observé à simplement changer son état indiquant qu'il a changé et préparer le message qui doit être transmis à l'observateur. C'est donc l'observateur qui est actif et va explicitement demander la notification d'état et récuperer les messages des observables qui ont indiqués qu'ils étaient modifiés.\\
+
 Ce comportement apparaît par exemple au niveau de l'observation de l'environnement par l'IA. L'IA va périodiquement choisir de regarder l'état de l'environnement.
 
+\newpage
 \section{Diagramme de classes}
 \subsection{Algorithmes}
 \begin{figure}[!h]\centering
@@ -299,33 +304,39 @@ Ce comportement apparaît par exemple au niveau de l'observation de l'environnem
 \end{figure}
 Pour faciliter l'instanciation des algorithmes de plus court chemin et d'affectation, un Design Pattern Factory est prévu. Il instanciera un objet dérivant de la classe abstraite Assigment ou ShortestPath qui représentent l'interface de manipulation des algorithmes.
 
+\newpage
 \subsection{Arbres}
-\begin{figure}[!h]\centering
+\begin{figure}[!h]\centering %sidewaysfigure
    \includegraphics[scale=0.5]{images/c_arbres.png}
    \caption{\label{c_arbre} Diagramme de classes des arbres}
 \end{figure}
-De la même manière manière qu'avec les algorithmes, une Factory permettra d'instancier un arbre concret.\\
+
+De la même manière qu'avec les algorithmes, une Factory permettra d'instancier un arbre concret.\\
 Certains arbres peuvent se constuire de plusieurs manières, c'est pourquoi on prévoira un Design Pattern Builder pour permettre de monter différemment ces arbres.
 
+\newpage
 \subsection{Framework}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/c_framework.png}
+   \includegraphics[scale=0.6]{images/c_framework.png}
    \caption{\label{c_framework} Diagramme de classes du framework}
 \end{figure}
 
-
+\newpage
 \subsection{IA \& Contraintes}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/c_ia_contraintes.png}
+   \includegraphics[angle=90, scale=0.5]{images/c_ia_contraintes.png}
    \caption{\label{c_ia_contraintes} Diagramme de classes d'IA et contraintes}
 \end{figure}
 
+\newpage
 \subsection{Environnement}
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/c_ia_contraintes.png}
+   \includegraphics[angle=90, scale=0.5]{images/c_ia_contraintes.png}
    \caption{\label{c_ia_contraintes} Diagramme de classes d'IA et contraintes}
 \end{figure}
+
 %
+\newpage
 \section{Scénario et diagrammes de séquences}
 
 On peut distinguer plusieurs scénarios pour notre application. Le scénario utilisateur où l'acteur principal est l'utilisateur final, c'est à dire celui qui va utiliser le framework pour résoudre un problème en fonction de son contexte.\\
@@ -382,12 +393,12 @@ Des scénarios annexes existent, relatifs aux sous-systèmes du framework et à 
 \item Lancement de la simulation / résolution par le contrôleur du framework.
 \end{itemize} %\vspace{4mm}
 
-
+\newpage
 \subsection{Scénarios annexes}
 
 \subsubsection{Initialisation}
 
-L'initialisation est la première étape effectuée lors de l'exécution. Elle se déroule comme suit :
+L'initialisation est la première étape effectuée lors de l'exécution. Elle se déroule comme suit :\\
 
 	\begin{itemize}
 	\setlength{\itemsep}{5pt}
@@ -399,13 +410,15 @@ L'initialisation est la première étape effectuée lors de l'exécution. Elle s
 		\item Des emplacements de travail
 		\item Des obstacles
 		\end{itemize}
-    \item Donne un accès en lecture aux données spatiales
+    \item Donne un accès en lecture aux données spatiales\\
 	\end{itemize}
 
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/seq_init.png}
+   \includegraphics[angle=90, scale=0.5]{images/seq_init.png}
    \caption{\label{seq_init} Séquence d'initialisation}
 \end{figure}
+
+(Voir Diagramme de séquence d'initialisation~\ref{seq_init}, page~\pageref{seq_init}).
 
 %
 \subsubsection{Contrôleur principal}
@@ -437,25 +450,28 @@ L'initialisation est la première étape effectuée lors de l'exécution. Elle s
 		    \item ...
 		    \end{itemize}
 		\end{itemize}
-	\item La boucle recommence tant que les conditions sont respectées
+	\item La boucle recommence tant que les conditions sont respectées\\
 	\end{itemize}
 %
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/seq_simu.png}
-   \caption{\label{seq_init} Séquence de simulation}
+   \includegraphics[scale=0.55]{images/seq_simu.png}
+   \caption{\label{seq_simu} Séquence de simulation}
 \end{figure}
+
+(Voir Diagramme de séquence de simulation~\ref{seq_simu}, page~\pageref{seq_simu}).
+
 \subsubsection{Contrôleur IA}
 
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/seq_ia.png}
-   \caption{\label{seq_init} Séquence du contrôleur de l'IA : cycle \og observation – apprentissage – prise de décision - affectation \fg}
+   \includegraphics[scale=0.45]{images/seq_ia.png}
+   \caption{\label{seq_ia} Séquence du contrôleur de l'IA : cycle \og observation – apprentissage – prise de décision - affectation \fg}
 \end{figure}
 %
 \subsubsection{Contrôleur Environnement}
 
 \begin{figure}[!h]\centering
-   \includegraphics[scale=0.5]{images/seq_environnement.png}
-   \caption{\label{seq_init} Séquence de mise à jour de l'environnement}
+   \includegraphics[angle=90, scale=0.55]{images/seq_environnement.png}
+   \caption{\label{seq_env} Séquence de mise à jour de l'environnement}
 \end{figure}
 
 
