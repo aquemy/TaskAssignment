@@ -34,4 +34,32 @@
 #include <SIF/utils/logger.hpp>
 #include <SIF/utils/timeManagement.hpp>
 
+// Core
+#include <SIF/core/continue/continue.hpp>
+#include <SIF/core/continue/stepsContinue.hpp>
+#include <SIF/core/continue/timeContinue.hpp>
+#include <SIF/core/activePolicy.hpp>
+#include <SIF/core/controller.hpp>
+#include <SIF/core/multiThread.hpp>
+#include <SIF/core/observable.hpp>
+#include <SIF/core/observablePolicy.hpp>
+#include <SIF/core/observer.hpp>
+#include <SIF/core/passivePolicy.hpp>
+#include <SIF/core/singleThread.hpp>
+#include <SIF/core/step.hpp>
+#include <SIF/core/threadingModel.hpp>
+
+// Environment
+#include <SIF/environment/coordonate.hpp>
+#include <SIF/environment/dynamicObject.hpp>
+#include <SIF/environment/environment.hpp>
+#include <SIF/environment/eval.hpp>
+#include <SIF/environment/object.hpp>
+#include <SIF/environment/obstacle.hpp>
+#include <SIF/environment/space.hpp>
+#include <SIF/environment/spatialData.hpp>
+#include <SIF/environment/square.hpp>
+#include <SIF/environment/staticObject.hpp>
+#include <SIF/environment/taskSpot.hpp>
+
 #endif // _SIF_HEADER_
