@@ -34,7 +34,7 @@ namespace sif
 
 /** Constraint : General class for constraints
 
-General class for constraints, has the level of the priority (int).
+General class for constraints, has the level of the priority (int). Several types of constraints exist.
 
 @see sif::ConstraintSystem, sif::StepConstraint, sif::PropConstraint, sif::CustomConstraint
 */

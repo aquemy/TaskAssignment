@@ -34,7 +34,7 @@ namespace sif
 
 /** Task : Abstract object
 
-A Task is a task :) 
+A Task is materialized by a counter.
 
 @see sif::Task, sif::PeriodicTaskSpot, sif::Observable
 */
