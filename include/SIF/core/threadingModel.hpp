@@ -41,7 +41,9 @@ Define a policy regarding the threading environnement.
 
 class ThreadingModel
 {
-
+public :
+    virtual void lock() = 0;
+    virtual void unlock() = 0;
 };
 
 }

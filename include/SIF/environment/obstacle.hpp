@@ -36,7 +36,7 @@ namespace sif
 
 It defines obstacle that can be overlapped by any objet.
 
-@see sif::Environment, sif::Object, sif::DynamicObject, sif::Obstacle
+@see sif::Environment, sif::Object, sif::DynamicObject, sif::Square
 */
 
 template <class Coordonate>

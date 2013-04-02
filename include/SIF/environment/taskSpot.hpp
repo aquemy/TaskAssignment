@@ -40,8 +40,8 @@ Different types of TaskSpot are provided such as periodic ones.
 @see sif::Task, sif::PeriodicTaskSpot, sif::Observable
 */
 
-template <class Overlapping, Coordonate>
-class TaskSpot : public DynamicObject<Overlapping, Coordonate>, public Observable<ActivePolicy>
+template <Coordonate>
+class TaskSpot : public DynamicObject<Coordonate>, public Observable<ActivePolicy>
 {
 
 };
