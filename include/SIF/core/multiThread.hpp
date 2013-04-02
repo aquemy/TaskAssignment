@@ -41,7 +41,12 @@ Provide mecanisms for a thread-safe environnement in order to allow parallel com
 
 class MultiThread : public ThreadingModel
 {
+public :
+    void lock();
+    void unlock();
 
+protected :
+    std::mutex m;
 };
 
 }

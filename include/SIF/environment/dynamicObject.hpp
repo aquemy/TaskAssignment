@@ -41,7 +41,7 @@ By moving, we suggest physically or just changing its internal state.
 */
 
 template <class Coordonate>
-class DynamicObject : public Object<Coordonate>
+class DynamicObject : public Object<Coordonate>, public Observable<ActivePolicy>
 {
 
 };

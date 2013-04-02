@@ -41,7 +41,9 @@ Dummy policy in case or the user does not want to use SIF in a multithread envir
 
 class SingleThread : public ThreadingModel
 {
-
+public :
+    void lock();
+    void unlock();
 };
 
 }

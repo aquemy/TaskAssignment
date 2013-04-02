@@ -40,7 +40,23 @@ The controller is a static class that is the entry point of the execution flux.
 
 class Controller
 {
-
+public :
+    void addContinue(Continue& _cont);
+    void addStep(Step _step);
+    void addStep(Step _step, unsigned _pos);
+    
+    static void init();
+    static void startPartitioning();
+    static void startIndexing();
+    static void run();
+    
+protected :
+    
+    bool checkContinue();
+    
+    std::vector<Continue*> cont;
+    std::list<Step> steps;
+    
 };
 
 }

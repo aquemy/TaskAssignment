@@ -40,7 +40,7 @@ Abstract class for objects contained in the environment.
 */
 
 template <class Coordonate>
-class Object : public Observable<PassivePolicy>
+class Object
 {
 
 };
