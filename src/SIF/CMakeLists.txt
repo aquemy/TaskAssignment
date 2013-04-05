@@ -2,6 +2,7 @@ set(SRC
     utils/baseLogger.cpp
     utils/logger.cpp
     utils/timeManagement.cpp
+    core/controller.cpp
 )
 
 add_library(sif STATIC ${SRC})

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <model.hpp>
+// <t-controller.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,26 +26,15 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_MODEL_
-#define _SIF_MODEL_
+#include <sif>
 
-namespace sif
+using namespace sif;
+
+int main(void)
 {
-
-/** Model : Defined IA and Strategie
-
-Model defined the shape of the IA and the arrangement of the strategies.
-
-@see sif::IA, sif::Strategy
-*/
-
-class Model
-{
-
-};
-
-
+    
+ 
+    return 0;
+    
 }
-
-#endif // _SIF_MODEL_
 

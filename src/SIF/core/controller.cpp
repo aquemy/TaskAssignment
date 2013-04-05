@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <model.hpp>
+// <controller.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,26 +26,52 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_MODEL_
-#define _SIF_MODEL_
-
 namespace sif
 {
 
-/** Model : Defined IA and Strategie
-
-Model defined the shape of the IA and the arrangement of the strategies.
-
-@see sif::IA, sif::Strategy
-*/
-
-class Model
+void Controller::addContinue(Continue& _cont)
 {
+    cont.push_back(_cont);
+}
 
-};
+void Controller::addStep(Step _step)
+{
+    steps.push_back(_step);
+}
 
+void Controller::addStep(Step _step, unsigned _pos)
+{
+    steps.insert(_pos, _step);
+}
+    
+static void Controller::init()
+{
+    
+}
+
+static void Controller::startPartitioning()
+{
 
 }
 
-#endif // _SIF_MODEL_
+static void Controller::startIndexing()
+{
+
+}
+
+static void Controller::run()
+{
+
+}
+    
+/*protected :
+    
+    bool checkContinue();
+    
+    std::vector<Continue*> cont;
+    std::list<Step> steps;
+    
+};*/
+
+}
 

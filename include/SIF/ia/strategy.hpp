@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <model.hpp>
+// <strategy.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,20 +26,20 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_MODEL_
-#define _SIF_MODEL_
+#ifndef _SIF_STRATEGY_
+#define _SIF_STRATEGY_
 
 namespace sif
 {
 
-/** Model : Defined IA and Strategie
+/** Strategy : Defines the policy of the model
 
-Model defined the shape of the IA and the arrangement of the strategies.
+The Strategy is defined by the user, defines the policy of the model.
 
-@see sif::IA, sif::Strategy
+@see sif::Model,
 */
 
-class Model
+class Strategie
 {
 
 };
@@ -47,5 +47,5 @@ class Model
 
 }
 
-#endif // _SIF_MODEL_
+#endif // _SIF_STRATEGY_
 
