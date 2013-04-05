@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <t-logger.cpp>
+// <controller.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,26 +26,52 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <sif>
-
-using namespace sif;
-
-int main(void)
+namespace sif
 {
-    // Desactivation du mode DEBUG
-    logger.startSerialize("log.txt"); // On sérialize tout dans log.txt
-    logger.setQuiet(Logger::PROGRESS); // Pas de message de progression affiché
-    logger.startSerialize(Logger::ERROR, "error.txt"); // On sérialize les erreurs à part
-        
-    // Test
-    logger(Logger::PROGRESS) << "Step1 completed.";
-    logger << "Step2 completed";
-    logger(Logger::ERROR) << "An error has occurred.";
-    logger(Logger::DEBUG) << "Entering function y.";
-    logger(Logger::WARNING) << "Size invalid. Set to 0.";
-    logger(Logger::INFO) << "Init IA.";
- 
-    return 0;
+
+void Controller::addContinue(Continue& _cont)
+{
+    cont.push_back(_cont);
+}
+
+void Controller::addStep(Step _step)
+{
+    steps.push_back(_step);
+}
+
+void Controller::addStep(Step _step, unsigned _pos)
+{
+    steps.insert(_pos, _step);
+}
     
+static void Controller::init()
+{
+    
+}
+
+static void Controller::startPartitioning()
+{
+
+}
+
+static void Controller::startIndexing()
+{
+
+}
+
+static void Controller::run()
+{
+
+}
+    
+/*protected :
+    
+    bool checkContinue();
+    
+    std::vector<Continue*> cont;
+    std::list<Step> steps;
+    
+};*/
+
 }
 

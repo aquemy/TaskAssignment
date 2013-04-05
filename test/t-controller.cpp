@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <t-logger.cpp>
+// <t-controller.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -32,18 +32,7 @@ using namespace sif;
 
 int main(void)
 {
-    // Desactivation du mode DEBUG
-    logger.startSerialize("log.txt"); // On sérialize tout dans log.txt
-    logger.setQuiet(Logger::PROGRESS); // Pas de message de progression affiché
-    logger.startSerialize(Logger::ERROR, "error.txt"); // On sérialize les erreurs à part
-        
-    // Test
-    logger(Logger::PROGRESS) << "Step1 completed.";
-    logger << "Step2 completed";
-    logger(Logger::ERROR) << "An error has occurred.";
-    logger(Logger::DEBUG) << "Entering function y.";
-    logger(Logger::WARNING) << "Size invalid. Set to 0.";
-    logger(Logger::INFO) << "Init IA.";
+    
  
     return 0;
     
