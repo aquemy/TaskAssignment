@@ -34,12 +34,13 @@ namespace sif
 
 /** AtlasGrid : Tree data structure
 
-AtlasGrid is a simple data structure, a simple matrix.
+AtlasGrid is a simple data structure for partitionning..
 
 @see sif::Tree
 */
 
-class AtlasGrid : public Tree
+template <class Data>
+class AtlasGrid : public Tree<Data>
 {
 
 };

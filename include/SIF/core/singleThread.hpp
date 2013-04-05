@@ -41,9 +41,18 @@ Dummy policy in case or the user does not want to use SIF in a multithread envir
 
 class SingleThread : public ThreadingModel
 {
-public :
-    void lock();
-    void unlock();
+protected :
+
+     /**
+     * Implemention of the lock method
+     */
+    virtual void _lock() = 0;
+    
+    /**
+     * Implemention of the unlock method
+     */
+    virtual void _unlock() = 0;
+    
 };
 
 }

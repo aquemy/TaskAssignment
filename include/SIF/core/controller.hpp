@@ -29,6 +29,11 @@
 #ifndef _SIF_CONTROLLER_
 #define _SIF_CONTROLLER_
 
+#include <vector>
+#include <list>
+
+#include <SIF/core/step.hpp>
+
 namespace sif
 {
 
@@ -41,17 +46,51 @@ The controller is a static class that is the entry point of the execution flux.
 class Controller
 {
 public :
+
+    /**
+     * Add a stop criterion
+     * @param _cont Criterion
+     */
     void addContinue(Continue& _cont);
+    
+    /**
+     * Add a step to the controller, at the end of the list
+     * @param _step Step to add
+     */
     void addStep(Step _step);
+    
+    /**
+     * Add a step to the controller
+     * @param _step Step to add
+     * @param _pos Position of the step in the list
+     */
     void addStep(Step _step, unsigned _pos);
     
+    /**
+     * Static initialization
+     */
     static void init();
+    
+    /**
+     * Start the space partitioning
+     */
     static void startPartitioning();
+    
+    /**
+     * Start the space indexing
+     */
     static void startIndexing();
+    
+    /**
+     * Run the simulation / computation
+     */
     static void run();
     
 protected :
     
+    /**
+     * Check if 
+     */
     bool checkContinue();
     
     std::vector<Continue*> cont;

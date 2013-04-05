@@ -41,6 +41,50 @@ General class for constraints, has the level of the priority (int).
 
 class Constraint
 {
+public :
+
+    /**
+     * Default constructor
+     * @param _priority Constraint priority
+     */ 
+    Constraint(unsigned _priority);
+    
+    /**
+     * Change the priority
+     * @param _priority Constraint priority
+     */ 
+    void setPriority(unsigned _priority);
+    
+    /**
+     * Get the priority
+     * @return Constraint priority
+     */ 
+    unsigned getPriority() const;
+    
+    /**
+     * Comparaison operator based on priority
+     * @param _const Constraint to compare
+     * @return boolean
+     */
+    bool operator<(Constraint& _const);
+    
+    /**
+     * Check the constraint satisfaction and launch callback function if needed
+     * @return boolean
+     */ 
+    virtual bool operator()() = 0;
+
+protected :
+
+    unsigned priority;  ///< Priority of the constraint
+
+};
+
+class ConstraintCompare
+{
+public :
+    
+    bool operator()(Constraint* _c1, Constraint* _c2);
 
 };
 

@@ -29,6 +29,8 @@
 #ifndef _SIF_OBSERVABLE_
 #define _SIF_OBSERVABLE_
 
+#include <SIF/core/observer.hpp>
+
 namespace sif
 {
 
@@ -42,6 +44,27 @@ The Observable part of the Design Pattern Observer. The notifying policy determi
 template <class NotifyPolicy>
 class Observable : public NotifyPolicy
 {
+
+public : 
+    
+    /**
+     * Add observer
+     * @param _obs New observer
+     */
+    void addObserver(Observer& _obs);
+    
+    /**
+     * Remove an observer
+     * @param _obs Observer to remove
+     */
+    void removeObserver(Observer& _obs);
+    
+protected :
+
+    /**
+     * Implemention of the setChange method
+     */
+    virtual void _setChange() = 0;
 
 };
 

@@ -32,16 +32,25 @@
 namespace sif
 {
 
-/** AssignmentFactory : Serve for reassignment
+/** AssignmentFactory : Instanciate assignment algorithm
 
-This factory will serve when we need to reassign the unit.
+This factory converts general data to specific data used for a specific assignment algorithm.
 
 @see sif::Assignment
 */
 
 class AssignmentFactory
 {
+public :
 
+    /**
+     * Kuhn instanciation : tranform data into a cost matrix
+     * @param _resource Resources to assign
+     * @param _taskSpot taskSpot to be affected
+     * @return Kuhn instance (right-value)
+     */   
+    static Khun&& Khun(std::map<Resource*, int> _resource, std::vector<TaskSpot*> _taskSpot);
+    
 };
 
 }

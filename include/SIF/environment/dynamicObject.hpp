@@ -29,6 +29,9 @@
 #ifndef _SIF_DYNAMIC_OBJECT_
 #define _SIF_DYNAMIC_OBJECT_
 
+#include <SIF/environment/object.hpp>
+#include <SIF/core/observable.hpp>
+
 namespace sif
 {
 
@@ -40,8 +43,8 @@ By moving, we suggest physically or just changing its internal state.
 @see sif::Environment, sif::Object, sif::StaticObject, sif::Ressource, sif::TaskSpot
 */
 
-template <class Coordonate>
-class DynamicObject : public Object<Coordonate>, public Observable<ActivePolicy>
+template <class Coord>
+class DynamicObject : public Object<Coord>, public Observable<ActivePolicy>
 {
 
 };

@@ -32,9 +32,9 @@
 namespace sif
 {
 
-/** ShortestPathFactory : General class for shortest path
+/** ShortestPathFactory : 
 
-This Factory solves the shortest path problems.
+
 
 @see sif::ShortestPath
 */
@@ -42,6 +42,13 @@ This Factory solves the shortest path problems.
 class ShortestPathFactory
 {
 
+public :
+    /**
+     * AStar instanciation : tranform data into a cost matrix
+     * @return AStar instance (right-value)
+     */   
+    static AStar&& AStar();
+    
 };
 
 }

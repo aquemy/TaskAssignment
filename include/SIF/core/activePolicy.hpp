@@ -29,6 +29,8 @@
 #ifndef _SIF_ACTIVE_POLICY_
 #define _SIF_ACTIVE_POLICY_
 
+#include <SIF/core/observablePolicy.hpp>
+
 namespace sif
 {
 
@@ -41,7 +43,13 @@ This policy will notify directly the observer when a state change occured.
 
 class ActivePolicy : public ObservablePolicy
 {
+protected :
 
+    /**
+     * Implemention of the setChange method
+     */
+    virtual void _setChange();
+   
 };
 
 }

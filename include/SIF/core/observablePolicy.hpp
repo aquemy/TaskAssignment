@@ -41,7 +41,14 @@ Define different observable behaviors. The implementation is based on NVI idiom 
 
 class ObservablePolicy
 {
+public :
 
+    virtual void setChange() final;
+    
+protected :
+
+    virtual void _setChange() = 0;
+    
 };
 
 

@@ -39,7 +39,7 @@ Abstract class for objects contained in the environment.
 @see sif::Environment, sif::Space, sif::DynamicObject, sif::StaticObject
 */
 
-template <class Coordonate>
+template <class Coord>
 class Object
 {
 

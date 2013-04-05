@@ -39,8 +39,8 @@ It defines a square shaped obstacle.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::Obstacle
 */
 
-template <class Coordonate>
-class Square : public Obstacle<Coordonate>
+template <class Coord>
+class Square : public Obstacle<Coord>
 {
 
 };

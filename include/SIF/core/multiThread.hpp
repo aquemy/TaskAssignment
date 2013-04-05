@@ -29,6 +29,10 @@
 #ifndef _SIF_MULTI_THREAD_
 #define _SIF_MULTI_THREAD_
 
+#include <mutex>
+
+#include <SIF/core/threadingModel.hpp>
+
 namespace sif
 {
 
@@ -41,12 +45,19 @@ Provide mecanisms for a thread-safe environnement in order to allow parallel com
 
 class MultiThread : public ThreadingModel
 {
-public :
-    void lock();
-    void unlock();
-
 protected :
-    std::mutex m;
+
+    /**
+     * Implemention of the lock method
+     */
+    virtual void _lock();
+    
+    /**
+     * Implemention of the unlock method
+     */
+    virtual void _unlock();
+    
+    std::mutex m;   ///< Mutex to lock the scope
 };
 
 }

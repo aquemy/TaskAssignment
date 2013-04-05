@@ -39,7 +39,8 @@ RTree is a tree data structure for spatial access methods, ie, for indexing mult
 @see sif::Tree
 */
 
-class RTree : public Tree
+template <class Data>
+class RTree : public Tree<Data>
 {
 
 };

@@ -41,7 +41,23 @@ AStar is a computer algorithm that is widely used in pathfinding and graph trave
 
 class AStar : public ShortestPath
 {
+public :
 
+    /**
+     * Default constructor
+     */   
+    AStar() = default;
+
+    /**
+     * Start the shortest path computation
+     * @param _from Origin
+     * @param _to Goal
+     * @param _data Spatial data
+     * @return list of spacial elements that composed the path
+     */  
+    template<class Data>
+    std::list<Data>&& operator()(const Coordonate& _from, const _Coordonate& _to, const Tree<Data> _data);
+    
 };
 
 }

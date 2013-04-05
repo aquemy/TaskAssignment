@@ -39,7 +39,8 @@ QuadTree is a tree data structure in which each internal node has exactly four c
 @see sif::Tree
 */
 
-class QuadTree : public Tree
+template <class Data>
+class QuadTree : public Tree<Data>
 {
 
 };

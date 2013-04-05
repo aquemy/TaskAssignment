@@ -32,6 +32,12 @@
 namespace sif
 {
 
+enum ConstraintComp
+{
+    GREATER = 0,
+    LESSER = 1
+};
+
 /** StepConstraint : Special constraint
 
 StepConstraint is a special constraint related to the step.
@@ -41,6 +47,44 @@ StepConstraint is a special constraint related to the step.
 
 class StepConstraint : public Constraint
 {
+public :
+
+    /**
+     * Default constructor
+     * @param _task Task concerned by the constraint
+     * @param _comp Comparaison operator
+     * @param _step Step value
+     * @param _reachCondition Callback function called when the constraint is satisfied
+     * @param _breakCondition Callback function called when the constraint is not satisfied
+     * @param _rT Right value of the tolerance interval
+     * @param _lT Left value of the tolerance interval
+     */
+    StepConstraint(Task& _task, 
+        ConstraintComp _comp, 
+        int _step,
+        std::function<void()> _reachCondition = []{},
+        std::function<void()> _breakCondition = []{},
+        int _rT = 0, 
+        int _lT = 0
+   )
+   
+   /**
+     * Check the constraint satisfaction and launch callback function if needed
+     * @return boolean
+     */ 
+   virtual bool operator()();
+
+protected :
+
+    ConstraintComp op;                      ///< Comparaison operator
+    int step;                               ///< Value of the step
+    Task& task;                             ///< Reference on the task
+    int lastValue;                          ///< Value at the last check
+    int leftTolerance;                      ///< Value for the left tolerance
+    int rightTolerance;                     ///< Value for the right tolerance
+    
+    std::function<void()> breakCondition;   ///< Called when the constraint is not satisfied
+    std::function<void()> reachCondition;   ///< Called when the constraint is satisfied
 
 };
 

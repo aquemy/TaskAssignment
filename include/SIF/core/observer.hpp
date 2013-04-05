@@ -42,6 +42,12 @@ or have to check them, depending on the policy of the observables.
 
 class Observer
 {
+public :
+
+    void notify();
+
+protected :
+
 
 };
 

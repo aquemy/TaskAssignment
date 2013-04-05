@@ -39,6 +39,7 @@ Tree is the class which list trees.
 @see sif::TreeFactory, sif::RTree, sif::QuadTree, sif::AtlasGrid
 */
 
+template <class Data>
 class Tree
 {
 

@@ -40,8 +40,8 @@ such as sif::Obstacle that defines obstacle in space.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::Obstacle
 */
 
-template <class Coordonate>
-class StaticObject : public Object<Coordonate>
+template <class Coord>
+class StaticObject : public Object<Coord>
 {
 
 };

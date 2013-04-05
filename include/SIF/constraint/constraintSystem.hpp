@@ -34,12 +34,13 @@ namespace sif
 
 /** ConstraintSystem : List of constraints
 
-ConstraintSystem list the constraints of the system. This list is sorted by priority level.
+ConstraintSystem is a container of constraints. This list is sorted by priority level.
+At the moment it is a simple priority queue.
 
 @see sif::Constraint
 */
 
-class ConstraintSystem
+class ConstraintSystem : public std::priority_queue<Contraint*, ConstraintCompare>
 {
 
 };

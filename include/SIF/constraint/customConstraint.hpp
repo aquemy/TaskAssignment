@@ -41,6 +41,32 @@ CustomConstraint is a special constraint defined by the user.
 
 class CustomConstraint : public Constraint
 {
+public :
+
+    /**
+     * Default constructor
+     * @param _cond Condition to satisfy the constraint
+     * @param _reachCondition Callback function called when the constraint is satisfied
+     * @param _breakCondition Callback function called when the constraint is not satisfied
+     */
+    CustomConstraint(std::function<bool()> _cond,
+        std::function<void()> _reachCondition = []{},
+        std::function<void()> _breakCondition = []{}
+   )
+   
+   /**
+     * Check the constraint satisfaction and launch callback function if needed
+     * @return boolean
+     */ 
+   virtual bool operator()();
+
+protected :
+
+    std::function<bool()> cond;             ///< Constraint satisfaction
+    bool lastValue;                         ///< Value at the last check
+
+    std::function<void()> breakCondition;   ///< Called when the constraint is not satisfied
+    std::function<void()> reachCondition;   ///< Called when the constraint is satisfied
 
 };
 

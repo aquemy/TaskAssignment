@@ -41,6 +41,12 @@ This policy will change the internal state of the observable. It is the responsa
 
 class PassivePolicy : public ObservablePolicy
 {
+protected :
+
+    /**
+     * Implemention of the setChange method
+     */
+    virtual void _setChange();
 
 };
 

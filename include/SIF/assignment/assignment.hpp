@@ -42,6 +42,13 @@ This class enabled to reassign the different units.
 template <class Data>
 class Assignment
 {
+public :
+    
+    /**
+     * Start the assignment problem resolution
+     * @return A map from resource to TaskSpot
+     */   
+    std::map<Resource*,TaskSpot*> operator()();
 
 };
 

@@ -40,7 +40,7 @@ It contains the different objets that can evolve in a specific space.
 @see sif::Space, sif::Object
 */
 
-template <class <template class> Space, class Coordonate>
+template <template <class> class Space, class Coord>
 class Environment : public Observer
 {
 

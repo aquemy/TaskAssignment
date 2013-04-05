@@ -42,7 +42,17 @@ Kuhn is an algorithm wihch solves the asssignment problem. Kuhn is also named th
 template <class Data>
 class Kuhn : public Assignment<Data>
 {
-
+public :
+    
+    /**
+     * Start the Kuhn method
+     * @return A map from resource to TaskSpot
+     */   
+    std::map<Resource*,TaskSpot*> operator()();
+    
+protected :
+    
+    std::vector<std::vector>> cost;     ///< Cost matrix
 };
 
 }
