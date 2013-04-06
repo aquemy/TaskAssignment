@@ -33,6 +33,7 @@
 #include <list>
 
 #include <SIF/core/step.hpp>
+#include <SIF/core/continue/continue.hpp>
 
 namespace sif
 {

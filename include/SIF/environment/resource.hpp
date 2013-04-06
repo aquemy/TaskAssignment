@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <controller.cpp>
+// <resource.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,59 +26,29 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <iterator>
-
-#include <SIF/core/controller.hpp>
-#include <SIF/core/continue/continue.hpp>
+#ifndef _SIF_RESOURCE_
+#define _SIF_RESOURCE_
 
 namespace sif
 {
 
-void Controller::addContinue(Continue& _cont)
-{
-    cont.push_back(&_cont);
-}
+/** Ressource : Ressource that can be affected to a task
 
-void Controller::addStep(Step _step)
-{
-    steps.push_back(_step);
-}
+A ressource is an object that can be affected to a task. It modelizes a point in space 
+that can move. Thanks to a shortest path algorithm it is independant when it know
+the Task Spot he has to join.
 
-void Controller::addStep(Step _step, unsigned _pos)
-{
-    auto it = std::begin(steps);
-    for(auto i = 0; i < _pos; i++,it++);
-    steps.insert(it, _step);
-}
-    
-void Controller::init()
-{
-    
-}
+@see sif::Environment, sif::Object, sif::DynamicObject sif::TaskSpot
+*/
 
-void Controller::startPartitioning()
+template <class Coord>
+class Resource : public DynamicObject<Coord>
 {
 
-}
+};
 
-void Controller::startIndexing()
-{
 
 }
 
-void Controller::run()
-{
-
-}
-    
-/*protected :
-    
-    bool checkContinue();
-    
-    std::vector<Continue*> cont;
-    std::list<Step> steps;
-    
-};*/
-
-}
+#endif // _SIF_RESOURCE_
 
