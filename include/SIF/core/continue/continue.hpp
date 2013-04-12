@@ -41,7 +41,22 @@ Hierarchie of functors that defines criteria in order to continue the calculatio
 
 class Continue
 {
-
+public :
+    
+    /**
+     * Check the criterion
+     * @return boolean
+     */
+    virtual bool operator()();
+    
+protected :
+    
+    /**
+     * Implementation of the test
+     * @return boolean
+     */
+    virtual bool _check() = 0;
+    
 };
 
 }

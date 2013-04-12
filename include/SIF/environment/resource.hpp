@@ -29,6 +29,8 @@
 #ifndef _SIF_RESOURCE_
 #define _SIF_RESOURCE_
 
+#include <SIF/environment/direction.hpp>
+
 namespace sif
 {
 
@@ -38,13 +40,40 @@ A ressource is an object that can be affected to a task. It modelizes a point in
 that can move. Thanks to a shortest path algorithm it is independant when it know
 the Task Spot he has to join.
 
-@see sif::Environment, sif::Object, sif::DynamicObject sif::TaskSpot
+@see sif::Environment, sif::Object, sif::DynamicObject, sif::TaskSpot
 */
 
 template <class Coord>
 class Resource : public DynamicObject<Coord>
 {
+public :
+    
+    /**
+     * Update Resource
+     * @param _time Ellapsed time since the last update
+     */
+    virtual void update(double _time);
+    
+    /**
+     * Move the resource in specified direction
+     * @param _dir Direction
+     * @param _time Ellapsed time since the last move
+     */
+    void move(Direction _dir, double _time);
 
+protected : 
+    
+    /**
+     * Check the collision according to the direction of the movement
+     * @param _dir Direction
+     * @return true is colliding, false otherwise
+     */
+    bool colliding(Direction _dir);
+    
+    double velocity;                     ///< Velocity of the ressource
+    Path path;                              ///< Path to reach the assignment
+    TaskSpot* assignment;       ///< Assignment
+    ShortestPath& spa;             ///< Shortest path algorithm
 };
 
 

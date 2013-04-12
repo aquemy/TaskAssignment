@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <eval.hpp>
+// <direction.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,53 +26,31 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_EVAL_
-#define _SIF_EVAL_
+#ifndef _SIF_DIRECTION_
+#define _SIF_DIRECTION_
 
 namespace sif
 {
 
-/** 
- *  Eval : Different types of eval function
+/**Direction : Define direction for dynamic objects
+
+ At the moment the direction define constants for the 4 cardinal points : North, East, South, West.
+In the future, they will depends on a general metric used in the environment. For instance, with a manhattan metric,
+resources could only be moved in N,E,S,W directions but with an euclidian metric they could me mouved in 8 directions :
+ N, E, S, W, NE, NW, SE, SW.
+
+@see sif::Environment, sif::Object, sif::Ressource
 */
 
-/** 
- *  EvalTable : A map of cost indexed by Data pointers
-*/
-template <class Data>    
-using EvalTable = std::map<Data*,int>;
-
-/** 
- *  Eval : Base for eval function
-*/
-template <class Data>
-using Eval = std::function<int(Data&)>;
-
-/** 
- *  EvalLoop : Evaluate a vector of Data
- * @param _eval Evaluation function
- * @param _data Vector of data to evaluate
- * @return EvalTable
-*/
-template <class Data>
-EvalTable EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data);
-
-/** 
- * ConstraintEval : Typedef for the constraint evaluation
-*/
-using ConstraintEval = Eval<Constraint>;
-
-/** 
- * TaskSpotEval : Typedef for the TaskSpot evaluation
-*/
-using TaskSpotEval = Eval<TaskSpot>;
-
-/** 
- * ResourceEval : Typedef for the Resource evaluation
-*/
-using ResourceEval = Eval<Resource>;
+enum Direction
+{
+    NORTH,
+    WEST,
+    SOUTH,
+    EAST
+};
 
 }
 
-#endif // _SIF_EVAL_
+#endif // _SIF_DIRECTION_
 

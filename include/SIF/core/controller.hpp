@@ -34,6 +34,7 @@
 
 #include <SIF/core/step.hpp>
 #include <SIF/core/continue/continue.hpp>
+#include <SIF/environment/spatialData.hpp>
 
 namespace sif
 {
@@ -47,25 +48,35 @@ The controller is a static class that is the entry point of the execution flux.
 class Controller
 {
 public :
+    
+    /**
+      * Default contructor
+      */
+     Controller();
+    
+     /**
+      * Default destructor
+      */
+     ~Controller();
 
     /**
      * Add a stop criterion
      * @param _cont Criterion
      */
-    void addContinue(Continue& _cont);
+    static void addContinue(Continue& _cont);
     
     /**
      * Add a step to the controller, at the end of the list
      * @param _step Step to add
      */
-    void addStep(Step _step);
+    static void addStep(Step _step);
     
     /**
      * Add a step to the controller
      * @param _step Step to add
      * @param _pos Position of the step in the list
      */
-    void addStep(Step _step, unsigned _pos);
+    static void addStep(Step _step, unsigned _pos);
     
     /**
      * Static initialization
@@ -90,13 +101,15 @@ public :
 protected :
     
     /**
-     * Check if 
+     * Check if a stop criterion is reached
+     * @return boolean
      */
-    bool checkContinue();
+    static bool checkContinue();
     
-    std::vector<Continue*> cont;
-    std::list<Step> steps;
-    
+    static std::vector<Continue*> cont;
+    static std::list<Step> steps;
+    static SpatialData* spatialData;
+    static bool initialized;
 };
 
 }

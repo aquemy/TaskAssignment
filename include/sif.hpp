@@ -51,6 +51,7 @@
 
 // Environment
 #include <SIF/environment/coordonate.hpp>
+#include <SIF/environment/direction.hpp>
 #include <SIF/environment/dynamicObject.hpp>
 #include <SIF/environment/environment.hpp>
 #include <SIF/environment/eval.hpp>
@@ -61,5 +62,13 @@
 #include <SIF/environment/square.hpp>
 #include <SIF/environment/staticObject.hpp>
 #include <SIF/environment/taskSpot.hpp>
+
+// Graph
+#include <SIF/graph/atlasGrid.hpp>
+#include <SIF/graph/path.hpp>
+#include <SIF/graph/quadTree.hpp>
+#include <SIF/graph/rTree.hpp>
+#include <SIF/graph/tree.hpp>
+#include <SIF/graph/treeFactory.hpp>
 
 #endif // _SIF_HEADER_

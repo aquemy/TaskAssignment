@@ -43,7 +43,7 @@ A step is a simple using directive on a pair composed by a std::function and a d
 @see sif::Controller
 */
 
-using Step = std::pair<std::function<void(void)>, std::chrono::milliseconds>;
+using Step = std::pair<std::function<void(void)>, unsigned>;
 
 }
 

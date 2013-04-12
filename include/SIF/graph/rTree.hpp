@@ -29,6 +29,8 @@
 #ifndef _SIF_R_TREE_
 #define _SIF_R_TREE_
 
+#include <SIF/graph/tree.hpp>
+
 namespace sif
 {
 

@@ -29,6 +29,8 @@
 #ifndef _SIF_SHORTEST_PATH_
 #define _SIF_SHORTEST_PATH_
 
+#include <SIF/graph/path.hpp>
+
 namespace sif
 {
 
@@ -52,10 +54,10 @@ public :
      * @param _from Origin
      * @param _to Goal
      * @param _data Spatial data
-     * @return list of spacial elements that composed the path
+     * @return A path
      */  
     template<class Data>
-    std::list<Data>&& operator()(const Coordonate& _from, const _Coordonate& _to, const Tree<Data> _data);
+    Path&& operator()(const Coordonate& _from, const _Coordonate& _to, const Tree<Data> _data);
 };
 
 }

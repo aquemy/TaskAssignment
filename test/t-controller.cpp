@@ -26,14 +26,45 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include <exception>
+
 #include <sif.hpp>
 
+using namespace std;
 using namespace sif;
+
+void f()
+{
+    static int i = 0;
+    i++;
+    std::cout << i << std::endl;
+}
 
 int main(void)
 {
     
- 
+    try
+    {
+        auto func = f;
+        Step step(func, 10);
+        
+        StepsContinue cont(5);
+        TimeContinue cont_2(5);
+        
+        Controller::addContinue(cont);
+        Controller::addContinue(cont_2);
+        
+        Controller::addStep(step);
+        
+        Controller::init();
+        Controller::run();
+    }
+    catch(exception& e)
+    {
+        logger(Logger::ERROR) << e.what();
+        logger << "FATAL ERROR - EXIT NOW !";
+    }
+    
     return 0;
     
 }

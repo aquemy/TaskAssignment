@@ -41,10 +41,14 @@ This allow only cartesian system and uniform type representation.
 @see sif::Environment, sif::Space
 */
 
-template <class Dim, class Type>
+template <int Dim, class Type>
 class Coordonate : public std::vector<Type>
 {
-
+    /**
+     * Default constructor
+     * Check the Type template is a numeric type with type_trait
+     */
+    Coordonate() ;
 };
 
 

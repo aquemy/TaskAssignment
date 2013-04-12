@@ -43,7 +43,10 @@ Different types of TaskSpot are provided such as periodic ones.
 template <class Coord>
 class TaskSpot : public DynamicObject<Coord>, public Observable<ActivePolicy>
 {
-
+    /**
+     * Update Ressource
+     */
+    virtual void update();
 };
 
 

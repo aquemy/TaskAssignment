@@ -44,10 +44,10 @@ class ShortestPathFactory
 
 public :
     /**
-     * AStar instanciation : tranform data into a cost matrix
+     * AStar instanciation : tranform a TaskSpot into coordonates
      * @return AStar instance (right-value)
      */   
-    static AStar&& AStar();
+    static AStar&& AStar(TaskSpot& const _taskSpot);
     
 };
 

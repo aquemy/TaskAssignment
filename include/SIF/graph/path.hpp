@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <eval.hpp>
+// <path.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,53 +26,27 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_EVAL_
-#define _SIF_EVAL_
+#ifndef _SIF_PATH_
+#define _SIF_PATH_
 
 namespace sif
 {
+    
+#include <list>
 
-/** 
- *  Eval : Different types of eval function
+/** Path : Path data structure
+
+A path is list of data elements used for resources in order they know how to reach an aim.
+
+@see sif::Tree
 */
 
-/** 
- *  EvalTable : A map of cost indexed by Data pointers
-*/
-template <class Data>    
-using EvalTable = std::map<Data*,int>;
-
-/** 
- *  Eval : Base for eval function
-*/
 template <class Data>
-using Eval = std::function<int(Data&)>;
+class Path : public std::list<Data*>
+{
 
-/** 
- *  EvalLoop : Evaluate a vector of Data
- * @param _eval Evaluation function
- * @param _data Vector of data to evaluate
- * @return EvalTable
-*/
-template <class Data>
-EvalTable EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data);
-
-/** 
- * ConstraintEval : Typedef for the constraint evaluation
-*/
-using ConstraintEval = Eval<Constraint>;
-
-/** 
- * TaskSpotEval : Typedef for the TaskSpot evaluation
-*/
-using TaskSpotEval = Eval<TaskSpot>;
-
-/** 
- * ResourceEval : Typedef for the Resource evaluation
-*/
-using ResourceEval = Eval<Resource>;
+};
 
 }
 
-#endif // _SIF_EVAL_
-
+#endif // _SIF_PATH_

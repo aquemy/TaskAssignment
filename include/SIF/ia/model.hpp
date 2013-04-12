@@ -32,16 +32,23 @@
 namespace sif
 {
 
-/** Model : Defined IA and Strategie
+/** Model : Defines relationship between strategies and how the observation is done
 
-Model defined the shape of the IA and the arrangement of the strategies.
+Model defines the arrangement bewteen strategies and how the observation and all the IA process has to be carried out.
 
 @see sif::IA, sif::Strategy
 */
 
 class Model
 {
-
+protected :
+    
+    virtual int evalSituation() = 0;
+    virtual void learn() = 0;
+    virtual void decide() = 0;
+    virtual void assign() = 0;
+    
+    Strategy& currentStrategy;
 };
 
 

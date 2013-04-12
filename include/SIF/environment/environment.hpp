@@ -43,7 +43,12 @@ It contains the different objets that can evolve in a specific space.
 template <template <class> class Space, class Coord>
 class Environment : public Observer
 {
-
+public :
+    /**
+     * Update environment by updating all its components
+     * @param _time Ellapsed time since the last update
+     */
+    void update(double _time);
 };
 
 

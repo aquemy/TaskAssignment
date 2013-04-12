@@ -29,6 +29,8 @@
 #ifndef _SIF_QUAD_TREE_
 #define _SIF_QUAD_TREE_
 
+#include <SIF/graph/tree.hpp>
+
 namespace sif
 {
 

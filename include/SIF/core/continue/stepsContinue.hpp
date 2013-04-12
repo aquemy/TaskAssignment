@@ -29,6 +29,8 @@
 #ifndef _SIF_STEPS_CONTINUE_
 #define _SIF_STEPS_CONTINUE_
 
+#include <SIF/core/continue/continue.hpp>
+
 namespace sif
 {
 
@@ -41,7 +43,22 @@ Criterion for ending the calculation / simulation after a user-defined number of
 
 class StepsContinue : public Continue
 {
-
+public :
+    
+    /**
+     * Default constructor
+     */
+    StepsContinue(unsigned _steps);
+    
+protected :
+    
+    /**
+     * Implementation of the test
+     * @return boolean
+     */
+    virtual bool _check();
+    
+    unsigned steps;
 };
 
 }

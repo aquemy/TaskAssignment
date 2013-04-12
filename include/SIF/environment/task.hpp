@@ -41,7 +41,10 @@ A Task is materialized by a counter.
 
 class Task : public Observer
 {
-
+    /**
+     * Update Task
+     */
+    void update();
 };
 
 

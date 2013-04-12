@@ -63,7 +63,7 @@ public :
 protected :
 
     std::function<bool()> cond;             ///< Constraint satisfaction
-    bool lastValue;                         ///< Value at the last check
+    bool lastValue;                                    ///< Value at the last check
 
     std::function<void()> breakCondition;   ///< Called when the constraint is not satisfied
     std::function<void()> reachCondition;   ///< Called when the constraint is satisfied

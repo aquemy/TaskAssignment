@@ -29,6 +29,10 @@
 #ifndef _SIF_TIME_CONTINUE_
 #define _SIF_TIME_CONTINUE_
 
+#include <chrono>
+
+#include <SIF/core/continue/continue.hpp>
+
 namespace sif
 {
 
@@ -41,7 +45,25 @@ Criterion for ending the calculation / simulation after a user-defined time
 
 class TimeContinue : public Continue
 {
-
+public :
+    
+    /**
+     * Constructor with time in seconds
+     * @param _sec Time in seconds
+     */
+    TimeContinue(double _sec);
+    
+protected :
+    
+    /**
+     * Implementation of the test
+     * @return boolean
+     */
+    virtual bool _check();
+    
+    bool start;
+    double sec;
+    std::chrono::steady_clock::time_point startTime;
 };
 
 }

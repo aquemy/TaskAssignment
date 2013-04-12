@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <eval.hpp>
+// <stepsContinue.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,53 +26,32 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_EVAL_
-#define _SIF_EVAL_
+#include <sstream>
+
+#include <SIF/core/continue/stepsContinue.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
-
-/** 
- *  Eval : Different types of eval function
-*/
-
-/** 
- *  EvalTable : A map of cost indexed by Data pointers
-*/
-template <class Data>    
-using EvalTable = std::map<Data*,int>;
-
-/** 
- *  Eval : Base for eval function
-*/
-template <class Data>
-using Eval = std::function<int(Data&)>;
-
-/** 
- *  EvalLoop : Evaluate a vector of Data
- * @param _eval Evaluation function
- * @param _data Vector of data to evaluate
- * @return EvalTable
-*/
-template <class Data>
-EvalTable EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data);
-
-/** 
- * ConstraintEval : Typedef for the constraint evaluation
-*/
-using ConstraintEval = Eval<Constraint>;
-
-/** 
- * TaskSpotEval : Typedef for the TaskSpot evaluation
-*/
-using TaskSpotEval = Eval<TaskSpot>;
-
-/** 
- * ResourceEval : Typedef for the Resource evaluation
-*/
-using ResourceEval = Eval<Resource>;
+    StepsContinue::StepsContinue(unsigned _steps) : steps(_steps)
+    {};
+    
+    bool StepsContinue::StepsContinue::_check()
+    {
+        static std::ostringstream oss;
+        oss.str("");
+        oss.clear();
+        oss << steps;
+        logger(Logger::INFO) << "StepsContinue : " +oss.str();
+        
+        if(steps > 1)
+        {
+             steps--;
+             return true;
+        }
+         
+         return false;
+             
+    }
 
 }
-
-#endif // _SIF_EVAL_
-

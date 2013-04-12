@@ -27,21 +27,39 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <iterator>
+#include <stdexcept> 
 
 #include <SIF/core/controller.hpp>
 #include <SIF/core/continue/continue.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
+    
+std::vector<Continue*> Controller::cont;
+std::list<Step> Controller::steps;
+SpatialData* Controller::spatialData;  
+bool Controller::initialized = false;
+    
+Controller::Controller()
+{
+        
+}
+    
+Controller::~Controller()
+{
+    logger(Logger::DEBUG) << "Delete Spatial Data.";
+    delete Controller::spatialData;
+}
 
 void Controller::addContinue(Continue& _cont)
 {
-    cont.push_back(&_cont);
+    Controller::cont.push_back(&_cont);
 }
 
 void Controller::addStep(Step _step)
 {
-    steps.push_back(_step);
+    Controller::steps.push_back(_step);
 }
 
 void Controller::addStep(Step _step, unsigned _pos)
@@ -53,7 +71,13 @@ void Controller::addStep(Step _step, unsigned _pos)
     
 void Controller::init()
 {
+    logger(Logger::PROGRESS) << "Init Controller.";
     
+    // Check that there is a least one continue criterion
+    if(Controller::cont.size() == 0)
+        throw std::runtime_error("One criterion is requiered at least !");
+    
+    Controller::initialized = true;
 }
 
 void Controller::startPartitioning()
@@ -68,17 +92,30 @@ void Controller::startIndexing()
 
 void Controller::run()
 {
-
+    if(!Controller::initialized)
+        throw std::runtime_error("Controller not initialized !");
+    
+    logger(Logger::PROGRESS) << "Run Controller.";
+    while(Controller::checkContinue())
+    {
+        for(auto step : Controller::steps)
+            step.first();
+    }
 }
+
+bool Controller::checkContinue()
+{
+    bool res = true; 
+    unsigned i = 0;
     
-/*protected :
+    while(res && i < cont.size())
+    {
+        res = cont[i]->operator()();
+        i++;
+    }
     
-    bool checkContinue();
-    
-    std::vector<Continue*> cont;
-    std::list<Step> steps;
-    
-};*/
+    return res;
+}
 
 }
 

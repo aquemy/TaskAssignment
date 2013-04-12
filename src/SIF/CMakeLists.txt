@@ -3,6 +3,9 @@ set(SRC
     utils/logger.cpp
     utils/timeManagement.cpp
     core/controller.cpp
+    core/continue/continue.cpp
+    core/continue/stepsContinue.cpp
+    core/continue/timeContinue.cpp
 )
 
 add_library(sif STATIC ${SRC})

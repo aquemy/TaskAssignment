@@ -41,7 +41,47 @@ IA
 
 class IA : public Observer
 {
+public :
+    
+    /**
+     * Constructor
+     * @param _model Model of IA
+     * @param _assignement Assignment algorithm
+     */
+    IA(Model& _model, Assignment& _assignement);
+    
+    /**
+     * Constructor
+     * @param _model Model of IA
+     * @param _assignement Assignment algorithm
+     * @param _spatialData Spatial data used for strategies
+     */
+    IA(Model& _model, Assignment& _assignement, SpatialData& _spatialData);
+    
+    /**
+     * Update IA
+     * @param _time Ellapsed time since the last update
+     */
+    void update(double _time);
+    
+    /**
+     * Set the model
+     * @param _model New strategy model
+     */
+    void setModel(Model& _model);
+    
+    /**
+     * Set the spatial data
+     * @param _spatialData New spatialData
+     */
+    void setSpatialData(SpatialData& spatialData);
 
+protected :
+
+    SpatialData& spatialData;
+    Model& model;
+    
+    
 };
 
 

@@ -80,6 +80,13 @@ protected :
 
 };
 
+
+/** ConstraintCompare : Functor to compare constraints on priority level
+
+Functor to compare constraints on priority level
+
+@see sif::ConstraintSystem, sif::StepConstraint, sif::PropConstraint, sif::CustomConstraint
+*/
 class ConstraintCompare
 {
 public :

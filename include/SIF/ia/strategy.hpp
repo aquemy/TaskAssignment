@@ -41,7 +41,36 @@ The Strategy is defined by the user, defines the policy of the model.
 
 class Strategie
 {
+public : 
+    
+     /**
+      * Perform the evaluation of the situation
+      * @param _spatialData Data structures of the environments
+      * @param _constraintSystem Constraints on tasks
+      * @return Value of the evaluation
+      */
+    virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem) = 0;
+    
+    /**
+     * Perform the assignment of resources
+     * @return assigment information
+     */
+    virtual std::map<Resource*,TaskSpot*> assign() = 0;
+    
+protected :
+    
+    EvalTable<Constraint> constraintTable;              ///< Evaluation of constraints
+    EvalTable<TaskSpot> taskSpotsTable;               ///< Evaluation of taskspots
+    EvalTable<Resource> resourceTable;                ///< Evaluation of resources
+    EvalTable<Resource> globalResourceTable;    ///< Global evaluation of resources
 
+    ConstraintEval& constraintEval;                            ///< Eval function for constraints
+    TaskSpotEval& taskSpotEval;                               ///< Eval function for taskSpot
+    ResourceEval& resourceEval;                              ///< Eval function for resource
+    ResourceEval& globalResourceEval;                  ///< Global eval function for resource
+    Eval<void> evalSituation;                                     ///< Eval function for the situation
+   
+    Assignment& assigment;                                     ///< Assigment algorithm
 };
 
 

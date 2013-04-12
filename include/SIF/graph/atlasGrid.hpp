@@ -29,6 +29,8 @@
 #ifndef _SIF_ATLAS_GRID_
 #define _SIF_ATLAS_GRID_
 
+#include <SIF/graph/tree.hpp>
+
 namespace sif
 {
 

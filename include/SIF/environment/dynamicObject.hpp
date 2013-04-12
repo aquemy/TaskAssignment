@@ -46,7 +46,14 @@ By moving, we suggest physically or just changing its internal state.
 template <class Coord>
 class DynamicObject : public Object<Coord>, public Observable<ActivePolicy>
 {
-
+public :
+    
+    /**
+     * Update dynamic object
+     * @param _time Ellapsed time since the last update
+     */
+    virtual void update(double _time) = 0;
+    
 };
 
 
