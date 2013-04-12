@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <simpleStrategy.hpp>
+// <manualModel.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,30 +26,63 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_SIMPLE_STRATEGY_
-#define _SIF_SIMPLE_STRATEGY_
-
-#include <SIF/ia/strategy.hpp>
-#include <SIF/constraint/constraintSystem.hpp>
+#ifndef _SIF_MANUAL_MODEL_
+#define _SIF_MANUAL_MODEL_
 
 namespace sif
 {
 
-/** SimpleStrategy : Defines a simple strategy
+/** ManualModel : Model without any decision or learning process
 
-@see sif::Model,
+This model is the simpliest model that can be imagined. No relationship is defined between strategies and
+the current strategy is defined by the user.
+
+@see sif::IA, sif::Strategy, sif::Model
 */
 
-class SimpleStrategy : public Strategy
+class ManualModel : public Model
 {
-public :
 
-    virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
+public : 
+    
+    /**
+     * Update Model
+     * @param _time Ellapsed time since the last update
+     * @param _spatialData Data
+     */
+    virtual void update(double _time, SpatialData& _spatialData)
+    
+protected :
+    
+    /**
+     * Evaluation of the situation : define how the situation has to be evaluated, according to the current strategy
+     * @return Value of the evaluation
+     */
+    virtual int evalSituation();
+    
+    /**
+     * Learning process
+     */
+    virtual void learn() ;
+    
+    /**
+     * Decision process : mainly dedicated to change the strategy according to evaluation
+     */
+    virtual void decide();
+    
+    /**
+     * Assignment process : mainly dedicated to assign through the assignment algorithm of the main strategy
+     */
+    virtual void assign();
+    
+    std::vector<Strategy*> strategies;  ///< Strategy used by the model
+    Strategy& currentStrategy;                ///< Current strategy
+    int newStratPos;                                  ///< If the user as 
     
 };
 
 
 }
 
-#endif // _SIF_SIMPLE_STRATEGY_
+#endif // _SIF_MANUAL_MODEL_
 

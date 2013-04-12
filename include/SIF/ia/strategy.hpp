@@ -32,16 +32,33 @@
 namespace sif
 {
 
-/** Strategy : Defines the policy of the model
+/** Strategy : Defines the behavior of the IA at a precise moment
 
-The Strategy is defined by the user, defines the policy of the model.
+ * The strategy define the whole process of the evaluation and assignment
 
 @see sif::Model,
 */
 
-class Strategie
+class Strategy
 {
-public : 
+public :
+    
+    /**
+     * Constructor
+     * @param _constraintEval Eval function for constraints
+     * @param _taskEval Eval function for taskSpot
+     * @param _resourceEval Eval function for resource
+     * @param _globalResourceEval Global eval function for resource
+     * @param _evalSituation Eval function for the situation
+     * @param _assignment Assigment algorithm
+     */
+    Strategy(ConstraintEval& _constraintEval,
+                    TaskSpotEval& _taskSpotEval,
+                    ResourceEval& _resourceEval, 
+                    ResourceEval& _globalResourceEval,
+                    Eval<void> _evalSituation,
+                    Assigment& _assigment
+                    )
     
      /**
       * Perform the evaluation of the situation
@@ -55,7 +72,7 @@ public :
      * Perform the assignment of resources
      * @return assigment information
      */
-    virtual std::map<Resource*,TaskSpot*> assign() = 0;
+    virtual std::map<Resource*,TaskSpot*> assign();
     
 protected :
     

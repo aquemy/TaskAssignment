@@ -41,14 +41,60 @@ Model defines the arrangement bewteen strategies and how the observation and all
 
 class Model
 {
+
+public : 
+    
+    /**
+     * Update Model
+     * @param _time Ellapsed time since the last update
+     * @param _spatialData Data
+     */
+    virtual void update(double _time, SpatialData& _spatialData)  = 0;
+    
+    /**
+     * Add a strategy to the model
+     * @param _strategy Strategy to add to the model 
+     */
+    void addStrategy(Strategy& _strategy);
+    
+    /**
+     * Set current strategy
+     * @param _pos Position of the strategy in the vector
+     */
+    void setCurrentStrategy(unsigned _pos);
+    
+    /**
+     * Set current strategy, only if the strategy is in the model
+     * @param _strategy Strategy to set as current strategy
+     */
+    void setCurrentStrategy(Strategy& _strategy);
+    
 protected :
     
+    /**
+     * Evaluation of the situation : define how the situation has to be evaluated, according to the current strategy
+     * @return Value of the evaluation
+     */
     virtual int evalSituation() = 0;
+    
+    /**
+     * Learning process
+     */
     virtual void learn() = 0;
+    
+    /**
+     * Decision process : mainly dedicated to change the strategy according to evaluation
+     */
     virtual void decide() = 0;
+    
+    /**
+     * Assignment process : mainly dedicated to assign through the assignment algorithm of the main strategy
+     */
     virtual void assign() = 0;
     
-    Strategy& currentStrategy;
+    std::vector<Strategy*> strategies;  ///< Strategy used by the model
+    Strategy& currentStrategy;                ///< Current strategy
+    
 };
 
 
