@@ -1,6 +1,7 @@
+
 //////////////////////////////////////////////////////////////////////////////
 //
-// <t-logger.cpp>
+// <it-assignment.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,25 +27,35 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include <exception>
+
 #include <sif.hpp>
 
+using namespace std;
 using namespace sif;
 
 int main(void)
 {
-    // Desactivation du mode DEBUG
-    logger.startSerialize("log.txt"); // On sérialize tout dans log.txt
-    logger.setQuiet(Logger::PROGRESS); // Pas de message de progression affiché
-    logger.startSerialize(Logger::ERROR, "error.txt"); // On sérialize les erreurs à part
+    /**
+     * Integration tests for assignment module
+     */
+    try
+    {
+        // Creation of some resources and taskspots
         
-    // Test
-    logger(Logger::PROGRESS) << "Step1 completed.";
-    logger << "Step2 completed";
-    logger(Logger::ERROR) << "An error has occurred.";
-    logger(Logger::DEBUG) << "Entering function y.";
-    logger(Logger::WARNING) << "Size invalid. Set to 0.";
-    logger(Logger::INFO) << "Init IA.";
- 
+        // Create an instance of Kuhn Algorithm
+        Kuhn algo = AssignmentFactory::KuhnInstance();
+        
+        // Launch
+        auto assignement = algo();
+
+    }
+    catch(exception& e)
+    {
+        logger(Logger::ERROR) << e.what();
+        logger << "FATAL ERROR - EXIT NOW !";
+    }
+    
     return 0;
     
 }

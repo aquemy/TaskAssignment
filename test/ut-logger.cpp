@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <task.hpp>
+// <ut-logger.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,51 +26,26 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_TASK_
-#define _SIF_TASK_
+#include <sif.hpp>
 
-#include <functional>
+using namespace sif;
 
-#include <SIF/core/observer.hpp>
-
-namespace sif
+int main(void)
 {
-
-/** Task : Abstract object
-
-A Task is materialized by a counter.
-
-@see sif::Task, sif::PeriodicTaskSpot, sif::Observable
-*/
-
-class Task : public Observer
-{
-public :
+    // Desactivation du mode DEBUG
+    logger.startSerialize("log.txt"); // On sérialize tout dans log.txt
+    logger.setQuiet(Logger::PROGRESS); // Pas de message de progression affiché
+    logger.startSerialize(Logger::ERROR, "error.txt"); // On sérialize les erreurs à part
+        
+    // Test
+    logger(Logger::PROGRESS) << "Step1 completed.";
+    logger << "Step2 completed";
+    logger(Logger::ERROR) << "An error has occurred.";
+    logger(Logger::DEBUG) << "Entering function y.";
+    logger(Logger::WARNING) << "Size invalid. Set to 0.";
+    logger(Logger::INFO) << "Init IA.";
+ 
+    return 0;
     
-    /**
-     * Constructor
-     * @param _value Defaut value
-     */
-    Task(int _value = 0);
-    
-    /**
-     * Update Task
-     * @param _f The result will remplace value and the int parameter will be the initial value
-     */
-    void update(std::function<int(int&)> _f);
-    
-    /**
-     * Get the current value
-     * @return value
-     */
-    int getValue() const;
-    
-protected :
-    int value;
-};
-
-
 }
-
-#endif // _SIF_TASK_
 

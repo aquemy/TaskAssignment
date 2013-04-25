@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <task.hpp>
+// <constraint.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,51 +26,28 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_TASK_
-#define _SIF_TASK_
-
-#include <functional>
-
-#include <SIF/core/observer.hpp>
+#include <SIF/constraint/stepConstraint.hpp>
 
 namespace sif
 {
 
-/** Task : Abstract object
-
-A Task is materialized by a counter.
-
-@see sif::Task, sif::PeriodicTaskSpot, sif::Observable
-*/
-
-class Task : public Observer
-{
-public :
+    Constraint::Constraint(unsigned _priority) : priority(_priority)
+    {}
     
-    /**
-     * Constructor
-     * @param _value Defaut value
-     */
-    Task(int _value = 0);
+    void Constraint::setPriority(unsigned _priority)
+    {
+        priority = _priority;
+    }
     
-    /**
-     * Update Task
-     * @param _f The result will remplace value and the int parameter will be the initial value
-     */
-    void update(std::function<int(int&)> _f);
+    unsigned Constraint::getPriority() const
+    {
+        return priority;
+    }
     
-    /**
-     * Get the current value
-     * @return value
-     */
-    int getValue() const;
-    
-protected :
-    int value;
-};
-
+    bool Constraint::operator<(Constraint& _const)
+    {
+        return priority < _const.getPriority();
+    }
 
 }
-
-#endif // _SIF_TASK_
 

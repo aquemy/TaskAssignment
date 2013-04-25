@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <task.hpp>
+// <task.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,51 +26,24 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_TASK_
-#define _SIF_TASK_
-
-#include <functional>
-
-#include <SIF/core/observer.hpp>
+#include <SIF/environment/task.hpp>
 
 namespace sif
 {
 
-/** Task : Abstract object
-
-A Task is materialized by a counter.
-
-@see sif::Task, sif::PeriodicTaskSpot, sif::Observable
-*/
-
-class Task : public Observer
-{
-public :
+    Task::Task(int _value) : value(_value)
+    {}
     
-    /**
-     * Constructor
-     * @param _value Defaut value
-     */
-    Task(int _value = 0);
+    void Task::update(std::function<int(int&)> _f)
+    {
+        value = _f(value);
+    }
     
-    /**
-     * Update Task
-     * @param _f The result will remplace value and the int parameter will be the initial value
-     */
-    void update(std::function<int(int&)> _f);
+    int Task::getValue() const
+    {
+        return value;
+    }
     
-    /**
-     * Get the current value
-     * @return value
-     */
-    int getValue() const;
-    
-protected :
-    int value;
-};
-
-
 }
 
-#endif // _SIF_TASK_
 

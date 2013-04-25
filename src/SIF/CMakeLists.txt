@@ -1,4 +1,6 @@
 set(SRC
+    constraint/constraint.cpp
+    constraint/stepConstraint.cpp
     utils/baseLogger.cpp
     utils/logger.cpp
     utils/timeManagement.cpp
@@ -6,6 +8,7 @@ set(SRC
     core/continue/continue.cpp
     core/continue/stepsContinue.cpp
     core/continue/timeContinue.cpp
+    environment/task.cpp
 )
 
 add_library(sif STATIC ${SRC})

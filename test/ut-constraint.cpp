@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <task.hpp>
+// <ut-constraint.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,51 +26,69 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_TASK_
-#define _SIF_TASK_
-
+#include <exception>
 #include <functional>
 
-#include <SIF/core/observer.hpp>
+#include <sif.hpp>
 
-namespace sif
+using namespace std;
+using namespace sif;
+
+int i = 0;
+
+void foo()
+{ i++ ;}
+
+void bar()
+{ i-- ;}
+
+int main(void)
 {
-
-/** Task : Abstract object
-
-A Task is materialized by a counter.
-
-@see sif::Task, sif::PeriodicTaskSpot, sif::Observable
-*/
-
-class Task : public Observer
-{
-public :
-    
     /**
-     * Constructor
-     * @param _value Defaut value
+     * Unit tests for constraint classes
      */
-    Task(int _value = 0);
-    
-    /**
-     * Update Task
-     * @param _f The result will remplace value and the int parameter will be the initial value
-     */
-    void update(std::function<int(int&)> _f);
-    
-    /**
-     * Get the current value
-     * @return value
-     */
-    int getValue() const;
-    
-protected :
-    int value;
-};
+    try
+    {
+        // Creation of a Task
+        Task t;
+        
+        // Creation of a StepConstraint
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500, foo, bar, 0, 10);
+        
+        // Should be false and i = 0
+        if(sc() || i != 0)
+            throw runtime_error("Error in expectations for first test");
+        
+        // Change to 501
+        t.update([](int& i) -> int { return i+501;});
+        
+        // Should be true and i = 1
+        if(!sc() || i != 1)
+            throw runtime_error("Error in expectations for second test");
+        
+        // Change to 498
+        t.update([](int& i) -> int { return i-3;});
+        
+        // Should be true and i = 1
+        if(!sc()  || i != 1)
+            throw runtime_error("Error in expectations for third test");
+        
+        // Change to 489
+        t.update([](int& i) -> int { return i-9;});
+        
+        // Should be false and i = 0
+        if(sc() || i != 0)
+            throw runtime_error("Error in expectations for fourth test");
 
-
+    }
+    catch(exception& e)
+    {
+        logger(Logger::ERROR) << e.what();
+        logger << "FATAL ERROR - EXIT NOW !";
+    }
+    
+    return 0;
+    
 }
 
-#endif // _SIF_TASK_
 

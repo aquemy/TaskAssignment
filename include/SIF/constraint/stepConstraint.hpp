@@ -32,6 +32,7 @@
 #include <functional>
 
 #include <SIF/environment/task.hpp>
+#include <SIF/constraint/constraint.hpp>
 
 namespace sif
 {
@@ -55,6 +56,7 @@ public :
 
     /**
      * Default constructor
+     * @param _priority Priority of the task
      * @param _task Task concerned by the constraint
      * @param _comp Comparaison operator
      * @param _step Step value
@@ -63,7 +65,8 @@ public :
      * @param _rT Right value of the tolerance interval
      * @param _lT Left value of the tolerance interval
      */
-    StepConstraint(Task& _task, 
+    StepConstraint(unsigned priority,
+        Task& _task, 
         ConstraintComp _comp, 
         int _step,
         std::function<void()> _reachCondition = []{},
@@ -83,7 +86,7 @@ protected :
     ConstraintComp op;                      ///< Comparaison operator
     int step;                                          ///< Value of the step
     Task& task;                                   ///< Reference on the task
-    int lastValue;                                 ///< Value at the last check
+    bool lastValue;                              ///< Value at the last check
     int leftTolerance;                          ///< Value for the left tolerance
     int rightTolerance;                       ///< Value for the right tolerance
     

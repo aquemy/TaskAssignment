@@ -10,8 +10,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 ######################################################################################
 
 set (TEST_LIST  
-        t-logger
-        t-controller
+        ut-constraint
+        ut-logger
+        it-controller
 		)
 
 ######################################################################################

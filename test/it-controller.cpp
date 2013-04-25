@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <t-controller.cpp>
+// <it-controller.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -27,6 +27,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <exception>
+#include <cassert>
 
 #include <sif.hpp>
 
@@ -60,8 +61,8 @@ int main(void)
         Controller::run();
         
         // Should return 5
-        if(i != 0)
-            throw runtime_error("Something is wrong with the controller")
+        if(i != 5)
+            throw runtime_error("Something is wrong with the controller");
         
     }
     catch(exception& e)
