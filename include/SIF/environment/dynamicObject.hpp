@@ -29,6 +29,7 @@
 #ifndef _SIF_DYNAMIC_OBJECT_
 #define _SIF_DYNAMIC_OBJECT_
 
+#include <SIF/core/activePolicy.hpp>
 #include <SIF/environment/object.hpp>
 #include <SIF/core/observable.hpp>
 

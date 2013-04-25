@@ -55,8 +55,10 @@ public :
      * @param _data Spatial data
      * @return A path
      */  
-    template<class Data>
-    Path&& operator()(const Coordonate& _from, const _Coordonate& _to, const Tree<Data> _data);
+    template<class Data, int Dim, class Type>
+    Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
+                                            const Coordonate<Dim, Type>& _to, 
+                                            const Tree<Data> _data);
     
 };
 

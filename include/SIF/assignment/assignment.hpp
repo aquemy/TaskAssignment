@@ -29,6 +29,11 @@
 #ifndef _SIF_ASSIGNMENT_
 #define _SIF_ASSIGNMENT_
 
+#include <map>
+
+#include <SIF/environment/resource.hpp>
+#include <SIF/environment/taskSpot.hpp>
+
 namespace sif
 {
 
@@ -39,7 +44,7 @@ This class enabled to reassign the different units.
 @see sif::Assignment, sif::Kuhn, sif::NearestNeighboor
 */
 
-template <class Data>
+
 class Assignment
 {
 public :
@@ -47,8 +52,9 @@ public :
     /**
      * Start the assignment problem resolution
      * @return A map from resource to TaskSpot
-     */   
-    std::map<Resource*,TaskSpot*> operator()();
+     */
+    template<class Coord, class Data>
+    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()();
 
 };
 

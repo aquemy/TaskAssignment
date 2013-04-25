@@ -30,6 +30,10 @@
 #define _SIF_RESOURCE_
 
 #include <SIF/environment/direction.hpp>
+#include <SIF/environment/dynamicObject.hpp>
+#include <SIF/environment/taskSpot.hpp>
+#include <SIF/spa/shortestPath.hpp>
+#include <SIF/graph/path.hpp>
 
 namespace sif
 {
@@ -43,10 +47,18 @@ the Task Spot he has to join.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::TaskSpot
 */
 
-template <class Coord>
+template <class Coord, class Data>
 class Resource : public DynamicObject<Coord>
 {
 public :
+    
+    /**
+     * Constructor
+     * @param _coord Initial coordonates
+     * @param _velocity Velocity of the resource
+     * @param _spa Shortest Path Algorithm
+     */
+    Resource(Coord _coord, double _velocity, ShortestPath& _spa);
     
     /**
      * Update Resource
@@ -60,6 +72,18 @@ public :
      * @param _time Ellapsed time since the last move
      */
     void move(Direction _dir, double _time);
+        
+    /**
+     * Check if the resource is busy (it cannot be assigned)
+     * @return boolean
+     */
+    bool isBusy();
+    
+    /**
+     * Set a new assignement if it is possible
+     * @param _assignment New assignment
+     */
+    void setAssignment(TaskSpot<Coord>& _assignment);
 
 protected : 
     
@@ -70,10 +94,10 @@ protected :
      */
     bool colliding(Direction _dir);
     
-    double velocity;                     ///< Velocity of the ressource
-    Path path;                              ///< Path to reach the assignment
-    TaskSpot* assignment;       ///< Assignment
-    ShortestPath& spa;             ///< Shortest path algorithm
+    double velocity;                                      ///< Velocity of the ressource
+    Path<Data> path;                                 ///< Path to reach the assignment
+    TaskSpot<Coord>* assignment;       ///< Assignment
+    ShortestPath& spa;                              ///< Shortest path algorithm
 };
 
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <square.hpp>
+// <space.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,23 +26,58 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_SQUARE_
-#define _SIF_SQUARE_
+#ifndef _SIF_SPACE_
+#define _SIF_SPACE_
+
+#include <vector>
+#include <utility>
+
+#include <SIF/environment/coordonate.hpp>
 
 namespace sif
 {
 
-/** Square : Square shaped obstacle
+/** Space : Defines the space
 
-It defines a square shaped obstacle
+It defines the space  by its coordonates system and its boundaries.
 
-@see sif::Obstacle
+@see sif::Coordonate, sif::Environment
 */
 
-template <class Coord>
-class Square : public Obstacle<Coord>
+template <int Dim, class Type>
+class Space
 {
-
+public :
+    
+    /**
+     * Constructor
+     */
+    Space();
+    
+    /**
+     * Set boundaries for a specific dimension
+     * @param _pos Dimension index
+     * @param _left Left value
+     * @param _right Right value
+     */
+    void setBoundaries(unsigned _pos, Type _left, Type _right);
+    
+    /**
+     * Get boundaries for a specific dimension
+     * @param _pos
+     * @return left and right values in a std::pair
+     */
+    std::pair<Type,Type> getBoundaries(unsigned _pos) const;
+    
+    /**
+     * Check if a point is in the space
+     * @param _coord Coordonate of the point
+     * @return boolean
+     */
+    bool inSpace(Coordonate<Dim,Type> _coord) const; 
+    
+    protected :
+        std::vector<std::pair<Type,Type>> boundaries; /// Boundaries
 };
 
 

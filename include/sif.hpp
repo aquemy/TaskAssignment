@@ -34,6 +34,17 @@
 #include <SIF/utils/logger.hpp>
 #include <SIF/utils/timeManagement.hpp>
 
+// Assignment
+#include <SIF/assignment/assignment.hpp>
+#include <SIF/assignment/assignmentFactory.hpp>
+#include <SIF/assignment/kuhn.hpp>
+
+// Constraint
+#include <SIF/constraint/constraint.hpp>
+#include <SIF/constraint/constraintSystem.hpp>
+#include <SIF/constraint/customConstraint.hpp>
+#include <SIF/constraint/stepConstraint.hpp>
+
 // Core
 #include <SIF/core/continue/continue.hpp>
 #include <SIF/core/continue/stepsContinue.hpp>
@@ -57,10 +68,12 @@
 #include <SIF/environment/eval.hpp>
 #include <SIF/environment/object.hpp>
 #include <SIF/environment/obstacle.hpp>
+#include <SIF/environment/resource.hpp>
 #include <SIF/environment/space.hpp>
 #include <SIF/environment/spatialData.hpp>
 #include <SIF/environment/square.hpp>
 #include <SIF/environment/staticObject.hpp>
+#include <SIF/environment/task.hpp>
 #include <SIF/environment/taskSpot.hpp>
 
 // Graph
@@ -70,5 +83,17 @@
 #include <SIF/graph/rTree.hpp>
 #include <SIF/graph/tree.hpp>
 #include <SIF/graph/treeFactory.hpp>
+
+// IA
+#include <SIF/ia/ia.hpp>
+#include <SIF/ia/model.hpp>
+#include <SIF/ia/strategy.hpp>
+#include <SIF/ia/model/manualModel.hpp>
+#include <SIF/ia/strategy/simpleStrategy.hpp.h>
+
+// Shortest Path Algorithm
+#include <SIF/spa/aStar.hpp>
+#include <SIF/spa/shortestPath.hpp>
+#include <SIF/spa/shortestPathFactory.hpp>
 
 #endif // _SIF_HEADER_

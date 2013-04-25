@@ -33,11 +33,11 @@
 using namespace std;
 using namespace sif;
 
+static int i = 0;
+
 void f()
 {
-    static int i = 0;
     i++;
-    std::cout << i << std::endl;
 }
 
 int main(void)
@@ -58,6 +58,11 @@ int main(void)
         
         Controller::init();
         Controller::run();
+        
+        // Should return 5
+        if(i != 0)
+            throw runtime_error("Something is wrong with the controller")
+        
     }
     catch(exception& e)
     {

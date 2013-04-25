@@ -29,6 +29,10 @@
 #ifndef _SIF_STEP_CONSTRAINT_
 #define _SIF_STEP_CONSTRAINT_
 
+#include <functional>
+
+#include <SIF/environment/task.hpp>
+
 namespace sif
 {
 
@@ -66,7 +70,7 @@ public :
         std::function<void()> _breakCondition = []{},
         int _rT = 0, 
         int _lT = 0
-   )
+   );
    
    /**
      * Check the constraint satisfaction and launch callback function if needed

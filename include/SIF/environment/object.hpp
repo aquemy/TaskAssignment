@@ -42,7 +42,8 @@ Abstract class for objects contained in the environment.
 template <class Coord>
 class Object
 {
-
+protected :
+    Coord coord;
 };
 
 

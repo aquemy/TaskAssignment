@@ -29,6 +29,8 @@
 #ifndef _SIF_ASSIGNMENT_FACTORY_
 #define _SIF_ASSIGNMENT_FACTORY_
 
+#include <SIF/assignment/kuhn.hpp>
+
 namespace sif
 {
 
@@ -49,7 +51,8 @@ public :
      * @param _taskSpot taskSpot to be affected
      * @return Kuhn instance (right-value)
      */   
-    static Khun&& Khun(std::map<Resource*, int> _resource, std::vector<TaskSpot*> _taskSpot);
+    template <class Coord, class Data>
+    static Kuhn&& KuhnInstance(std::map<Resource<Coord, Data>*, int> _resource, std::vector<TaskSpot<Coord>*> _taskSpot);
     
 };
 

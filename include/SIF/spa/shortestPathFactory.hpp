@@ -29,6 +29,9 @@
 #ifndef _SIF_SHORTEST_PATH_FACTORY_
 #define _SIF_SHORTEST_PATH_FACTORY_
 
+#include <SIF/environment/taskSpot.hpp>
+#include <SIF/spa/aStar.hpp>
+
 namespace sif
 {
 
@@ -47,7 +50,8 @@ public :
      * AStar instanciation : tranform a TaskSpot into coordonates
      * @return AStar instance (right-value)
      */   
-    static AStar&& AStar(TaskSpot& const _taskSpot);
+    template <class Coord>
+    static AStar&& AStarInstance(TaskSpot<Coord>& _taskSpot);
     
 };
 

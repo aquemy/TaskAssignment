@@ -29,6 +29,8 @@
 #ifndef _SIF_IA_
 #define _SIF_IA_
 
+#include <SIF/ia/model.hpp>
+
 namespace sif
 {
 
@@ -39,6 +41,7 @@ IA
 @see sif::Observer,
 */
 
+template <class Coord, class Data>
 class IA : public Observer
 {
 public :
@@ -48,7 +51,7 @@ public :
      * @param _model Model of IA
      * @param _assignement Assignment algorithm
      */
-    IA(Model& _model, Assignment& _assignement);
+    IA(Model<Coord, Data>& _model, Assignment& _assignement);
     
     /**
      * Constructor
@@ -56,7 +59,7 @@ public :
      * @param _assignement Assignment algorithm
      * @param _spatialData Spatial data used for strategies
      */
-    IA(Model& _model, Assignment& _assignement, SpatialData& _spatialData);
+    IA(Model<Coord, Data>& _model, Assignment& _assignement, SpatialData& _spatialData);
     
     /**
      * Update IA
@@ -68,7 +71,7 @@ public :
      * Set the model
      * @param _model New strategy model
      */
-    void setModel(Model& _model);
+    void setModel(Model<Coord, Data>& _model);
     
     /**
      * Set the spatial data
@@ -79,7 +82,7 @@ public :
 protected :
 
     SpatialData& spatialData;
-    Model& model;
+    Model<Coord, Data>& model;
     
     
 };

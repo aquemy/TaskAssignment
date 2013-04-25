@@ -29,6 +29,8 @@
 #ifndef _SIF_COORDONATE_
 #define _SIF_COORDONATE_
 
+#include <vector>
+
 namespace sif
 {
 
@@ -36,12 +38,13 @@ namespace sif
 
 The coordonate object is designed to describe the space. First template represents
 the number of dimensions and the second one represents the type of each coordonate.
-This allow only cartesian system and uniform type representation.
+This allows only cartesian system and uniform type representation at the moment.
+Some inherited functions from std::vector have been deleted such as push_back and other size-related functions.
 
 @see sif::Environment, sif::Space
 */
 
-template <int Dim, class Type>
+template <int Dim, class Type = int>
 class Coordonate : public std::vector<Type>
 {
     /**
@@ -49,6 +52,7 @@ class Coordonate : public std::vector<Type>
      * Check the Type template is a numeric type with type_trait
      */
     Coordonate() ;
+    
 };
 
 

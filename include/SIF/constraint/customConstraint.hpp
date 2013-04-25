@@ -29,6 +29,8 @@
 #ifndef _SIF_CUSTOM_CONSTRAINT_
 #define _SIF_CUSTOM_CONSTRAINT_
 
+#include <functional>
+
 namespace sif
 {
 
@@ -52,7 +54,7 @@ public :
     CustomConstraint(std::function<bool()> _cond,
         std::function<void()> _reachCondition = []{},
         std::function<void()> _breakCondition = []{}
-   )
+   );
    
    /**
      * Check the constraint satisfaction and launch callback function if needed

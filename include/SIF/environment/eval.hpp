@@ -29,6 +29,8 @@
 #ifndef _SIF_EVAL_
 #define _SIF_EVAL_
 
+#include <functional>
+
 namespace sif
 {
 
@@ -55,7 +57,7 @@ using Eval = std::function<int(Data&)>;
  * @return EvalTable
 */
 template <class Data>
-EvalTable EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data);
+EvalTable<Data> EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data);
 
 /** 
  * ConstraintEval : Typedef for the constraint evaluation
@@ -65,12 +67,14 @@ using ConstraintEval = Eval<Constraint>;
 /** 
  * TaskSpotEval : Typedef for the TaskSpot evaluation
 */
-using TaskSpotEval = Eval<TaskSpot>;
+template <class Coord>
+using TaskSpotEval = Eval<TaskSpot<Coord>>;
 
 /** 
  * ResourceEval : Typedef for the Resource evaluation
 */
-using ResourceEval = Eval<Resource>;
+template <class Coord, class Data>
+using ResourceEval = Eval<Resource<Coord, Data>>;
 
 }
 

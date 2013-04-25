@@ -29,10 +29,10 @@
 #ifndef _SIF_PATH_
 #define _SIF_PATH_
 
+#include <list>
+
 namespace sif
 {
-    
-#include <list>
 
 /** Path : Path data structure
 

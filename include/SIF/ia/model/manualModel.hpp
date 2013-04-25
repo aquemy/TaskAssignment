@@ -40,7 +40,8 @@ the current strategy is defined by the user.
 @see sif::IA, sif::Strategy, sif::Model
 */
 
-class ManualModel : public Model
+template <class Coord, class Data>
+class ManualModel : public Model<Coord, Data>
 {
 
 public : 
@@ -50,7 +51,7 @@ public :
      * @param _time Ellapsed time since the last update
      * @param _spatialData Data
      */
-    virtual void update(double _time, SpatialData& _spatialData)
+    virtual void update(double _time, SpatialData& _spatialData);
     
 protected :
     
@@ -75,9 +76,9 @@ protected :
      */
     virtual void assign();
     
-    std::vector<Strategy*> strategies;  ///< Strategy used by the model
-    Strategy& currentStrategy;                ///< Current strategy
-    int newStratPos;                                  ///< If the user as 
+    
+    std::vector<Strategy<Coord, Data>*> strategies;  ///< Strategy used by the model
+    Strategy<Coord, Data>& currentStrategy;                ///< Current strategy
     
 };
 

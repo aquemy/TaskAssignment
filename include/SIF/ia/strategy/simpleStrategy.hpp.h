@@ -39,8 +39,9 @@ namespace sif
 
 @see sif::Model,
 */
-
-class SimpleStrategy : public Strategy
+    
+ template <class Coord, class Data>
+class SimpleStrategy : public Strategy<Coord, Data>
 {
 public :
 

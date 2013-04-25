@@ -29,6 +29,8 @@
 #ifndef _SIF_MODEL_
 #define _SIF_MODEL_
 
+#include <SIF/ia/strategy.hpp>
+
 namespace sif
 {
 
@@ -39,6 +41,7 @@ Model defines the arrangement bewteen strategies and how the observation and all
 @see sif::IA, sif::Strategy
 */
 
+template <class Coord, class Data>
 class Model
 {
 
@@ -55,7 +58,7 @@ public :
      * Add a strategy to the model
      * @param _strategy Strategy to add to the model 
      */
-    void addStrategy(Strategy& _strategy);
+    void addStrategy(Strategy<Coord, Data>& _strategy);
     
     /**
      * Set current strategy
@@ -67,7 +70,7 @@ public :
      * Set current strategy, only if the strategy is in the model
      * @param _strategy Strategy to set as current strategy
      */
-    void setCurrentStrategy(Strategy& _strategy);
+    void setCurrentStrategy(Strategy<Coord, Data>& _strategy);
     
 protected :
     
@@ -91,9 +94,11 @@ protected :
      * Assignment process : mainly dedicated to assign through the assignment algorithm of the main strategy
      */
     virtual void assign() = 0;
+   
     
-    std::vector<Strategy*> strategies;  ///< Strategy used by the model
-    Strategy& currentStrategy;                ///< Current strategy
+    
+    std::vector<Strategy<Coord, Data>*> strategies;  ///< Strategy used by the model
+    Strategy<Coord, Data>& currentStrategy;                ///< Current strategy
     
 };
 

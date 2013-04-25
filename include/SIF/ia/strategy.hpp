@@ -29,6 +29,9 @@
 #ifndef _SIF_STRATEGY_
 #define _SIF_STRATEGY_
 
+#include <SIF/environment/eval.hpp>
+#include <SIF/assignment/assignment.hpp>
+
 namespace sif
 {
 
@@ -39,6 +42,7 @@ namespace sif
 @see sif::Model,
 */
 
+template <class Coord, class Data>
 class Strategy
 {
 public :
@@ -53,12 +57,12 @@ public :
      * @param _assignment Assigment algorithm
      */
     Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval& _taskSpotEval,
-                    ResourceEval& _resourceEval, 
-                    ResourceEval& _globalResourceEval,
-                    Eval<void> _evalSituation,
-                    Assigment& _assigment
-                    )
+                    TaskSpotEval<Coord>& _taskSpotEval,
+                    ResourceEval<Coord, Data>& _resourceEval, 
+                    ResourceEval<Coord, Data>& _globalResourceEval,
+                    Eval<int> _evalSituation,
+                    Assignment& _assigment
+                    );
     
      /**
       * Perform the evaluation of the situation
@@ -72,20 +76,20 @@ public :
      * Perform the assignment of resources
      * @return assigment information
      */
-    virtual std::map<Resource*,TaskSpot*> assign();
+    virtual std::map<Resource<Coord, Data>*,TaskSpot<Coord>*> assign();
     
 protected :
     
     EvalTable<Constraint> constraintTable;              ///< Evaluation of constraints
-    EvalTable<TaskSpot> taskSpotsTable;               ///< Evaluation of taskspots
-    EvalTable<Resource> resourceTable;                ///< Evaluation of resources
-    EvalTable<Resource> globalResourceTable;    ///< Global evaluation of resources
+    EvalTable<TaskSpot<Coord>> taskSpotsTable;               ///< Evaluation of taskspots
+    EvalTable<Resource<Coord, Data>> resourceTable;                ///< Evaluation of resources
+    EvalTable<Resource<Coord, Data>> globalResourceTable;    ///< Global evaluation of resources
 
     ConstraintEval& constraintEval;                            ///< Eval function for constraints
-    TaskSpotEval& taskSpotEval;                               ///< Eval function for taskSpot
-    ResourceEval& resourceEval;                              ///< Eval function for resource
-    ResourceEval& globalResourceEval;                  ///< Global eval function for resource
-    Eval<void> evalSituation;                                     ///< Eval function for the situation
+    TaskSpotEval<Coord>& taskSpotEval;                               ///< Eval function for taskSpot
+    ResourceEval<Coord, Data>& resourceEval;                              ///< Eval function for resource
+    ResourceEval<Coord, Data>& globalResourceEval;                  ///< Global eval function for resource
+    Eval<int> evalSit;                                     ///< Eval function for the situation
    
     Assignment& assigment;                                     ///< Assigment algorithm
 };

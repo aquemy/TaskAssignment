@@ -39,20 +39,20 @@ Kuhn is an algorithm wihch solves the asssignment problem. Kuhn is also named th
 @see sif::Assignment
 */
 
-template <class Data>
-class Kuhn : public Assignment<Data>
+class Kuhn : public Assignment
 {
 public :
     
     /**
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
-     */   
-    std::map<Resource*,TaskSpot*> operator()();
+     */
+    template <class Coord, class Data>
+    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()();
     
 protected :
     
-    std::vector<std::vector>> cost;     ///< Cost matrix
+    std::vector<std::vector<int>> cost;     ///< Cost matrix
 };
 
 }

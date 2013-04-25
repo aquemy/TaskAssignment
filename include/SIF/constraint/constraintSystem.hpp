@@ -29,6 +29,11 @@
 #ifndef _SIF_CONSTRAINT_SYSTEM_
 #define _SIF_CONSTRAINT_SYSTEM_
 
+#include <vector>
+#include <queue>
+
+#include <SIF/constraint/constraint.hpp>
+
 namespace sif
 {
 
@@ -40,7 +45,7 @@ At the moment it is a simple priority queue.
 @see sif::Constraint
 */
 
-class ConstraintSystem : public std::priority_queue<Contraint*, ConstraintCompare>
+class ConstraintSystem : public std::priority_queue<Constraint*, std::vector<Constraint*>, ConstraintCompare>
 {
 
 };
