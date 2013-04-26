@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <assignment.hpp>
+// <customConstraint.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,40 +26,38 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_ASSIGNMENT_
-#define _SIF_ASSIGNMENT_
-
-#include <map>
-
-#include <SIF/environment/resource.hpp>
-#include <SIF/environment/taskSpot.hpp>
+#include <SIF/constraint/customConstraint.hpp>
 
 namespace sif
 {
-
-/** Assignment : General class for the assignment
-
-This class enabled to reassign the different units.
-
-@see sif::Assignment, sif::Kuhn, sif::NearestNeighboor
-*/
-
-
-class Assignment
-{
-public :
+    CustomConstraint::CustomConstraint(std::function<bool()> _cond,
+        std::function<void()> _reachCondition,
+        std::function<void()> _breakCondition
+   ) : 
+   Constraint(_priority),
+    cond(_cond),
+    reachCondition(_reachCondition),
+    breakCondition(_breakCondition),
+    lastValue(false)
+    {  }
     
-    /**
-     * Start the assignment problem resolution
-     * @return A map from resource to TaskSpot
-     */
-    template<class Coord, class Data>
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()() = 0;
-
-};
-
+    bool CustomConstraint::operator()()
+    {
+        bool res = cond();
+        
+        if(lastValue && !res)
+        {
+            lastValue = false;
+            breakCondition();
+        }
+        else if(!lastValue && res)
+        {
+            lastValue = true;
+            reachCondition();
+        }
+        
+        return res;
+            
+    };
 
 }
-
-#endif // _SIF_ASSIGNMENT_
-
