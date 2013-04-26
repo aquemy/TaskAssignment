@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <resource.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,28 +26,29 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/environment/resource.hpp>
 
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
+	Resource::Resource(Coord _coord, double _velocity, ShortestPath& _spa)
+	{ }
     
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
+    void Resource::update(double _time)
+	{ }
     
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
+    void Resource::move(Direction _dir, double _time)
+	{ }
+        
+    bool Resource::isBusy()
+	{ }
     
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
+    void Resource::setAssignment(TaskSpot<Coord>& _assignment)
+	{ }
 
+    bool Resource::colliding(Direction _dir)
+	{ }
+    
 }
+
 

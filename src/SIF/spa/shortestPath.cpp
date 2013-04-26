@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <shortestPath.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,28 +26,17 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/spa/shortestPath.hpp>
 
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
+    template<class Data, int Dim, class Type>
+    Path<Data>&& ShortestPath::operator()(const Coordonate<Dim,Type>& _from,
+                                               const Coordonate<Dim, Type>& _to, 
+                                               const Tree<Data> _data)
+	{ }
     
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
-    
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
-    
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
-
 }
+
 

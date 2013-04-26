@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <model.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -8,10 +8,10 @@
 // This software is governed by the CeCILL license under French law and
 // abiding by the rules of distribution of free software.  You can  ue,
 // modify and/ or redistribute the software under the terms of the CeCILL
-// license as circulated by CEA, CNRS and INRIA at the following URL
+// license as circulated by CEA, CNRS and INRModel at the following URL
 // "http://www.cecill.info".
 //
-// In this respect, the user's attention is drawn to the risks associated
+// In this respect, the user's attention is drawn to the risks assocmodelted
 // with loading,  using,  modifying and/or developing or reproducing the
 // software by the user in light of its specific status of free software,
 // that may mean  that it is complicated to manipulate,  and  that  also
@@ -26,28 +26,20 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/model/model.hpp>
 
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
+    void Model::addStrategy(Strategy<Coord, Data>& _strategy)
+    { }
     
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
+    void Model::setCurrentStrategy(unsigned _pos)
+    { }
     
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
+    void Model::setCurrentStrategy(Strategy<Coord, Data>& _strategy)
+    { }
     
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
-
 }
+
 

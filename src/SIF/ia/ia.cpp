@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <ia.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,28 +26,26 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/ia/ia.hpp>
 
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
+    IA::IA(Model<Coord, Data>& _model, Assignment& _assignement)
+	{ }
     
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
+    IA::IA(Model<Coord, Data>& _model, Assignment& _assignement, SpatialData& _spatialData)
+	{ }
     
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
+    void IA::update(double _time)
+	{ }
     
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
-
+    void IA::setModel(Model<Coord, Data>& _model)
+	{ }
+    
+    void IA::setSpatialData(SpatialData& spatialData)
+    { }
+    
 }
+
 

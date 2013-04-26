@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <multiThread.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,28 +26,16 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/core/multiThread.hpp>
 
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
+	void MultiThread::_lock()
+	{ }
     
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
-    
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
-    
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
+    void MultiThread::_unlock()
+    { }
 
 }
 

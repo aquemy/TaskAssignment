@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <eval.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,28 +26,15 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/environment/eval.hpp>
 
 namespace sif
 {
-
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
-    
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
-    
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
-    
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
+	
+	template <class Data>
+	EvalTable<Data> Eval::EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data)
+	{ }
 
 }
+
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <constraint.cpp>
+// <manualModel.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,28 +26,26 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/constraint/constraint.hpp>
+#include <SIF/ia/model/manualModel.hpp>
 
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
-    {}
-    
-    void Constraint::setPriority(unsigned _priority)
-    {
-        priority = _priority;
-    }
-    
-    unsigned Constraint::getPriority() const
-    {
-        return priority;
-    }
-    
-    bool Constraint::operator<(Constraint& _const)
-    {
-        return priority < _const.getPriority();
-    }
+	void ManualModel::update(double _time, SpatialData& _spatialData)
+	{ }
 
+    int ManualModel::evalSituation()
+	{ }
+
+    void ManualModel::learn() 
+	{ }
+
+    void ManualModel::decide()
+	{ }
+
+    void ManualModel::assign()
+    { }
+    
 }
+
 
