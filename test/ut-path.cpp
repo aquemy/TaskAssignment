@@ -1,7 +1,6 @@
-
 //////////////////////////////////////////////////////////////////////////////
 //
-// <it-assignment.cpp>
+// <ut-path.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -37,17 +36,11 @@ using namespace sif;
 int main(void)
 {
     /**
-     * Integration tests for assignment module
+     * Unit tests for path
      */
     try
     {
-        // Creation of some resources and taskspots
         
-        // Create an instance of Kuhn Algorithm
-        //Kuhn algo = AssignmentFactory::KuhnInstance();
-        
-        // Launch
-        //auto assignement = algo();
 
     }
     catch(exception& e)
