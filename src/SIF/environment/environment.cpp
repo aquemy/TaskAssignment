@@ -31,7 +31,8 @@
 namespace sif
 {
 
-    void Environment::update(double _time)
+    template <template <class> class Space, class Coord>
+    void Environment<Space, Coord>::update(double _time)
     { }
     
 }

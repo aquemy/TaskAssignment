@@ -31,6 +31,8 @@
 
 #include <functional>
 
+#include <SIF/constraint/constraint.hpp>
+
 namespace sif
 {
 
@@ -51,7 +53,8 @@ public :
      * @param _reachCondition Callback function called when the constraint is satisfied
      * @param _breakCondition Callback function called when the constraint is not satisfied
      */
-    CustomConstraint(std::function<bool()> _cond,
+    CustomConstraint(unsigned _priority,
+        std::function<bool()> _cond,
         std::function<void()> _reachCondition = []{},
         std::function<void()> _breakCondition = []{}
    );

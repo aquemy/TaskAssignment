@@ -32,8 +32,8 @@ namespace sif
 {
 
     template <class Coord>
-    static AStar&& ShortestPathFactory::AStarInstance(TaskSpot<Coord>& _taskSpot)
-	{ }
+    AStar&& ShortestPathFactory::AStarInstance(TaskSpot<Coord>& _taskSpot)
+    { }
     
 }
 

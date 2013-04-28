@@ -32,7 +32,7 @@ namespace sif
 {
 	
 	template <class Data>
-	EvalTable<Data> Eval::EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data)
+	EvalTable<Data> EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data)
 	{ }
 
 }

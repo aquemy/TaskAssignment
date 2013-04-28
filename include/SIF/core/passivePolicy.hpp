@@ -29,6 +29,8 @@
 #ifndef _SIF_PASSIVE_POLICY_
 #define _SIF_PASSIVE_POLICY_
 
+#include <SIF/core/observablePolicy.hpp>
+
 namespace sif
 {
 

@@ -29,6 +29,8 @@
 #ifndef _SIF_ENVIRONMENT_
 #define _SIF_ENVIRONMENT_
 
+#include <SIF/core/observer.hpp>
+
 namespace sif
 {
 

@@ -29,6 +29,8 @@
 #ifndef _SIF_SINGLE_THREAD_
 #define _SIF_SINGLE_THREAD_
 
+#include <SIF/core/threadingModel.hpp>
+
 namespace sif
 {
 

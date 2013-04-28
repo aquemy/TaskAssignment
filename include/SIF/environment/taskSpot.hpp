@@ -29,6 +29,10 @@
 #ifndef _SIF_TASK_SPOT_
 #define _SIF_TASK_SPOT_
 
+#include <SIF/environment/dynamicObject.hpp>
+#include <SIF/core/activePolicy.hpp>
+#include <SIF/core/observable.hpp>
+
 namespace sif
 {
 

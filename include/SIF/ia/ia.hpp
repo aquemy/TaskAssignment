@@ -51,7 +51,7 @@ public :
      * @param _model Model of IA
      * @param _assignement Assignment algorithm
      */
-    IA(Model<Coord, Data>& _model, Assignment& _assignement);
+    IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement);
     
     /**
      * Constructor
@@ -59,7 +59,7 @@ public :
      * @param _assignement Assignment algorithm
      * @param _spatialData Spatial data used for strategies
      */
-    IA(Model<Coord, Data>& _model, Assignment& _assignement, SpatialData& _spatialData);
+    IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement, SpatialData& _spatialData);
     
     /**
      * Update IA

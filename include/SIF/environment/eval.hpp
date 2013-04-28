@@ -30,6 +30,12 @@
 #define _SIF_EVAL_
 
 #include <functional>
+#include <map>
+#include <vector>
+
+#include <SIF/constraint/constraint.hpp>
+#include <SIF/environment/taskSpot.hpp>
+#include <SIF/environment/resource.hpp>
 
 namespace sif
 {

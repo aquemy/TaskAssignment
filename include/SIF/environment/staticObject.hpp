@@ -29,6 +29,8 @@
 #ifndef _SIF_STATIC_OBJECT_
 #define _SIF_STATIC_OBJECT_
 
+#include <SIF/environment/object.hpp>
+
 namespace sif
 {
 

@@ -26,21 +26,23 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/strategy/strategy.hpp>
+#include <SIF/ia/strategy.hpp>
 
 namespace sif
 {
 
-    Strategy::Strategy(ConstraintEval& _constraintEval,
+    template <class Coord, class Data>
+    Strategy<Coord, Data>::Strategy(ConstraintEval& _constraintEval,
                     TaskSpotEval<Coord>& _taskSpotEval,
                     ResourceEval<Coord, Data>& _resourceEval, 
                     ResourceEval<Coord, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment& _assigment
+                    Assignment<Coord, Data>& _assigment
                     )
     { }
     
-    std::map<Resource<Coord, Data>*,TaskSpot<Coord>*> Strategy::assign()
+    template <class Coord, class Data>
+    std::map<Resource<Coord, Data>*,TaskSpot<Coord>*> Strategy<Coord, Data>::assign()
     { }
     
 }

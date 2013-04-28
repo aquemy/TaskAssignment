@@ -30,24 +30,29 @@
 
 namespace sif
 {
+    template <class Coord, class Data>
+    Resource<Coord, Data>::Resource(Coord _coord, double _velocity, ShortestPath& _spa)
+    { }
+    
+    template <class Coord, class Data>
+    void Resource<Coord, Data>::update(double _time)
+    { }
+    
+    template <class Coord, class Data>
+    void Resource<Coord, Data>::move(Direction _dir, double _time)
+    { }
+    
+    template <class Coord, class Data>    
+    bool Resource<Coord, Data>::isBusy()
+    { }
+    
+    template <class Coord, class Data>
+    void Resource<Coord, Data>::setAssignment(TaskSpot<Coord>& _assignment)
+    { }
 
-	Resource::Resource(Coord _coord, double _velocity, ShortestPath& _spa)
-	{ }
-    
-    void Resource::update(double _time)
-	{ }
-    
-    void Resource::move(Direction _dir, double _time)
-	{ }
-        
-    bool Resource::isBusy()
-	{ }
-    
-    void Resource::setAssignment(TaskSpot<Coord>& _assignment)
-	{ }
-
-    bool Resource::colliding(Direction _dir)
-	{ }
+    template <class Coord, class Data>
+    bool Resource<Coord, Data>::colliding(Direction _dir)
+    { }
     
 }
 

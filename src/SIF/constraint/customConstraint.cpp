@@ -26,15 +26,16 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include <SIF/constraint/constraint.hpp>
 #include <SIF/constraint/customConstraint.hpp>
 
 namespace sif
 {
-    CustomConstraint::CustomConstraint(std::function<bool()> _cond,
+    CustomConstraint::CustomConstraint(unsigned _priority, std::function<bool()> _cond,
         std::function<void()> _reachCondition,
         std::function<void()> _breakCondition
    ) : 
-   Constraint(_priority),
+    Constraint(_priority),
     cond(_cond),
     reachCondition(_reachCondition),
     breakCondition(_breakCondition),

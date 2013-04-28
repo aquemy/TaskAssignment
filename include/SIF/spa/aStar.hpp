@@ -29,6 +29,8 @@
 #ifndef _SIF_A_STAR_
 #define _SIF_A_STAR_
 
+#include <SIF/spa/shortestPath.hpp>
+
 namespace sif
 {
 

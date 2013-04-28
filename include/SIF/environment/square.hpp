@@ -29,6 +29,8 @@
 #ifndef _SIF_SQUARE_
 #define _SIF_SQUARE_
 
+#include <SIF/environment/obstacle.hpp>
+
 namespace sif
 {
 

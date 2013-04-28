@@ -52,7 +52,7 @@ public :
      * @return Kuhn instance (right-value)
      */   
     template <class Coord, class Data>
-    static Kuhn&& KuhnInstance(std::map<Resource<Coord, Data>*, int> _resource, std::vector<TaskSpot<Coord>*> _taskSpot);
+    static Kuhn<Coord, Data>&& KuhnInstance(std::map<Resource<Coord, Data>*, int> _resource, std::vector<TaskSpot<Coord>*> _taskSpot);
     
 };
 

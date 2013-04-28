@@ -32,7 +32,7 @@ namespace sif
 {
 
 	template <class Coord, class Data>
-    static Kuhn&& AssignmentFactory::KuhnInstance(std::map<Resource<Coord, Data>*, int> _resource, std::vector<TaskSpot<Coord>*> _taskSpot)
+    Kuhn<Coord, Data>&& AssignmentFactory::KuhnInstance(std::map<Resource<Coord, Data>*, int> _resource, std::vector<TaskSpot<Coord>*> _taskSpot)
     { }
 
 }

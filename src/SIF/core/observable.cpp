@@ -31,10 +31,12 @@
 namespace sif
 {
 
-	void Observable::addObserver(Observer& _obs)
-	{ }
+    template <class NotifyPolicy>
+    void Observable<NotifyPolicy>::addObserver(Observer& _obs)
+    { }
     
-    void Observable::removeObserver(Observer& _obs)
+    template <class NotifyPolicy>
+    void Observable<NotifyPolicy>::removeObserver(Observer& _obs)
     { }
 	
 }

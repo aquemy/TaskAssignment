@@ -29,6 +29,8 @@
 #ifndef _SIF_MANUAL_MODEL_
 #define _SIF_MANUAL_MODEL_
 
+#include <SIF/ia/model.hpp>
+
 namespace sif
 {
 

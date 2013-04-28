@@ -29,6 +29,10 @@
 #ifndef _SIF_KUHN_
 #define _SIF_KUHN_
 
+#include <vector>
+
+#include <SIF/assignment/assignment.hpp>
+
 namespace sif
 {
 
@@ -38,8 +42,8 @@ Kuhn is an algorithm wihch solves the asssignment problem. Kuhn is also named th
 
 @see sif::Assignment
 */
-
-class Kuhn : public Assignment
+template<class Coord, class Data>
+class Kuhn : public Assignment<Coord, Data>
 {
 public :
     
@@ -47,7 +51,6 @@ public :
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
      */
-    template <class Coord, class Data>
     std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()();
     
 protected :

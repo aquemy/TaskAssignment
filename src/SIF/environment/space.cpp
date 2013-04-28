@@ -30,17 +30,21 @@
 
 namespace sif
 {
-
-    Space::Space()
+    
+    template <int Dim, class Type>
+    Space<Dim, Type>::Space()
     { }
     
-    void Space::setBoundaries(unsigned _pos, Type _left, Type _right)
+    template <int Dim, class Type>
+    void Space<Dim, Type>::setBoundaries(unsigned _pos, Type _left, Type _right)
     { }
 
-    std::pair<Type,Type> Space::getBoundaries(unsigned _pos) const
+    template <int Dim, class Type>    
+    std::pair<Type,Type> Space<Dim, Type>::getBoundaries(unsigned _pos) const
     { }
     
-    bool Space::inSpace(Coordonate<Dim,Type> _coord) const
+    template <int Dim, class Type>
+    bool Space<Dim, Type>::inSpace(Coordonate<Dim,Type> _coord) const
     { }
     
 }

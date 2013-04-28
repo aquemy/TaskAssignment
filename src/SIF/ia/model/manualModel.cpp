@@ -31,19 +31,24 @@
 namespace sif
 {
 
-	void ManualModel::update(double _time, SpatialData& _spatialData)
-	{ }
+    template <class Coord, class Data>
+    void ManualModel<Coord, Data>::update(double _time, SpatialData& _spatialData)
+    { }
+    
+    template <class Coord, class Data>
+    int ManualModel<Coord, Data>::evalSituation()
+    { }
 
-    int ManualModel::evalSituation()
-	{ }
+    template <class Coord, class Data>
+    void ManualModel<Coord, Data>::learn() 
+    { }
 
-    void ManualModel::learn() 
-	{ }
+    template <class Coord, class Data>
+    void ManualModel<Coord, Data>::decide()
+    { }
 
-    void ManualModel::decide()
-	{ }
-
-    void ManualModel::assign()
+    template <class Coord, class Data>
+    void ManualModel<Coord, Data>::assign()
     { }
     
 }

@@ -26,18 +26,21 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/model/model.hpp>
+#include <SIF/ia/model.hpp>
 
 namespace sif
 {
 
-    void Model::addStrategy(Strategy<Coord, Data>& _strategy)
+    template <class Coord, class Data>
+    void Model<Coord, Data>::addStrategy(Strategy<Coord, Data>& _strategy)
     { }
     
-    void Model::setCurrentStrategy(unsigned _pos)
+    template <class Coord, class Data>
+    void Model<Coord, Data>::setCurrentStrategy(unsigned _pos)
     { }
     
-    void Model::setCurrentStrategy(Strategy<Coord, Data>& _strategy)
+    template <class Coord, class Data>
+    void Model<Coord, Data>::setCurrentStrategy(Strategy<Coord, Data>& _strategy)
     { }
     
 }

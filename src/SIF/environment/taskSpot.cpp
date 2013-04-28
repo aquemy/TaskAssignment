@@ -30,9 +30,11 @@
 
 namespace sif
 {
-
-    void TaskSpot::update()
+    
+    template <class Coord>
+    void TaskSpot<Coord>::update()
     { }
+    
 }
 
 

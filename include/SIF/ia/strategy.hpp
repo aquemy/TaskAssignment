@@ -31,6 +31,8 @@
 
 #include <SIF/environment/eval.hpp>
 #include <SIF/assignment/assignment.hpp>
+#include <SIF/environment/spatialData.hpp>
+#include <SIF/constraint/constraintSystem.hpp>
 
 namespace sif
 {
@@ -61,7 +63,7 @@ public :
                     ResourceEval<Coord, Data>& _resourceEval, 
                     ResourceEval<Coord, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment& _assigment
+                    Assignment<Coord, Data>& _assigment
                     );
     
      /**
@@ -91,7 +93,7 @@ protected :
     ResourceEval<Coord, Data>& globalResourceEval;                  ///< Global eval function for resource
     Eval<int> evalSit;                                     ///< Eval function for the situation
    
-    Assignment& assigment;                                     ///< Assigment algorithm
+    Assignment<Coord, Data>& assigment;                                     ///< Assigment algorithm
 };
 
 

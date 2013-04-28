@@ -89,7 +89,7 @@
 #include <SIF/ia/model.hpp>
 #include <SIF/ia/strategy.hpp>
 #include <SIF/ia/model/manualModel.hpp>
-#include <SIF/ia/strategy/simpleStrategy.hpp.h>
+#include <SIF/ia/strategy/simpleStrategy.hpp>
 
 // Shortest Path Algorithm
 #include <SIF/spa/aStar.hpp>

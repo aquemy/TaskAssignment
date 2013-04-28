@@ -30,8 +30,8 @@
 
 namespace sif
 {
-
-	Coordonate::Coordonate()
+    template <int Dim, class Type>
+    Coordonate<Dim, Type>::Coordonate()
     { }
     
 }

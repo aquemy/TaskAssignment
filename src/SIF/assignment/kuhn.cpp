@@ -32,7 +32,7 @@ namespace sif
 {
 
 	template <class Coord, class Data>
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> Kuhn::operator()()
+    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> Kuhn<Coord, Data>::operator()()
     { }
 
 }
