@@ -77,7 +77,7 @@ public :
      * Set the spatial data
      * @param _spatialData New spatialData
      */
-    void setSpatialData(SpatialData& spatialData);
+    void setSpatialData(SpatialData& _spatialData);
 
 protected :
 

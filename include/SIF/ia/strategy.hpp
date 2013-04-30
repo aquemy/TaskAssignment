@@ -52,7 +52,7 @@ public :
     /**
      * Constructor
      * @param _constraintEval Eval function for constraints
-     * @param _taskEval Eval function for taskSpot
+     * @param _taskSpotEval Eval function for taskSpot
      * @param _resourceEval Eval function for resource
      * @param _globalResourceEval Global eval function for resource
      * @param _evalSituation Eval function for the situation
@@ -63,7 +63,7 @@ public :
                     ResourceEval<Coord, Data>& _resourceEval, 
                     ResourceEval<Coord, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Coord, Data>& _assigment
+                    Assignment<Coord, Data>& _assignment
                     );
     
      /**
