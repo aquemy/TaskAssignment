@@ -46,6 +46,10 @@ namespace sif
     bool Resource<Coord, Data>::isBusy()
     { }
     
+    template <class Coord, class Data>  
+    void Resource<Coord, Data>::setBusy(bool _status)
+    { }
+    
     template <class Coord, class Data>
     void Resource<Coord, Data>::setAssignment(TaskSpot<Coord>& _assignment)
     { }

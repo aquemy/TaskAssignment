@@ -59,7 +59,7 @@ public :
      * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coord _coord, double _velocity, bool _busy ShortestPath& _spa);
+    Resource(Coord _coord, double _velocity, bool _busy, ShortestPath& _spa);
     
     /**
      * Update Resource
@@ -79,6 +79,12 @@ public :
      * @return boolean
      */
     bool isBusy();
+    
+    /**
+     * Set the status of the resource
+     * @param _status Bool
+     */
+    void setBusy(bool _status);
     
     /**
      * Set a new assignement if it is possible
