@@ -31,9 +31,38 @@
 namespace sif
 {
 
-    template <template <class> class Space, class Coord>
-    void Environment<Space, Coord>::update(double _time)
-    { }
+    template <int Dim, class Type>
+    void Environment<Dim, Type>::update(double _time)
+    { 
+
+    }
+
+    template <int Dim, class Type>
+    void Environment<Dim, Type>::addObject(Obstacle& _obstacle)
+    {
+        if(space.inSpace(_obstacle.getCoordonates()))
+            obstacles.push_back(_obstacles);
+    }
+
+    template <int Dim, class Type>
+    void Environment<Dim, Type>::addObject(Resource& _resource)
+    {
+        if(space.inSpace(_resource.getCoordonates()))
+            ressources.push_back(_resource);
+    }
+
+    template <int Dim, class Type>
+    void Environment<Dim, Type>::addObject(TaskSpot& _taskSpot)
+    {
+        if(space.inSpace(_taskSpot.getCoordonates()))
+            taskSpots.push_back(_taskSpot);
+    }
+
+    template <int Dim, class Type>
+    void Environment<Dim, Type>::setSpatialData(SpatialData& _spatialData)
+    {
+        spatialData = _spatialData;
+    }
     
 }
 

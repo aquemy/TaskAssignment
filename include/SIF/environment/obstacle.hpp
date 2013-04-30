@@ -36,14 +36,17 @@ namespace sif
 
 /** Obstacle : Obstacle in the environment
 
-It defines obstacle that can be overlapped by any objet.
+It defines obstacle that cannot be overlapped by any objet.
 
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::Square
 */
 
-template <class Coord>
+template <int Dim, class Type>
 class Obstacle : public StaticObject<Coord>
 {
+public :
+
+    virtual bool colliding(Coordonate<Dim, Type> _coord) = 0;
 
 };
 

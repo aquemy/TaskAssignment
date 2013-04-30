@@ -29,7 +29,10 @@
 #ifndef _SIF_ENVIRONMENT_
 #define _SIF_ENVIRONMENT_
 
+#include <vector>
+
 #include <SIF/core/observer.hpp>
+#include <SIF/environment/space.hpp>
 
 namespace sif
 {
@@ -42,15 +45,50 @@ It contains the different objets that can evolve in a specific space.
 @see sif::Space, sif::Object
 */
 
-template <template <class> class Space, class Coord>
+template <int Dim, class Type>
 class Environment : public Observer
 {
 public :
+
     /**
      * Update environment by updating all its components
      * @param _time Ellapsed time since the last update
      */
     void update(double _time);
+
+    /**
+     * Add obstacle to the environment
+     * @param _obstacle New obstacle
+     */
+    void addObject(Obstacle& _obstacle);
+
+    /**
+     * Add resource to the environment
+     * @param _resource New resource
+     */
+    void addObject(Resource& _resource);
+
+    /**
+     * Add taskSpot to the environment
+     * @param _taskSpot New taskSpot
+     */
+    void addObject(TaskSpot& _taskSpot);
+
+    /**
+     * setSpatialData
+     * @param _spatialData New spatialData
+     */
+    void setSpatialData(SpatialData& _spatialData);
+    
+
+protected :
+
+    Space<Dim,Type> space;
+    std::vector<Resource> resources;
+    std::vector<TaskSpot> taskSpots;
+    std::vector<Obstacle> obstacles;
+    SpatialData& spatialData;
+
 };
 
 

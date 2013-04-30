@@ -32,7 +32,7 @@ namespace sif
 {
 
     template <int Dim, class Type>
-    Coordonate<Dim, Type>::Coordonate()
+    Coordonate<Dim, Type>::Coordonate() : std::vector<Type>(int)
     { }
     
 }

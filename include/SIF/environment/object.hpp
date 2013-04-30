@@ -39,11 +39,27 @@ Abstract class for objects contained in the environment.
 @see sif::Environment, sif::Space, sif::DynamicObject, sif::StaticObject
 */
 
-template <class Coord>
+template <class Dim, Type>
 class Object
 {
+public :
+
+    /**
+    * Constructor
+    * @param _coord Coordonates of the resource
+    */
+    Object(Coordonate<Dim, Type> _coord);
+
+    /**
+    * Get coordonates of the object
+    * @return Coordonate
+    */
+    Coordonate<Dim, Type> getCoordonates() const;
+
 protected :
-    Coord coord;
+
+    Coordonate<Dim, Type> coord;
+
 };
 
 

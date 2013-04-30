@@ -33,19 +33,34 @@ namespace sif
     
     template <int Dim, class Type>
     Space<Dim, Type>::Space()
-    { }
+    {
+        boundaries.resize(Dim);
+    }
     
     template <int Dim, class Type>
     void Space<Dim, Type>::setBoundaries(unsigned _pos, Type _left, Type _right)
-    { }
+    {
+        if(_pos < Dim)
+            boundaries[_pos] = std::pair<Type,Type>(_left, _right);
+    }
 
     template <int Dim, class Type>    
     std::pair<Type,Type> Space<Dim, Type>::getBoundaries(unsigned _pos) const
-    { }
+    { 
+        return boundaries[_pos];
+    }
     
     template <int Dim, class Type>
     bool Space<Dim, Type>::inSpace(Coordonate<Dim,Type> _coord) const
-    { }
+    { 
+        for(unsigned i = 0; i < Dim; i++)
+        {
+            if(_coord[i] < boundaries[i].first || _coord[i] > boundaries[i].second)
+                return false;
+        }
+        
+        return true;
+    }
     
 }
 

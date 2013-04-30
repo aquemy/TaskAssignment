@@ -31,6 +31,20 @@
 namespace sif
 {
 
+    Square(std::vector<std::pair<Type,Type>> _boundaries) :
+        boundaries(_boundaries)
+    { }
+
+    bool colliding(Coordonate<Dim, Type> _coord)
+    {
+        for(unsigned i = 0; i < Dim; i++)
+        {
+            if(_coord[i] > boundaries[i].first || _coord[i] < boundaries[i].second)
+                return true;
+        }
+        
+        return false;
+    }
     
 }
 
