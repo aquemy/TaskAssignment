@@ -56,9 +56,10 @@ public :
      * Constructor
      * @param _coord Initial coordonates
      * @param _velocity Velocity of the resource
+     * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coordonate<Dim, Type> _coord, double _velocity, ShortestPath& _spa);
+    Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa);
     
     /**
      * Update Resource
@@ -77,7 +78,13 @@ public :
      * Check if the resource is busy (it cannot be assigned)
      * @return boolean
      */
-    bool isBusy();
+    bool isBusy() const;
+    
+    /**
+     * Set the status of the resource
+     * @param _status Bool
+     */
+    void setBusy(bool _status);
     
     /**
      * Set a new assignement if it is possible
@@ -93,7 +100,7 @@ protected :
      * @return true is colliding, false otherwise
      */
     bool colliding(Direction _dir);
-    
+    bool busy;										///< Status of the resource
     double velocity;                                ///< Velocity of the ressource
     Path<Data> path;                                ///< Path to reach the assignment
     TaskSpot<Dim, Type>* assignment;                ///< Assignment

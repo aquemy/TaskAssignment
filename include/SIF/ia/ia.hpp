@@ -49,17 +49,15 @@ public :
     /**
      * Constructor
      * @param _model Model of IA
-     * @param _assignement Assignment algorithm
      */
-    IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement);
+    IA(Model<Coord, Data>& _model);
     
     /**
      * Constructor
      * @param _model Model of IA
-     * @param _assignement Assignment algorithm
      * @param _spatialData Spatial data used for strategies
      */
-    IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement, SpatialData& _spatialData);
+    IA(Model<Coord, Data>& _model, SpatialData& _spatialData);
     
     /**
      * Update IA
@@ -77,7 +75,7 @@ public :
      * Set the spatial data
      * @param _spatialData New spatialData
      */
-    void setSpatialData(SpatialData& spatialData);
+    void setSpatialData(SpatialData& _spatialData);
 
 protected :
 
