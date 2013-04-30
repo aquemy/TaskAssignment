@@ -33,6 +33,9 @@
 using namespace std;
 using namespace sif;
 
+int cinq (int i)
+{ return 5; }
+
 int main(void)
 {
     /**
@@ -40,8 +43,15 @@ int main(void)
      */
     try
     {
-        
-
+        Task t;
+        TaskSpot ts(t, cinq);
+        ts.update();
+		
+		// Test ?
+		// Should be 
+        if(t.getValue() == 5)
+            throw runtime_error("Error in expectations for first test");
+        	
     }
     catch(exception& e)
     {

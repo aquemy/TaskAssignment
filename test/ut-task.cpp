@@ -33,6 +33,9 @@
 using namespace std;
 using namespace sif;
 
+int cinq (int i)
+{ return 5; }
+
 int main(void)
 {
     /**
@@ -40,8 +43,14 @@ int main(void)
      */
     try
     {
+        // Creation of a Task
+        Task t;
         
-
+        // Should be equal to 5
+        t.update(cinq)
+        if(t.getValue() != 5)
+            throw runtime_error("Error in expectations for first test");
+        
     }
     catch(exception& e)
     {

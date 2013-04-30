@@ -34,8 +34,7 @@ namespace sif
 
 /** SpatialData : Contains the index of the objets and the partition of the space.
 
-This is the object that partition and index the environment. All objects that need
-this information need to use its interface.
+This is the object that partition and index the environment. All objects that need this information need to use its interface.
 
 */
 

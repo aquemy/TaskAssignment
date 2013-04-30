@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <ut-eval.cpp>
+// <ut-resource.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -36,12 +36,18 @@ using namespace sif;
 int main(void)
 {
     /**
-     * Unit tests for eval
+     * Unit tests for resource
      */
     try
     {
         
-		// Test for EvalLoop(..)
+		// Test for update()
+		
+		// Test for move()
+		
+		// Test for isBusy()
+		
+		// Test for colliding()
 	
     }
     catch(exception& e)

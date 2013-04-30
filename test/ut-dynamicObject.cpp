@@ -1,6 +1,7 @@
+
 //////////////////////////////////////////////////////////////////////////////
 //
-// <ut-eval.cpp>
+// <ut-dynamicObject.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -36,13 +37,12 @@ using namespace sif;
 int main(void)
 {
     /**
-     * Unit tests for eval
+     * Unit tests for dynamicObject
      */
     try
     {
         
-		// Test for EvalLoop(..)
-	
+
     }
     catch(exception& e)
     {
