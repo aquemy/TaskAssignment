@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <ut-eval.cpp>
+// <ut-space.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -36,12 +36,12 @@ using namespace sif;
 int main(void)
 {
     /**
-     * Unit tests for eval
+     * Unit tests for space
      */
     try
     {
         
-		// Test for EvalLoop(..)
+		// Test for inSpace()
 	
     }
     catch(exception& e)

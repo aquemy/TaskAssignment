@@ -32,22 +32,24 @@
 namespace sif
 {
 
-/**Direction : Define direction for dynamic objects
-
- At the moment the direction define constants for the 4 cardinal points : North, East, South, West.
-In the future, they will depends on a general metric used in the environment. For instance, with a manhattan metric,
-resources could only be moved in N,E,S,W directions but with an euclidian metric they could me mouved in 8 directions :
- N, E, S, W, NE, NW, SE, SW.
+/**Direction : Vector of an orthonormale base of the space
 
 @see sif::Environment, sif::Object, sif::Ressource
 */
 
-enum Direction
+template <int Dim>
+class Direction
 {
-    NORTH,
-    WEST,
-    SOUTH,
-    EAST
+public :
+    
+    Direction(unsigned _pos, bool _way);
+
+    std::pair<int, bool> getValue() const;
+
+protected :
+
+    std::pair<int, bool> dir;
+
 };
 
 }

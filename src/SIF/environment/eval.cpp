@@ -33,7 +33,13 @@ namespace sif
 	
 	template <class Data>
 	EvalTable<Data> EvalLoop(Eval<Data> _eval, std::vector<Data*>& _data)
-	{ }
+	{ 
+        EvalTable<Data> result;
+        for(auto& d : _data)
+            result[d*] = _eval(*d);
+
+        return result;
+    }
 
 }
 

@@ -31,6 +31,21 @@
 namespace sif
 {
 
+    template <int Dim>
+    Direction::Direction(unsigned _pos, bool _way) :
+        way(_way)
+    {
+        if(_pos < Dim)
+            pos = _pos;
+        else
+            //
+    }
+
+    template <int Dim>
+    std::pair<int, bool> Direction::getValue() const
+    {
+        return dir;
+    }
     
 }
 

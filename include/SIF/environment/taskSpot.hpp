@@ -47,10 +47,24 @@ Different types of TaskSpot are provided such as periodic ones.
 template <class Coord>
 class TaskSpot : public DynamicObject<Coord>, public Observable<ActivePolicy>
 {
+public :
+
+    /**
+     * Constructor
+     * @param _t The associated task
+     * @param _f Function which serves to update the task
+     */
+    TaskSpot(Task _t, std::function<int(int&)> _f);
+    
     /**
      * Update Ressource
      */
     virtual void update();
+    
+protected :
+	
+	int f (int i);
+	Task t&;
 };
 
 

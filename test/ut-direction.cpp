@@ -1,6 +1,7 @@
+
 //////////////////////////////////////////////////////////////////////////////
 //
-// <ut-eval.cpp>
+// <ut-direction.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -36,13 +37,12 @@ using namespace sif;
 int main(void)
 {
     /**
-     * Unit tests for eval
+     * Unit tests for direction
      */
     try
     {
         
-		// Test for EvalLoop(..)
-	
+
     }
     catch(exception& e)
     {

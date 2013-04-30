@@ -47,8 +47,8 @@ the Task Spot he has to join.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::TaskSpot
 */
 
-template <class Coord, class Data>
-class Resource : public DynamicObject<Coord>
+template <int Dim, class Type, class Data>
+class Resource : public DynamicObject<Dim, Type>
 {
 public :
     
@@ -56,9 +56,10 @@ public :
      * Constructor
      * @param _coord Initial coordonates
      * @param _velocity Velocity of the resource
+     * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coord _coord, double _velocity, ShortestPath& _spa);
+    Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa);
     
     /**
      * Update Resource
@@ -77,13 +78,19 @@ public :
      * Check if the resource is busy (it cannot be assigned)
      * @return boolean
      */
-    bool isBusy();
+    bool isBusy() const;
+    
+    /**
+     * Set the status of the resource
+     * @param _status Bool
+     */
+    void setBusy(bool _status);
     
     /**
      * Set a new assignement if it is possible
      * @param _assignment New assignment
      */
-    void setAssignment(TaskSpot<Coord>& _assignment);
+    void setAssignment(TaskSpot<Dim, Type>& _assignment);
 
 protected : 
     
@@ -93,10 +100,10 @@ protected :
      * @return true is colliding, false otherwise
      */
     bool colliding(Direction _dir);
-    
-    double velocity;                                      ///< Velocity of the ressource
-    Path<Data> path;                                 ///< Path to reach the assignment
-    TaskSpot<Coord>* assignment;       ///< Assignment
+    bool busy;										///< Status of the resource
+    double velocity;                                ///< Velocity of the ressource
+    Path<Data> path;                                ///< Path to reach the assignment
+    TaskSpot<Dim, Type>* assignment;                ///< Assignment
     ShortestPath& spa;                              ///< Shortest path algorithm
 };
 

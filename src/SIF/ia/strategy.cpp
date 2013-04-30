@@ -31,19 +31,21 @@
 namespace sif
 {
 
-    template <class Coord, class Data>
-    Strategy<Coord, Data>::Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Coord>& _taskSpotEval,
-                    ResourceEval<Coord, Data>& _resourceEval, 
-                    ResourceEval<Coord, Data>& _globalResourceEval,
+    template <int Dim, class Type, class Data>
+    Strategy<int Dim, class Type, Data>::Strategy(ConstraintEval& _constraintEval,
+                    TaskSpotEval<int Dim, class Type>& _taskSpotEval,
+                    ResourceEval<int Dim, class Type, Data>& _resourceEval, 
+                    ResourceEval<int Dim, class Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Coord, Data>& _assigment
+                    Assignment<int Dim, class Type, Data>& _assigment
                     )
     { }
     
-    template <class Coord, class Data>
-    std::map<Resource<Coord, Data>*,TaskSpot<Coord>*> Strategy<Coord, Data>::assign()
-    { }
+    template <int Dim, class Type, class Data>
+    std::map<Resource<int Dim, class Type, Data>*,TaskSpot<int Dim, class Type>*> Strategy<int Dim, class Type, Data>::assign()
+    { 
+
+    }
     
 }
 

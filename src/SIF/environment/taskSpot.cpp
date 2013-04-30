@@ -30,10 +30,17 @@
 
 namespace sif
 {
+    TaskSpot(Task _t, std::function<int(int&)> _f) : 
+    	t(_t), 
+    	f(_f)
+    { }
     
     template <class Coord>
     void TaskSpot<Coord>::update()
-    { }
+    {
+    	_t.update(_f);
+    }
+
     
 }
 

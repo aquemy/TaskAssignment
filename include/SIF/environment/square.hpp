@@ -41,9 +41,18 @@ It defines a square shaped obstacle.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::Obstacle
 */
 
-template <class Coord>
-class Square : public Obstacle<Coord>
+template <int Dim, class Type>
+class Square : public Obstacle<Dim, Type>
 {
+public :
+    
+    Square(std::vector<std::pair<Type,Type>> _boundaries);
+
+    virtual bool colliding(Coordonate<Dim, Type> _coord);
+
+protected :
+
+    std::vector<std::pair<Type,Type>> boundaries; /// Boundaries
 
 };
 

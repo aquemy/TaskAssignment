@@ -31,25 +31,34 @@
 namespace sif
 {
     
-    template <class Coord, class Data>
-    IA<Coord, Data>::IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement)
+    template <int Dim, class Type, class Data>
+    IA<Dim, Type, Data>::IA(Model<Dim, Type, Data>& _model) :
+        model(_model)
 	{ }
     
-     template <class Coord, class Data>
-    IA<Coord, Data>::IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement, SpatialData& _spatialData)
+     template <int Dim, class Type, class Data>
+    IA<Dim, Type, Data>::IA(Model<Dim, Type, Data>& _model, SpatialData& _spatialData) :
+        IA(_model),
+        spatialData(_spatialData)
 	{ }
      
-    template <class Coord, class Data>
-    void IA<Coord, Data>::update(double _time)
-	{ }
+    template <int Dim, class Type, class Data>
+    void IA<Dim, Type, Data>::update(double _time)
+	{ 
+        model.update(_time);
+    }
     
-    template <class Coord, class Data>
-    void IA<Coord, Data>::setModel(Model<Coord, Data>& _model)
-	{ }
+    template <int Dim, class Type, class Data>
+    void IA<Dim, Type, Data>::setModel(Model<Dim, Type, Data>& _model)
+	{ 
+        model = _model;
+    }
     
-    template <class Coord, class Data>
-    void IA<Coord, Data>::setSpatialData(SpatialData& spatialData)
-    { }
+    template <int Dim, class Type, class Data>
+    void IA<Dim, Type, Data>::setSpatialData(SpatialData& _spatialData)
+    { 
+        spatialData = _spatialData;
+    }
     
 }
 

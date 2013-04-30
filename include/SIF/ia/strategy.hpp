@@ -44,7 +44,7 @@ namespace sif
 @see sif::Model,
 */
 
-template <class Coord, class Data>
+template <int Dim, class Type, class Data>
 class Strategy
 {
 public :
@@ -59,11 +59,11 @@ public :
      * @param _assignment Assigment algorithm
      */
     Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Coord>& _taskSpotEval,
-                    ResourceEval<Coord, Data>& _resourceEval, 
-                    ResourceEval<Coord, Data>& _globalResourceEval,
+                    TaskSpotEval<int Dim, class Type>& _taskSpotEval,
+                    ResourceEval<int Dim, class Type, Data>& _resourceEval, 
+                    ResourceEval<int Dim, class Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Coord, Data>& _assignment
+                    Assignment<int Dim, class Type, Data>& _assigment
                     );
     
      /**
@@ -78,22 +78,22 @@ public :
      * Perform the assignment of resources
      * @return assigment information
      */
-    virtual std::map<Resource<Coord, Data>*,TaskSpot<Coord>*> assign();
+    virtual std::map<Resource<int Dim, class Type, Data>*,TaskSpot<int Dim, class Type>*> assign();
     
 protected :
     
     EvalTable<Constraint> constraintTable;              ///< Evaluation of constraints
-    EvalTable<TaskSpot<Coord>> taskSpotsTable;               ///< Evaluation of taskspots
-    EvalTable<Resource<Coord, Data>> resourceTable;                ///< Evaluation of resources
-    EvalTable<Resource<Coord, Data>> globalResourceTable;    ///< Global evaluation of resources
+    EvalTable<TaskSpot<int Dim, class Type>> taskSpotsTable;               ///< Evaluation of taskspots
+    EvalTable<Resource<int Dim, class Type, Data>> resourceTable;                ///< Evaluation of resources
+    EvalTable<Resource<int Dim, class Type, Data>> globalResourceTable;    ///< Global evaluation of resources
 
     ConstraintEval& constraintEval;                            ///< Eval function for constraints
-    TaskSpotEval<Coord>& taskSpotEval;                               ///< Eval function for taskSpot
-    ResourceEval<Coord, Data>& resourceEval;                              ///< Eval function for resource
-    ResourceEval<Coord, Data>& globalResourceEval;                  ///< Global eval function for resource
+    TaskSpotEval<int Dim, class Type>& taskSpotEval;                               ///< Eval function for taskSpot
+    ResourceEval<int Dim, class Type, Data>& resourceEval;                              ///< Eval function for resource
+    ResourceEval<int Dim, class Type, Data>& globalResourceEval;                  ///< Global eval function for resource
     Eval<int> evalSit;                                     ///< Eval function for the situation
    
-    Assignment<Coord, Data>& assigment;                                     ///< Assigment algorithm
+    Assignment<int Dim, class Type, Data>& assigment;                                     ///< Assigment algorithm
 };
 
 

@@ -30,8 +30,16 @@
 
 namespace sif
 {
-
+    template <class Dim, Type>
+    Object<Dim, Type>::Object(Coordonate<Dim, Type> _coord) : coord(_coord)
+    { }
     
+    template <class Dim, Type>
+    Coordonate<Dim, Type> Object<Dim, Type>getCoordonates() const
+    {
+        return coord;
+    }
+
 }
 
 

@@ -41,7 +41,7 @@ Model defines the arrangement bewteen strategies and how the observation and all
 @see sif::IA, sif::Strategy
 */
 
-template <class Coord, class Data>
+template <int Dim, class Type, class Data>
 class Model
 {
 
@@ -58,7 +58,7 @@ public :
      * Add a strategy to the model
      * @param _strategy Strategy to add to the model 
      */
-    void addStrategy(Strategy<Coord, Data>& _strategy);
+    void addStrategy(Strategy<Dim, Type, Data>& _strategy);
     
     /**
      * Set current strategy
@@ -70,7 +70,7 @@ public :
      * Set current strategy, only if the strategy is in the model
      * @param _strategy Strategy to set as current strategy
      */
-    void setCurrentStrategy(Strategy<Coord, Data>& _strategy);
+    void setCurrentStrategy(Strategy<Dim, Type, Data>& _strategy);
     
 protected :
     
@@ -97,8 +97,8 @@ protected :
    
     
     
-    std::vector<Strategy<Coord, Data>*> strategies;  ///< Strategy used by the model
-    Strategy<Coord, Data>& currentStrategy;                ///< Current strategy
+    std::vector<Strategy<Dim, Type, Data>*> strategies;        ///< Strategy used by the model
+    Strategy<Dim, Type, Data>& currentStrategy;                ///< Current strategy
     
 };
 
