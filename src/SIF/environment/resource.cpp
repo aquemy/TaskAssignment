@@ -31,7 +31,7 @@
 namespace sif
 {
     template <class Coord, class Data>
-    Resource<Coord, Data>::Resource(Coord _coord, double _velocity, ShortestPath& _spa)
+    Resource<Coord, Data>::Resource(Coord _coord, double _velocity, bool _busy, ShortestPath& _spa)
     { }
     
     template <class Coord, class Data>

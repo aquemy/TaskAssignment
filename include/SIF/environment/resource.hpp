@@ -56,9 +56,10 @@ public :
      * Constructor
      * @param _coord Initial coordonates
      * @param _velocity Velocity of the resource
+     * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coord _coord, double _velocity, ShortestPath& _spa);
+    Resource(Coord _coord, double _velocity, bool _busy ShortestPath& _spa);
     
     /**
      * Update Resource
@@ -94,6 +95,7 @@ protected :
      */
     bool colliding(Direction _dir);
     
+    bool busy;										///< Status of the resource
     double velocity;                                      ///< Velocity of the ressource
     Path<Data> path;                                 ///< Path to reach the assignment
     TaskSpot<Coord>* assignment;       ///< Assignment
