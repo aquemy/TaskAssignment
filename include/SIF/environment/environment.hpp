@@ -50,7 +50,7 @@ class Environment : public Observer
 {
 public :
 
-    /**
+        /**
      * Update environment by updating all its components
      * @param _time Ellapsed time since the last update
      */
