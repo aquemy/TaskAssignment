@@ -30,33 +30,45 @@
 
 namespace sif
 {
-    template <class Coord, class Data>
-    Resource<Coord, Data>::Resource(Coord _coord, double _velocity, bool _busy, ShortestPath& _spa)
+    template <int Dim, class Type, class Data>
+    Resource<Dim, Type, Data>::Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa) :
+        Object<Dim, Type>(_coord),
+        velocity(_velocity),
+        busy(_busy),
+        spa(_spa)
     { }
     
-    template <class Coord, class Data>
-    void Resource<Coord, Data>::update(double _time)
+    template <int Dim, class Type, class Data>
+    void Resource<Dim, Type, Data>::update(double _time)
     { }
     
-    template <class Coord, class Data>
-    void Resource<Coord, Data>::move(Direction _dir, double _time)
-    { }
+    template <int Dim, class Type, class Data>
+    void Resource<Dim, Type, Data>::move(Direction<Dim> _dir, double _time)
+    { 
+        Coordonate<Dim, Type> tcoord = Object<Dim, Type>::coord;
+        // New position on the direction specified
+        tcoord[_dir.getValue().first] += _dir.getValue().second*(velocity*_time); 
+        if(true) // TEST IN SPACE + NOT COLLIDING
+            Object<Dim, Type>::coord = tcoord;
+    }
     
-    template <class Coord, class Data>    
-    bool Resource<Coord, Data>::isBusy()
-    { }
+    template <int Dim, class Type, class Data>    
+    bool Resource<Dim, Type, Data>::isBusy() const
+    { 
+        return busy;
+    }
     
-    template <class Coord, class Data>  
-    void Resource<Coord, Data>::setBusy(bool _status)
-    { }
+    template <int Dim, class Type, class Data>  
+    void Resource<Dim, Type, Data>::setBusy(bool _status)
+    { 
+        busy = _status;
+    }
     
-    template <class Coord, class Data>
-    void Resource<Coord, Data>::setAssignment(TaskSpot<Coord>& _assignment)
-    { }
-
-    template <class Coord, class Data>
-    bool Resource<Coord, Data>::colliding(Direction _dir)
-    { }
+    template <int Dim, class Type, class Data>
+    void Resource<Dim, Type, Data>::setAssignment(TaskSpot<Dim, Type>& _assignment)
+    { 
+        assignment = _assignment;
+    }
     
 }
 

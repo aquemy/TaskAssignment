@@ -51,8 +51,8 @@ public :
      * @param _taskSpot taskSpot to be affected
      * @return Kuhn instance (right-value)
      */   
-    template <class Coord, class Data>
-    static Kuhn<Coord, Data>&& KuhnInstance(std::map<Resource<Coord, Data>*, int> _resource, std::vector<TaskSpot<Coord>*> _taskSpot);
+    template <int Dim, class Type, class Data>
+    static Kuhn<Dim, Type, Data>&& KuhnInstance(std::map<Resource<Dim, Type, Data>*, int> _resource, std::vector<TaskSpot<Dim, Type>*> _taskSpot);
     
 };
 

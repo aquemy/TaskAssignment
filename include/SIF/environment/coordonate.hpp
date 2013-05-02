@@ -47,6 +47,7 @@ Some inherited functions from std::vector have been deleted such as push_back an
 template <int Dim, class Type = int>
 class Coordonate : public std::vector<Type>
 {
+public :
     /**
      * Default constructor
      * Check the Type template is a numeric type with type_trait
@@ -57,6 +58,8 @@ class Coordonate : public std::vector<Type>
 
 
 }
+
+#include <SIF/environment/coordonate.cpp>
 
 #endif // _SIF_COORDONATE_
 

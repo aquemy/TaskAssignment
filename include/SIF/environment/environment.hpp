@@ -33,6 +33,10 @@
 
 #include <SIF/core/observer.hpp>
 #include <SIF/environment/space.hpp>
+#include <SIF/environment/object.hpp>
+#include <SIF/environment/resource.hpp>
+#include <SIF/environment/obstacle.hpp>
+#include <SIF/environment/spatialData.hpp>
 
 namespace sif
 {
@@ -45,12 +49,12 @@ It contains the different objets that can evolve in a specific space.
 @see sif::Space, sif::Object
 */
 
-template <int Dim, class Type>
+template <int Dim, class Type, class Data>
 class Environment : public Observer
 {
 public :
 
-    /**
+        /**
      * Update environment by updating all its components
      * @param _time Ellapsed time since the last update
      */
@@ -60,19 +64,19 @@ public :
      * Add obstacle to the environment
      * @param _obstacle New obstacle
      */
-    void addObject(Obstacle& _obstacle);
+    void addObject(Obstacle<Dim, Type>& _obstacle);
 
     /**
      * Add resource to the environment
      * @param _resource New resource
      */
-    void addObject(Resource& _resource);
+    void addObject(Resource<Dim, Type, Data>& _resource);
 
     /**
      * Add taskSpot to the environment
      * @param _taskSpot New taskSpot
      */
-    void addObject(TaskSpot& _taskSpot);
+    void addObject(TaskSpot<Dim, Type>& _taskSpot);
 
     /**
      * setSpatialData
@@ -84,9 +88,9 @@ public :
 protected :
 
     Space<Dim,Type> space;
-    std::vector<Resource> resources;
-    std::vector<TaskSpot> taskSpots;
-    std::vector<Obstacle> obstacles;
+    std::vector<Resource<Dim, Type, Data>> resources;
+    std::vector<TaskSpot<Dim, Type>> taskSpots;
+    std::vector<Obstacle<Dim, Type>> obstacles;
     SpatialData& spatialData;
 
 };

@@ -26,21 +26,21 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/taskSpot.hpp>
-
 namespace sif
 {
-    TaskSpot(Task _t, std::function<int(int&)> _f) : 
+    
+    template <int Dim, class Type>
+    TaskSpot<Dim, Type>::TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&)> _f) :
+        DynamicObject<Dim, Type>(_coord),
     	t(_t), 
     	f(_f)
     { }
     
-    template <class Coord>
-    void TaskSpot<Coord>::update()
+    template <int Dim, class Type>
+    void  TaskSpot<Dim, Type>::update(double _time)
     {
-    	_t.update(_f);
+    	t.update(f);
     }
-
     
 }
 

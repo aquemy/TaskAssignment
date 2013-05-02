@@ -42,16 +42,23 @@ It defines obstacle that cannot be overlapped by any objet.
 */
 
 template <int Dim, class Type>
-class Obstacle : public StaticObject<Coord>
+class Obstacle : public StaticObject<Dim, Type>
 {
 public :
+    
+    /**
+    * Constructor
+    * @param _coord Coordonates of the resource
+    */
+    Obstacle(Coordonate<Dim, Type> _coord);
 
     virtual bool colliding(Coordonate<Dim, Type> _coord) = 0;
 
 };
 
-
 }
+
+#include <SIF/environment/obstacle.cpp>
 
 #endif // _SIF_OBSTACLE_
 

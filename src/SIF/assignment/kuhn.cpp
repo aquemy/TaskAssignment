@@ -31,8 +31,8 @@
 namespace sif
 {
 
-	template <class Coord, class Data>
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> Kuhn<Coord, Data>::operator()(std::map<pair<Resource<Coord,Data>,TaskSpot<Coord>>*,int> list_cost)
+	template <int Dim, class Type, class Data>
+    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Kuhn<Dim, Type, Data>::operator()()
     {
     
     // map < pair < resource, taskSpot >, int(cost) >

@@ -32,6 +32,7 @@
 #include <SIF/environment/direction.hpp>
 #include <SIF/environment/dynamicObject.hpp>
 #include <SIF/environment/taskSpot.hpp>
+#include <SIF/environment/direction.hpp>
 #include <SIF/spa/shortestPath.hpp>
 #include <SIF/graph/path.hpp>
 
@@ -47,8 +48,8 @@ the Task Spot he has to join.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::TaskSpot
 */
 
-template <class Coord, class Data>
-class Resource : public DynamicObject<Coord>
+template <int Dim, class Type, class Data>
+class Resource : public DynamicObject<Dim, Type>
 {
 public :
     
@@ -59,7 +60,7 @@ public :
      * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coord _coord, double _velocity, bool _busy, ShortestPath& _spa);
+    Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa);
     
     /**
      * Update Resource
@@ -72,13 +73,13 @@ public :
      * @param _dir Direction
      * @param _time Ellapsed time since the last move
      */
-    void move(Direction _dir, double _time);
+    void move(Direction<Dim> _dir, double _time);
         
     /**
      * Check if the resource is busy (it cannot be assigned)
      * @return boolean
      */
-    bool isBusy();
+    bool isBusy() const;
     
     /**
      * Set the status of the resource
@@ -90,7 +91,7 @@ public :
      * Set a new assignement if it is possible
      * @param _assignment New assignment
      */
-    void setAssignment(TaskSpot<Coord>& _assignment);
+    void setAssignment(TaskSpot<Dim, Type>& _assignment);
 
 protected : 
     
@@ -99,12 +100,11 @@ protected :
      * @param _dir Direction
      * @return true is colliding, false otherwise
      */
-    bool colliding(Direction _dir);
-    
+    bool colliding(Direction<Dim> _dir);
     bool busy;										///< Status of the resource
-    double velocity;                                      ///< Velocity of the ressource
-    Path<Data> path;                                 ///< Path to reach the assignment
-    TaskSpot<Coord>* assignment;       ///< Assignment
+    double velocity;                                ///< Velocity of the ressource
+    Path<Data> path;                                ///< Path to reach the assignment
+    TaskSpot<Dim, Type>* assignment;                ///< Assignment
     ShortestPath& spa;                              ///< Shortest path algorithm
 };
 

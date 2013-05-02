@@ -42,8 +42,8 @@ Kuhn is an algorithm wihch solves the asssignment problem. Kuhn is also named th
 
 @see sif::Assignment
 */
-template<class Coord, class Data>
-class Kuhn : public Assignment<Coord, Data>
+template<int Dim, class Type, class Data>
+class Kuhn : public Assignment<Dim, Type, Data>
 {
 public :
     
@@ -51,7 +51,11 @@ public :
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
      */
+<<<<<<< HEAD
     std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()(vector<Resource<Coord,Data>* _resource, vector<TaskSpot<Coord>* _taskSpot);
+=======
+    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> operator()();
+>>>>>>> 9656564216f0212d4e2f926a5734b3b31ee04f12
     
 protected :
     

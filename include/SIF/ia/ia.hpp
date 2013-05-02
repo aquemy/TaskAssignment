@@ -41,7 +41,7 @@ IA
 @see sif::Observer,
 */
 
-template <class Coord, class Data>
+template <int Dim, class Type, class Data>
 class IA : public Observer
 {
 public :
@@ -49,17 +49,8 @@ public :
     /**
      * Constructor
      * @param _model Model of IA
-     * @param _assignement Assignment algorithm
      */
-    IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement);
-    
-    /**
-     * Constructor
-     * @param _model Model of IA
-     * @param _assignement Assignment algorithm
-     * @param _spatialData Spatial data used for strategies
-     */
-    IA(Model<Coord, Data>& _model, Assignment<Coord, Data>& _assignement, SpatialData& _spatialData);
+    IA(Model<Dim, Type, Data>& _model);
     
     /**
      * Update IA
@@ -71,19 +62,18 @@ public :
      * Set the model
      * @param _model New strategy model
      */
-    void setModel(Model<Coord, Data>& _model);
+    void setModel(Model<Dim, Type, Data>& _model);
     
     /**
      * Set the spatial data
      * @param _spatialData New spatialData
      */
-    void setSpatialData(SpatialData& spatialData);
+    void setSpatialData(SpatialData& _spatialData);
 
 protected :
 
+    Model<Dim, Type, Data>& model;
     SpatialData& spatialData;
-    Model<Coord, Data>& model;
-    
     
 };
 

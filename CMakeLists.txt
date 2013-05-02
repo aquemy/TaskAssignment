@@ -56,11 +56,14 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Target.cmake)
 ######################################################################################
 
 ## Paths
-set(SIF_SRC_DIR "${CMAKE_SOURCE_DIR}/src/SIF" CACHE INTERNAL "SIF source directory" FORCE)
+set(SIF_SRC_DIR "${CMAKE_SOURCE_DIR}/include/SIF" CACHE INTERNAL "SIF source directory" FORCE)
 set(SIF_BIN_DIR "${CMAKE_BINARY_DIR}" CACHE INTERNAL "SIF binary directory" FORCE)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-add_subdirectory(${SIF_SRC_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Files.cmake)
+
 add_subdirectory(doc)
 add_subdirectory(test)
 

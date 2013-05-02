@@ -26,11 +26,28 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/direction.hpp>
+#include <stdexcept>
+
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
 
+    template <int Dim>
+    Direction<Dim>::Direction(unsigned _pos, bool _way) 
+    {
+        dir.second = _way;
+        if(_pos < Dim)
+            dir.first = _pos;
+        else
+            throw std::runtime_error("An error has occurred.");
+    }
+
+    template <int Dim>
+    std::pair<int, bool> Direction<Dim>::getValue() const
+    {
+        return dir;
+    }
     
 }
 

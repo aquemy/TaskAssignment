@@ -26,16 +26,17 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/square.hpp>
-
 namespace sif
 {
 
-    Square(std::vector<std::pair<Type,Type>> _boundaries) :
+    template <int Dim, class Type>
+    Square<Dim, Type>::Square(Coordonate<Dim, Type> _coord, std::vector<std::pair<Type,Type>> _boundaries) :
+        Obstacle<Dim, Type>(_coord),
         boundaries(_boundaries)
     { }
 
-    bool colliding(Coordonate<Dim, Type> _coord)
+    template <int Dim, class Type>
+    bool Square<Dim, Type>::colliding(Coordonate<Dim, Type> _coord)
     {
         for(unsigned i = 0; i < Dim; i++)
         {

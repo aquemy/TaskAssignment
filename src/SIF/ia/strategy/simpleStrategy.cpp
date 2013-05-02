@@ -31,8 +31,8 @@
 namespace sif
 {
 
-     template <class Coord, class Data>
-    int SimpleStrategy<Coord, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
+     template <int Dim, class Type, class Data>
+    int SimpleStrategy<Dim, Type, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
     { }
     
 }

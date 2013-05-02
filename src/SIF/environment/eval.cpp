@@ -36,7 +36,7 @@ namespace sif
 	{ 
         EvalTable<Data> result;
         for(auto& d : _data)
-            result[d*] = _eval(*d);
+            result[d] = _eval(*d);
 
         return result;
     }

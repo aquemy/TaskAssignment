@@ -73,14 +73,14 @@ using ConstraintEval = Eval<Constraint>;
 /** 
  * TaskSpotEval : Typedef for the TaskSpot evaluation
 */
-template <class Coord>
-using TaskSpotEval = Eval<TaskSpot<Coord>>;
+template <int Dim, class Type>
+using TaskSpotEval = Eval<TaskSpot<Dim, Type>>;
 
 /** 
  * ResourceEval : Typedef for the Resource evaluation
 */
-template <class Coord, class Data>
-using ResourceEval = Eval<Resource<Coord, Data>>;
+template <int Dim, class Type, class Data>
+using ResourceEval = Eval<Resource<Dim, Type, Data>>;
 
 }
 

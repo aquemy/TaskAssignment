@@ -65,7 +65,7 @@ public :
      * @param _rT Right value of the tolerance interval
      * @param _lT Left value of the tolerance interval
      */
-    StepConstraint(unsigned priority,
+    StepConstraint(unsigned _priority,
         Task& _task, 
         ConstraintComp _comp, 
         int _step,

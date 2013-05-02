@@ -26,11 +26,13 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/dynamicObject.hpp>
-
 namespace sif
 {
-
+    
+    template <int Dim, class Type>
+    DynamicObject<Dim, Type>::DynamicObject(Coordonate<Dim, Type> _coord) :
+        Object<Dim, Type>(_coord)
+    { }
     
 }
 

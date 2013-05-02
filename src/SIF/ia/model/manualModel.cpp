@@ -26,29 +26,34 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/model/manualModel.hpp>
-
 namespace sif
 {
+    
+    template <int Dim, class Type, class Data>
+    ManualModel<Dim, Type, Data>::ManualModel(Strategy<Dim, Type, Data>& _currentStrategy) :
+        Model<Dim, Type, Data>(_currentStrategy)
+    { 
+        addStrategy(_currentStrategy);
+    }
 
-    template <class Coord, class Data>
-    void ManualModel<Coord, Data>::update(double _time, SpatialData& _spatialData)
+    template <int Dim, class Type, class Data>
+    void ManualModel<Dim, Type, Data>::update(double _time, SpatialData& _spatialData)
     { }
     
-    template <class Coord, class Data>
-    int ManualModel<Coord, Data>::evalSituation()
+    template <int Dim, class Type, class Data>
+    int ManualModel<Dim, Type, Data>::evalSituation()
     { }
 
-    template <class Coord, class Data>
-    void ManualModel<Coord, Data>::learn() 
+    template <int Dim, class Type, class Data>
+    void ManualModel<Dim, Type, Data>::learn() 
     { }
 
-    template <class Coord, class Data>
-    void ManualModel<Coord, Data>::decide()
+    template <int Dim, class Type, class Data>
+    void ManualModel<Dim, Type, Data>::decide()
     { }
 
-    template <class Coord, class Data>
-    void ManualModel<Coord, Data>::assign()
+    template <int Dim, class Type, class Data>
+    void ManualModel<Dim, Type, Data>::assign()
     { }
     
 }

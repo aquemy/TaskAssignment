@@ -50,8 +50,8 @@ public :
      * AStar instanciation : tranform a TaskSpot into coordonates
      * @return AStar instance (right-value)
      */   
-    template <class Coord>
-    static AStar&& AStarInstance(TaskSpot<Coord>& _taskSpot);
+    template <int Dim, class Type>
+    static AStar&& AStarInstance(TaskSpot<Dim, Type>& _taskSpot);
     
 };
 

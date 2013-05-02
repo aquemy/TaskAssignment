@@ -41,13 +41,14 @@ int main(void)
      */
     try
     {
-        
+        Direction<3> d(3, true);
 
     }
     catch(exception& e)
     {
         logger(Logger::ERROR) << e.what();
         logger << "FATAL ERROR - EXIT NOW !";
+        return 1;
     }
     
     return 0;

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <strategy.cpp>
+// <ut-simpleIndex.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -8,10 +8,10 @@
 // This software is governed by the CeCILL license under French law and
 // abiding by the rules of distribution of free software.  You can  ue,
 // modify and/ or redistribute the software under the terms of the CeCILL
-// license as circulated by CEA, CNRS and INRStrategy at the following URL
+// license as circulated by CEA, CNRS and INRIA at the following URL
 // "http://www.cecill.info".
 //
-// In this respect, the user's attention is drawn to the risks assocstrategyted
+// In this respect, the user's attention is drawn to the risks associated
 // with loading,  using,  modifying and/or developing or reproducing the
 // software by the user in light of its specific status of free software,
 // that may mean  that it is complicated to manipulate,  and  that  also
@@ -26,27 +26,40 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/strategy.hpp>
+#include <exception>
+#include <vector>
 
-namespace sif
+#include <sif.hpp>
+
+using namespace std;
+using namespace sif;
+
+int main(void)
 {
-
-    template <int Dim, class Type, class Data>
-    Strategy<Dim, Type, Data>::Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
-                    )
-    { }
-    
-    template <int Dim, class Type, class Data>
-    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Strategy<Dim, Type, Data>::assign()
-    { 
+    /**
+     * Unit tests for SimpleIndex
+     */
+    try
+    {
+        // Creation of Obstacles
+        Coordonate<2,int> coord;
+        std::vector<std::pair<int,int>> boundaries = {{0,10}, {0,10}};
+        Square<2,int> s1(coord, boundaries);
+        
+        std::vector<Square<2,int>*> obs;
+        obs.push_back(&s1);
+        
+        SimpleIndex<Square<2,int>> ind(obs);
 
     }
+    catch(exception& e)
+    {
+        logger(Logger::ERROR) << e.what();
+        logger << "FATAL ERROR - EXIT NOW !";
+        return 1;
+    }
+    
+    return 0;
     
 }
-
 

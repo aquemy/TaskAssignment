@@ -29,6 +29,9 @@
 #ifndef _SIF_ATLAS_GRID_
 #define _SIF_ATLAS_GRID_
 
+#include <vector>
+#include <list>
+
 #include <SIF/graph/tree.hpp>
 
 namespace sif
@@ -44,7 +47,10 @@ AtlasGrid is a simple data structure for partitionning..
 template <class Data>
 class AtlasGrid : public Tree<Data>
 {
-
+public :
+    
+protected :
+    
 };
 
 }

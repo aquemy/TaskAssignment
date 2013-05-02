@@ -26,22 +26,37 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/model.hpp>
+#include <algorithm>
 
 namespace sif
 {
+    
+    template <int Dim, class Type, class Data>
+    void Model<Dim, Type, Data>::Model(Strategy<Dim, Type, Data>& _currentStrategy) :
+        currentStrategy(_currentStrategy)
+    { 
+        addStrategy(_currentStrategy);
+    }
 
-    template <class Coord, class Data>
-    void Model<Coord, Data>::addStrategy(Strategy<Coord, Data>& _strategy)
-    { }
+    template <int Dim, class Type, class Data>
+    void Model<Dim, Type, Data>::addStrategy(Strategy<Dim, Type, Data>& _strategy)
+    { 
+        strategies.push_back(&_strategy);
+    }
     
-    template <class Coord, class Data>
-    void Model<Coord, Data>::setCurrentStrategy(unsigned _pos)
-    { }
+    template <int Dim, class Type, class Data>
+    void Model<Dim, Type, Data>::setCurrentStrategy(unsigned _pos)
+    { 
+        if(_pos < strategies.size())
+            currentStrategy = *strategies[_pos];
+    }
     
-    template <class Coord, class Data>
-    void Model<Coord, Data>::setCurrentStrategy(Strategy<Coord, Data>& _strategy)
-    { }
+    template <int Dim, class Type, class Data>
+    void Model<Dim, Type, Data>::setCurrentStrategy(Strategy<Dim, Type, Data>& _strategy)
+    { 
+        if(std::find(std::begin(strategies), std::end(strategies), &_strategy) != std::end(strategies))
+            currentStrategy = _strategy;
+    }
     
 }
 

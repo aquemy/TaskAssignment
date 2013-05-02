@@ -42,14 +42,22 @@ such as sif::Obstacle that defines obstacle in space.
 @see sif::Environment, sif::Object, sif::DynamicObject, sif::Obstacle
 */
 
-template <class Coord>
-class StaticObject : public Object<Coord>
+template <int Dim, class Type>
+class StaticObject : public Object<Dim, Type>
 {
+    
+public :
+    /**
+    * Constructor
+    * @param _coord Coordonates of the resource
+    */
+    StaticObject(Coordonate<Dim, Type> _coord);
 
 };
 
-
 }
+
+#include <SIF/environment/staticObject.cpp>
 
 #endif // _SIF_STATIC_OBJECT_
 

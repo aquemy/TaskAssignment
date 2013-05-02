@@ -13,7 +13,6 @@ set(SRC
     core/controller.cpp
     core/multiThread.cpp
     core/observable.cpp
-    core/observable.cpp
     core/observablePolicy.cpp
     core/observer.cpp
     core/passivePolicy.cpp
@@ -68,5 +67,3 @@ install(TARGETS sif ARCHIVE DESTINATION lib${LIB_SUFFIX} COMPONENT libraries)
 ######################################################################################
 ### 0) Include source directories
 ######################################################################################
-
-#add_subdirectory(utils)

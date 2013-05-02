@@ -40,8 +40,8 @@ namespace sif
 @see sif::Model,
 */
     
- template <class Coord, class Data>
-class SimpleStrategy : public Strategy<Coord, Data>
+template <int Dim, class Type, class Data>
+class SimpleStrategy : public Strategy<Dim, Type, Data>
 {
 public :
 

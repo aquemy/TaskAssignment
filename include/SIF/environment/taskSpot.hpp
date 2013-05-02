@@ -29,7 +29,10 @@
 #ifndef _SIF_TASK_SPOT_
 #define _SIF_TASK_SPOT_
 
+#include <functional>
+
 #include <SIF/environment/dynamicObject.hpp>
+#include <SIF/environment/task.hpp>
 #include <SIF/core/activePolicy.hpp>
 #include <SIF/core/observable.hpp>
 
@@ -44,31 +47,34 @@ Different types of TaskSpot are provided such as periodic ones.
 @see sif::Task, sif::PeriodicTaskSpot, sif::Observable
 */
 
-template <class Coord>
-class TaskSpot : public DynamicObject<Coord>, public Observable<ActivePolicy>
+template <int Dim, class Type>
+class TaskSpot : public DynamicObject<Dim, Type>//, public Observable<ActivePolicy>
 {
 public :
 
     /**
      * Constructor
+     * @param _coord Coordonates of the taskSpot
      * @param _t The associated task
      * @param _f Function which serves to update the task
      */
-    TaskSpot(Task _t, std::function<int(int&)> _f);
+    TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&)> _f);
     
     /**
      * Update Ressource
      */
-    virtual void update();
+    virtual void update(double _time);
     
 protected :
-	
-	int f (int i);
-	Task t&;
+    
+         std::function<int(int&)> f;
+	Task& t;
+    
 };
 
-
 }
+
+#include <SIF/environment/taskSpot.cpp>
 
 #endif // _SIF_TASK_SPOT_
 

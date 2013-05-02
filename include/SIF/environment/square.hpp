@@ -46,7 +46,7 @@ class Square : public Obstacle<Dim, Type>
 {
 public :
     
-    Square(std::vector<std::pair<Type,Type>> _boundaries);
+    Square(Coordonate<Dim, Type> _coord, std::vector<std::pair<Type,Type>> _boundaries);
 
     virtual bool colliding(Coordonate<Dim, Type> _coord);
 
@@ -56,8 +56,9 @@ protected :
 
 };
 
-
 }
+
+#include <SIF/environment/square.cpp>
 
 #endif // _SIF_SQUAREE_
 

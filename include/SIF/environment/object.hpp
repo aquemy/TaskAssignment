@@ -29,6 +29,8 @@
 #ifndef _SIF_OBJECT_
 #define _SIF_OBJECT_
 
+#include <SIF/environment/coordonate.hpp>
+
 namespace sif
 {
 
@@ -39,7 +41,7 @@ Abstract class for objects contained in the environment.
 @see sif::Environment, sif::Space, sif::DynamicObject, sif::StaticObject
 */
 
-template <class Dim, Type>
+template <int Dim, class Type>
 class Object
 {
 public :
@@ -62,8 +64,9 @@ protected :
 
 };
 
-
 }
+
+#include <SIF/environment/object.cpp>
 
 #endif // _SIF_OBJECT_
 

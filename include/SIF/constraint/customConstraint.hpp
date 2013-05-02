@@ -49,6 +49,7 @@ public :
 
     /**
      * Default constructor
+     * @param _priority Priority of the constraint
      * @param _cond Condition to satisfy the constraint
      * @param _reachCondition Callback function called when the constraint is satisfied
      * @param _breakCondition Callback function called when the constraint is not satisfied

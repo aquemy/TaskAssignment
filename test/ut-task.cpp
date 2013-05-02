@@ -47,7 +47,7 @@ int main(void)
         Task t;
         
         // Should be equal to 5
-        t.update(cinq)
+        t.update(cinq);
         if(t.getValue() != 5)
             throw runtime_error("Error in expectations for first test");
         
