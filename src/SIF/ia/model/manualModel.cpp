@@ -38,23 +38,37 @@ namespace sif
 
     template <int Dim, class Type, class Data>
     void ManualModel<Dim, Type, Data>::update(double _time, SpatialData& _spatialData)
-    { }
+    { 
+        logger(Logger::PROGRESS) << "ManualModel : UPDATE";
+        evalSituation();
+        learn();
+        decide();
+        assign();
+    }
     
     template <int Dim, class Type, class Data>
     int ManualModel<Dim, Type, Data>::evalSituation()
-    { }
+    { 
+        logger(Logger::PROGRESS) << "ManualModel : Situation evaluation.";
+    }
 
     template <int Dim, class Type, class Data>
     void ManualModel<Dim, Type, Data>::learn() 
-    { }
+    { 
+        logger(Logger::PROGRESS) << "ManualModel : Learn.";
+    }
 
     template <int Dim, class Type, class Data>
     void ManualModel<Dim, Type, Data>::decide()
-    { }
+    { 
+        logger(Logger::PROGRESS) << "ManualModel : Decide.";
+    }
 
     template <int Dim, class Type, class Data>
     void ManualModel<Dim, Type, Data>::assign()
-    { }
+    { 
+        logger(Logger::PROGRESS) << "ManualModel : Assign.";
+    }
     
 }
 
