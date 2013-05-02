@@ -31,8 +31,8 @@
 namespace sif
 {
 
-	template <class Coord, class Data>
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> Kuhn<Coord, Data>::operator()()
+    template <int Dim, class Type, class Data>
+    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Kuhn<Dim, Type, Data>::operator()()
     { }
 
 }

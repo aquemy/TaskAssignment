@@ -44,11 +44,10 @@ int main(void)
     try
     {
         Task t;
-        TaskSpot ts(t, cinq);
-        ts.update();
+        TaskSpot<2,int> ts(Coordonate<2,int>(), t, cinq);
+        ts.update(0);
 		
-		// Test ?
-		// Should be 
+	// Should be 5
         if(t.getValue() == 5)
             throw runtime_error("Error in expectations for first test");
         	

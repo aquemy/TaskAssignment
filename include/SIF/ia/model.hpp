@@ -48,6 +48,12 @@ class Model
 public : 
     
     /**
+     * Constructor
+     * @param _currentStrategy Main strategy
+     */
+    Model(Strategy<Dim, Type, Data>& _currentStrategy);
+    
+    /**
      * Update Model
      * @param _time Ellapsed time since the last update
      * @param _spatialData Data
@@ -102,8 +108,9 @@ protected :
     
 };
 
-
 }
+
+#include <SIF/ia/model.hpp>
 
 #endif // _SIF_MODEL_
 

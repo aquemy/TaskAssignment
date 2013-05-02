@@ -42,11 +42,17 @@ the current strategy is defined by the user.
 @see sif::IA, sif::Strategy, sif::Model
 */
 
-template <class Coord, class Data>
-class ManualModel : public Model<Coord, Data>
+template <int Dim, class Type, class Data>
+class ManualModel : public Model<Dim, Type, Data>
 {
 
 public : 
+    
+    /**
+     * Constructor
+     * @param _currentStrategy Main strategy
+     */
+    ManualModel(Strategy<Dim, Type, Data>& _currentStrategy);
     
     /**
      * Update Model
@@ -79,13 +85,15 @@ protected :
     virtual void assign();
     
     
-    std::vector<Strategy<Coord, Data>*> strategies;  ///< Strategy used by the model
-    Strategy<Coord, Data>& currentStrategy;                ///< Current strategy
+    std::vector<Strategy<Dim, Type, Data>*> strategies;  ///< Strategy used by the model
+    Strategy<Dim, Type, Data>& currentStrategy;                ///< Current strategy
     
 };
 
 
 }
+
+#include <SIF/ia/model/manualModel.cpp>
 
 #endif // _SIF_MANUAL_MODEL_
 

@@ -1,7 +1,6 @@
-
 //////////////////////////////////////////////////////////////////////////////
 //
-// <ut-dynamicObject.cpp>
+// <it-ia.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -28,21 +27,34 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <exception>
+#include <cassert>
 
 #include <sif.hpp>
 
 using namespace std;
 using namespace sif;
 
+static int i = 0;
+
+void f()
+{
+    i++;
+}
+
 int main(void)
 {
-    /**
-     * Unit tests for dynamicObject
-     */
+    
     try
     {
         
-
+        // Strategies creation
+        //Strategy<2,int,int> s1;
+        
+        // Model creation
+        //ManualModel<2,int,int> model(s1); 
+        
+        // IA Creation
+        
     }
     catch(exception& e)
     {
@@ -53,4 +65,5 @@ int main(void)
     return 0;
     
 }
+
 

@@ -1,7 +1,6 @@
-
 //////////////////////////////////////////////////////////////////////////////
 //
-// <ut-coordonate.cpp>
+// <simpleIndex.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -27,30 +26,39 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <exception>
+#ifndef _SIF_SIMPLE_INDEX_
+#define _SIF_SIMPLE_INDEX_
 
-#include <sif.hpp>
+#include <vector>
+#include <list>
 
-using namespace std;
-using namespace sif;
+#include <SIF/graph/tree.hpp>
 
-int main(void)
+namespace sif
 {
-    /**
-     * Unit tests for coordonate
-     */
-    try
-    {
-        
 
-    }
-    catch(exception& e)
-    {
-        logger(Logger::ERROR) << e.what();
-        logger << "FATAL ERROR - EXIT NOW !";
-    }
+/** Simplexe : Stock information in vector
+
+ * Simpliest indexing data ever.
+
+@see sif::Tree
+*/
+
+template <class Data>
+class SimpleIndex : public Tree<Data>
+{
+public :
     
-    return 0;
+    SimpleIndex(std::vector<Data*>& _data);
     
+protected :
+    
+    std::vector<Data*>& data;
+    
+};
+
 }
 
+#include <SIF/graph/simpleIndex.cpp>
+
+#endif // _SIF_SIMPLE_INDEXD_

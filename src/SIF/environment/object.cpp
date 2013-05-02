@@ -26,16 +26,14 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/object.hpp>
-
 namespace sif
 {
-    template <class Dim, Type>
+    template <int Dim, class Type>
     Object<Dim, Type>::Object(Coordonate<Dim, Type> _coord) : coord(_coord)
     { }
     
-    template <class Dim, Type>
-    Coordonate<Dim, Type> Object<Dim, Type>getCoordonates() const
+    template <int Dim, class Type>
+    Coordonate<Dim, Type> Object<Dim, Type>::getCoordonates() const
     {
         return coord;
     }

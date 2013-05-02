@@ -26,11 +26,13 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/obstacle.hpp>
-
 namespace sif
 {
-
+    
+    template <int Dim, class Type>
+    Obstacle<Dim, Type>::Obstacle(Coordonate<Dim, Type> _coord) :
+        StaticObject<Dim, Type>(_coord)
+    { }
 
 }
 

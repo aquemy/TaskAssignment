@@ -32,7 +32,7 @@ namespace sif
 {
     template <int Dim, class Type, class Data>
     Resource<Dim, Type, Data>::Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa) :
-        Object(_coord),
+        Object<Dim, Type>(_coord),
         velocity(_velocity),
         busy(_busy),
         spa(_spa)
@@ -43,13 +43,13 @@ namespace sif
     { }
     
     template <int Dim, class Type, class Data>
-    void Resource<Dim, Type, Data>::move(Direction _dir, double _time)
+    void Resource<Dim, Type, Data>::move(Direction<Dim> _dir, double _time)
     { 
-        Coordonate<Dim, Type> tcoord = coord;
+        Coordonate<Dim, Type> tcoord = Object<Dim, Type>::coord;
         // New position on the direction specified
         tcoord[_dir.getValue().first] += _dir.getValue().second*(velocity*_time); 
         if(true) // TEST IN SPACE + NOT COLLIDING
-            coord = tcoord;
+            Object<Dim, Type>::coord = tcoord;
     }
     
     template <int Dim, class Type, class Data>    

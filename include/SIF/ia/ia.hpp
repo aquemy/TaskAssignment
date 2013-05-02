@@ -53,13 +53,6 @@ public :
     IA(Model<Dim, Type, Data>& _model);
     
     /**
-     * Constructor
-     * @param _model Model of IA
-     * @param _spatialData Spatial data used for strategies
-     */
-    IA(Model<Dim, Type, Data>& _model, SpatialData& _spatialData);
-    
-    /**
      * Update IA
      * @param _time Ellapsed time since the last update
      */
@@ -79,9 +72,8 @@ public :
 
 protected :
 
-    SpatialData& spatialData;
     Model<Dim, Type, Data>& model;
-    
+    SpatialData& spatialData;
     
 };
 

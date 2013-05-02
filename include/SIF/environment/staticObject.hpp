@@ -45,11 +45,19 @@ such as sif::Obstacle that defines obstacle in space.
 template <int Dim, class Type>
 class StaticObject : public Object<Dim, Type>
 {
+    
+public :
+    /**
+    * Constructor
+    * @param _coord Coordonates of the resource
+    */
+    StaticObject(Coordonate<Dim, Type> _coord);
 
 };
 
-
 }
+
+#include <SIF/environment/staticObject.cpp>
 
 #endif // _SIF_STATIC_OBJECT_
 

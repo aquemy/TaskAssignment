@@ -13,6 +13,7 @@ set (TEST_LIST
         ut-aStar
         ut-atlasGrid
         ut-constraint
+        ut-direction
         ut-environment
         ut-eval
         ut-ia
@@ -27,6 +28,7 @@ set (TEST_LIST
         ut-rTree
         ut-shortestPath
         ut-shortestPathFactory
+        ut-simpleIndex
         ut-simpleStrategy
         ut-spatialData
         ut-strategy
@@ -37,6 +39,7 @@ set (TEST_LIST
         ut-treeFactory
         it-assignment
         it-controller
+        it-ia
 		)
 
 ######################################################################################

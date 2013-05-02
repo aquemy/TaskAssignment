@@ -81,6 +81,7 @@
 #include <SIF/graph/path.hpp>
 #include <SIF/graph/quadTree.hpp>
 #include <SIF/graph/rTree.hpp>
+#include <SIF/graph/simpleIndex.hpp>
 #include <SIF/graph/tree.hpp>
 #include <SIF/graph/treeFactory.hpp>
 

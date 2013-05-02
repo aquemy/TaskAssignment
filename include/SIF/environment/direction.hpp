@@ -29,6 +29,8 @@
 #ifndef _SIF_DIRECTION_
 #define _SIF_DIRECTION_
 
+#include <utility>
+
 namespace sif
 {
 
@@ -53,6 +55,8 @@ protected :
 };
 
 }
+
+#include <SIF/environment/direction.cpp>
 
 #endif // _SIF_DIRECTION_
 

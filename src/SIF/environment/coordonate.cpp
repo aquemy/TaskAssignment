@@ -26,13 +26,11 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/coordonate.hpp>
-
 namespace sif
 {
 
     template <int Dim, class Type>
-    Coordonate<Dim, Type>::Coordonate() : std::vector<Type>(int)
+    Coordonate<Dim, Type>::Coordonate() : std::vector<Type>(Dim)
     { }
     
 }

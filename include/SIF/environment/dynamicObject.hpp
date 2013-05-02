@@ -44,10 +44,16 @@ By moving, we suggest physically or just changing its internal state.
 @see sif::Environment, sif::Object, sif::StaticObject, sif::Ressource, sif::TaskSpot
 */
 
-template <class Coord>
-class DynamicObject : public Object<Coord>, public Observable<ActivePolicy>
+template <int Dim, class Type>
+class DynamicObject : public Object<Dim, Type>//, public Observable<ActivePolicy>
 {
 public :
+    
+     /**
+    * Constructor
+    * @param _coord Coordonates of the resource
+    */
+    DynamicObject(Coordonate<Dim, Type> _coord);
     
     /**
      * Update dynamic object
@@ -57,8 +63,9 @@ public :
     
 };
 
-
 }
+
+#include <SIF/environment/dynamicObject.cpp>
 
 #endif // _SIF_DYNAMIC_OBJECT_
 

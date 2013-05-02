@@ -26,11 +26,13 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/staticObject.hpp>
-
 namespace sif
 {
-
+    
+    template <int Dim, class Type>
+    StaticObject<Dim, Type>::StaticObject(Coordonate<Dim, Type> _coord) :
+        Object<Dim, Type>(_coord)
+    { }
     
 }
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <strategy.cpp>
+// <simpleIndex.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -8,10 +8,10 @@
 // This software is governed by the CeCILL license under French law and
 // abiding by the rules of distribution of free software.  You can  ue,
 // modify and/ or redistribute the software under the terms of the CeCILL
-// license as circulated by CEA, CNRS and INRStrategy at the following URL
+// license as circulated by CEA, CNRS and INRIA at the following URL
 // "http://www.cecill.info".
 //
-// In this respect, the user's attention is drawn to the risks assocstrategyted
+// In this respect, the user's attention is drawn to the risks associated
 // with loading,  using,  modifying and/or developing or reproducing the
 // software by the user in light of its specific status of free software,
 // that may mean  that it is complicated to manipulate,  and  that  also
@@ -26,27 +26,15 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/strategy.hpp>
-
 namespace sif
 {
-
-    template <int Dim, class Type, class Data>
-    Strategy<Dim, Type, Data>::Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
-                    )
-    { }
     
-    template <int Dim, class Type, class Data>
-    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Strategy<Dim, Type, Data>::assign()
-    { 
-
-    }
+    template <class Data>
+    SimpleIndex<Data>::SimpleIndex(std::vector<Data*>& _data) :
+        data(_data)
+    {}
     
 }
+
 
 

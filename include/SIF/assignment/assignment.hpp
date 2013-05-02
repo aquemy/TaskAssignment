@@ -44,7 +44,7 @@ This class enabled to reassign the different units.
 @see sif::Assignment, sif::Kuhn, sif::NearestNeighboor
 */
 
-template<class Coord, class Data>
+template<int Dim, class Type, class Data>
 class Assignment
 {
 public :
@@ -53,7 +53,7 @@ public :
      * Start the assignment problem resolution
      * @return A map from resource to TaskSpot
      */
-    virtual std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()() = 0;
+    virtual std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> operator()() = 0;
 
 };
 
