@@ -51,11 +51,23 @@ public :
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
      */
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()();
+    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()(vector<Resource<Coord,Data>* _resource, vector<TaskSpot<Coord>* _taskSpot);
     
 protected :
     
     std::vector<std::vector<int>> cost;     ///< Cost matrix
+    
+    typedef enum
+	{
+		normal,
+		surrounded,
+		crossed
+	} _state;							///< 
+	
+	
+
+
+
 };
 
 }

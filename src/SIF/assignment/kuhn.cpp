@@ -32,8 +32,19 @@ namespace sif
 {
 
 	template <class Coord, class Data>
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> Kuhn<Coord, Data>::operator()()
-    { }
+    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> Kuhn<Coord, Data>::operator()(std::map<pair<Resource<Coord,Data>,TaskSpot<Coord>>*,int> list_cost)
+    {
+    
+    // map < pair < resource, taskSpot >, int(cost) >
+    // Mettre INF sur case à ajouter pour faire une matrice carrée !
+    
+    // Step 1 : Lister toutes les Ressources / TaskSpot
+    // Step 2 : Si nb(R) > nb(TS) alors add(nb(R)-nb(TS)) à TS sinon add(nb(TS)-nb(R)) à R pour créer 1 matrice carrée
+    // Remplir la matrice de MAX_INT (inclure limits.h)
+    // Modifier la matrice de cout en fonction de la liste de cout passée en param
+    // Appliquer l'algo de Kuhn
+    
+    }
 
 }
 
