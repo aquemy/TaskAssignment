@@ -6,6 +6,7 @@ set(SRC_FROM_INC
     assignment/assignmentFactory.hpp
     assignment/kuhn.hpp
     core/activePolicy.hpp
+    core/controller.hpp
     core/multiThread.hpp
     core/observable.hpp
     core/observablePolicy.hpp
@@ -51,7 +52,6 @@ set(SRC_FROM_SRC
     core/continue/continue.cpp
     core/continue/stepsContinue.cpp
     core/continue/timeContinue.cpp
-    core/controller.cpp
     environment/aEnvironment.cpp
     environment/aResource.cpp
     environment/spatialData.cpp

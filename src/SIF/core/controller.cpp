@@ -29,7 +29,6 @@
 #include <iterator>
 #include <stdexcept> 
 
-#include <SIF/core/controller.hpp>
 #include <SIF/core/continue/continue.hpp>
 #include <SIF/utils/logger.hpp>
 
@@ -53,7 +52,7 @@ Controller::~Controller()
     delete Controller::spatialData;
 }
 
-void Controller::addEnvironment(AEnvironment& _env)
+void Controller::setEnvironment(AEnvironment& _env)
 {
     Controller::env = &_env;
 }
@@ -74,8 +73,9 @@ void Controller::addStep(Step _step, unsigned _pos)
     for(auto i = 0; i < _pos; i++,it++);
     steps.insert(it, std::pair<Step, unsigned>(_step,01));
 }
-    
-void Controller::init()
+   
+template <int Dim, class Type, class Data>
+void Controller::init(IA<Dim, Type, Data>& _ia)
 {
     logger(Logger::PROGRESS) << "Init Controller.";
     
@@ -83,21 +83,23 @@ void Controller::init()
     if(Controller::cont.size() == 0)
         throw std::runtime_error("One criterion is requiered at least !");
         
+    if(Controller::env == nullptr)
+        throw std::runtime_error("Controller needs an environment !");
+        
     // If SpatialData is not specified, we created it
     if(spatialData == nullptr)
     {
         // If we have partition or indexing algorithm AND environment
         //if()
-        std::cout << "A" << std::endl;
         spatialData = new SpatialData();
     }
-    std::cout << "A" << std::endl;
+    
+    env->setSpatialData(*spatialData);
+    
     spatialData->startPartitioning();
-    std::cout << "A" << std::endl;
     spatialData->startIndexing();
-    std::cout << "A" << std::endl;
-    //env->setSpatialData(*spatialData);
-    std::cout << "A" << std::endl;
+    
+
     Controller::initialized = true;
 }
 

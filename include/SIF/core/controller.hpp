@@ -36,6 +36,7 @@
 #include <SIF/core/continue/continue.hpp>
 #include <SIF/environment/aEnvironment.hpp>
 #include <SIF/environment/spatialData.hpp>
+#include <SIF/ia/ia.hpp>
 
 namespace sif
 {
@@ -61,10 +62,10 @@ public :
      ~Controller();
      
      /**
-     * Add environment
-     * @param _step Step to add
+     * Set the environment
+     * @param _env The environment of the simulation
      */
-    static void addEnvironment(AEnvironment& _env);
+    static void setEnvironment(AEnvironment& _env);
 
     /**
      * Add a stop criterion
@@ -87,8 +88,10 @@ public :
     
     /**
      * Static initialization
+     * @param _ia IA for the simulation
      */
-    static void init();
+    template <int Dim, class Type, class Data>
+    static void init(IA<Dim, Type, Data>& _ia);
     
     /**
      * Start the space partitioning
@@ -121,6 +124,8 @@ protected :
 };
 
 }
+
+#include <SIF/core/controller.cpp>
 
 #endif // _SIF_CONTROLLER_
 

@@ -83,5 +83,7 @@ public :
 
 }
 
+#include <SIF/environment/space.cpp>
+
 #endif // _SIF_SQUARE_
 
