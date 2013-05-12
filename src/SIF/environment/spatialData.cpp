@@ -27,10 +27,23 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <SIF/environment/spatialData.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
-
+    void SpatialData::startPartitioning()
+    {
+        logger(Logger::PROGRESS) << "SpatialData : Start partitioning.";
+        
+        logger(Logger::PROGRESS) << "SpatialData : Finish partitioning.";
+    }
+    
+    void SpatialData::startIndexing()
+    {
+        logger(Logger::PROGRESS) << "SpatialData : Start indexing.";
+        
+        logger(Logger::PROGRESS) << "SpatialData : Finish indexing.";
+    }
     
 }
 

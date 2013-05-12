@@ -60,5 +60,7 @@ protected :
 
 }
 
+#include <SIF/assignment/kuhn.cpp>
+
 #endif // _SIF_KUHN_
 

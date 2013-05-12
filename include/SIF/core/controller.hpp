@@ -34,6 +34,7 @@
 
 #include <SIF/core/step.hpp>
 #include <SIF/core/continue/continue.hpp>
+#include <SIF/environment/aEnvironment.hpp>
 #include <SIF/environment/spatialData.hpp>
 
 namespace sif
@@ -58,6 +59,12 @@ public :
       * Default destructor
       */
      ~Controller();
+     
+     /**
+     * Add environment
+     * @param _step Step to add
+     */
+    static void addEnvironment(AEnvironment& _env);
 
     /**
      * Add a stop criterion
@@ -107,9 +114,10 @@ protected :
     static bool checkContinue();
     
     static std::vector<Continue*> cont;
-    static std::list<Step> steps;
+    static std::list<std::pair<Step, unsigned>> steps;
     static SpatialData* spatialData;
     static bool initialized;
+    static AEnvironment* env;
 };
 
 }

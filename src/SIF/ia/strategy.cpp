@@ -26,8 +26,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/strategy.hpp>
-
 namespace sif
 {
 
@@ -37,8 +35,14 @@ namespace sif
                     ResourceEval<Dim, Type, Data>& _resourceEval, 
                     ResourceEval<Dim, Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
-                    )
+                    Assignment<Dim, Type, Data>& _assignment
+                    ) :
+        constraintEval(_constraintEval),
+        taskSpotEval(_taskSpotEval),
+        resourceEval(_resourceEval),
+        globalResourceEval(_globalResourceEval),
+        evalSit(_evalSituation),
+        assignment(_assignment)
     { }
     
     template <int Dim, class Type, class Data>

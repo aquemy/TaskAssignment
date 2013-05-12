@@ -61,6 +61,8 @@
 #include <SIF/core/threadingModel.hpp>
 
 // Environment
+#include <SIF/environment/aEnvironment.hpp>
+#include <SIF/environment/aResource.hpp>
 #include <SIF/environment/coordonate.hpp>
 #include <SIF/environment/direction.hpp>
 #include <SIF/environment/dynamicObject.hpp>

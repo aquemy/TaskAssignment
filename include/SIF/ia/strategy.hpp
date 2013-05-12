@@ -93,11 +93,12 @@ protected :
     ResourceEval<Dim, Type, Data>& globalResourceEval;                  ///< Global eval function for resource
     Eval<int> evalSit;                                     ///< Eval function for the situation
    
-    Assignment<Dim, Type, Data>& assigment;                                     ///< Assigment algorithm
+    Assignment<Dim, Type, Data>& assignment;                                     ///< Assignment algorithm
 };
 
-
 }
+
+#include <SIF/ia/strategy.cpp>
 
 #endif // _SIF_STRATEGY_
 

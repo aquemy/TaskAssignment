@@ -73,12 +73,14 @@ public :
 protected :
 
     Model<Dim, Type, Data>& model;
-    SpatialData& spatialData;
+    SpatialData* spatialData;
     
 };
 
 
 }
+
+#include <SIF/ia/ia.cpp>
 
 #endif // _SIF_IA_
 

@@ -26,10 +26,24 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/strategy/simpleStrategy.hpp>
-
 namespace sif
 {
+    
+    template <int Dim, class Type, class Data>
+    SimpleStrategy<Dim, Type, Data>::SimpleStrategy(ConstraintEval& _constraintEval,
+                    TaskSpotEval<Dim, Type>& _taskSpotEval,
+                    ResourceEval<Dim, Type, Data>& _resourceEval, 
+                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
+                    Eval<int> _evalSituation,
+                    Assignment<Dim, Type, Data>& _assigment
+                    ) :
+        Strategy<Dim, Type, Data>(_constraintEval, 
+                        _taskSpotEval, 
+                        _resourceEval, 
+                        _globalResourceEval, 
+                        _evalSituation, 
+                        _assigment)
+    { }
 
      template <int Dim, class Type, class Data>
     int SimpleStrategy<Dim, Type, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)

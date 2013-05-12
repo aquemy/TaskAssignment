@@ -23,7 +23,6 @@ set(SRC_FROM_INC
     environment/obstacle.hpp
     environment/resource.hpp
     environment/space.hpp
-    environment/spatialData.hpp
     environment/square.hpp
     environment/staticObject.hpp
     environment/taskSpot.hpp
@@ -53,6 +52,9 @@ set(SRC_FROM_SRC
     core/continue/stepsContinue.cpp
     core/continue/timeContinue.cpp
     core/controller.cpp
+    environment/aEnvironment.cpp
+    environment/aResource.cpp
+    environment/spatialData.cpp
     environment/task.cpp
     utils/baseLogger.cpp
     utils/logger.cpp

@@ -110,7 +110,7 @@ protected :
 
 }
 
-#include <SIF/ia/model.hpp>
+#include <SIF/ia/model.cpp>
 
 #endif // _SIF_MODEL_
 
