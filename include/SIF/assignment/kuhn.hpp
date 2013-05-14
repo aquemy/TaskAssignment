@@ -30,6 +30,8 @@
 #define _SIF_KUHN_
 
 #include <vector>
+#include <map>
+#include <limits.h>
 
 #include <SIF/assignment/assignment.hpp>
 
@@ -51,11 +53,7 @@ public :
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
      */
-<<<<<<< HEAD
-    std::map<Resource<Coord,Data>*,TaskSpot<Coord>*> operator()(vector<Resource<Coord,Data>* _resource, vector<TaskSpot<Coord>* _taskSpot);
-=======
-    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> operator()();
->>>>>>> 9656564216f0212d4e2f926a5734b3b31ee04f12
+    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> operator()(std::map<std::pair<std::vector<Resource<Dim, Type, Data>>*, std::vector<TaskSpot<Dim, Type>>*>, int>);
     
 protected :
     
@@ -67,10 +65,6 @@ protected :
 		surrounded,
 		crossed
 	} _state;							///< 
-	
-	
-
-
 
 };
 

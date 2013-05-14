@@ -32,15 +32,67 @@ namespace sif
 {
 
 	template <int Dim, class Type, class Data>
-    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Kuhn<Dim, Type, Data>::operator()()
+    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Kuhn<Dim, Type, Data>::operator()(std::map<std::pair<std::vector<Resource<Dim, Type, Data>>*, std::vector<TaskSpot<Dim, Type>>*>, int> _mymap)
     {
     
-    // map < pair < resource, taskSpot >, int(cost) >
-    // Mettre INF sur case à ajouter pour faire une matrice carrée !
+    std::vector<Resource<Dim, Type, Data>> _resource;
+    std::vector<TaskSpot<Dim, Type>> _ taskSpot;
+	
+    // Step 1 : List of Resource & TaskSpot
+    for (auto& eval : _mymap)
+    {
+    	if (std::find(_resource.begin(), _resource.end(), &*eval.first.first) == _resource.end())
+		{  	// Recovery of resources
+			_resource.push_back(eval.first.first);
+		}
+			
+    	if (std::find(_taskSpot.begin(), _taskSpot.end(), &*eval.first.second) == _taskSpot.end())
+		{	// Recovery of taskSpots
+			_taskSpot.push_back(eval.first.second);
+		}
+		
+    }
     
-    // Step 1 : Lister toutes les Ressources / TaskSpot
-    // Step 2 : Si nb(R) > nb(TS) alors add(nb(R)-nb(TS)) à TS sinon add(nb(TS)-nb(R)) à R pour créer 1 matrice carrée
+    // Step 2 : Creation of square matrix
+    int sizeResource = _resource.size(), sizeTaskSpot = _taskSpot.size();
+    if (sizeResource > sizeTaskSpot)
+    {
+    	for (int i=0; i<sizeResource - sizeTaskSpot; i++)
+    	{
+    		_taskSpot.push_back(new TaskSpot());
+    	}
+    }
+    else if (sizeResource < sizeTaskSpot)
+    {
+    	for (int i=0; i<sizeTaskSpot - sizeResource; i++)
+    	{
+    		_resource.push_back(new Resource());
+    	}
+    }
+	
+    // Cost Matrix
+	std::vector <std::vector<int> > cost(_resource.size());
+	for (int i=0; i<_resource.size(); i++)
+	{
+		cost[i].resize(_taskSpot.size());
+		for (int j=0; j<_taskSpot.size(); j++)
+			cost[i][j] = -1;
+	}
+	
+	for (auto& eval : _mymap)
+	{
+		cost[eval.first.first][eval.first.second] = eval.second;
+	}
+	for (int i=0; i<cost.size(); i++)
+	{
+		for (int j=0; j<cost.size(); j++)
+			if (cost[i][j] == -1)
+				cost[i][j] = INT_MAX;
+	}
+	
+    // Mettre INF sur case à ajouter pour faire une matrice carrée !
     // Remplir la matrice de MAX_INT (inclure limits.h)
+    
     // Modifier la matrice de cout en fonction de la liste de cout passée en param
     // Appliquer l'algo de Kuhn
     

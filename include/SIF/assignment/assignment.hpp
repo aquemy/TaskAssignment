@@ -53,7 +53,7 @@ public :
      * Start the assignment problem resolution
      * @return A map from resource to TaskSpot
      */
-    virtual std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> operator()() = 0;
+    virtual std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> operator()(std::map<std::pair<std::vector<Resource<Dim, Type, Data>>*, std::vector<TaskSpot<Dim, Type>>*>, int>) = 0;
 
 };
 
