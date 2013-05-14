@@ -65,6 +65,7 @@
 #include <SIF/core/threadingModel.hpp>
 
 // Environment
+#include <SIF/environment/aCoordonate.hpp>
 #include <SIF/environment/aEnvironment.hpp>
 #include <SIF/environment/aResource.hpp>
 #include <SIF/environment/aTaskSpot.hpp>

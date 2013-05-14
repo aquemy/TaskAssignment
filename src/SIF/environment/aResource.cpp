@@ -51,6 +51,10 @@ namespace sif
             else
             {
                 logger(Logger::INFO) << "Resource : path calculation.";
+                /*template<class Data, int Dim, class Type>
+    Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
+                                                      const Coordonate<Dim, Type>& _to, 
+                                                      const Tree<Data> _data);*/
                 //path = spa();
             }
         }
