@@ -29,6 +29,10 @@
 #ifndef _SIF_HEADER_
 #define _SIF_HEADER_
 
+// Config
+#include <SIF/core/config.hpp>
+#include <SIF/core/using.hpp>
+
 // Utils
 #include <SIF/utils/baseLogger.hpp>
 #include <SIF/utils/logger.hpp>

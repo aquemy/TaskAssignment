@@ -82,5 +82,10 @@ if(UNIX)
     set(INSTALL_SUB_DIR /sif)
 endif()
 
+#set(ECF_MULTI_THREADING ON CACHE BOOL "Threading Model")
+#configure_file(src/config/config.hpp.in src/config/config.hpp)
+#add_definitions(-DSIF_MULTI_THREADING)
+#add_definitions(-DSIF_MULTI_THREADING)
+
 
 

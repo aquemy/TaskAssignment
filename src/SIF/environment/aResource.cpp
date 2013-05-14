@@ -51,6 +51,7 @@ namespace sif
             else
             {
                 logger(Logger::INFO) << "Resource : path calculation.";
+                //path = spa();
             }
         }
         else
