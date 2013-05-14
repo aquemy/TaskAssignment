@@ -30,6 +30,8 @@
 #define _SIF_KUHN_
 
 #include <vector>
+#include <map>
+#include <limits.h>
 
 #include <SIF/assignment/assignment.hpp>
 
@@ -51,11 +53,20 @@ public :
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
      */
-    std::map<AResource*,ATaskSpot*> operator()();
+    std::map<AResource*,ATaskSpot*> operator()(std::map<std::pair<std::vector<AResource*>, std::vector<ATaskSpot*>>, int>);
+
     
 protected :
     
     std::vector<std::vector<int>> cost;     ///< Cost matrix
+    
+    typedef enum
+	{
+		normal,
+		surrounded,
+		crossed
+	} state;							///< 
+
 };
 
 }
