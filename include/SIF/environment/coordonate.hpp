@@ -52,7 +52,7 @@ public :
      * Default constructor
      * Check the Type template is a numeric type with type_trait
      */
-    Coordonate() ;
+    Coordonate();
     
 };
 

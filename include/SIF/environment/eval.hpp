@@ -84,5 +84,7 @@ using ResourceEval = Eval<Resource<Dim, Type, Data>>;
 
 }
 
+#include <SIF/environment/eval.cpp>
+
 #endif // _SIF_EVAL_
 

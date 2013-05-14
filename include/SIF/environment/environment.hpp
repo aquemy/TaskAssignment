@@ -55,23 +55,32 @@ class Environment : public AEnvironment, public Observer
 public :
 
     /**
+     * Add resources to the environment
+     * @param _resources Vector of resources
+     */
+    void addObject(std::vector<AResource*>& _resources);
+
+    /**
      * Add obstacle to the environment
      * @param _obstacle New obstacle
      */
     void addObject(Obstacle<Dim, Type>& _obstacle);
 
     /**
-     * Add taskSpot to the environment
-     * @param _taskSpot New taskSpot
+     * Add taskSpots to the environment
+     * @param _taskSpots Vector of taskSpots
      */
-    void addObject(TaskSpot<Dim, Type>& _taskSpot);
+    void addObject(std::vector<ATaskSpot*>& _taskSpots);
     
-
 protected :
+
+    /**
+     * Debug function to show all informations about the class
+     */
+    void _dump();
 
     Space<Dim,Type> space;
     
-    std::vector<TaskSpot<Dim, Type>> taskSpots;
     std::vector<Obstacle<Dim, Type>> obstacles;
 
 };

@@ -33,6 +33,8 @@ namespace sif
     Obstacle<Dim, Type>::Obstacle(Coordonate<Dim, Type> _coord) :
         StaticObject<Dim, Type>(_coord)
     { }
+    
+    
 
 }
 

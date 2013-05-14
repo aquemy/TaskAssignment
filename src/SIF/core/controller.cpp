@@ -91,10 +91,12 @@ void Controller::init(IA<Dim, Type, Data>& _ia)
     {
         // If we have partition or indexing algorithm AND environment
         //if()
+        logger(Logger::DEBUG) << "Controller : SpatialData creation";
         spatialData = new SpatialData();
     }
     
     env->setSpatialData(*spatialData);
+    _ia.setSpatialData(*spatialData);
     
     spatialData->startPartitioning();
     spatialData->startIndexing();
@@ -131,9 +133,9 @@ void Controller::run()
     while(Controller::checkContinue())
     {
         auto now = std::chrono::steady_clock::now();
-        for(auto step : Controller::steps)
+        unsigned diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime).count();
+        for(auto& step : Controller::steps)
         {
-            unsigned diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime).count();
             if(step.second < diff / step.first.second)
             {
                 step.second = diff / step.first.second;

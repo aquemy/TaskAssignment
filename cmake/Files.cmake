@@ -54,6 +54,7 @@ set(SRC_FROM_SRC
     core/continue/timeContinue.cpp
     environment/aEnvironment.cpp
     environment/aResource.cpp
+    environment/aTaskSpot.cpp
     environment/spatialData.cpp
     environment/task.cpp
     utils/baseLogger.cpp

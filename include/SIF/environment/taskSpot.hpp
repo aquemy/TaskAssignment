@@ -31,6 +31,7 @@
 
 #include <functional>
 
+#include <SIF/environment/aTaskSpot.hpp>
 #include <SIF/environment/dynamicObject.hpp>
 #include <SIF/environment/task.hpp>
 #include <SIF/core/activePolicy.hpp>
@@ -48,7 +49,7 @@ Different types of TaskSpot are provided such as periodic ones.
 */
 
 template <int Dim, class Type>
-class TaskSpot : public DynamicObject<Dim, Type>//, public Observable<ActivePolicy>
+class TaskSpot : public ATaskSpot, public DynamicObject<Dim, Type>//, public Observable<ActivePolicy>
 {
 public :
 
@@ -66,9 +67,11 @@ public :
     virtual void update(double _time);
     
 protected :
-    
-         std::function<int(int&)> f;
-	Task& t;
+
+    /**
+     * Implementation of dump function
+     */
+    void _dump();
     
 };
 

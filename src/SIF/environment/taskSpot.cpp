@@ -31,17 +31,26 @@ namespace sif
     
     template <int Dim, class Type>
     TaskSpot<Dim, Type>::TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&)> _f) :
-        DynamicObject<Dim, Type>(_coord),
-    	t(_t), 
-    	f(_f)
+        ATaskSpot(_t, _f),
+        DynamicObject<Dim, Type>(_coord)
     { }
     
     template <int Dim, class Type>
-    void  TaskSpot<Dim, Type>::update(double _time)
+    void TaskSpot<Dim, Type>::update(double _time)
     {
-    	t.update(f);
+    	ATaskSpot::update(_time);
     }
     
+    template <int Dim, class Type>
+    void TaskSpot<Dim, Type>::_dump()
+    {
+        std::string coordString;
+        for(auto e : DynamicObject<Dim, Type>::coord)
+            coordString+= std::to_string(e) + " ";
+
+        std::string message = "Coord : ( "+coordString+") | Value of Task : "+std::to_string(t.getValue());
+        logger(Logger::INFO) << message;
+    }
 }
 
 

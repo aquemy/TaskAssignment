@@ -59,7 +59,7 @@ public :
                     ResourceEval<Dim, Type, Data>& _resourceEval, 
                     ResourceEval<Dim, Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
+                    Assignment& _assigment
                     );
     
     virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem);

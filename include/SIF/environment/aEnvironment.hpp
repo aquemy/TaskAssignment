@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <task.hpp>
+// <aEnvironment.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,51 +26,82 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_TASK_
-#define _SIF_TASK_
+#ifndef _SIF_AENVIRONMENT_
+#define _SIF_AENVIRONMENT_
 
-#include <functional>
+#include <vector>
 
-#include <SIF/core/observer.hpp>
+#include <SIF/environment/spatialData.hpp>
+#include <SIF/environment/aResource.hpp>
 
 namespace sif
 {
 
-/** Task : Abstract object
+/** AEnvironment : Abstract class for environment.
 
-A Task is materialized by a counter.
-
-@see sif::Task, sif::PeriodicTaskSpot, sif::Observable
+@see sif::Environment
 */
 
-class Task : public Observer
+class AEnvironment
 {
 public :
+
+    /**
+     * Update environment by updating all its components
+     * @param _time Ellapsed time since the last update
+     */
+    void update(double _time);
     
     /**
-     * Constructor
-     * @param _value Defaut value
+     * Add resource to the environment
+     * @param _resource New resource
      */
-    Task(int _value = 0);
+    void addObject(AResource& _resource);
     
     /**
-     * Update Task
-     * @param _f The result will remplace value and the int parameter will be the initial value
+     * Add resources to the environment
+     * @param _resources Vector of resources
      */
-    void update(double _time, std::function<int(int&)> _f);
+    void addObject(std::vector<AResource*>& _resources);
+
+    /**
+     * setSpatialData
+     * @param _spatialData New spatialData
+     */
+    void setSpatialData(SpatialData& _spatialData);
     
     /**
-     * Get the current value
-     * @return value
+     * Add taskSpot to the environment
+     * @param _taskSpot New taskSpot
      */
-    int getValue() const;
+    void addObject(ATaskSpot& _taskSpot);
     
+    /**
+     * Add taskSpots to the environment
+     * @param _taskSpots Vector of taskSpots
+     */
+    void addObject(std::vector<ATaskSpot*>& _taskSpots);
+    
+    /**
+     * Debug function to show all informations about the class
+     */
+    void dump();
+
 protected :
-    int value;
+
+    /**
+     * Implementation for dump function
+     */
+    virtual void _dump() = 0;
+
+    std::vector<ATaskSpot*> taskSpots;
+    std::vector<AResource*> resources;
+    SpatialData* spatialData;
+    
 };
 
 
 }
 
-#endif // _SIF_TASK_
+#endif // _SIF_AENVIRONMENT_
 

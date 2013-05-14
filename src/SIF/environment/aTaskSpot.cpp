@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <assignmentFactory.hpp>
+// <aTaskSpot.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,36 +26,27 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_ASSIGNMENT_FACTORY_
-#define _SIF_ASSIGNMENT_FACTORY_
-
-#include <SIF/assignment/kuhn.hpp>
+#include <SIF/environment/aTaskSpot.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
 
-/** AssignmentFactory : Instanciate assignment algorithm
-
-This factory converts general data to specific data used for a specific assignment algorithm.
-
-@see sif::Assignment
-*/
-
-class AssignmentFactory
-{
-public :
-
-    /**
-     * Kuhn instanciation : tranform data into a cost matrix
-     * @param _resource Resources to assign
-     * @param _taskSpot taskSpot to be affected
-     * @return Kuhn instance (right-value)
-     */   
-    static Kuhn&& KuhnInstance(std::map<AResource*, int> _resource, std::vector<ATaskSpot*> _taskSpot);
+    ATaskSpot::ATaskSpot(Task& _t, std::function<int(int&)> _f) :
+        t(_t),
+        f(_f)
+    { }
     
-};
-
+    void ATaskSpot::update(double _time)
+    {
+        logger(Logger::PROGRESS) << "TaskSpot : update";
+    	t.update(_time, f);
+    }
+    
+    void ATaskSpot::dump()
+    {
+        _dump();
+    }
 }
 
-#endif // _SIF_ASSIGNMENT_FACTORY_
 

@@ -41,7 +41,7 @@ int main(void)
      */
     try
     {
-        Direction<3> d(3, true);
+        Direction<3> d(1, true);
 
     }
     catch(exception& e)

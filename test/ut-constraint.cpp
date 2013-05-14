@@ -60,21 +60,21 @@ int main(void)
             throw runtime_error("Error in expectations for first test");
         
         // Change to 501
-        t.update([](int& i) -> int { return i+501;});
+        t.update(0, [](int& i) -> int { return i+501;});
         
         // Should be true and i = 1
         if(!sc() || i != 1)
             throw runtime_error("Error in expectations for second test");
         
         // Change to 498
-        t.update([](int& i) -> int { return i-3;});
+        t.update(0, [](int& i) -> int { return i-3;});
         
         // Should be true and i = 1
         if(!sc()  || i != 1)
             throw runtime_error("Error in expectations for third test");
         
         // Change to 489
-        t.update([](int& i) -> int { return i-9;});
+        t.update(0, [](int& i) -> int { return i-9;});
         
         // Should be false and i = 0
         if(sc() || i != 0)

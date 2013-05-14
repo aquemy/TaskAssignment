@@ -27,12 +27,37 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <SIF/environment/aResource.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
+
+    AResource::AResource(double _velocity, bool _busy, ShortestPath& _spa) :
+        velocity(_velocity),
+        busy(_busy),
+        spa(_spa)
+    {}
     
     void AResource::update(double _time)
-    { }
+    { 
+        logger(Logger::PROGRESS) << "Resource : update";
+        if(assignment != nullptr)
+        {
+            logger(Logger::INFO) << "Resource : assignment found.";
+            if(path != nullptr)
+            {
+                logger(Logger::INFO) << "Resource : moving.";
+            }
+            else
+            {
+                logger(Logger::INFO) << "Resource : path calculation.";
+            }
+        }
+        else
+        {
+            logger(Logger::INFO) << "Resource : no assigment / wait.";
+        }
+    }
     
     bool AResource::isBusy() const
     { 
@@ -47,6 +72,11 @@ namespace sif
     void AResource::setSpatialData(SpatialData& _spatialData)
     { 
         spatialData = &_spatialData;
+    }
+    
+    void AResource::dump()
+    {
+        _dump();
     }
     
 }

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <assignmentFactory.hpp>
+// <aPath.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,36 +26,24 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_ASSIGNMENT_FACTORY_
-#define _SIF_ASSIGNMENT_FACTORY_
+#ifndef _SIF_APATH_
+#define _SIF_APATH_
 
-#include <SIF/assignment/kuhn.hpp>
+#include <list>
 
 namespace sif
 {
 
-/** AssignmentFactory : Instanciate assignment algorithm
+/** APath : Abstract path
 
-This factory converts general data to specific data used for a specific assignment algorithm.
-
-@see sif::Assignment
+@see sif::Tree
 */
 
-class AssignmentFactory
+class APath
 {
-public :
 
-    /**
-     * Kuhn instanciation : tranform data into a cost matrix
-     * @param _resource Resources to assign
-     * @param _taskSpot taskSpot to be affected
-     * @return Kuhn instance (right-value)
-     */   
-    static Kuhn&& KuhnInstance(std::map<AResource*, int> _resource, std::vector<ATaskSpot*> _taskSpot);
-    
 };
 
 }
 
-#endif // _SIF_ASSIGNMENT_FACTORY_
-
+#endif // _SIF_APATH_

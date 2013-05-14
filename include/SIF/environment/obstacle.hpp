@@ -52,7 +52,10 @@ public :
     */
     Obstacle(Coordonate<Dim, Type> _coord);
 
-    virtual bool colliding(Coordonate<Dim, Type> _coord) = 0;
+    //virtual bool colliding(Coordonate<Dim, Type> _coord) = 0;
+    
+protected :
+
 
 };
 

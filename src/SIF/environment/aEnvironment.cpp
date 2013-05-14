@@ -27,13 +27,25 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <SIF/environment/aEnvironment.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
 
     void AEnvironment::update(double _time)
-    { 
-
+    {
+        logger(Logger::PROGRESS) << "Environment : UPDATE";
+        for(auto r : resources)
+            r->update(_time);
+            
+       for(auto t : taskSpots)
+            t->update(_time);
+    }
+    
+    void AEnvironment::addObject(std::vector<AResource*>& _resources)
+    {
+        for(auto& i : _resources)
+            resources.push_back(i);
     }
 
     void AEnvironment::addObject(AResource& _resource)
@@ -47,6 +59,22 @@ namespace sif
         spatialData = &_spatialData;
         for(auto r : resources)
             r->setSpatialData(_spatialData);
+    }
+    
+    void AEnvironment::addObject(ATaskSpot& _taskSpot)
+    {
+        taskSpots.push_back(&_taskSpot);
+    }
+   
+    void AEnvironment::addObject(std::vector<ATaskSpot*>& _taskSpots)
+    {
+        for(auto& i : _taskSpots)
+            taskSpots.push_back(i);
+    }
+    
+    void AEnvironment::dump()
+    {
+        _dump();
     }
     
 }

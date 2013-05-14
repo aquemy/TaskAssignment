@@ -35,7 +35,7 @@ namespace sif
                     ResourceEval<Dim, Type, Data>& _resourceEval, 
                     ResourceEval<Dim, Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
+                    Assignment& _assigment
                     ) :
         Strategy<Dim, Type, Data>(_constraintEval, 
                         _taskSpotEval, 

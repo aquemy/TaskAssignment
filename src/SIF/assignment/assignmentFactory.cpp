@@ -31,8 +31,7 @@
 namespace sif
 {
 
-    template <int Dim, class Type, class Data>
-    Kuhn<Dim, Type, Data>&& AssignmentFactory::KuhnInstance(std::map<Resource<Dim, Type, Data>*, int> _resource, std::vector<TaskSpot<Dim, Type>*> _taskSpot)
+    Kuhn&& AssignmentFactory::KuhnInstance(std::map<AResource*, int> _resource, std::vector<ATaskSpot*> _taskSpot)
     { }
 
 }

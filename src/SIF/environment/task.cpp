@@ -27,6 +27,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <SIF/environment/task.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
@@ -34,8 +35,10 @@ namespace sif
     Task::Task(int _value) : value(_value)
     {}
     
-    void Task::update(std::function<int(int&)> _f)
+    void Task::update(double _time, std::function<int(int&)> _f)
     {
+        logger(Logger::PROGRESS) << "Task : update";
+        (void)_time;
         value = _f(value);
     }
     

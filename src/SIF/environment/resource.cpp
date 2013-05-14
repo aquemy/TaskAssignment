@@ -26,16 +26,14 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/resource.hpp>
+#include <string>
 
 namespace sif
 {
     template <int Dim, class Type, class Data>
     Resource<Dim, Type, Data>::Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa) :
-        Object<Dim, Type>(_coord),
-        velocity(_velocity),
-        busy(_busy),
-        spa(_spa)
+        AResource(_velocity, _busy, _spa),
+        DynamicObject<Dim, Type>(_coord)
     { }
     
     template <int Dim, class Type, class Data>
@@ -54,6 +52,28 @@ namespace sif
         assignment = _assignment;
     }
     
+    template <int Dim, class Type, class Data>
+    void Resource<Dim, Type, Data>::update(double _time)
+    { 
+        AResource::update(_time);
+    }
+    
+    template <int Dim, class Type, class Data>
+    void Resource<Dim, Type, Data>::_dump()
+    {
+        std::string coordString;
+        std::string status;
+        for(auto e : DynamicObject<Dim, Type>::coord)
+            coordString+= std::to_string(e) + " ";
+
+        if(busy)
+            status = "Busy";
+        else
+            status = "Free";
+
+        std::string message = "Coord : ( "+coordString+") | Status : "+status;
+        logger(Logger::INFO) << message;
+    }
 }
 
 

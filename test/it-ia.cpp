@@ -43,16 +43,11 @@ void f()
 
 int main(void)
 {
-    
+    /**
+     * Integration tests for IA
+     */
     try
     {
-        /*Strategy<Dim, Type, Data>::Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
-                    ) std::function<int(Data&)>*/ 
         // Eval Functions creation
         ConstraintEval ce = [](Constraint& i) -> int { return 0; };
         TaskSpotEval<2,int> tsp = [](TaskSpot<2, int>& i) -> int { return 0; };

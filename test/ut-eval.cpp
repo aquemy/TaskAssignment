@@ -27,6 +27,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <exception>
+#include <map>
 
 #include <sif.hpp>
 
@@ -40,8 +41,29 @@ int main(void)
      */
     try
     {
+        // Create some resources for the tests
+        AStar spa;
+        Coordonate<2,int> coord;
+        coord[0] = 0;
+        coord[1] = 0;
         
-		// Test for EvalLoop(..)
+        std::vector<Resource<2,int,int>*> res;
+        for(unsigned i = 0; i < 5; i++)
+            res.push_back(new Resource<2,int,int>(coord, 100, false, spa));
+    
+		EvalTable<Resource<2, int, int>> table;
+		
+		ResourceEval<2, int, int> evalFunc = [](Resource<2, int, int>& i) { return 1; };
+		
+		table = EvalLoop(evalFunc, res);
+		
+		// Test if all resource are evaluated properly
+		for(auto& e : table)
+		    if(e.second != 1)
+		        throw std::runtime_error("Problem in the result of the evaluation.");
+		
+		for(auto e : res)
+		    delete e;
 	
     }
     catch(exception& e)

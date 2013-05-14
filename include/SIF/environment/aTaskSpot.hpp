@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <assignmentFactory.hpp>
+// <aTaskSpot.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,36 +26,61 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_ASSIGNMENT_FACTORY_
-#define _SIF_ASSIGNMENT_FACTORY_
+#ifndef _SIF_ATASK_SPOT_
+#define _SIF_ATASK_SPOT_
 
-#include <SIF/assignment/kuhn.hpp>
+#include <functional>
+
+#include <SIF/environment/dynamicObject.hpp>
+#include <SIF/environment/task.hpp>
+#include <SIF/core/activePolicy.hpp>
+#include <SIF/core/observable.hpp>
 
 namespace sif
 {
 
-/** AssignmentFactory : Instanciate assignment algorithm
+/** TaskSpot : Physical object that can modify a task
 
-This factory converts general data to specific data used for a specific assignment algorithm.
+The TaskSpot is an object that can modify a task when a specific action occured.
+Different types of TaskSpot are provided such as periodic ones.
 
-@see sif::Assignment
+@see sif::Task, sif::PeriodicTaskSpot, sif::Observable
 */
 
-class AssignmentFactory
+class ATaskSpot
 {
 public :
 
     /**
-     * Kuhn instanciation : tranform data into a cost matrix
-     * @param _resource Resources to assign
-     * @param _taskSpot taskSpot to be affected
-     * @return Kuhn instance (right-value)
-     */   
-    static Kuhn&& KuhnInstance(std::map<AResource*, int> _resource, std::vector<ATaskSpot*> _taskSpot);
+     * Constructor
+     * @param _t The associated task
+     * @param _f Function which serves to update the task
+     */
+    ATaskSpot(Task& _t, std::function<int(int&)> _f);
+
+    /**
+     * Update Ressource
+     */
+    virtual void update(double _time);
+    
+    /**
+     * Debug function to show all informations about the class
+     */
+    void dump();
+    
+protected :
+    
+    /**
+     * Implementation for dump function
+     */
+    virtual void _dump() = 0;
+    
+    std::function<int(int&)> f;
+	Task& t;
     
 };
 
 }
 
-#endif // _SIF_ASSIGNMENT_FACTORY_
+#endif // _SIF_ATASK_SPOT_
 

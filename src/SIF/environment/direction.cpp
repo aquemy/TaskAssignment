@@ -40,7 +40,7 @@ namespace sif
         if(_pos < Dim)
             dir.first = _pos;
         else
-            throw std::runtime_error("An error has occurred.");
+            throw std::runtime_error("Dimension problem !");
     }
 
     template <int Dim>

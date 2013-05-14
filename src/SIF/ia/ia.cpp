@@ -54,6 +54,7 @@ namespace sif
     template <int Dim, class Type, class Data>
     void IA<Dim, Type, Data>::setSpatialData(SpatialData& _spatialData)
     { 
+        logger(Logger::DEBUG) << "IA : Set SpatialData.";
         spatialData = &_spatialData;
     }
     

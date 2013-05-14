@@ -63,7 +63,7 @@ public :
                     ResourceEval<Dim,Type, Data>& _resourceEval, 
                     ResourceEval<Dim, Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
+                    Assignment& _assigment
                     );
     
      /**
@@ -93,7 +93,7 @@ protected :
     ResourceEval<Dim, Type, Data>& globalResourceEval;                  ///< Global eval function for resource
     Eval<int> evalSit;                                     ///< Eval function for the situation
    
-    Assignment<Dim, Type, Data>& assignment;                                     ///< Assignment algorithm
+    Assignment& assignment;                                     ///< Assignment algorithm
 };
 
 }

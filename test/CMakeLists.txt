@@ -10,36 +10,36 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 ######################################################################################
 
 set (TEST_LIST  
-        ut-aStar
-        ut-atlasGrid
+        #ut-aStar
+        #ut-atlasGrid
         ut-constraint
         ut-direction
         ut-environment
         ut-eval
-        ut-ia
+        #ut-ia
         ut-kuhn
         ut-logger
-        ut-manualModel
-        ut-model
-        ut-object
-        ut-observer
-        ut-path
-        ut-quadTree
-        ut-rTree
-        ut-shortestPath
-        ut-shortestPathFactory
-        ut-simpleIndex
-        ut-simpleStrategy
-        ut-spatialData
-        ut-strategy
+        #ut-manualModel
+        #ut-model
+        #ut-object
+        #ut-observer
+        #ut-path
+        #ut-quadTree
+        #ut-rTree
+        #ut-shortestPath
+        #ut-shortestPathFactory
+        #ut-simpleIndex
+        #ut-simpleStrategy
+        #ut-spatialData
+        #ut-strategy
         ut-task
         ut-taskSpot
-        ut-threading
-        ut-tree
-        ut-treeFactory
-        it-assignment
-        it-controller
-        it-ia
+        #ut-threading
+        #ut-tree
+        #ut-treeFactory
+        #it-assignment
+        #it-controller
+        #it-ia
 		)
 
 ######################################################################################

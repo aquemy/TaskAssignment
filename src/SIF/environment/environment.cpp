@@ -30,19 +30,51 @@ namespace sif
 {
 
     template <int Dim, class Type, class Data>
+    void Environment<Dim, Type, Data>::addObject(std::vector<AResource*>& _resources)
+    {
+        AEnvironment::addObject(_resources);
+    }
+
+    template <int Dim, class Type, class Data>
     void Environment<Dim, Type, Data>::addObject(Obstacle<Dim, Type>& _obstacle)
     {
         if(space.inSpace(_obstacle.getCoordonates()))
             obstacles.push_back(_obstacle);
     }
 
-    template <int Dim, class Type, class Data>
-    void Environment<Dim, Type, Data>::addObject(TaskSpot<Dim, Type>& _taskSpot)
+    /*template <int Dim, class Type, class Data>
+    void Environment<Dim, Type, Data>::addObject(ATaskSpot& _taskSpot)
     {
         if(space.inSpace(_taskSpot.getCoordonates()))
             taskSpots.push_back(_taskSpot);
+    }*/
+    
+    template <int Dim, class Type, class Data>
+    void Environment<Dim, Type, Data>::addObject(std::vector<ATaskSpot*>& _taskSpots)
+    {
+        AEnvironment::addObject(_taskSpots);
     }
     
+    template <int Dim, class Type, class Data>
+    void Environment<Dim, Type, Data>::_dump()
+    {
+        logger(Logger::INFO) << "--------------ENVIRONMENT DUMP--------------";
+        // Space info
+        logger(Logger::INFO) << "SPACE INFO";
+        
+        // Resource info
+        logger(Logger::INFO) << "RESOURCES INFO";
+        for(auto& e : AEnvironment::resources)
+            e->dump();
+        
+        // TaskSpot info
+        logger(Logger::INFO) << "TASKSPOTS INFO";
+        for(auto& e : AEnvironment::taskSpots)
+            e->dump();
+        
+        // Obstacle info
+        logger(Logger::INFO) << "--------------------------------------------";
+    }
 }
 
 

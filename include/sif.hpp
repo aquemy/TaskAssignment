@@ -63,6 +63,7 @@
 // Environment
 #include <SIF/environment/aEnvironment.hpp>
 #include <SIF/environment/aResource.hpp>
+#include <SIF/environment/aTaskSpot.hpp>
 #include <SIF/environment/coordonate.hpp>
 #include <SIF/environment/direction.hpp>
 #include <SIF/environment/dynamicObject.hpp>
@@ -79,6 +80,7 @@
 #include <SIF/environment/taskSpot.hpp>
 
 // Graph
+#include <SIF/graph/aPath.hpp>
 #include <SIF/graph/atlasGrid.hpp>
 #include <SIF/graph/path.hpp>
 #include <SIF/graph/quadTree.hpp>

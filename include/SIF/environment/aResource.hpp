@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <resource.hpp>
+// <aResource.hpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,34 +26,29 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_RESOURCE_
-#define _SIF_RESOURCE_
+#ifndef _SIF_ARESOURCE_
+#define _SIF_ARESOURCE_
 
-#include <SIF/environment/aResource.hpp>
 #include <SIF/environment/direction.hpp>
 #include <SIF/environment/dynamicObject.hpp>
 #include <SIF/environment/taskSpot.hpp>
 #include <SIF/environment/direction.hpp>
+#include <SIF/environment/spatialData.hpp>
 #include <SIF/spa/shortestPath.hpp>
-#include <SIF/graph/path.hpp>
+#include <SIF/graph/aPath.hpp>
 
 namespace sif
 {
 
-/** Ressource : Ressource that can be affected to a task
+/** ARessource : Abstract resource
 
-A ressource is an object that can be affected to a task. It modelizes a point in space 
-that can move. Thanks to a shortest path algorithm it is independant when it know
-the Task Spot he has to join.
-
-@see sif::Environment, sif::Object, sif::DynamicObject, sif::TaskSpot
+@see sif::Resource
 */
 
-template <int Dim, class Type, class Data>
-class Resource : public AResource, public DynamicObject<Dim, Type>
+class AResource
 {
 public :
-    
+
     /**
      * Constructor
      * @param _coord Initial coordonates
@@ -61,47 +56,54 @@ public :
      * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa);
+    AResource(double _velocity, bool _busy, ShortestPath& _spa);
     
     /**
-     * Move the resource in specified direction
-     * @param _dir Direction
-     * @param _time Ellapsed time since the last move
-     */
-    void move(Direction<Dim> _dir, double _time);  
-    
-    /**
-     * Set a new assignement if it is possible
-     * @param _assignment New assignment
-     */
-    void setAssignment(TaskSpot<Dim, Type>& _assignment);
-    
-    /**
-     * Update dynamic object
+     * Update Resource
      * @param _time Ellapsed time since the last update
      */
     virtual void update(double _time);
+      
+    /**
+     * Check if the resource is busy (it cannot be assigned)
+     * @return boolean
+     */
+    bool isBusy() const;
+    
+    /**
+     * Set the status of the resource
+     * @param _status Bool
+     */
+    void setBusy(bool _status);
+    
+    /**
+     * Set spatialData
+     * @param _spatialData New SpatialData
+     */
+    void setSpatialData(SpatialData& _spatialData);
+    
+    /**
+     * Debug function to show all informations about the class
+     */
+    void dump();
 
 protected : 
 
     /**
-     * Implementation of dump function
+     * Implementation for dump function
      */
-    void _dump();
+    virtual void _dump() = 0;
     
-    /**
-     * Check the collision according to the direction of the movement
-     * @param _dir Direction
-     * @return true is colliding, false otherwise
-     */
-    bool colliding(Direction<Dim> _dir);
-
+    bool busy;									///< Status of the resource
+    double velocity;                            ///< Velocity of the ressource
+    APath* path;                                ///< Path to reach the assignment
+    SpatialData* spatialData;
+    ATaskSpot* assignment;                      ///< Assignment
+    ShortestPath& spa;                          ///< Shortest path algorithm
 };
 
 
 }
 
-#include <SIF/environment/resource.cpp>
-
-#endif // _SIF_RESOURCE_
+#endif // _SIF_ARESOURCE_
 
