@@ -26,7 +26,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/ia/ia.hpp>
+#include <stdexcept>
 
 namespace sif
 {
@@ -38,8 +38,11 @@ namespace sif
      
     template <int Dim, class Type, class Data>
     void IA<Dim, Type, Data>::update(double _time)
-	{ 
-        model.update(_time);
+	{
+	    if(spatialData == nullptr)
+	        throw std::runtime_error("IA needs SpatialData to work on");
+        logger(Logger::PROGRESS) << "IA : UPDATE";
+        model.update(_time, *spatialData);
     }
     
     template <int Dim, class Type, class Data>
@@ -51,7 +54,7 @@ namespace sif
     template <int Dim, class Type, class Data>
     void IA<Dim, Type, Data>::setSpatialData(SpatialData& _spatialData)
     { 
-        spatialData = _spatialData;
+        spatialData = &_spatialData;
     }
     
 }

@@ -32,7 +32,7 @@ namespace sif
 {
     
     template <int Dim, class Type, class Data>
-    void Model<Dim, Type, Data>::Model(Strategy<Dim, Type, Data>& _currentStrategy) :
+    Model<Dim, Type, Data>::Model(Strategy<Dim, Type, Data>& _currentStrategy) :
         currentStrategy(_currentStrategy)
     { 
         addStrategy(_currentStrategy);

@@ -33,7 +33,7 @@ namespace sif
     ManualModel<Dim, Type, Data>::ManualModel(Strategy<Dim, Type, Data>& _currentStrategy) :
         Model<Dim, Type, Data>(_currentStrategy)
     { 
-        addStrategy(_currentStrategy);
+        
     }
 
     template <int Dim, class Type, class Data>

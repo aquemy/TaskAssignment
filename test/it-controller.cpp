@@ -36,8 +36,9 @@ using namespace sif;
 
 static int i = 0;
 
-void f()
+void f(unsigned ellapsedTime)
 {
+    cout << ellapsedTime << endl;
     i++;
 }
 
@@ -47,7 +48,7 @@ int main(void)
     try
     {
         auto func = f;
-        Step step(func, 10);
+        Step step(func, placeholder::_1);
         
         StepsContinue cont(5);
         TimeContinue cont_2(5);

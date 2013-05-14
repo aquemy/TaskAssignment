@@ -29,6 +29,7 @@
 #ifndef _SIF_RESOURCE_
 #define _SIF_RESOURCE_
 
+#include <SIF/environment/aResource.hpp>
 #include <SIF/environment/direction.hpp>
 #include <SIF/environment/dynamicObject.hpp>
 #include <SIF/environment/taskSpot.hpp>
@@ -49,7 +50,7 @@ the Task Spot he has to join.
 */
 
 template <int Dim, class Type, class Data>
-class Resource : public DynamicObject<Dim, Type>
+class Resource : public AResource, public DynamicObject<Dim, Type>
 {
 public :
     
@@ -63,35 +64,18 @@ public :
     Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa);
     
     /**
-     * Update Resource
-     * @param _time Ellapsed time since the last update
-     */
-    virtual void update(double _time);
-    
-    /**
      * Move the resource in specified direction
      * @param _dir Direction
      * @param _time Ellapsed time since the last move
      */
-    void move(Direction<Dim> _dir, double _time);
-        
-    /**
-     * Check if the resource is busy (it cannot be assigned)
-     * @return boolean
-     */
-    bool isBusy() const;
-    
-    /**
-     * Set the status of the resource
-     * @param _status Bool
-     */
-    void setBusy(bool _status);
+    void move(Direction<Dim> _dir, double _time);  
     
     /**
      * Set a new assignement if it is possible
      * @param _assignment New assignment
      */
     void setAssignment(TaskSpot<Dim, Type>& _assignment);
+    
 
 protected : 
     
@@ -106,10 +90,13 @@ protected :
     Path<Data> path;                                ///< Path to reach the assignment
     TaskSpot<Dim, Type>* assignment;                ///< Assignment
     ShortestPath& spa;                              ///< Shortest path algorithm
+    SpatialData* spatialData;
 };
 
 
 }
+
+#include <SIF/environment/resource.cpp>
 
 #endif // _SIF_RESOURCE_
 

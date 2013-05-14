@@ -84,10 +84,6 @@ protected :
      */
     virtual void assign();
     
-    
-    std::vector<Strategy<Dim, Type, Data>*> strategies;  ///< Strategy used by the model
-    Strategy<Dim, Type, Data>& currentStrategy;                ///< Current strategy
-    
 };
 
 

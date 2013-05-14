@@ -26,16 +26,8 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/environment/environment.hpp>
-
 namespace sif
 {
-
-    template <int Dim, class Type, class Data>
-    void Environment<Dim, Type, Data>::update(double _time)
-    { 
-
-    }
 
     template <int Dim, class Type, class Data>
     void Environment<Dim, Type, Data>::addObject(Obstacle<Dim, Type>& _obstacle)
@@ -45,23 +37,10 @@ namespace sif
     }
 
     template <int Dim, class Type, class Data>
-    void Environment<Dim, Type, Data>::addObject(Resource<Dim, Type, Data>& _resource)
-    {
-        if(space.inSpace(_resource.getCoordonates()))
-            resources.push_back(_resource);
-    }
-
-    template <int Dim, class Type, class Data>
     void Environment<Dim, Type, Data>::addObject(TaskSpot<Dim, Type>& _taskSpot)
     {
         if(space.inSpace(_taskSpot.getCoordonates()))
             taskSpots.push_back(_taskSpot);
-    }
-
-    template <int Dim, class Type, class Data>
-    void Environment<Dim, Type, Data>::setSpatialData(SpatialData& _spatialData)
-    {
-        spatialData = _spatialData;
     }
     
 }

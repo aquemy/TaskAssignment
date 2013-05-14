@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
 //
-// <simpleStrategy.hpp>
+// <aEnvironment.cpp>
 // Copyright (C), 2013
 //
 // Adeline Bailly, Alexandre Quemy
@@ -26,49 +26,29 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _SIF_SIMPLE_STRATEGY_
-#define _SIF_SIMPLE_STRATEGY_
-
-#include <SIF/ia/strategy.hpp>
-#include <SIF/constraint/constraintSystem.hpp>
+#include <SIF/environment/aEnvironment.hpp>
 
 namespace sif
 {
 
-/** SimpleStrategy : Defines a simple strategy
+    void AEnvironment::update(double _time)
+    { 
 
-@see sif::Model,
-*/
-    
-template <int Dim, class Type, class Data>
-class SimpleStrategy : public Strategy<Dim, Type, Data>
-{
-public :
+    }
 
-    /**
-     * Constructor
-     * @param _constraintEval Eval function for constraints
-     * @param _taskSpotEval Eval function for taskSpot
-     * @param _resourceEval Eval function for resource
-     * @param _globalResourceEval Global eval function for resource
-     * @param _evalSituation Eval function for the situation
-     * @param _assignment Assigment algorithm
-     */
-    SimpleStrategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment<Dim, Type, Data>& _assigment
-                    );
-    
-    virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
-    
-};
+    void AEnvironment::addObject(AResource& _resource)
+    {
+        //if(space.inSpace(_resource.getCoordonates()))
+            resources.push_back(&_resource);
+    }
 
+    void AEnvironment::setSpatialData(SpatialData& _spatialData)
+    {
+        spatialData = &_spatialData;
+        for(auto r : resources)
+            r->setSpatialData(_spatialData);
+    }
+    
 }
 
-#include <SIF/ia/strategy/simpleStrategy.cpp>
-
-#endif // _SIF_SIMPLE_STRATEGY_
 

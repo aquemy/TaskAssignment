@@ -50,15 +50,9 @@ It contains the different objets that can evolve in a specific space.
 */
 
 template <int Dim, class Type, class Data>
-class Environment : public Observer
+class Environment : public AEnvironment, public Observer
 {
 public :
-
-        /**
-     * Update environment by updating all its components
-     * @param _time Ellapsed time since the last update
-     */
-    void update(double _time);
 
     /**
      * Add obstacle to the environment
@@ -67,36 +61,25 @@ public :
     void addObject(Obstacle<Dim, Type>& _obstacle);
 
     /**
-     * Add resource to the environment
-     * @param _resource New resource
-     */
-    void addObject(Resource<Dim, Type, Data>& _resource);
-
-    /**
      * Add taskSpot to the environment
      * @param _taskSpot New taskSpot
      */
     void addObject(TaskSpot<Dim, Type>& _taskSpot);
-
-    /**
-     * setSpatialData
-     * @param _spatialData New spatialData
-     */
-    void setSpatialData(SpatialData& _spatialData);
     
 
 protected :
 
     Space<Dim,Type> space;
-    std::vector<Resource<Dim, Type, Data>> resources;
+    
     std::vector<TaskSpot<Dim, Type>> taskSpots;
     std::vector<Obstacle<Dim, Type>> obstacles;
-    SpatialData& spatialData;
 
 };
 
 
 }
+
+#include <SIF/environment/environment.cpp>
 
 #endif // _SIF_ENVIRONMENT_
 

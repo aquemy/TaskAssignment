@@ -39,10 +39,6 @@ namespace sif
     { }
     
     template <int Dim, class Type, class Data>
-    void Resource<Dim, Type, Data>::update(double _time)
-    { }
-    
-    template <int Dim, class Type, class Data>
     void Resource<Dim, Type, Data>::move(Direction<Dim> _dir, double _time)
     { 
         Coordonate<Dim, Type> tcoord = Object<Dim, Type>::coord;
@@ -50,18 +46,6 @@ namespace sif
         tcoord[_dir.getValue().first] += _dir.getValue().second*(velocity*_time); 
         if(true) // TEST IN SPACE + NOT COLLIDING
             Object<Dim, Type>::coord = tcoord;
-    }
-    
-    template <int Dim, class Type, class Data>    
-    bool Resource<Dim, Type, Data>::isBusy() const
-    { 
-        return busy;
-    }
-    
-    template <int Dim, class Type, class Data>  
-    void Resource<Dim, Type, Data>::setBusy(bool _status)
-    { 
-        busy = _status;
     }
     
     template <int Dim, class Type, class Data>

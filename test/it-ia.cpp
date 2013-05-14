@@ -46,15 +46,37 @@ int main(void)
     
     try
     {
+        /*Strategy<Dim, Type, Data>::Strategy(ConstraintEval& _constraintEval,
+                    TaskSpotEval<Dim, Type>& _taskSpotEval,
+                    ResourceEval<Dim, Type, Data>& _resourceEval, 
+                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
+                    Eval<int> _evalSituation,
+                    Assignment<Dim, Type, Data>& _assigment
+                    ) std::function<int(Data&)>*/ 
+        // Eval Functions creation
+        ConstraintEval ce = [](Constraint& i) -> int { return 0; };
+        TaskSpotEval<2,int> tsp = [](TaskSpot<2, int>& i) -> int { return 0; };
+        ResourceEval<2,int, int> re = [](Resource<2, int, int>& i) -> int { return 0; };
+        Eval<int> e = [](int& i) -> int { return 0; };
+        
+        // Assignment
+        Kuhn<2, int, int> assignment;
         
         // Strategies creation
-        //Strategy<2,int,int> s1;
+        SimpleStrategy<2,int,int> s1(ce, tsp, re, re, e, assignment);
         
         // Model creation
-        //ManualModel<2,int,int> model(s1); 
+        ManualModel<2,int,int> model(s1);
         
         // IA Creation
+        IA<2,int,int> ia(model);
         
+        // Create and set Spatial Data (normally done by the controller)
+        SpatialData sd;
+        ia.setSpatialData(sd);
+        
+        // Update process
+        ia.update(0);
     }
     catch(exception& e)
     {

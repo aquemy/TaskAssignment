@@ -33,11 +33,15 @@ namespace sif
 
     template <class NotifyPolicy>
     void Observable<NotifyPolicy>::addObserver(Observer& _obs)
-    { }
+    { 
+        observers.push_back(&_obs);
+    }
     
     template <class NotifyPolicy>
     void Observable<NotifyPolicy>::removeObserver(Observer& _obs)
-    { }
+    { 
+        observers.erase(std::remove(observers.begin(), observers.end(), &_obs), observers.end());
+    }
 	
 }
 

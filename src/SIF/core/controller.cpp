@@ -29,7 +29,6 @@
 #include <iterator>
 #include <stdexcept> 
 
-#include <SIF/core/controller.hpp>
 #include <SIF/core/continue/continue.hpp>
 #include <SIF/utils/logger.hpp>
 
@@ -37,9 +36,10 @@ namespace sif
 {
     
 std::vector<Continue*> Controller::cont;
-std::list<Step> Controller::steps;
+std::list<std::pair<Step, unsigned>> Controller::steps;
 SpatialData* Controller::spatialData;  
 bool Controller::initialized = false;
+AEnvironment* Controller::env;
     
 Controller::Controller()
 {
@@ -52,6 +52,11 @@ Controller::~Controller()
     delete Controller::spatialData;
 }
 
+void Controller::setEnvironment(AEnvironment& _env)
+{
+    Controller::env = &_env;
+}
+
 void Controller::addContinue(Continue& _cont)
 {
     Controller::cont.push_back(&_cont);
@@ -59,47 +64,83 @@ void Controller::addContinue(Continue& _cont)
 
 void Controller::addStep(Step _step)
 {
-    Controller::steps.push_back(_step);
+    Controller::steps.push_back(std::pair<Step, unsigned>(_step,0));
 }
 
 void Controller::addStep(Step _step, unsigned _pos)
 {
     auto it = std::begin(steps);
     for(auto i = 0; i < _pos; i++,it++);
-    steps.insert(it, _step);
+    steps.insert(it, std::pair<Step, unsigned>(_step,01));
 }
-    
-void Controller::init()
+   
+template <int Dim, class Type, class Data>
+void Controller::init(IA<Dim, Type, Data>& _ia)
 {
     logger(Logger::PROGRESS) << "Init Controller.";
     
     // Check that there is a least one continue criterion
     if(Controller::cont.size() == 0)
         throw std::runtime_error("One criterion is requiered at least !");
+        
+    if(Controller::env == nullptr)
+        throw std::runtime_error("Controller needs an environment !");
+        
+    // If SpatialData is not specified, we created it
+    if(spatialData == nullptr)
+    {
+        // If we have partition or indexing algorithm AND environment
+        //if()
+        spatialData = new SpatialData();
+    }
     
+    env->setSpatialData(*spatialData);
+    
+    spatialData->startPartitioning();
+    spatialData->startIndexing();
+    
+
     Controller::initialized = true;
 }
 
 void Controller::startPartitioning()
 {
-
+    if(spatialData == nullptr)
+        logger(Logger::DEBUG) << "Controller::startPartitioning : no SpatialData found !";
+    else
+        spatialData->startPartitioning();
 }
 
 void Controller::startIndexing()
 {
-
+    if(spatialData == nullptr)
+        logger(Logger::DEBUG) << "Controller::startIndexing : no SpatialData found !";
+    else
+        spatialData->startIndexing();
 }
 
 void Controller::run()
 {
     if(!Controller::initialized)
         throw std::runtime_error("Controller not initialized !");
-    
+
     logger(Logger::PROGRESS) << "Run Controller.";
+    
+    auto startTime = std::chrono::steady_clock::now();
+    
     while(Controller::checkContinue())
     {
+        auto now = std::chrono::steady_clock::now();
         for(auto step : Controller::steps)
-            step.first();
+        {
+            unsigned diff = std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime).count();
+            if(step.second < diff / step.first.second)
+            {
+                step.second = diff / step.first.second;
+                step.first.first(diff);
+            }
+    
+        }
     }
 }
 

@@ -41,6 +41,14 @@ This is the object that partition and index the environment. All objects that ne
 class SpatialData 
 {
 
+public : 
+    
+    void startPartitioning();
+    
+    void startIndexing();
+
+private : 
+
 };
 
 

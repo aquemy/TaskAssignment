@@ -66,6 +66,8 @@ protected :
      */
     virtual void _setChange() = 0;
 
+    std::vector<Observer*> observers;
+
 };
 
 
