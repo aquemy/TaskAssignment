@@ -31,6 +31,7 @@
 
 #include <vector>
 #include <map>
+#include <algorithm>
 #include <limits.h>
 
 #include <SIF/assignment/assignment.hpp>
@@ -53,7 +54,7 @@ public :
      * Start the Kuhn method
      * @return A map from resource to TaskSpot
      */
-    std::map<AResource*,ATaskSpot*> operator()(std::map<std::pair<std::vector<AResource*>, std::vector<ATaskSpot*>>, int>);
+    std::map<AResource*,ATaskSpot*> operator()(std::map<std::pair<AResource*, ATaskSpot*>, int>);
 
     
 protected :
@@ -62,16 +63,25 @@ protected :
     
     typedef enum
 	{
-		normal,
-		surrounded,
-		crossed
+		Normal,
+		Surrounded,
+		Crossed
 	} state;							///< 
+
+	typedef std::vector <std::vector<std::pair<int, state> > > typeMat;
+
+	void subtractionMins(typeMat & mat);
+	int lineWLessZUncrossed (typeMat & m);
+	void barZLocatedSameArea(typeMat & m, int l, int c);
+	bool zeroOnAllRC(typeMat & m);
+	void markLinesInit(typeMat & m, std::vector<bool> & mdL);
+	bool markLines(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
+	bool markRows(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
+	void subtractionPartTable(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
 
 };
 
 }
-
-#include <SIF/assignment/kuhn.cpp>
 
 #endif // _SIF_KUHN_
 

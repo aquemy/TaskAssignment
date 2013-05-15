@@ -1,0 +1,32 @@
+
+% -------------------------------------
+% ---			core/ 			---
+% -------------------------------------
+
+% -------------------------
+\subsection{controller}
+% -------------------------
+
+On va tester la fonction \texttt{run()}, pour cela on va utiliser une fonction qui nous permetrra de compter le nombre de passage ie le nombre d'étapes. Il suffira de vérifier que le compteur a atteint le nombre d'étapes prévues.
+
+
+% -------------------------------------
+% ---		core/continue/			---
+% -------------------------------------
+
+
+% -------------------------
+\subsection{stepContinue}
+% -------------------------
+
+On doit tester la fonction \texttt{\_check()}. Deux cas sont a tester, lorsque l'argument \texttt{steps} $>1$ (retourne vrai) et lorsqu'il est $\leq1$ (retourne faux).\\
+
+% -------------------------
+\subsection{timeContinue}
+% -------------------------
+
+
+On doit tester la fonction \texttt{\_check()}.\\
+Si le chronomètre n'a pas été lancé, la fonction doit le lancer (cf logger).\\
+Ensuite, on testera un cas où la durée limite n'a pas été atteinte, et un autre où elle a été dépassée.\\
+On testera également le cas d'erreur où la durée est négative.

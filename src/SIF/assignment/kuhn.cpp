@@ -26,74 +26,376 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include "SIF/assignment/kuhn.hpp"
+
 namespace sif
 {
 
-	std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<std::vector<AResource*>, std::vector<ATaskSpot*>>, int> _mymap)
+	std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap)
     {
     
-    std::vector<AResource*> _resources;
-    std::vector<ATaskSpot*> _taskSpots;
+		std::vector<AResource*> _resources;
+		std::vector<ATaskSpot*> _taskSpots;
 	
-    // Step 1 : List of Resource & TaskSpot
-    /*for (auto& eval : _mymap)
-    {
-    	if (std::find(_resource.begin(), _resource.end(), &*eval.first.first) == _resource.end())
-		{  	// Recovery of resources
-			_resource.push_back(eval.first.first);
-		}
+		// Step 1 : List of Resource & TaskSpot
+		for (auto& eval : _mymap)
+		{
+			if (std::find(_resources.begin(), _resources.end(), &*eval.first.first) == _resources.end())
+			{  	// Recovery of resources
+				_resources.push_back(eval.first.first);
+			}
 			
-    	if (std::find(_taskSpot.begin(), _taskSpot.end(), &*eval.first.second) == _taskSpot.end())
-		{	// Recovery of taskSpots
-			_taskSpot.push_back(eval.first.second);
+			if (std::find(_taskSpots.begin(), _taskSpots.end(), &*eval.first.second) == _taskSpots.end())
+			{	// Recovery of taskSpots
+				_taskSpots.push_back(eval.first.second);
+			}
+		
 		}
 		
-    }
-    
-    // Step 2 : Creation of square matrix
-    int sizeResource = _resource.size(), sizeTaskSpot = _taskSpot.size();
-    if (sizeResource > sizeTaskSpot)
-    {
-    	for (int i=0; i<sizeResource - sizeTaskSpot; i++)
-    	{
-    		_taskSpot.push_back(new TaskSpot());
-    	}
-    }
-    else if (sizeResource < sizeTaskSpot)
-    {
-    	for (int i=0; i<sizeTaskSpot - sizeResource; i++)
-    	{
-    		_resource.push_back(new Resource());
-    	}
-    }
+		// Step 2 : Creation of square matrix
+		int sizeResources = _resources.size(), sizeTaskSpots = _taskSpots.size();
+		if (sizeResources > sizeTaskSpots)
+		{
+			for (int i=0; i<sizeResources - sizeTaskSpots; i++)
+			{
+				_taskSpots.push_back(nullptr);
+			}
+		}
+		else if (sizeResources < sizeTaskSpots)
+		{
+			for (int i=0; i<sizeTaskSpots - sizeResources; i++)
+			{
+				_resources.push_back(nullptr);
+			}
+		}
 	
-    // Cost Matrix
-	std::vector <std::vector<int> > cost(_resource.size());
-	for (int i=0; i<_resource.size(); i++)
-	{
-		cost[i].resize(_taskSpot.size());
-		for (int j=0; j<_taskSpot.size(); j++)
-			cost[i][j] = -1;
-	}
+		// Cost Matrix
+		cost.resize(_resources.size());
+		for (int i=0; i<_resources.size(); i++)
+		{
+			cost[i].resize(_taskSpots.size());
+			for (int j=0; j<_taskSpots.size(); j++)
+				cost[i][j] = -1;
+		}
 	
-	for (auto& eval : _mymap)
-	{
-		cost[eval.first.first][eval.first.second] = eval.second;
-	}
-	for (int i=0; i<cost.size(); i++)
-	{
-		for (int j=0; j<cost.size(); j++)
-			if (cost[i][j] == -1)
-				cost[i][j] = INT_MAX;
-	}
+		for (auto& eval : _mymap)
+		{
+			bool find = false;
+			int indR = 0, indTS = 0;
+		
+			while (indR< _resources.size() && !find)
+			{
+				if (&*eval.first.first == _resources[indR])
+					find = true;
+				indR++;
+			}
+			find = false;
+			while (indTS< _taskSpots.size() && !find)
+			{
+				if (&*eval.first.second == _taskSpots[indTS])
+					find = true;
+				indTS++;
+			}
+			cost[indR][indTS] = eval.second;
+		}
+		for (int i=0; i<cost.size(); i++)
+		{
+			for (int j=0; j<cost.size(); j++)
+				if (cost[i][j] == -1)
+					cost[i][j] = INT_MAX;
+		}
 	
-    // Mettre INF sur case à ajouter pour faire une matrice carrée !
-    // Remplir la matrice de MAX_INT (inclure limits.h)
-    
-    // Modifier la matrice de cout en fonction de la liste de cout passée en param
-    // Appliquer l'algo de Kuhn*/
-    
+		// Algorithm : Kuhn */
+		int n = _resources.size();
+		typeMat mat(n);
+		for (int i=0; i<n; i++)
+		{
+			mat[i].resize(n);
+			for (int j=0; j<n; j++)
+			{
+				mat[i][j].first = cost[i][j];
+				mat[i][j].second = Normal;
+			}
+		}
+	
+		subtractionMins(mat);
+	
+		int line;
+		bool b, isPossible, repeat = true;
+		std::vector<bool> markedLines(n), markedRows(n);
+		int compteur = 0;
+		do
+		{
+			// Clean
+			for (int i=0; i<n; i++)
+			{
+				markedLines[i] = false;
+				markedRows[i] = false;
+				for (int j=0; j<n; j++)
+					mat[i][j].second = Normal;
+			}
+	
+			// 2- Encadrer et barrer les zéros
+			isPossible = true;
+			while (isPossible)
+			{
+				int i = 0;
+				line = lineWLessZUncrossed (mat);
+				if (line != -1)
+				{
+					b = false;
+					while (!b)
+					{
+						if (mat[line][i].first == 0)
+						{
+							mat[line][i].second = Surrounded;
+							b = true;
+						}
+						i++;
+					}
+					barZLocatedSameArea(mat, line, --i);
+				}
+				else
+					isPossible = false;
+			}
+			if (!zeroOnAllRC(mat))
+			{
+				markLinesInit(mat, markedLines);
+				bool _continue = true;
+				while (_continue)
+				{
+					_continue = markRows(mat, markedLines, markedRows);
+					if (_continue)
+						_continue = markLines(mat, markedLines, markedRows);
+				}
+				subtractionPartTable(mat, markedLines, markedRows);
+			}
+			else
+				repeat = false;
+			
+		} while (repeat);
+		
+		std::map<AResource*,ATaskSpot*> assignment;
+		int i = 0, j = 0;
+		while(i < n)
+		{
+			bool find = false;
+			while(j < n && find == false)
+			{
+				if (mat[i][j].second == Surrounded)
+				{
+					assignment.insert(std::pair<AResource*,ATaskSpot*> (_resources[i], _taskSpots[j]));
+					find = true;
+				}
+				j++;
+			}
+			i++;
+		}
+		
+		return assignment;
     }
 
+	// --------------------------------------------------------------------
+	// --------------------------------------------------------------------
+
+	void Kuhn::subtractionMins(typeMat & mat)
+	{
+		double min = INT_MAX;
+		for (int i=0; i<mat.size(); i++)
+		{
+			for (int j=0; j<mat.size(); j++)
+			{
+				if (min > mat[i][j].first)
+					min = mat[i][j].first;
+			}
+			for (int j=0; j<mat.size(); j++)
+			{
+				mat[i][j].first -= min;
+			}
+			min = INT_MAX;
+		}
+	
+		for (int i=0; i<mat.size(); i++)
+		{
+			for (int j=0; j<mat.size(); j++)
+			{
+				if (min > mat[j][i].first)
+					min = mat[j][i].first;
+			}
+			for (int j=0; j<mat.size(); j++)
+			{
+				mat[j][i].first -= min;
+			}
+			min = INT_MAX;
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	int Kuhn::lineWLessZUncrossed (typeMat & m)
+	{
+		int line = -1, counterLine = 0, counter = 0;
+	
+		for (int i=0; i<m.size(); i++)
+		{
+			for (int j=0; j<m.size(); j++)
+			{
+				if (m[i][j].first == 0 && m[i][j].second == Normal)
+					counter++;
+			}
+			if (counterLine < counter)
+			{
+				line = i;
+				counterLine = counter;
+			}
+			counter = 0;
+		}
+	
+		return line;
+	}
+
+	// --------------------------------------------------------------------
+
+	void Kuhn::barZLocatedSameArea(typeMat & m, int l, int c)
+	{
+		for (int i=0; i<m.size(); i++)
+		{
+			if (m[l][i].first == 0 && i != c)
+				m[l][i].second = Crossed;
+			if (m[i][c].first ==0 && i != l)
+				m[i][c].second = Crossed;
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	bool Kuhn::zeroOnAllRC(typeMat & m)
+	{
+		bool find = true;
+		int l = 0, c;
+		while (find && l < m.size())
+		{
+			c = 0;
+			find = false;
+			while (!find && c < m.size())
+			{
+				if (m[l][c].second == Surrounded)
+					find = true;
+				c++;
+			}
+			l++;
+		}
+	
+		return find;
+	}
+
+	// --------------------------------------------------------------------
+
+	void Kuhn::markLinesInit(typeMat & m, std::vector<bool> & mdL)
+	{
+		for (int i=0; i<m.size(); i++)
+		{
+			int j = 0;
+			bool containt = false;
+			while (containt == false && j<m.size())
+			{
+				if (m[i][j].second == Surrounded)
+					containt = true;
+				j++;
+			}
+			if (containt == false)
+			{
+				mdL[i] = true;
+			}
+		}
+	}
+
+	// --------------------------------------------------------------------
+
+	bool Kuhn::markRows(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR)
+	{
+		bool bool_mR = false;
+		for (int i=0; i<m.size(); i++)
+		{
+			if (mdL[i] == true)
+			{
+				int j = 0;
+				bool containt = false;
+				while (containt == false && j<m.size())
+				{
+					if (m[i][j].second == Crossed)
+						containt = true;
+					j++;
+				}
+				j--;
+				if (containt == true && mdR[j] == false)
+				{
+					mdR[j] = true;
+					bool_mR = true;
+				}
+			}
+		}
+	
+		return bool_mR;
+	}
+
+	// --------------------------------------------------------------------
+
+	bool Kuhn::markLines(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR)
+	{
+		bool bool_mL = false;
+		for (int j=0; j<m.size(); j++)
+		{
+			if (mdR[j] == true)
+			{
+				int i = 0;
+				bool containt = false;
+				while (containt == false && i<m.size())
+				{
+					if (m[i][j].second == Surrounded)
+						containt = true;
+					i++;
+				}
+				i--;
+				if (containt == true && mdL[i] == false)
+				{
+					mdL[i] = true;
+					bool_mL = true;
+				}
+			}
+		}
+	
+		return bool_mL;
+	}
+
+	// --------------------------------------------------------------------
+
+	void Kuhn::subtractionPartTable(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR)
+	{
+		double min = INT_MAX;
+		for (int i=0; i<m.size(); i++)
+		{
+			if(mdL[i] == true)
+			{
+				for (int j=0; j<m.size(); j++)
+				{
+					if(mdR[j] == false && min > m[i][j].first)
+						min = m[i][j].first;
+				}
+			
+			}
+		}
+	
+		for (int i=0; i<m.size(); i++)
+		{
+			for (int j=0; j<m.size(); j++)
+			{
+				if(mdL[i] == true && mdR[j] == false)
+					m[i][j].first -= min;
+				if(mdL[i] == false && mdR[j] == true)
+					m[i][j].first += min;
+			}
+		}
+	}
 }
 

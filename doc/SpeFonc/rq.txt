@@ -1,0 +1,15 @@
+Rq :
+
+1- constraint/customConstraint
+	Initialisation lastValue ?
+
+2- constraint/stepConstraint
+	Test unitaire operator() ?
+
+3- graph/simpleIndex
+	Je vois pas quoi dire ..
+
+4- ia/strategy/simpleStrategy
+	Quelque chose ?
+
+5- utils ?

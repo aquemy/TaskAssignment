@@ -1,0 +1,67 @@
+
+% -------------------------
+\subsection{Environnement}
+% -------------------------
+
+On doit tester la fonction \texttt{update(double \_time)}, cette fonction met à jour l'environnement en fonction d'un paramètre de temps.\\
+
+\begin{itemize}
+\item Cas d'erreur~: Si on passe un paramètre négatif, une erreur doit apparaître. En effet, cela reviendrait à un retour dans le passé.
+\item Cas aux limites~: Si le paramètre passé est nul, on doit obtenir le même environnement qu'avant la mise à jour.
+\item Cas nominal~: Enfin, si on passe un paramètre positif, l'environnement peut être différent, en effet celui-ci change avec le temps.
+\end{itemize}
+
+% -------------------------
+\subsection{Eval}
+% -------------------------
+
+On doit tester la fonction \texttt{EvalLoop(Eval<Data> \_eval, std::vector<Data*>\& \_data)} , cette fonction évalue les données selon la fonction \texttt{\_eval}.\\
+
+Les différents cas à tester sont~:
+\begin{itemize}
+\item Si le vecteur de données est nul, la fonction doit renvoyer une table nulle (ou une erreur ?)
+\item Si la fonction d'évaluation est \og constante \fg, elle doit évaluer toutes les données de la même manière.
+%\item 
+\end{itemize}
+
+% -------------------------
+\subsection{Resource}
+% -------------------------
+
+Quatre fonctions sont à évaluer.\\
+
+La première est la fonction \texttt{update(double \_time)}. Pour cette focntion, trois cas sont à tester.
+\begin{itemize}
+\item \_$time < 0 \Rightarrow$ Retourne une erreur
+\item \_$time = 0 \Rightarrow$ Pas de modification par rapport à avant la mise à jour
+\item \_$time > 0 \Rightarrow$ Deux cas peuvent survenir et sont donc à tester. Le premier correspond au cas où aucune modification ne survient, par exemple lorsqu'une ressource n'a pas été réaffecté. Le second cas correspond au cas où au moins une modification de la ressource, par exemple lorsque la ressource a été réaffecté.\\
+\end{itemize}
+
+La seconde est la fonction \texttt{move(Direction \_dir, double \_time)}.
+Si le temps est négatif, on doit avoir une erreur. Si le temps est nul, les coordonnées de la resource doivent rester inchangées. Si le temps est positif, les coordonnées de la resource peuvent changées. On testera les différentes directions possibles, qui dépendent de l'espace. \\
+
+La troisième est la fonction \texttt{isBusy()}, celle-ci teste si la fonction peut être réaffectée ou non. On doit tester si une ressource libre devient occupée après avoir été affectée.\\
+
+La quatrième est la fonction \texttt{colliding()}. Cette fonction teste si la ressource ne rentre pas en collision avec un autre objet dynamique. Deux cas sont à tester, le cas où il y a une collision (la fonction doit renvoyer \texttt{true}), et le cas où il n'y a pas de collision (\texttt{false}).
+
+% -------------------------
+\subsection{Space}
+% -------------------------
+
+Une fonction à tester~: \texttt{inSpace(Coordonate<Dim, Type> \_coord)}, qui vérifie si les coordonnées sont dans l'espace.
+\begin{itemize}
+\item Premier cas~: Les coordonnées ne sont pas dans l'espace. La fonction doit retourner \texttt{faux}.
+\item Deuxième cas~: Les coordonées sont dans l'espace. On va vérifier sur chaque extrémité de l'espace (aux frontières) que la fonction renvoie bien vraie.
+\end{itemize}
+
+% -------------------------
+\subsection{Task}
+% -------------------------
+
+On doit tester la fonction \texttt{update(std::function<int(int\&)> \_f)}. Cette fonction est associée à une fonction d'évaluation (\_f), pour le test, on va créer une fonction qui renvoie toujours la même chose. Il suffira donc de tester si la valeur de la tâche est égale à ce que renvoie la fonction.
+
+% -------------------------
+\subsection{TaskSpot}
+% -------------------------
+
+On doit tester la fonction \texttt{update()}. Cette fonction met à jour la tâche à l'aide de la fonction asociée à l'emplacement de travail. De la même manière, que pour la fonction \texttt{update} de Task, on crée une fonction dont on connait le résultat. On teste ensuite si la nouvelle valeur de la tâche est la valeur qu'on attendait.
