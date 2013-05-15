@@ -68,6 +68,7 @@ namespace sif
     void ManualModel<Dim, Type, Data>::assign()
     { 
         logger(Logger::PROGRESS) << "ManualModel : Assign.";
+        Model<Dim, Type, Data>::currentStrategy.assign();
     }
     
 }

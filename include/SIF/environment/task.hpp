@@ -55,6 +55,7 @@ public :
     
     /**
      * Update Task
+     * @param _time Ellapsed time since the last update
      * @param _f The result will remplace value and the int parameter will be the initial value
      */
     void update(double _time, std::function<int(int&)> _f);

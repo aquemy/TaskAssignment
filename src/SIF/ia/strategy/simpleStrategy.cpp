@@ -35,14 +35,14 @@ namespace sif
                     ResourceEval<Dim, Type, Data>& _resourceEval, 
                     ResourceEval<Dim, Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment& _assigment
+                    Assignment& _assignment
                     ) :
         Strategy<Dim, Type, Data>(_constraintEval, 
                         _taskSpotEval, 
                         _resourceEval, 
                         _globalResourceEval, 
                         _evalSituation, 
-                        _assigment)
+                        _assignment)
     { }
 
      template <int Dim, class Type, class Data>

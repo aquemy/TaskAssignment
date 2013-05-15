@@ -31,6 +31,11 @@ endif()
 ### 0) Define general CXX flags for DEBUG and RELEASE
 ######################################################################################
 
+IF (NOT DEFINED SIF_DEFAULT_DIM)
+    set(SIF_DEFAULT_DIM 3)
+ENDIF()
+add_definitions(-DSIF_DEFAULT_DIM)
+
 if(DEBUG)
   set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
 else(DEBUG)
@@ -81,11 +86,6 @@ endif(ENABLE_CMAKE_TESTING)
 if(UNIX)
     set(INSTALL_SUB_DIR /sif)
 endif()
-
-#set(ECF_MULTI_THREADING ON CACHE BOOL "Threading Model")
-#configure_file(src/config/config.hpp.in src/config/config.hpp)
-#add_definitions(-DSIF_MULTI_THREADING)
-#add_definitions(-DSIF_MULTI_THREADING)
 
 
 

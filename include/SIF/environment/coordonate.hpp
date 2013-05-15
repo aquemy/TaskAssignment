@@ -31,6 +31,9 @@
 
 #include <vector>
 
+#include <SIF/core/config.hpp>
+#include <SIF/environment/aCoordonate.hpp>
+
 namespace sif
 {
 
@@ -44,8 +47,8 @@ Some inherited functions from std::vector have been deleted such as push_back an
 @see sif::Environment, sif::Space
 */
 
-template <int Dim, class Type = int>
-class Coordonate : public std::vector<Type>
+template <int Dim = DEF_DIM, class Type = DEF_COORD_TYPE>
+class Coordonate : public ACoordonate, public std::vector<Type>
 {
 public :
     /**

@@ -63,7 +63,7 @@ public :
                     ResourceEval<Dim,Type, Data>& _resourceEval, 
                     ResourceEval<Dim, Type, Data>& _globalResourceEval,
                     Eval<int> _evalSituation,
-                    Assignment& _assigment
+                    Assignment& _assignment
                     );
     
      /**

@@ -48,7 +48,9 @@ namespace sif
     template <int Dim, class Type, class Data>
     std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Strategy<Dim, Type, Data>::assign()
     { 
-
+        logger(Logger::PROGRESS) << "Strategy : assignment";
+        std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> test;
+        return test;
     }
     
 }
