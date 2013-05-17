@@ -33,14 +33,20 @@
 using namespace std;
 using namespace sif;
 
+int cinq (int i)
+{ return 5; }
+
 int main(void)
 {
     /**
      * Unit tests for kuhn
      */
     try
-    {
-        
+    {/*
+    	Task t;
+        TaskSpot<2,int> ts(Coordonate<2,int>(), t, cinq);
+    
+        //std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap)//*/
 
     }
     catch(exception& e)
