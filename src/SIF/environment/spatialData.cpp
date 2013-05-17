@@ -31,18 +31,32 @@
 
 namespace sif
 {
+    SpatialData::SpatialData(AEnvironment* _env) :
+        env(_env)
+    { }
+
     void SpatialData::startPartitioning()
     {
         logger(Logger::PROGRESS) << "SpatialData : Start partitioning.";
-        
+        taskSpots = env->getTaskSpots();
         logger(Logger::PROGRESS) << "SpatialData : Finish partitioning.";
     }
     
     void SpatialData::startIndexing()
     {
         logger(Logger::PROGRESS) << "SpatialData : Start indexing.";
-        
+        resources = env->getResources();
         logger(Logger::PROGRESS) << "SpatialData : Finish indexing.";
+    }
+    
+    std::vector<ATaskSpot*> SpatialData::getTaskSpots() const
+    {
+        return taskSpots;
+    }
+    
+    std::vector<AResource*> SpatialData::getResources() const
+    {
+        return resources;
     }
     
 }

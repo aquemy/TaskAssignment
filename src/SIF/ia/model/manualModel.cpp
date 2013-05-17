@@ -37,19 +37,20 @@ namespace sif
     }
 
     template <int Dim, class Type, class Data>
-    void ManualModel<Dim, Type, Data>::update(double _time, SpatialData& _spatialData)
+    void ManualModel<Dim, Type, Data>::update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
     { 
         logger(Logger::PROGRESS) << "ManualModel : UPDATE";
-        evalSituation();
+        evalSituation(_spatialData, _constraintSystem);
         learn();
         decide();
         assign();
     }
     
     template <int Dim, class Type, class Data>
-    int ManualModel<Dim, Type, Data>::evalSituation()
+    int ManualModel<Dim, Type, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
     { 
         logger(Logger::PROGRESS) << "ManualModel : Situation evaluation.";
+        Model<Dim, Type, Data>::currentStrategy.evalSituation(_spatialData, _constraintSystem);
     }
 
     template <int Dim, class Type, class Data>

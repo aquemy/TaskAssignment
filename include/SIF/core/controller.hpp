@@ -35,6 +35,7 @@
 #include <SIF/core/step.hpp>
 #include <SIF/core/continue/continue.hpp>
 #include <SIF/environment/aEnvironment.hpp>
+#include <SIF/environment/environment.hpp>
 #include <SIF/environment/spatialData.hpp>
 #include <SIF/ia/ia.hpp>
 
@@ -91,7 +92,7 @@ public :
      * @param _ia IA for the simulation
      */
     template <int Dim, class Type, class Data>
-    static void init(IA<Dim, Type, Data>& _ia);
+    static void init(IA<Dim, Type, Data>& _ia, Environment<Dim, Type, Data>& _env);
     
     /**
      * Start the space partitioning

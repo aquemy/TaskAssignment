@@ -31,11 +31,13 @@
 
 namespace sif
 {
-    CustomConstraint::CustomConstraint(unsigned _priority, std::function<bool()> _cond,
+    CustomConstraint::CustomConstraint(Task& _t, 
+        unsigned _priority, 
+        std::function<bool()> _cond,
         std::function<void()> _reachCondition,
         std::function<void()> _breakCondition
    ) : 
-    Constraint(_priority),
+    Constraint(_t, _priority),
     cond(_cond),
     reachCondition(_reachCondition),
     breakCondition(_breakCondition),

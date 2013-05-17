@@ -85,7 +85,6 @@ protected :
 
     ConstraintComp op;                      ///< Comparaison operator
     int step;                                          ///< Value of the step
-    Task& task;                                   ///< Reference on the task
     bool lastValue;                              ///< Value at the last check
     int leftTolerance;                          ///< Value for the left tolerance
     int rightTolerance;                       ///< Value for the right tolerance

@@ -43,6 +43,11 @@ namespace sif
     	t.update(_time, f);
     }
     
+    const Task& ATaskSpot::getTask() const
+    {
+        return t;
+    }
+    
     void ATaskSpot::dump()
     {
         _dump();

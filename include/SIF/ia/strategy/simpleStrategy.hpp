@@ -47,23 +47,18 @@ public :
 
     /**
      * Constructor
-     * @param _constraintEval Eval function for constraints
-     * @param _taskSpotEval Eval function for taskSpot
-     * @param _resourceEval Eval function for resource
-     * @param _globalResourceEval Global eval function for resource
-     * @param _evalSituation Eval function for the situation
      * @param _assignment Assigment algorithm
      */
-    SimpleStrategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment& _assignment
-                    );
+    SimpleStrategy(Assignment& _assignment);
     
     virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
-    
+
+protected :
+
+    Constraint* firstNotSatisfied;                      ///< First constraint not satisfied
+    TaskSpotEval taskSpotEval;                          ///< Eval function for taskSpot
+    EvalTable<ATaskSpot> taskSpotsTable;                ///< Evaluation of taskspots
+
 };
 
 }

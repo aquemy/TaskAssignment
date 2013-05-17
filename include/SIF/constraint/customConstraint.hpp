@@ -54,7 +54,8 @@ public :
      * @param _reachCondition Callback function called when the constraint is satisfied
      * @param _breakCondition Callback function called when the constraint is not satisfied
      */
-    CustomConstraint(unsigned _priority,
+    CustomConstraint(Task& _t,
+        unsigned _priority,
         std::function<bool()> _cond,
         std::function<void()> _reachCondition = []{},
         std::function<void()> _breakCondition = []{}

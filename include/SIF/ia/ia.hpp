@@ -50,7 +50,7 @@ public :
      * Constructor
      * @param _model Model of IA
      */
-    IA(Model<Dim, Type, Data>& _model);
+    IA(Model<Dim, Type, Data>& _model, ConstraintSystem& _constraintSystem);
     
     /**
      * Update IA
@@ -74,6 +74,7 @@ protected :
 
     Model<Dim, Type, Data>& model;
     SpatialData* spatialData;
+    ConstraintSystem& constraintSystem;
     
 };
 

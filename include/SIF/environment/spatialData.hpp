@@ -29,8 +29,16 @@
 #ifndef _SIF_SPATIAL_DATA_
 #define _SIF_SPATIAL_DATA_
 
+
+#include <SIF/environment/aEnvironment.hpp>
+#include <SIF/environment/aResource.hpp>
+#include <SIF/environment/aTaskSpot.hpp>
+
 namespace sif
 {
+
+class AResource;
+class AEnvironment;
 
 /** SpatialData : Contains the index of the objets and the partition of the space.
 
@@ -42,13 +50,23 @@ class SpatialData
 {
 
 public : 
+
+    SpatialData(AEnvironment* _env);
     
     void startPartitioning();
     
     void startIndexing();
+    
+    std::vector<ATaskSpot*> getTaskSpots() const;
+    
+    std::vector<AResource*> getResources() const;
 
-private : 
+protected : 
 
+    std::vector<ATaskSpot*> taskSpots;
+    std::vector<AResource*> resources;
+    AEnvironment* env;
+    
 };
 
 

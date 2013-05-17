@@ -58,13 +58,7 @@ public :
      * @param _evalSituation Eval function for the situation
      * @param _assignment Assigment algorithm
      */
-    Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim,Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment& _assignment
-                    );
+    Strategy(Assignment& _assignment);
     
      /**
       * Perform the evaluation of the situation
@@ -81,19 +75,9 @@ public :
     virtual std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> assign();
     
 protected :
-    
-    EvalTable<Constraint> constraintTable;              ///< Evaluation of constraints
-    EvalTable<TaskSpot<Dim, Type>> taskSpotsTable;               ///< Evaluation of taskspots
-    EvalTable<Resource<Dim, Type, Data>> resourceTable;                ///< Evaluation of resources
-    EvalTable<Resource<Dim, Type, Data>> globalResourceTable;    ///< Global evaluation of resources
-
-    ConstraintEval& constraintEval;                            ///< Eval function for constraints
-    TaskSpotEval<Dim, Type>& taskSpotEval;                               ///< Eval function for taskSpot
-    ResourceEval<Dim, Type, Data>& resourceEval;                              ///< Eval function for resource
-    ResourceEval<Dim, Type, Data>& globalResourceEval;                  ///< Global eval function for resource
-    Eval<int> evalSit;                                     ///< Eval function for the situation
    
     Assignment& assignment;                                     ///< Assignment algorithm
+    std::map<std::pair<AResource*, ATaskSpot*>, int> couples;
 };
 
 }

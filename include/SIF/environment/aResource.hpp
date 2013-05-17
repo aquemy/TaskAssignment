@@ -40,6 +40,8 @@
 namespace sif
 {
 
+class SpatialData;
+
 /** ARessource : Abstract resource
 
 @see sif::Resource

@@ -32,8 +32,9 @@ namespace sif
 {
     
     template <int Dim, class Type, class Data>
-    IA<Dim, Type, Data>::IA(Model<Dim, Type, Data>& _model) :
-        model(_model)
+    IA<Dim, Type, Data>::IA(Model<Dim, Type, Data>& _model, ConstraintSystem& _constraintSystem) :
+        model(_model),
+        constraintSystem(_constraintSystem)
     { }
      
     template <int Dim, class Type, class Data>
@@ -42,7 +43,7 @@ namespace sif
 	    if(spatialData == nullptr)
 	        throw std::runtime_error("IA needs SpatialData to work on");
         logger(Logger::PROGRESS) << "IA : UPDATE";
-        model.update(_time, *spatialData);
+        model.update(_time, *spatialData, constraintSystem);
     }
     
     template <int Dim, class Type, class Data>

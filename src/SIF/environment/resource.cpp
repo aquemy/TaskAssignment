@@ -71,7 +71,7 @@ namespace sif
         else
             status = "Free";
 
-        std::string message = "Coord : ( "+coordString+") | Status : "+status;
+        std::string message = std::to_string((long int)this)+" ( "+coordString+") | Status : "+status;
         logger(Logger::INFO) << message;
     }
 }

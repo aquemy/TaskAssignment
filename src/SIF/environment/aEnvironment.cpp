@@ -72,6 +72,16 @@ namespace sif
             taskSpots.push_back(i);
     }
     
+    std::vector<ATaskSpot*> AEnvironment::getTaskSpots()
+    {
+        return taskSpots;
+    }   
+    
+    std::vector<AResource*> AEnvironment::getResources()
+    {
+        return resources;
+    }
+    
     void AEnvironment::dump()
     {
         _dump();

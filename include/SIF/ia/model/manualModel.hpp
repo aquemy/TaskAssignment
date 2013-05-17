@@ -59,7 +59,7 @@ public :
      * @param _time Ellapsed time since the last update
      * @param _spatialData Data
      */
-    virtual void update(double _time, SpatialData& _spatialData);
+    virtual void update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
     
 protected :
     
@@ -67,7 +67,7 @@ protected :
      * Evaluation of the situation : define how the situation has to be evaluated, according to the current strategy
      * @return Value of the evaluation
      */
-    virtual int evalSituation();
+    virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
     
     /**
      * Learning process

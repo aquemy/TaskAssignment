@@ -38,8 +38,7 @@ namespace sif
         int _rT, 
         int _lT
    ) : 
-   Constraint(_priority),
-    task(_task),
+   Constraint(_task, _priority),
             step(_step),
             op(_comp),
             reachCondition(_reachCondition),
@@ -53,7 +52,7 @@ namespace sif
     bool StepConstraint::operator()()
     {
         bool res;
-        int x = task.getValue();
+        int x = Constraint::t.getValue();
         if(op == ConstraintComp::GREATER)
         {
             if(!lastValue)

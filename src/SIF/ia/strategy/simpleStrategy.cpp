@@ -26,28 +26,89 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include <vector>
+#include <cmath>
+
+#include <SIF/constraint/constraint.hpp>
+#include <SIF/utils/logger.hpp>
+
 namespace sif
 {
     
     template <int Dim, class Type, class Data>
-    SimpleStrategy<Dim, Type, Data>::SimpleStrategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment& _assignment
-                    ) :
-        Strategy<Dim, Type, Data>(_constraintEval, 
-                        _taskSpotEval, 
-                        _resourceEval, 
-                        _globalResourceEval, 
-                        _evalSituation, 
-                        _assignment)
-    { }
+    SimpleStrategy<Dim, Type, Data>::SimpleStrategy(Assignment& _assignment) :
+        Strategy<Dim, Type, Data>(_assignment),
+        firstNotSatisfied(nullptr)
+    { 
+        // Creation of evalFunctions
+        taskSpotEval = [=](ATaskSpot& i) -> int {
+            if(&(i.getTask()) == &(firstNotSatisfied->getTask()))
+                return 1;
+            else
+                return 0; 
+        };
+    }
 
-     template <int Dim, class Type, class Data>
+    template <int Dim, class Type, class Data>
     int SimpleStrategy<Dim, Type, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
-    { }
+    { 
+        ConstraintSystem cs = _constraintSystem;
+        firstNotSatisfied = nullptr;
+        
+        for(unsigned i = 0; i < cs.size(); i++)
+        {
+            if(!cs.top()->operator()())
+            {
+                firstNotSatisfied = cs.top();
+                break;
+            }    
+            cs.pop();
+        }
+        
+        logger(Logger::PROGRESS) << "SimpleStrategy : Eval constraints";
+        
+        std::string message = "First not satisfied constraint : "+std::to_string((long int)firstNotSatisfied);
+        logger(Logger::INFO) << message;
+        
+        
+        logger(Logger::PROGRESS) << "SimpleStrategy : Eval taskSpot"; 
+        std::vector<ATaskSpot*> taskSpots = _spatialData.getTaskSpots();
+        taskSpotsTable = EvalLoop(taskSpotEval, taskSpots);
+        
+        for(auto e : taskSpotsTable)
+        {
+            std::string message = std::to_string((long int)e.first)+" ("+std::to_string(e.second)+")";
+            logger(Logger::INFO) << message;
+        }
+        
+        logger(Logger::PROGRESS) << "SimpleStrategy : Eval (resources / taskSpots)";
+        std::vector<AResource*> resources = _spatialData.getResources();
+        
+        for(auto res : resources)
+        {
+            for(auto ts : taskSpotsTable)
+            {
+                if(ts.second == 1)
+                {
+                    // TODO : use functors to define distance between objects
+                    int dist = 0; // Manhatan distance
+                    Coord<Dim, Type> coordR = res->getCoord();
+                    Coord<Dim, Type> coordTS = ts->getCoord();
+                    
+                    for(unsigned i = 0; i < Dim, i++)
+                        res += abs(coordR[i] - coordTS[i]);
+                        
+                    Strategy<Dim, Type, Data>::couples[std::make_pair<AResource*, ATaskSpot*>(res, ts.first)] = res;
+                }
+            }
+        }
+        
+        int situationEval = 0;
+        for(auto e : couples)
+            situationEval += e.second;
+
+        return situationEval;
+    }
     
 }
 

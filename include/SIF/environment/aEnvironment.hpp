@@ -37,6 +37,9 @@
 namespace sif
 {
 
+class AResource;
+class SpatialData;
+
 /** AEnvironment : Abstract class for environment.
 
 @see sif::Environment
@@ -81,6 +84,18 @@ public :
      * @param _taskSpots Vector of taskSpots
      */
     void addObject(std::vector<ATaskSpot*>& _taskSpots);
+    
+    /**
+     * Get TaskSpots
+     * @return Vector of TaskSpots
+     */
+    std::vector<ATaskSpot*> getTaskSpots();
+    
+    /**
+     * Get Resources
+     * @return Vector of Resources
+     */
+    std::vector<AResource*> getResources();
     
     /**
      * Debug function to show all informations about the class

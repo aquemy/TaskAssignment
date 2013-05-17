@@ -30,18 +30,7 @@ namespace sif
 {
 
     template <int Dim, class Type, class Data>
-    Strategy<Dim, Type, Data>::Strategy(ConstraintEval& _constraintEval,
-                    TaskSpotEval<Dim, Type>& _taskSpotEval,
-                    ResourceEval<Dim, Type, Data>& _resourceEval, 
-                    ResourceEval<Dim, Type, Data>& _globalResourceEval,
-                    Eval<int> _evalSituation,
-                    Assignment& _assignment
-                    ) :
-        constraintEval(_constraintEval),
-        taskSpotEval(_taskSpotEval),
-        resourceEval(_resourceEval),
-        globalResourceEval(_globalResourceEval),
-        evalSit(_evalSituation),
+    Strategy<Dim, Type, Data>::Strategy(Assignment& _assignment) :
         assignment(_assignment)
     { }
     
@@ -49,8 +38,7 @@ namespace sif
     std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Strategy<Dim, Type, Data>::assign()
     { 
         logger(Logger::PROGRESS) << "Strategy : assignment";
-        std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> test;
-        return test;
+        return assignment(couples);
     }
     
 }

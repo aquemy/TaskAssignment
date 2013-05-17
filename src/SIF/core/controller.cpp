@@ -75,7 +75,7 @@ void Controller::addStep(Step _step, unsigned _pos)
 }
    
 template <int Dim, class Type, class Data>
-void Controller::init(IA<Dim, Type, Data>& _ia)
+void Controller::init(IA<Dim, Type, Data>& _ia, Environment<Dim, Type, Data>& _env)
 {
     logger(Logger::PROGRESS) << "Init Controller.";
     
@@ -83,8 +83,9 @@ void Controller::init(IA<Dim, Type, Data>& _ia)
     if(Controller::cont.size() == 0)
         throw std::runtime_error("One criterion is requiered at least !");
         
-    if(Controller::env == nullptr)
-        throw std::runtime_error("Controller needs an environment !");
+    // TODO Surchage de la méthode init    
+    /*if(Controller::env == nullptr)
+        throw std::runtime_error("Controller needs an environment !");*/
         
     // If SpatialData is not specified, we created it
     if(spatialData == nullptr)
@@ -92,15 +93,14 @@ void Controller::init(IA<Dim, Type, Data>& _ia)
         // If we have partition or indexing algorithm AND environment
         //if()
         logger(Logger::DEBUG) << "Controller : SpatialData creation";
-        spatialData = new SpatialData();
+        spatialData = new SpatialData(&_env);
     }
     
-    env->setSpatialData(*spatialData);
+    _env.setSpatialData(*spatialData);
     _ia.setSpatialData(*spatialData);
     
     spatialData->startPartitioning();
     spatialData->startIndexing();
-    
 
     Controller::initialized = true;
 }

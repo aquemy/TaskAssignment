@@ -64,6 +64,11 @@ public :
     virtual void update(double _time);
     
     /**
+     * Return Task
+     */
+    const Task& getTask() const;
+    
+    /**
      * Debug function to show all informations about the class
      */
     void dump();

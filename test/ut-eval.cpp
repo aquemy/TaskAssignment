@@ -47,13 +47,13 @@ int main(void)
         coord[0] = 0;
         coord[1] = 0;
         
-        std::vector<Resource<2,int,int>*> res;
+        std::vector<AResource*> res;
         for(unsigned i = 0; i < 5; i++)
             res.push_back(new Resource<2,int,int>(coord, 100, false, spa));
     
-		EvalTable<Resource<2, int, int>> table;
+		EvalTable<AResource> table;
 		
-		ResourceEval<2, int, int> evalFunc = [](Resource<2, int, int>& i) { return 1; };
+		ResourceEval evalFunc = [](AResource& i) { return 1; };
 		
 		table = EvalLoop(evalFunc, res);
 		

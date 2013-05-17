@@ -31,7 +31,9 @@
 namespace sif
 {
 
-    Constraint::Constraint(unsigned _priority) : priority(_priority)
+    Constraint::Constraint(Task& _t, unsigned _priority) :
+        t(_t),
+        priority(_priority)
     {}
     
     void Constraint::setPriority(unsigned _priority)
@@ -47,6 +49,16 @@ namespace sif
     bool Constraint::operator<(Constraint& _const)
     {
         return priority < _const.getPriority();
+    }
+    
+    bool ConstraintCompare::operator()(Constraint* _c1, Constraint* _c2)
+    {
+        return *_c1 < *_c2;
+    }
+    
+    const Task& Constraint::getTask() const
+    {
+        return t;
     }
 
 }

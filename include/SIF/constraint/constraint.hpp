@@ -29,6 +29,8 @@
 #ifndef _SIF_CONSTRAINT_
 #define _SIF_CONSTRAINT_
 
+#include <SIF/environment/task.hpp>
+
 namespace sif
 {
 
@@ -47,7 +49,7 @@ public :
      * Default constructor
      * @param _priority Constraint priority
      */ 
-    Constraint(unsigned _priority);
+    Constraint(Task& _t, unsigned _priority);
     
     /**
      * Change the priority
@@ -73,9 +75,12 @@ public :
      * @return boolean
      */ 
     virtual bool operator()() = 0;
+    
+    const Task& getTask() const;
 
 protected :
 
+    Task& t;
     unsigned priority;  ///< Priority of the constraint
 
 };

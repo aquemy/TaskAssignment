@@ -48,7 +48,6 @@ int main(void)
     
         // Create simple 2D environment
         Environment<2, int, int> env;
-        Controller::setEnvironment(env);
         
         // Add some resources randomly
         AStar spa;
@@ -64,8 +63,13 @@ int main(void)
         
         env.addObject(res);
         
-        // Add some taskSpots
+        // Create some tasks and the constraintSystem
         Task t;
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        ConstraintSystem constraintSystem;
+        constraintSystem.push(&sc);
+        
+        // Add some taskSpots
         std::vector<ATaskSpot*> taskSpots;
         for(unsigned i = 0; i < 5; i++)
         {
@@ -75,24 +79,18 @@ int main(void)
         }
         
         env.addObject(taskSpots);
-       
-        // Eval Functions creation
-        ConstraintEval ce = [](Constraint& i) -> int { return 0; };
-        TaskSpotEval<2,int> tsp = [](TaskSpot<2, int>& i) -> int { return 0; };
-        ResourceEval<2,int, int> re = [](Resource<2, int, int>& i) -> int { return 0; };
-        Eval<int> e = [](int& i) -> int { return 0; };
         
         // Assignment
         Kuhn assignment;
         
         // Strategies creation
-        SimpleStrategy<2,int,int> s1(ce, tsp, re, re, e, assignment);
+        SimpleStrategy<2,int,int> s1(assignment);
         
         // Model creation
         ManualModel<2,int,int> model(s1);
         
         // IA Creation
-        IA<2,int,int> ia(model);
+        IA<2,int,int> ia(model, constraintSystem);
         
         // Stop criterion
         TimeContinue cont(5);
@@ -117,7 +115,7 @@ int main(void)
         Controller::addStep(iaStep);
         
         // Init and launch the simulation
-        Controller::init(ia);
+        Controller::init(ia, env);
         Controller::run();
         
         // Free Memory 

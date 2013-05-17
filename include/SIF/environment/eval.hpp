@@ -34,8 +34,8 @@
 #include <vector>
 
 #include <SIF/constraint/constraint.hpp>
-#include <SIF/environment/taskSpot.hpp>
-#include <SIF/environment/resource.hpp>
+#include <SIF/environment/aTaskSpot.hpp>
+#include <SIF/environment/aResource.hpp>
 
 namespace sif
 {
@@ -73,14 +73,12 @@ using ConstraintEval = Eval<Constraint>;
 /** 
  * TaskSpotEval : Typedef for the TaskSpot evaluation
 */
-template <int Dim, class Type>
-using TaskSpotEval = Eval<TaskSpot<Dim, Type>>;
+using TaskSpotEval = Eval<ATaskSpot>;
 
 /** 
  * ResourceEval : Typedef for the Resource evaluation
 */
-template <int Dim, class Type, class Data>
-using ResourceEval = Eval<Resource<Dim, Type, Data>>;
+using ResourceEval = Eval<AResource>;
 
 }
 
