@@ -84,13 +84,13 @@ int main(void)
         Kuhn assignment;
         
         // Strategies creation
-        SimpleStrategy<2,int,int> s1(assignment);
+        SimpleStrategy<2,int> s1(assignment);
         
         // Model creation
-        ManualModel<2,int,int> model(s1);
+        ManualModel<2,int> model(s1);
         
         // IA Creation
-        IA<2,int,int> ia(model, constraintSystem);
+        IA<2,int> ia(model, constraintSystem);
         
         // Stop criterion
         TimeContinue cont(5);
@@ -110,7 +110,7 @@ int main(void)
         
         // Step IA
         unsigned iaDelay = 1000; // ms
-        auto iaController = bind(&IA<2,int,int>::update, std::ref(ia), placeholders::_1);
+        auto iaController = bind(&IA<2,int>::update, std::ref(ia), placeholders::_1);
         Step iaStep(iaController, iaDelay);
         Controller::addStep(iaStep);
         

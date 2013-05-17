@@ -92,7 +92,7 @@ public :
      * @param _ia IA for the simulation
      */
     template <int Dim, class Type, class Data>
-    static void init(IA<Dim, Type, Data>& _ia, Environment<Dim, Type, Data>& _env);
+    static void init(IA<Dim, Type>& _ia, Environment<Dim, Type, Data>& _env);
     
     /**
      * Start the space partitioning

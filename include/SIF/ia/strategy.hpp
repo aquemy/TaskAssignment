@@ -44,7 +44,7 @@ namespace sif
 @see sif::Model,
 */
 
-template <int Dim, class Type, class Data>
+template <int Dim, class Type>
 class Strategy
 {
 public :
@@ -72,7 +72,7 @@ public :
      * Perform the assignment of resources
      * @return assigment information
      */
-    virtual std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> assign();
+    virtual std::map<AResource*,ATaskSpot*> assign();
     
 protected :
    

@@ -29,13 +29,13 @@
 namespace sif
 {
 
-    template <int Dim, class Type, class Data>
-    Strategy<Dim, Type, Data>::Strategy(Assignment& _assignment) :
+    template <int Dim, class Type>
+    Strategy<Dim, Type>::Strategy(Assignment& _assignment) :
         assignment(_assignment)
     { }
     
-    template <int Dim, class Type, class Data>
-    std::map<Resource<Dim, Type, Data>*,TaskSpot<Dim, Type>*> Strategy<Dim, Type, Data>::assign()
+    template <int Dim, class Type>
+    std::map<AResource*,ATaskSpot*> Strategy<Dim, Type>::assign()
     { 
         logger(Logger::PROGRESS) << "Strategy : assignment";
         return assignment(couples);

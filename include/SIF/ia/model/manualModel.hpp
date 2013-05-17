@@ -42,8 +42,8 @@ the current strategy is defined by the user.
 @see sif::IA, sif::Strategy, sif::Model
 */
 
-template <int Dim, class Type, class Data>
-class ManualModel : public Model<Dim, Type, Data>
+template <int Dim, class Type>
+class ManualModel : public Model<Dim, Type>
 {
 
 public : 
@@ -52,7 +52,7 @@ public :
      * Constructor
      * @param _currentStrategy Main strategy
      */
-    ManualModel(Strategy<Dim, Type, Data>& _currentStrategy);
+    ManualModel(Strategy<Dim, Type>& _currentStrategy);
     
     /**
      * Update Model

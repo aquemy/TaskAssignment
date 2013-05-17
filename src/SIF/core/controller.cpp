@@ -75,7 +75,7 @@ void Controller::addStep(Step _step, unsigned _pos)
 }
    
 template <int Dim, class Type, class Data>
-void Controller::init(IA<Dim, Type, Data>& _ia, Environment<Dim, Type, Data>& _env)
+void Controller::init(IA<Dim, Type>& _ia, Environment<Dim, Type, Data>& _env)
 {
     logger(Logger::PROGRESS) << "Init Controller.";
     

@@ -39,9 +39,9 @@ namespace sif
 
 @see sif::Model,
 */
-    
-template <int Dim, class Type, class Data>
-class SimpleStrategy : public Strategy<Dim, Type, Data>
+
+template <int Dim, class Type>
+class SimpleStrategy : public Strategy<Dim, Type>
 {
 public :
 

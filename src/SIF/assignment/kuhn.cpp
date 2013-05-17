@@ -27,31 +27,33 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "SIF/assignment/kuhn.hpp"
+#include <string>
 
 namespace sif
 {
 
 	std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap)
     {
-    
+        logger(Logger::INFO) << "Khun algorithm !";
+        
 		std::vector<AResource*> _resources;
 		std::vector<ATaskSpot*> _taskSpots;
 	
 		// Step 1 : List of Resource & TaskSpot
 		for (auto& eval : _mymap)
 		{
-			if (std::find(_resources.begin(), _resources.end(), &*eval.first.first) == _resources.end())
+			if (std::find(_resources.begin(), _resources.end(), eval.first.first) == _resources.end())
 			{  	// Recovery of resources
 				_resources.push_back(eval.first.first);
 			}
 			
-			if (std::find(_taskSpots.begin(), _taskSpots.end(), &*eval.first.second) == _taskSpots.end())
+			if (std::find(_taskSpots.begin(), _taskSpots.end(), eval.first.second) == _taskSpots.end())
 			{	// Recovery of taskSpots
 				_taskSpots.push_back(eval.first.second);
 			}
 		
 		}
-		
+		logger(Logger::INFO) << "A";
 		// Step 2 : Creation of square matrix
 		int sizeResources = _resources.size(), sizeTaskSpots = _taskSpots.size();
 		if (sizeResources > sizeTaskSpots)
@@ -68,7 +70,7 @@ namespace sif
 				_resources.push_back(nullptr);
 			}
 		}
-	
+	    logger(Logger::INFO) << "B";
 		// Cost Matrix
 		cost.resize(_resources.size());
 		for (int i=0; i<_resources.size(); i++)
@@ -77,34 +79,51 @@ namespace sif
 			for (int j=0; j<_taskSpots.size(); j++)
 				cost[i][j] = -1;
 		}
-	
+	    logger(Logger::INFO) << "C";
 		for (auto& eval : _mymap)
 		{
 			bool find = false;
 			int indR = 0, indTS = 0;
-		
-			while (indR< _resources.size() && !find)
+		    logger(Logger::INFO) << "C1";
+			while (indR < _resources.size() && !find)
 			{
-				if (&*eval.first.first == _resources[indR])
+			    
+				if (eval.first.first == _resources[indR])
 					find = true;
-				indR++;
+				else
+				    indR++;
 			}
 			find = false;
+			logger(Logger::INFO) << "C2";
 			while (indTS< _taskSpots.size() && !find)
 			{
-				if (&*eval.first.second == _taskSpots[indTS])
+				if (eval.first.second == _taskSpots[indTS])
 					find = true;
-				indTS++;
+			    else
+				    indTS++;
 			}
+			logger(Logger::INFO) << "C3";
 			cost[indR][indTS] = eval.second;
+			logger(Logger::INFO) << "C4";
 		}
+		
 		for (int i=0; i<cost.size(); i++)
 		{
 			for (int j=0; j<cost.size(); j++)
 				if (cost[i][j] == -1)
 					cost[i][j] = INT_MAX;
 		}
-	
+		
+		for(auto i : cost)
+		{
+		    std::string message;
+		    for(auto j : i)
+		    {
+		        message += " "+std::to_string(j);
+		        
+	        }
+	        logger(Logger::INFO) << message;
+		}
 		// Algorithm : Kuhn */
 		int n = _resources.size();
 		typeMat mat(n);
@@ -117,16 +136,28 @@ namespace sif
 				mat[i][j].second = Normal;
 			}
 		}
-	
+	    logger(Logger::INFO) << "D";
 		subtractionMins(mat);
-	
+	    logger(Logger::INFO) << "E";
 		int line;
 		bool b, isPossible, repeat = true;
 		std::vector<bool> markedLines(n), markedRows(n);
 		int compteur = 0;
 		do
 		{
+		    for(auto i : mat)
+		{
+		    std::string message;
+		    for(auto j : i)
+		    {
+		        message += " "+std::to_string(j.first);
+		        
+	        }
+	        logger(Logger::INFO) << message;
+		}
+		    logger(Logger::INFO) << "_______________________";
 			// Clean
+			//logger(Logger::INFO) << "E1";
 			for (int i=0; i<n; i++)
 			{
 				markedLines[i] = false;
@@ -134,11 +165,12 @@ namespace sif
 				for (int j=0; j<n; j++)
 					mat[i][j].second = Normal;
 			}
-	
+	        //logger(Logger::INFO) << "E2";
 			// 2- Encadrer et barrer les zéros
 			isPossible = true;
 			while (isPossible)
 			{
+			    
 				int i = 0;
 				line = lineWLessZUncrossed (mat);
 				if (line != -1)
@@ -158,12 +190,14 @@ namespace sif
 				else
 					isPossible = false;
 			}
+			//logger(Logger::INFO) << "E3";
 			if (!zeroOnAllRC(mat))
 			{
 				markLinesInit(mat, markedLines);
 				bool _continue = true;
 				while (_continue)
 				{
+				    //logger(Logger::INFO) << "E31";
 					_continue = markRows(mat, markedLines, markedRows);
 					if (_continue)
 						_continue = markLines(mat, markedLines, markedRows);
@@ -174,7 +208,7 @@ namespace sif
 				repeat = false;
 			
 		} while (repeat);
-		
+		logger(Logger::INFO) << "F";
 		std::map<AResource*,ATaskSpot*> assignment;
 		int i = 0, j = 0;
 		while(i < n)
@@ -191,7 +225,7 @@ namespace sif
 			}
 			i++;
 		}
-		
+		logger(Logger::PROGRESS) << "END Khun algorithm !";
 		return assignment;
     }
 

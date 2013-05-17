@@ -81,7 +81,7 @@ public :
      * @param _time Ellapsed time since the last update
      */
     virtual void update(double _time);
-
+    
 protected : 
 
     /**

@@ -29,15 +29,15 @@
 namespace sif
 {
     
-    template <int Dim, class Type, class Data>
-    ManualModel<Dim, Type, Data>::ManualModel(Strategy<Dim, Type, Data>& _currentStrategy) :
-        Model<Dim, Type, Data>(_currentStrategy)
+    template <int Dim, class Type>
+    ManualModel<Dim, Type>::ManualModel(Strategy<Dim, Type>& _currentStrategy) :
+        Model<Dim, Type>(_currentStrategy)
     { 
         
     }
 
-    template <int Dim, class Type, class Data>
-    void ManualModel<Dim, Type, Data>::update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
+    template <int Dim, class Type>
+    void ManualModel<Dim, Type>::update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
     { 
         logger(Logger::PROGRESS) << "ManualModel : UPDATE";
         evalSituation(_spatialData, _constraintSystem);
@@ -46,30 +46,30 @@ namespace sif
         assign();
     }
     
-    template <int Dim, class Type, class Data>
-    int ManualModel<Dim, Type, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
+    template <int Dim, class Type>
+    int ManualModel<Dim, Type>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
     { 
         logger(Logger::PROGRESS) << "ManualModel : Situation evaluation.";
-        Model<Dim, Type, Data>::currentStrategy.evalSituation(_spatialData, _constraintSystem);
+        Model<Dim, Type>::currentStrategy.evalSituation(_spatialData, _constraintSystem);
     }
 
-    template <int Dim, class Type, class Data>
-    void ManualModel<Dim, Type, Data>::learn() 
+    template <int Dim, class Type>
+    void ManualModel<Dim, Type>::learn() 
     { 
         logger(Logger::PROGRESS) << "ManualModel : Learn.";
     }
 
-    template <int Dim, class Type, class Data>
-    void ManualModel<Dim, Type, Data>::decide()
+    template <int Dim, class Type>
+    void ManualModel<Dim, Type>::decide()
     { 
         logger(Logger::PROGRESS) << "ManualModel : Decide.";
     }
 
-    template <int Dim, class Type, class Data>
-    void ManualModel<Dim, Type, Data>::assign()
+    template <int Dim, class Type>
+    void ManualModel<Dim, Type>::assign()
     { 
         logger(Logger::PROGRESS) << "ManualModel : Assign.";
-        Model<Dim, Type, Data>::currentStrategy.assign();
+        Model<Dim, Type>::currentStrategy.assign();
     }
     
 }

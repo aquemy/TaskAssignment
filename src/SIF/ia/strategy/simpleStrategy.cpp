@@ -28,16 +28,17 @@
 
 #include <vector>
 #include <cmath>
+#include <utility>
 
+#include <SIF/environment/coordonate.hpp>
 #include <SIF/constraint/constraint.hpp>
 #include <SIF/utils/logger.hpp>
 
 namespace sif
 {
-    
-    template <int Dim, class Type, class Data>
-    SimpleStrategy<Dim, Type, Data>::SimpleStrategy(Assignment& _assignment) :
-        Strategy<Dim, Type, Data>(_assignment),
+    template <int Dim, class Type>
+    SimpleStrategy<Dim, Type>::SimpleStrategy(Assignment& _assignment) :
+        Strategy<Dim, Type>(_assignment),
         firstNotSatisfied(nullptr)
     { 
         // Creation of evalFunctions
@@ -49,8 +50,8 @@ namespace sif
         };
     }
 
-    template <int Dim, class Type, class Data>
-    int SimpleStrategy<Dim, Type, Data>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
+    template <int Dim, class Type>
+    int SimpleStrategy<Dim, Type>::evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem)
     { 
         ConstraintSystem cs = _constraintSystem;
         firstNotSatisfied = nullptr;
@@ -92,19 +93,19 @@ namespace sif
                 {
                     // TODO : use functors to define distance between objects
                     int dist = 0; // Manhatan distance
-                    Coord<Dim, Type> coordR = res->getCoord();
-                    Coord<Dim, Type> coordTS = ts->getCoord();
+                    Coordonate<Dim, Type> coordR = static_cast<Resource<Dim, Type, int>*>(res)->getCoordonates();
+                    Coordonate<Dim, Type> coordTS = static_cast<TaskSpot<Dim, Type>*>(ts.first)->getCoordonates();
                     
-                    for(unsigned i = 0; i < Dim, i++)
-                        res += abs(coordR[i] - coordTS[i]);
+                    for(unsigned i = 0; i < Dim; i++)
+                        dist += abs(coordR[i] - coordTS[i]);
                         
-                    Strategy<Dim, Type, Data>::couples[std::make_pair<AResource*, ATaskSpot*>(res, ts.first)] = res;
+                    Strategy<Dim, Type>::couples[std::pair<AResource*, ATaskSpot*>(res, ts.first)] = dist;
                 }
             }
         }
         
         int situationEval = 0;
-        for(auto e : couples)
+        for(auto e : Strategy<Dim, Type>::couples)
             situationEval += e.second;
 
         return situationEval;

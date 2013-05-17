@@ -31,28 +31,28 @@
 namespace sif
 {
     
-    template <int Dim, class Type, class Data>
-    Model<Dim, Type, Data>::Model(Strategy<Dim, Type, Data>& _currentStrategy) :
+    template <int Dim, class Type>
+    Model<Dim, Type>::Model(Strategy<Dim, Type>& _currentStrategy) :
         currentStrategy(_currentStrategy)
     { 
         addStrategy(_currentStrategy);
     }
 
-    template <int Dim, class Type, class Data>
-    void Model<Dim, Type, Data>::addStrategy(Strategy<Dim, Type, Data>& _strategy)
+    template <int Dim, class Type>
+    void Model<Dim, Type>::addStrategy(Strategy<Dim, Type>& _strategy)
     { 
         strategies.push_back(&_strategy);
     }
     
-    template <int Dim, class Type, class Data>
-    void Model<Dim, Type, Data>::setCurrentStrategy(unsigned _pos)
+    template <int Dim, class Type>
+    void Model<Dim, Type>::setCurrentStrategy(unsigned _pos)
     { 
         if(_pos < strategies.size())
             currentStrategy = *strategies[_pos];
     }
     
-    template <int Dim, class Type, class Data>
-    void Model<Dim, Type, Data>::setCurrentStrategy(Strategy<Dim, Type, Data>& _strategy)
+    template <int Dim, class Type>
+    void Model<Dim, Type>::setCurrentStrategy(Strategy<Dim, Type>& _strategy)
     { 
         if(std::find(std::begin(strategies), std::end(strategies), &_strategy) != std::end(strategies))
             currentStrategy = _strategy;

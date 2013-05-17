@@ -41,7 +41,7 @@ IA
 @see sif::Observer,
 */
 
-template <int Dim, class Type, class Data>
+template <int Dim, class Type>
 class IA : public Observer
 {
 public :
@@ -50,7 +50,7 @@ public :
      * Constructor
      * @param _model Model of IA
      */
-    IA(Model<Dim, Type, Data>& _model, ConstraintSystem& _constraintSystem);
+    IA(Model<Dim, Type>& _model, ConstraintSystem& _constraintSystem);
     
     /**
      * Update IA
@@ -62,7 +62,7 @@ public :
      * Set the model
      * @param _model New strategy model
      */
-    void setModel(Model<Dim, Type, Data>& _model);
+    void setModel(Model<Dim, Type>& _model);
     
     /**
      * Set the spatial data
@@ -72,7 +72,7 @@ public :
 
 protected :
 
-    Model<Dim, Type, Data>& model;
+    Model<Dim, Type>& model;
     SpatialData* spatialData;
     ConstraintSystem& constraintSystem;
     
