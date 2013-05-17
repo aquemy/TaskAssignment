@@ -43,9 +43,21 @@ int main(void)
      */
     try
     {/*
-    	Task t;
-        TaskSpot<2,int> ts(Coordonate<2,int>(), t, cinq);
-    
+    	Task t, s, u;
+        ATaskSpot ts1 (t, cinq);
+        ATaskSpot ts2 (s, cinq);
+        ATaskSpot ts3 (u, cinq);
+    	AResource r1 (2.1, FALSE, nullptr);
+    	AResource r2 (1.1, FALSE, nullptr);
+    	
+    	std::map<std::pair<AResource*, ATaskSpot*>, int> map;
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (make_pair(ts1, r1), 1));
+    	
+    	
+    	
+    	/*
+    	 if(t.getValue() == 5)
+            throw runtime_error("Error in expectations for first test");
         //std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap)//*/
 
     }

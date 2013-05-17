@@ -74,6 +74,7 @@ protected :
 	int lineWLessZUncrossed (typeMat & m);
 	void barZLocatedSameArea(typeMat & m, int l, int c);
 	bool zeroOnAllRC(typeMat & m);
+	bool ZSurrondSameCol(typeMat & m, int c);
 	void markLinesInit(typeMat & m, std::vector<bool> & mdL);
 	bool markLines(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
 	bool markRows(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
