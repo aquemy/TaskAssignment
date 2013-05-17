@@ -51,8 +51,7 @@ Different types of TaskSpot are provided such as periodic ones.
 template <int Dim, class Type>
 class TaskSpot : public ATaskSpot, public DynamicObject<Dim, Type>//, public Observable<ActivePolicy>
 {
-public :
-
+public :    
     /**
      * Constructor
      * @param _coord Coordonates of the taskSpot

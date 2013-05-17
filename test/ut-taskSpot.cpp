@@ -44,8 +44,7 @@ int main(void)
     try
     {
         Task t;
-        TaskSpot<2,int> ts(Coordonate<2,int>(), t, cinq);
-        ts.update(0);
+        ATaskSpot<2,int> ts(t, cinq);
 		
 	// Should be 5
         if(t.getValue() == 5)

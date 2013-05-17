@@ -2,9 +2,6 @@ SET(SIF_SRC_DIR "src/SIF")
 SET(SIF_INC_DIR "include/SIF")
 
 set(SRC_FROM_INC
-    assignment/assignment.hpp
-    assignment/assignmentFactory.hpp
-    assignment/kuhn.hpp
     core/activePolicy.hpp
     core/controller.hpp
     core/multiThread.hpp
@@ -45,6 +42,9 @@ set(SRC_FROM_INC
 )
 
 set(SRC_FROM_SRC
+    assignment/assignment.cpp
+    assignment/assignmentFactory.cpp
+    assignment/kuhn.cpp
     constraint/constraint.cpp
     constraint/constraintSystem.cpp
     constraint/customConstraint.cpp
