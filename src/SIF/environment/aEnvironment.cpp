@@ -37,9 +37,6 @@ namespace sif
         logger(Logger::PROGRESS) << "Environment : UPDATE";
         for(auto r : resources)
             r->update(_time);
-            
-       for(auto t : taskSpots)
-            t->update(_time);
     }
     
     void AEnvironment::addObject(std::vector<AResource*>& _resources)

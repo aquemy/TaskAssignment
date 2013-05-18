@@ -38,7 +38,11 @@ namespace sif
     std::map<AResource*,ATaskSpot*> Strategy<Dim, Type>::assign()
     { 
         logger(Logger::PROGRESS) << "Strategy : assignment";
-        return assignment(couples);
+        auto res = assignment(couples);
+        for(auto& couple : res)
+           couple.first->setAssignment(*couple.second);
+            
+        return res;
     }
     
 }

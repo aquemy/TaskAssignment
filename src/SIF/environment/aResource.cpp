@@ -38,32 +38,6 @@ namespace sif
         spa(_spa)
     {}
     
-    void AResource::update(double _time)
-    { 
-        logger(Logger::PROGRESS) << "Resource : update";
-        if(assignment != nullptr)
-        {
-            logger(Logger::INFO) << "Resource : assignment found.";
-            if(path != nullptr)
-            {
-                logger(Logger::INFO) << "Resource : moving.";
-            }
-            else
-            {
-                logger(Logger::INFO) << "Resource : path calculation.";
-                /*template<class Data, int Dim, class Type>
-    Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
-                                                      const Coordonate<Dim, Type>& _to, 
-                                                      const Tree<Data> _data);*/
-                //path = spa();
-            }
-        }
-        else
-        {
-            logger(Logger::INFO) << "Resource : no assigment / wait.";
-        }
-    }
-    
     bool AResource::isBusy() const
     { 
         return busy;
@@ -77,6 +51,12 @@ namespace sif
     void AResource::setSpatialData(SpatialData& _spatialData)
     { 
         spatialData = &_spatialData;
+    }
+    
+    void AResource::setAssignment(ATaskSpot& _assignment)
+    { 
+        assignment = &_assignment;
+        setBusy(true);
     }
     
     void AResource::dump()

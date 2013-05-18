@@ -30,7 +30,7 @@
 
 namespace sif
 {
-    
+
     template <int Dim, class Type>
     Model<Dim, Type>::Model(Strategy<Dim, Type>& _currentStrategy) :
         currentStrategy(_currentStrategy)

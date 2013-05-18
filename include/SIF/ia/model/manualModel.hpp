@@ -30,6 +30,8 @@
 #define _SIF_MANUAL_MODEL_
 
 #include <SIF/ia/model.hpp>
+#include <SIF/environment/aResource.hpp>
+#include <SIF/environment/aTaskSpot.hpp>
 
 namespace sif
 {
@@ -82,7 +84,7 @@ protected :
     /**
      * Assignment process : mainly dedicated to assign through the assignment algorithm of the main strategy
      */
-    virtual void assign();
+    virtual std::map<AResource*,ATaskSpot*> assign();
     
 };
 

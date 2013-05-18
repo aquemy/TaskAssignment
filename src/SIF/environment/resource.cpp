@@ -47,15 +47,35 @@ namespace sif
     }
     
     template <int Dim, class Type, class Data>
-    void Resource<Dim, Type, Data>::setAssignment(TaskSpot<Dim, Type>& _assignment)
-    { 
-        assignment = _assignment;
-    }
-    
-    template <int Dim, class Type, class Data>
     void Resource<Dim, Type, Data>::update(double _time)
     { 
-        AResource::update(_time);
+        logger(Logger::PROGRESS) << "Resource : update";
+        if(assignment != nullptr)
+        {
+            logger(Logger::INFO) << "Resource : assignment found.";
+            if(Resource<Dim, Type, Data>::getCoordonates() == static_cast<TaskSpot<Dim, Type>*>(assignment)->getCoordonates())
+            {
+                logger(Logger::INFO) << "Resource : Update taskSpot.";
+                assignment->update(_time);
+            }
+            else if(path != nullptr)
+            {
+                logger(Logger::INFO) << "Resource : moving.";
+            }
+            else
+            {
+                logger(Logger::INFO) << "Resource : path calculation.";
+                /*template<class Data, int Dim, class Type>
+    Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
+                                                      const Coordonate<Dim, Type>& _to, 
+                                                      const Tree<Data> _data);*/
+                //path = spa();
+            }
+        }
+        else
+        {
+            logger(Logger::INFO) << "Resource : no assigment / wait.";
+        }
     }
     
     template <int Dim, class Type, class Data>

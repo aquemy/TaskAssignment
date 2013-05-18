@@ -196,7 +196,6 @@ namespace sif
 			}
 			i++;
 		}
-		logger(Logger::PROGRESS) << "END Khun algorithm !";
 		return assignment;
     }
 

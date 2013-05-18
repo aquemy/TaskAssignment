@@ -63,7 +63,7 @@ public :
      * Update Resource
      * @param _time Ellapsed time since the last update
      */
-    virtual void update(double _time);
+    virtual void update(double _time) = 0;
       
     /**
      * Check if the resource is busy (it cannot be assigned)
@@ -82,6 +82,12 @@ public :
      * @param _spatialData New SpatialData
      */
     void setSpatialData(SpatialData& _spatialData);
+    
+    /**
+     * Set a new assignement if it is possible
+     * @param _assignment New assignment
+     */
+    void setAssignment(ATaskSpot& _assignment);
     
     /**
      * Debug function to show all informations about the class

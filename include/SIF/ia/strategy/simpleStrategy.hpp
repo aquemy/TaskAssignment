@@ -31,6 +31,8 @@
 
 #include <SIF/ia/strategy.hpp>
 #include <SIF/constraint/constraintSystem.hpp>
+#include <SIF/environment/aResource.hpp>
+#include <SIF/environment/aTaskSpot.hpp>
 
 namespace sif
 {

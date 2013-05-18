@@ -58,7 +58,7 @@ public :
      * @param _time Ellapsed time since the last update
      * @param _spatialData Data
      */
-    virtual void update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem)  = 0;
+    virtual void update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem) = 0;
     
     /**
      * Add a strategy to the model
@@ -99,10 +99,8 @@ protected :
     /**
      * Assignment process : mainly dedicated to assign through the assignment algorithm of the main strategy
      */
-    virtual void assign() = 0;
+    virtual std::map<AResource*,ATaskSpot*> assign() = 0;
    
-    
-    
     std::vector<Strategy<Dim, Type>*> strategies;        ///< Strategy used by the model
     Strategy<Dim, Type>& currentStrategy;                ///< Current strategy
     

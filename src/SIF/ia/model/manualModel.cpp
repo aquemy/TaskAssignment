@@ -66,10 +66,10 @@ namespace sif
     }
 
     template <int Dim, class Type>
-    void ManualModel<Dim, Type>::assign()
+    std::map<AResource*,ATaskSpot*> ManualModel<Dim, Type>::assign()
     { 
         logger(Logger::PROGRESS) << "ManualModel : Assign.";
-        Model<Dim, Type>::currentStrategy.assign();
+        return Model<Dim, Type>::currentStrategy.assign();
     }
     
 }

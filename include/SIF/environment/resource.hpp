@@ -71,12 +71,6 @@ public :
     void move(Direction<Dim> _dir, double _time);  
     
     /**
-     * Set a new assignement if it is possible
-     * @param _assignment New assignment
-     */
-    void setAssignment(TaskSpot<Dim, Type>& _assignment);
-    
-    /**
      * Update dynamic object
      * @param _time Ellapsed time since the last update
      */
