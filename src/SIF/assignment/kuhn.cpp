@@ -239,10 +239,11 @@ namespace sif
 		} while (repeat);
 		
 		std::map<AResource*,ATaskSpot*> assignment;
-		int i = 0, j = 0;
+		int i = 0, j;
 		while(i < n)
 		{
 			bool find = false;
+			j = 0;
 			while(j < n && find == false)
 			{
 				if (mat[i][j].second == Surrounded)
