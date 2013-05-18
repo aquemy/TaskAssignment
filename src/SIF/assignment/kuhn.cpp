@@ -121,8 +121,9 @@ namespace sif
 			}
 		}
 		subtractionMins(mat);
+		
 		int line;
-		bool b, isPossible, repeat = true;
+		bool b, isPossible, repeat = true, exception = false;
 		std::vector<bool> markedLines(n), markedRows(n);
 		int compteur = 0;
 		do
@@ -145,18 +146,40 @@ namespace sif
 				if (line != -1)
 				{
 					b = false;
-					while (!b)
+					if (!exception)
 					{
-						if (mat[line][i].first == 0)
+						while (!b)
 						{
-							if (!ZSurrondSameCol(mat, i))
-							{	mat[line][i].second = Surrounded;
-								b = true;
+							if (mat[line][i].first == 0)
+							{
+								if (!ZSurrondSameCol(mat, i))
+								{
+									mat[line][i].second = Surrounded;
+									b = true;
+								}
 							}
+							i++;
 						}
-						i++;
-					}
 					i--;
+					}
+					else // cas exception
+					{
+						logger(Logger::INFO) << "Exception !";
+						i = mat.size() -1;
+						while (!b)
+						{
+							if (mat[line][i].first == 0)
+							{
+								if (!ZSurrondSameCol(mat, i))
+								{
+									mat[line][i].second = Surrounded;
+									b = true;
+								}
+							}
+							i--;
+						}
+					i++;
+					}
 					barZLocatedSameArea(mat, line, i);
 				}
 				else
@@ -173,13 +196,48 @@ namespace sif
 					if (_continue)
 						_continue = markLines(mat, markedLines, markedRows);
 				}
-
+				/*-
+				logger(Logger::INFO) << " - ";//-*/
+				exception = isFullmarked(markedLines, markedRows);
+				/*-
+				logger(Logger::INFO) << " - ";
+				for (int i=0; i<n; i++)
+				{
+					std::string msg;
+					for (int j=0; j<n ; j++)
+					{
+						msg += std::to_string(mat[i][j].first) + " ";
+					}
+					logger(Logger::INFO) << msg;
+				}
+				logger(Logger::INFO) << " - ";
+				for (int i=0; i<n; i++)
+				{
+					std::string msg;
+					for (int j=0; j<n ; j++)
+					{
+						msg += std::to_string(mat[i][j].first) + " ";
+					}
+					logger(Logger::INFO) << msg;
+				}//-*/
 				subtractionPartTable(mat, markedLines, markedRows);
+				/*-
+				logger(Logger::INFO) << " ---------------------";
+				for (int i=0; i<n; i++)
+				{
+					std::string msg;
+					for (int j=0; j<n ; j++)
+					{
+						msg += std::to_string(mat[i][j].second) + " ";
+					}
+					logger(Logger::INFO) << msg;
+				}//-*/
 			}
 			else
 				repeat = false;
 			
 		} while (repeat);
+		
 		std::map<AResource*,ATaskSpot*> assignment;
 		int i = 0, j = 0;
 		while(i < n)
@@ -196,12 +254,38 @@ namespace sif
 			}
 			i++;
 		}
+		
+		logger(Logger::PROGRESS) << "END Khun algorithm !";
+
 		return assignment;
     }
 
 	// --------------------------------------------------------------------
 	// --------------------------------------------------------------------
-
+	
+	void Kuhn::kuhn_loop(typeMat & mat)
+	{
+		
+	}
+		
+	// --------------------------------------------------------------------
+	
+	bool Kuhn::isFullmarked(std::vector<bool> & mdL, std::vector<bool> & mdR)
+	{
+		bool b = true;
+		int i = 0;
+		while(b && i<mdL.size())
+		{
+			if (mdL[i] == 0 || mdR[i] == 0)
+				b = false;
+			i++;
+		}
+		
+		return b;
+	}
+		
+	// --------------------------------------------------------------------
+	
 	void Kuhn::subtractionMins(typeMat & mat)
 	{
 		double min = INT_MAX;
@@ -324,6 +408,13 @@ namespace sif
 				mdL[i] = true;
 			}
 		}
+		/*-
+		std::string msg = "mk l init ";
+		for (int i=0; i<m.size(); i++)
+		{
+			msg += std::to_string(mdL[i]) + " ";
+		}
+		logger(Logger::INFO) << msg;//-*/
 	}
 
 	// --------------------------------------------------------------------
@@ -336,21 +427,24 @@ namespace sif
 			if (mdL[i] == true)
 			{
 				int j = 0;
-				bool containt = false;
-				while (containt == false && j<m.size())
+				for (int j=0; j<m.size(); j++)
 				{
 					if (m[i][j].second == Crossed)
-						containt = true;
-					j++;
-				}
-				j--;
-				if (containt == true && mdR[j] == false)
-				{
-					mdR[j] = true;
-					bool_mR = true;
+					{
+						if (mdR[j] == false)
+							bool_mR = true;
+						mdR[j] = true;
+					}
 				}
 			}
 		}
+		/*-
+		std::string msg = "mk r ";
+		for (int i=0; i<m.size(); i++)
+		{
+			msg += std::to_string(mdR[i]) + " ";
+		}
+		logger(Logger::INFO) << msg;//-*/
 	
 		return bool_mR;
 	}
@@ -365,21 +459,24 @@ namespace sif
 			if (mdR[j] == true)
 			{
 				int i = 0;
-				bool containt = false;
-				while (containt == false && i<m.size())
+				for (int i=0; i<m.size(); i++)
 				{
 					if (m[i][j].second == Surrounded)
-						containt = true;
-					i++;
-				}
-				i--;
-				if (containt == true && mdL[i] == false)
-				{
-					mdL[i] = true;
-					bool_mL = true;
+					{
+						if (mdL[i] == false)
+							bool_mL = true;
+						mdL[i] = true;
+					}
 				}
 			}
 		}
+		/*-
+		std::string msg = "mk l" ;
+		for (int i=0; i<m.size(); i++)
+		{
+			msg += std::to_string(mdL[i]) + " ";
+		}
+		logger(Logger::INFO) << msg;//-*/
 	
 		return bool_mL;
 	}
@@ -388,22 +485,30 @@ namespace sif
 
 	void Kuhn::subtractionPartTable(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR)
 	{
-		double min = INT_MAX;
+		int min = INT_MAX;
 		for (int i=0; i<m.size(); i++)
 		{
 			if(mdL[i] == true)
 			{
+				/*-
+				std::string msg = "test ligne : " + std::to_string(i+1);
+				logger(Logger::INFO) << msg;//-*/
 				for (int j=0; j<m.size(); j++)
 				{
 					if(mdR[j] == false && min > m[i][j].first)
+					{
 						min = m[i][j].first;
+						/*-
+						std::string msg = "col : " + std::to_string(j+1);
+						logger(Logger::INFO) << msg;//-*/
+					}
 				}
 			
 			}
 		}
-	
+		/*-
 		std::string msg = "min : " + std::to_string(min);
-		logger(Logger::INFO) << msg;
+		logger(Logger::INFO) << msg;//-*/
 		for (int i=0; i<m.size(); i++)
 		{
 			for (int j=0; j<m.size(); j++)
