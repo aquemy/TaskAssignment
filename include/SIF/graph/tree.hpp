@@ -42,6 +42,13 @@ Tree is the class which list trees.
 template <class Data>
 class Tree
 {
+public :
+
+    /**
+    * Return a vector of all objects of the tree.
+    * @return Vector of objets
+    */
+    virtual std::vector<Data*> getData() = 0;
 
 };
 

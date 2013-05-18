@@ -40,7 +40,7 @@ namespace sif
     void Resource<Dim, Type, Data>::move(Direction<Dim> _dir, double _time)
     { 
         Coordonate<Dim, Type> tcoord = Object<Dim, Type>::coord;
-        // New position on the direction specified
+        // New position on the specified direction 
         tcoord[_dir.getValue().first] += _dir.getValue().second*(velocity*_time); 
         if(true) // TEST IN SPACE + NOT COLLIDING
             Object<Dim, Type>::coord = tcoord;
@@ -69,7 +69,10 @@ namespace sif
     Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
                                                       const Coordonate<Dim, Type>& _to, 
                                                       const Tree<Data> _data);*/
-                //path = spa();
+                /*path = spa(Resource<Dim, Type, Data>::getCoordonates(), 
+                        static_cast<TaskSpot<Dim, Type>*>(assignment)->getCoordonates(),
+                        
+                        );*/
             }
         }
         else

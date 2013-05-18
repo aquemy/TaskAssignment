@@ -51,6 +51,8 @@ public :
     
     SimpleIndex(std::vector<Data*>& _data);
     
+    virtual std::vector<Data*> getData();
+    
 protected :
     
     std::vector<Data*>& data;

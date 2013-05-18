@@ -87,6 +87,7 @@
 // Graph
 #include <SIF/graph/aPath.hpp>
 #include <SIF/graph/atlasGrid.hpp>
+#include <SIF/graph/movement.hpp>
 #include <SIF/graph/path.hpp>
 #include <SIF/graph/quadTree.hpp>
 #include <SIF/graph/rTree.hpp>

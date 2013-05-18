@@ -29,6 +29,7 @@
 #include <vector>
 #include <cmath>
 #include <utility>
+#include <algorithm>
 
 #include <SIF/environment/coordonate.hpp>
 #include <SIF/constraint/constraint.hpp>
@@ -84,6 +85,8 @@ namespace sif
         
         logger(Logger::PROGRESS) << "SimpleStrategy : Eval (resources / taskSpots)";
         std::vector<AResource*> resources = _spatialData.getResources();
+        auto busy = [](AResource* i) { return i->isBusy(); };
+        resources.erase(std::remove_if(std::begin(resources), std::end(resources), busy), std::end(resources));
         
         for(auto res : resources)
         {

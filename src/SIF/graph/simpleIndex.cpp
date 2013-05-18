@@ -34,6 +34,12 @@ namespace sif
         data(_data)
     {}
     
+    template <class Data>
+    std::vector<Data*> SimpleIndex<Data>::getData()
+    {
+        return data;
+    }
+    
 }
 
 

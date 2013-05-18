@@ -58,7 +58,7 @@ public :
      * @return A path
      */  
     template<class Data, int Dim, class Type>
-    Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
+    Path<Dim>&& operator()(const Coordonate<Dim,Type>& _from,
                                             const Coordonate<Dim, Type>& _to, 
                                             const Tree<Data> _data);
     

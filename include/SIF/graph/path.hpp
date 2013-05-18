@@ -31,6 +31,8 @@
 
 #include <list>
 
+#include <SIF/graph/movement.hpp>
+
 namespace sif
 {
 
@@ -41,8 +43,8 @@ A path is list of data elements used for resources in order they know how to rea
 @see sif::Tree
 */
 
-template <class Data>
-class Path : public std::list<Data*>
+template <int Dim>
+class Path : public std::list<Movement<Dim>>
 {
 
 };
