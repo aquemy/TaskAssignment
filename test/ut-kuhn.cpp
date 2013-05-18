@@ -42,21 +42,35 @@ int main(void)
      * Unit tests for kuhn
      */
     try
-    {/*
+    {
+    	/*/ Creation of some resource for the tests
+    	AStar spa;
+        Coordonate<2,int> coord1, coord2, coord3, coord4, coord5;
+        coord1[0] = 0;   coord1[1] = 0;
+        coord2[0] = 5;   coord2[1] = 5;
+        coord3[0] = 1;   coord3[1] = 0;
+        coord4[0] = 5;   coord4[1] = 6;
+        coord5[0] = 10;   coord5[1] = 10;
+        
+    	AResource* r1 = new Resource<2,int,int>(coord1, 100, false, spa);
+    	AResource* r2 = new Resource<2,int,int>(coord2, 100, false, spa);
+    	
     	Task t, s, u;
-        ATaskSpot ts1 (t, cinq);
-        ATaskSpot ts2 (s, cinq);
-        ATaskSpot ts3 (u, cinq);
-    	AResource r1 (2.1, FALSE, nullptr);
-    	AResource r2 (1.1, FALSE, nullptr);
+        ATaskSpot* ts1 = new TaskSpot<2,int>(coord3, t, cinq);
+        ATaskSpot* ts2 = new TaskSpot<2,int>(coord4, s, cinq);
+        ATaskSpot* ts3 = new TaskSpot<2,int>(coord5, u, cinq);
     	
+    	std::pair<AResource*, ATaskSpot*> pair;
+    	pair = std::make_pair(ts1, r1);
     	std::map<std::pair<AResource*, ATaskSpot*>, int> map;
-    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (make_pair(ts1, r1), 1));
-    	
-    	
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (pair, 1));
+    	std::map<AResource*,ATaskSpot*> res;
+    	/*
+    	Kuhn k;
+    	res = k->operator()(map);
     	
     	/*
-    	 if(t.getValue() == 5)
+    	 if()
             throw runtime_error("Error in expectations for first test");
         //std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap)//*/
 
