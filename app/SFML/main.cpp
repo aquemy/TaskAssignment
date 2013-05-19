@@ -3,6 +3,7 @@
 #include <cassert>
 #include <functional>
 #include <random>
+#include <string>
 
 #include <SFML/Graphics.hpp>
 #include <sif.hpp>
@@ -12,41 +13,62 @@
 using namespace std;
 using namespace sif;
 
-void SFML_Draw(sf::RenderWindow& window, sf::View& mapView, DEnvironment& env, double _time)
+void SFML_Draw(sf::RenderWindow& window, 
+    DEnvironment& env, 
+    sf::Text& labelTask, 
+    Task& t,
+    SimpleSP& spa,
+    AEnvironment& env2,
+    double _time)
 {
     if(window.isOpen())
     {
-               
+        // Add resources
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            sf::Vector2i pos = sf::Mouse::getPosition();
+            Coordonate<2, int> coord;
+            coord[0] = pos.x;
+            coord[1] = pos.y;
+            AResource* r = new Resource<2,int,int>(coord, 50 / 1000., false, spa);
+            env2.addObject(*r);
+        }
+        
         // To close the application
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             window.close();
                 
-        //Update components
-        
+        //Update 
+        labelTask.setString("Value : "+to_string(t.getValue()));
         env.update();
         
         // Drawing part
         window.clear();
-        window.setView(mapView);
         env.draw(window);
-        window.setView(window.getDefaultView());
+        window.draw(labelTask);
         window.display();
     }
+    else
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            window.create(sf::VideoMode(800,600), "SIF Example");
 }
 
 int main(int argc, char *argv[])
 {
     (void) argc;
     
-    const unsigned xsize = 600;
-    const unsigned ysize = 600;
+    const unsigned xsize = 590;
+    const unsigned ysize = 590;
+    
+    sf::Font font;
+    font.loadFromFile("font.ttf");
+    sf::Text labelTask("Value : 0", font, 25);
+    labelTask.setColor(sf::Color::Black);
 
     try
     {
         // Create the Window and the View
         sf::RenderWindow window(sf::VideoMode(800,600), "SIF Example");
-        sf::View mapView(sf::FloatRect(0, 0, xsize, ysize));
-        mapView.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
         
         // Random engine
         std::random_device rd;
@@ -85,7 +107,18 @@ int main(int argc, char *argv[])
         {
             coord[0] = dis(gen);
             coord[1] = dis(gen);
-            taskSpots.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i){ return ++i; }));
+            taskSpots.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time)
+                { static double up = 0;
+                    up += _time*0.0001;
+                    if((int)up > 0)
+                    {
+                        up = 0;
+                        return i + 1; 
+                    }
+                    else 
+                        return i;
+                }
+            ));
         }
         
         env.addObject(taskSpots);
@@ -114,7 +147,7 @@ int main(int argc, char *argv[])
         Controller::addStep(envStep);
         
         // Step DUMP
-        unsigned dumpDelay = 5000; // ms
+        unsigned dumpDelay = 100; // ms
         auto dump = bind(&Environment<2,int,int>::dump, std::ref(env));
         Step dumpStep(dump, dumpDelay);
         Controller::addStep(dumpStep);
@@ -127,7 +160,13 @@ int main(int argc, char *argv[])
         
         // Step SFML Draw
         unsigned sfmlDelay = envDelay; // ms
-        auto sfmlController = bind(&SFML_Draw, std::ref(window), std::ref(mapView), std::ref(envi), placeholders::_1);
+        auto sfmlController = bind(&SFML_Draw, std::ref(window),  
+                    std::ref(envi), 
+                    std::ref(labelTask), 
+                    std::ref(t), 
+                    std::ref(spa),
+                    std::ref(env),
+                    placeholders::_1);
         Step sfmlStep(sfmlController, sfmlDelay);
         Controller::addStep(sfmlStep);
         

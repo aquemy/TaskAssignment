@@ -75,7 +75,7 @@ int main(void)
         {
             coord[0] = dis(gen);
             coord[1] = dis(gen);
-            taskSpots.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i){ return ++i; }));
+            taskSpots.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
         }
         
         env.addObject(taskSpots);

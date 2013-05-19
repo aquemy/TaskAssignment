@@ -32,7 +32,7 @@
 namespace sif
 {
     
-    ATaskSpot::ATaskSpot(Task& _t, std::function<int(int&)> _f) :
+    ATaskSpot::ATaskSpot(Task& _t, std::function<int(int&, double)> _f) :
         t(_t),
         f(_f)
     { }

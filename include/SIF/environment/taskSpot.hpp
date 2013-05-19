@@ -58,7 +58,7 @@ public :
      * @param _t The associated task
      * @param _f Function which serves to update the task
      */
-    TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&)> _f);
+    TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&, double)> _f);
     
     /**
      * Update Ressource

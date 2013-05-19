@@ -17,6 +17,7 @@ public:
         rectangle.setFillColor(sf::Color(100, 250, 50));
         rectangle.setOutlineThickness(5);
         rectangle.setOutlineColor(sf::Color(250, 150, 100));
+        rectangle.setPosition(5,5);
     }
     
     void update()
