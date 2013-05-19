@@ -67,51 +67,55 @@ namespace sif
             cs.pop();
         }
         
-        logger(Logger::PROGRESS) << "SimpleStrategy : Eval constraints";
-        
-        std::string message = "First not satisfied constraint : "+std::to_string((long int)firstNotSatisfied);
-        logger(Logger::INFO) << message;
-        
-        
-        logger(Logger::PROGRESS) << "SimpleStrategy : Eval taskSpot"; 
-        std::vector<ATaskSpot*> taskSpots = _spatialData.getTaskSpots().getData();
-        taskSpotsTable = EvalLoop(taskSpotEval, taskSpots);
-        
-        for(auto e : taskSpotsTable)
+        if(firstNotSatisfied != nullptr)
         {
-            std::string message = std::to_string((long int)e.first)+" ("+std::to_string(e.second)+")";
+        
+            logger(Logger::PROGRESS) << "SimpleStrategy : Eval constraints";
+            
+            std::string message = "First not satisfied constraint : "+std::to_string((long int)firstNotSatisfied);
             logger(Logger::INFO) << message;
-        }
-        
-        logger(Logger::PROGRESS) << "SimpleStrategy : Eval (resources / taskSpots)";
-        std::vector<AResource*> resources = _spatialData.getResources().getData();
-        auto busy = [](AResource* i) { return i->isBusy(); };
-        resources.erase(std::remove_if(std::begin(resources), std::end(resources), busy), std::end(resources));
-        
-        Strategy<Dim, Type>::couples.clear();
-        for(auto res : resources)
-        {
-            for(auto ts : taskSpotsTable)
+            
+            
+            logger(Logger::PROGRESS) << "SimpleStrategy : Eval taskSpot"; 
+            std::vector<ATaskSpot*> taskSpots = _spatialData.getTaskSpots().getData();
+            taskSpotsTable = EvalLoop(taskSpotEval, taskSpots);
+            
+            for(auto e : taskSpotsTable)
             {
-                if(ts.second == 1)
+                std::string message = std::to_string((long int)e.first)+" ("+std::to_string(e.second)+")";
+                logger(Logger::INFO) << message;
+            }
+            
+            logger(Logger::PROGRESS) << "SimpleStrategy : Eval (resources / taskSpots)";
+            std::vector<AResource*> resources = _spatialData.getResources().getData();
+            auto busy = [](AResource* i) { return i->isBusy(); };
+            resources.erase(std::remove_if(std::begin(resources), std::end(resources), busy), std::end(resources));
+            
+            Strategy<Dim, Type>::couples.clear();
+            for(auto res : resources)
+            {
+                for(auto ts : taskSpotsTable)
                 {
-                    // TODO : use functors to define distance between objects
-                    int dist = 0; // Manhatan distance
-                    Coordonate<Dim, Type> coordR = static_cast<Resource<Dim, Type, int>*>(res)->getCoordonates();
-                    Coordonate<Dim, Type> coordTS = static_cast<TaskSpot<Dim, Type>*>(ts.first)->getCoordonates();
-                    
-                    for(unsigned i = 0; i < Dim; i++)
-                        dist += abs(coordR[i] - coordTS[i]);
+                    if(ts.second == 1)
+                    {
+                        // TODO : use functors to define distance between objects
+                        int dist = 0; // Manhatan distance
+                        Coordonate<Dim, Type> coordR = static_cast<Resource<Dim, Type, int>*>(res)->getCoordonates();
+                        Coordonate<Dim, Type> coordTS = static_cast<TaskSpot<Dim, Type>*>(ts.first)->getCoordonates();
                         
-                    Strategy<Dim, Type>::couples[std::pair<AResource*, ATaskSpot*>(res, ts.first)] = dist;
+                        for(unsigned i = 0; i < Dim; i++)
+                            dist += abs(coordR[i] - coordTS[i]);
+                            
+                        Strategy<Dim, Type>::couples[std::pair<AResource*, ATaskSpot*>(res, ts.first)] = dist;
+                    }
                 }
             }
-        }
-        
+         }
+             
         int situationEval = 0;
         for(auto e : Strategy<Dim, Type>::couples)
             situationEval += e.second;
-
+                
         return situationEval;
     }
     

@@ -34,7 +34,8 @@ namespace sif
 
     AResource::AResource(double _velocity, bool _busy) :
         velocity(_velocity),
-        busy(_busy)
+        busy(_busy),
+        assignment(nullptr)
     {}
     
     bool AResource::isBusy() const

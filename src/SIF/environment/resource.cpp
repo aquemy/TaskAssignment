@@ -83,22 +83,32 @@ namespace sif
     void Resource<Dim, Type, Data>::move(double _time)
     {
         unsigned remaining = _time*velocity;
-        
-        //using Movement = std::pair<Direction<Dim>, unsigned>;
+
         Movement<Dim> move = path->back();
         Coordonate<Dim, Type> resCoord = Object<Dim, Type>::getCoordonates();
         Coordonate<Dim, Type> resCoord2 = resCoord;
         if(move.first.getValue().second)
             if(remaining < move.second)
+            {
                 resCoord[move.first.getValue().first] += remaining;
+                path->back().second -= remaining;
+            }
             else
+            {
                 resCoord[move.first.getValue().first] += move.second;
+                path->pop_back();
+            }
         else
             if(remaining < move.second)
+            {
                 resCoord[move.first.getValue().first] -= remaining;
+                path->back().second -= remaining;
+            }
             else
+            {
                 resCoord[move.first.getValue().first] -= move.second;
-
+                path->pop_back();
+            }
         Object<Dim, Type>::coord = resCoord;
         
         std::string coordString1;
@@ -111,7 +121,7 @@ namespace sif
         std::string message = "Moving from : ("+coordString1+") to: ("+coordString2+") - offset : "+std::to_string(move.second); 
            
         logger(Logger::INFO) << message;
-        path->pop_back();
+        
         if(path->empty())
         {
             delete path;
