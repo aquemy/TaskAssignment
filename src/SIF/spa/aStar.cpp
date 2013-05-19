@@ -26,16 +26,15 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
-#include <SIF/spa/aStar.hpp>
-
 namespace sif
 {
 
-    template<class Data, int Dim, class Type>
-    Path<Data>&& AStar::operator()(const Coordonate<Dim,Type>& _from,
-                                            const Coordonate<Dim, Type>& _to, 
-                                            const Tree<Data> _data)
-	{ }
+    template<int Dim, class Type>
+    Path<Dim>* AStar::operator()(const Coordonate<Dim,Type>& _from,
+                                 const Coordonate<Dim, Type>& _to)
+	{ 
+	    return new Path<Dim>;
+	}
     
 }
 

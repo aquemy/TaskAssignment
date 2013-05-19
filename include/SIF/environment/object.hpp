@@ -29,6 +29,7 @@
 #ifndef _SIF_OBJECT_
 #define _SIF_OBJECT_
 
+#include <SIF/environment/aObject.hpp>
 #include <SIF/environment/coordonate.hpp>
 
 namespace sif
@@ -42,7 +43,7 @@ Abstract class for objects contained in the environment.
 */
 
 template <int Dim, class Type>
-class Object
+class Object : public AObject
 {
 public :
 

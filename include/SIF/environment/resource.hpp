@@ -61,7 +61,7 @@ public :
      * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa);
+    Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath<Dim, Type> _spa);
     
     /**
      * Move the resource in specified direction
@@ -89,7 +89,9 @@ protected :
      * @return true is colliding, false otherwise
      */
     bool colliding(Direction<Dim> _dir);
-
+    
+    ShortestPath<Dim, Type> spa;                          ///< Shortest path algorithm
+    Path<Dim>* path;
 };
 
 

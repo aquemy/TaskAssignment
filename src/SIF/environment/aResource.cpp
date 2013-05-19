@@ -32,10 +32,9 @@
 namespace sif
 {
 
-    AResource::AResource(double _velocity, bool _busy, ShortestPath& _spa) :
+    AResource::AResource(double _velocity, bool _busy) :
         velocity(_velocity),
-        busy(_busy),
-        spa(_spa)
+        busy(_busy)
     {}
     
     bool AResource::isBusy() const

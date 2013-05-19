@@ -47,7 +47,7 @@ Different types of TaskSpot are provided such as periodic ones.
 @see sif::Task, sif::PeriodicTaskSpot, sif::Observable
 */
 
-class ATaskSpot
+class ATaskSpot : public AObject
 {
 public :
 

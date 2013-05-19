@@ -89,13 +89,13 @@ public :
      * Get TaskSpots
      * @return Vector of TaskSpots
      */
-    std::vector<ATaskSpot*> getTaskSpots();
+    std::vector<ATaskSpot*>& getTaskSpots();
     
     /**
      * Get Resources
      * @return Vector of Resources
      */
-    std::vector<AResource*> getResources();
+    std::vector<AResource*>& getResources();
     
     /**
      * Debug function to show all informations about the class

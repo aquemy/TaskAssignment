@@ -30,13 +30,7 @@
 
 namespace sif
 {
-
-    template<class Data, int Dim, class Type>
-    Path<Data>&& ShortestPath::operator()(const Coordonate<Dim,Type>& _from,
-                                               const Coordonate<Dim, Type>& _to, 
-                                               const Tree<Data> _data)
-	{ }
-    
+ 
 }
 
 

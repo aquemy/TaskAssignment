@@ -31,9 +31,11 @@
 namespace sif
 {
     template <int Dim, class Type, class Data>
-    Resource<Dim, Type, Data>::Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath& _spa) :
-        AResource(_velocity, _busy, _spa),
-        DynamicObject<Dim, Type>(_coord)
+    Resource<Dim, Type, Data>::Resource(Coordonate<Dim, Type> _coord, double _velocity, bool _busy, ShortestPath<Dim, Type> _spa) :
+        AResource(_velocity, _busy),
+        DynamicObject<Dim, Type>(_coord),
+        spa(_spa),
+        path(nullptr)
     { }
     
     template <int Dim, class Type, class Data>
@@ -65,14 +67,9 @@ namespace sif
             else
             {
                 logger(Logger::INFO) << "Resource : path calculation.";
-                /*template<class Data, int Dim, class Type>
-    Path<Data>&& operator()(const Coordonate<Dim,Type>& _from,
-                                                      const Coordonate<Dim, Type>& _to, 
-                                                      const Tree<Data> _data);*/
-                /*path = spa(Resource<Dim, Type, Data>::getCoordonates(), 
-                        static_cast<TaskSpot<Dim, Type>*>(assignment)->getCoordonates(),
-                        
-                        );*/
+
+                path = spa(Resource<Dim, Type, Data>::getCoordonates(), 
+                        static_cast<TaskSpot<Dim, Type>*>(assignment)->getCoordonates());
             }
         }
         else

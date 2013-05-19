@@ -74,7 +74,7 @@ namespace sif
         
         
         logger(Logger::PROGRESS) << "SimpleStrategy : Eval taskSpot"; 
-        std::vector<ATaskSpot*> taskSpots = _spatialData.getTaskSpots();
+        std::vector<ATaskSpot*> taskSpots = _spatialData.getTaskSpots().getData();
         taskSpotsTable = EvalLoop(taskSpotEval, taskSpots);
         
         for(auto e : taskSpotsTable)
@@ -84,7 +84,7 @@ namespace sif
         }
         
         logger(Logger::PROGRESS) << "SimpleStrategy : Eval (resources / taskSpots)";
-        std::vector<AResource*> resources = _spatialData.getResources();
+        std::vector<AResource*> resources = _spatialData.getResources().getData();
         auto busy = [](AResource* i) { return i->isBusy(); };
         resources.erase(std::remove_if(std::begin(resources), std::end(resources), busy), std::end(resources));
         

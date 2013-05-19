@@ -42,7 +42,7 @@ int main(void)
     try
     {
         // Create some resources for the tests
-        AStar spa;
+        SimpleSP spa;
         Coordonate<2,int> coord;
         coord[0] = 0;
         coord[1] = 0;

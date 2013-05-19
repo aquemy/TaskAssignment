@@ -29,40 +29,18 @@
 #ifndef _SIF_SHORTEST_PATH_
 #define _SIF_SHORTEST_PATH_
 
+#include <functional>
+
 #include <SIF/graph/path.hpp>
-#include <SIF/graph/tree.hpp>
+#include <SIF/environment/spatialData.hpp>
 #include <SIF/environment/coordonate.hpp>
 
 namespace sif
 {
 
-/** ShortestPath : General API for shortest path algorithms
-
-This class is the general API for shortest path algorithms.
-
-@see sif::ShortestPathFactory, sif::AStar
-*/
-
-class ShortestPath
-{
-public :
-    /**
-     * Default constructor
-     */   
-    ShortestPath() = default;
-
-    /**
-     * Start the shortest path computation
-     * @param _from Origin
-     * @param _to Goal
-     * @param _data Spatial data
-     * @return A path
-     */  
-    template<class Data, int Dim, class Type>
-    Path<Dim>&& operator()(const Coordonate<Dim,Type>& _from,
-                                                      const Coordonate<Dim, Type>& _to, 
-                                                      const Tree<Data> _data);
-};
+template <int Dim, class Type>
+using ShortestPath = std::function<Path<Dim>*(const Coordonate<Dim, Type>& _from,
+                                              const Coordonate<Dim, Type>& _to)>;
 
 }
 

@@ -33,6 +33,7 @@
 #include <SIF/environment/aEnvironment.hpp>
 #include <SIF/environment/aResource.hpp>
 #include <SIF/environment/aTaskSpot.hpp>
+#include <SIF/graph/simpleIndex.hpp>
 
 namespace sif
 {
@@ -57,14 +58,16 @@ public :
     
     void startIndexing();
     
-    std::vector<ATaskSpot*> getTaskSpots() const;
+    Tree<ATaskSpot>& getTaskSpots() const;
     
-    std::vector<AResource*> getResources() const;
+    Tree<AResource>& getResources() const;
+    
+    ~SpatialData();
 
 protected : 
 
-    std::vector<ATaskSpot*> taskSpots;
-    std::vector<AResource*> resources;
+    SimpleIndex<ATaskSpot>* taskSpots;
+    SimpleIndex<AResource>* resources;
     AEnvironment* env;
     
 };

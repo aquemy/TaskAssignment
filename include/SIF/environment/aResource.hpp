@@ -47,7 +47,7 @@ class SpatialData;
 @see sif::Resource
 */
 
-class AResource
+class AResource : public AObject
 {
 public :
 
@@ -57,7 +57,7 @@ public :
      * @param _busy Status of the resource
      * @param _spa Shortest Path Algorithm
      */
-    AResource(double _velocity, bool _busy, ShortestPath& _spa);
+    AResource(double _velocity, bool _busy);
     
     /**
      * Update Resource
@@ -103,10 +103,8 @@ protected :
     
     bool busy;									///< Status of the resource
     double velocity;                            ///< Velocity of the ressource
-    APath* path;                                ///< Path to reach the assignment
     SpatialData* spatialData;
     ATaskSpot* assignment;                      ///< Assignment
-    ShortestPath& spa;                          ///< Shortest path algorithm
 };
 
 

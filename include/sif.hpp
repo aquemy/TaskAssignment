@@ -104,6 +104,7 @@
 
 // Shortest Path Algorithm
 #include <SIF/spa/aStar.hpp>
+#include <SIF/spa/simpleSP.hpp>
 #include <SIF/spa/shortestPath.hpp>
 #include <SIF/spa/shortestPathFactory.hpp>
 

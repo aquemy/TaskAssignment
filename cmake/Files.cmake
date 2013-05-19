@@ -37,6 +37,7 @@ set(SRC_FROM_INC
     ia/model.hpp
     ia/strategy.hpp
     spa/aStar.hpp
+    spa/simpleSP.hpp
     spa/shortestPath.hpp
     spa/shortestPathFactory.hpp
 )

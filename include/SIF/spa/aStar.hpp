@@ -41,7 +41,7 @@ AStar is a computer algorithm that is widely used in pathfinding and graph trave
 @see sif::ShortestPath
 */
 
-class AStar : public ShortestPath
+class AStar
 {
 public :
 
@@ -57,14 +57,15 @@ public :
      * @param _data Spatial data
      * @return A path
      */  
-    template<class Data, int Dim, class Type>
-    Path<Dim>&& operator()(const Coordonate<Dim,Type>& _from,
-                                            const Coordonate<Dim, Type>& _to, 
-                                            const Tree<Data> _data);
+    template<int Dim, class Type>
+    Path<Dim>* operator()(const Coordonate<Dim,Type>& _from,
+                          const Coordonate<Dim, Type>& _to);
     
 };
 
 }
+
+#include <SIF/spa/aStar.cpp>
 
 #endif // _SIF_A_STAR_
 

@@ -38,25 +38,38 @@ namespace sif
     void SpatialData::startPartitioning()
     {
         logger(Logger::PROGRESS) << "SpatialData : Start partitioning.";
-        taskSpots = env->getTaskSpots();
         logger(Logger::PROGRESS) << "SpatialData : Finish partitioning.";
     }
     
     void SpatialData::startIndexing()
     {
         logger(Logger::PROGRESS) << "SpatialData : Start indexing.";
-        resources = env->getResources();
+        
+        if(resources == nullptr)
+            delete resources;
+        if(taskSpots == nullptr)
+            delete taskSpots;
+            
+        resources = new SimpleIndex<AResource>(env->getResources());
+        taskSpots = new SimpleIndex<ATaskSpot>(env->getTaskSpots());
+        
         logger(Logger::PROGRESS) << "SpatialData : Finish indexing.";
     }
     
-    std::vector<ATaskSpot*> SpatialData::getTaskSpots() const
+    Tree<ATaskSpot>& SpatialData::getTaskSpots() const
     {
-        return taskSpots;
+        return *taskSpots;
     }
     
-    std::vector<AResource*> SpatialData::getResources() const
+    Tree<AResource>& SpatialData::getResources() const
     {
-        return resources;
+        return *resources;
+    }
+    
+    SpatialData::~SpatialData()
+    {
+        delete resources;
+        delete taskSpots;
     }
     
 }
