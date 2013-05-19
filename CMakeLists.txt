@@ -67,6 +67,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Files.cmake)
 add_subdirectory(doc)
 add_subdirectory(test)
 add_subdirectory(lessons)
+add_subdirectory(app)
 
 ######################################################################################
 ### 5) Packaging : only in release !
