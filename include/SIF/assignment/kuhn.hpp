@@ -70,7 +70,6 @@ protected :
 
 	typedef std::vector <std::vector<std::pair<int, state> > > typeMat;
 
-	void kuhn_loop(typeMat & mat);
 	bool isFullmarked(std::vector<bool> & mdL, std::vector<bool> & mdR);
 	void subtractionMins(typeMat & mat);
 	int lineWLessZUncrossed (typeMat & m);

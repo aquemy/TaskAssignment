@@ -43,7 +43,7 @@ int main(void)
      */
     try
     {
-    	/*/ Creation of some resource for the tests
+    	// Creation of some resource for the tests
     	AStar spa;
         Coordonate<2,int> coord1, coord2, coord3, coord4, coord5;
         coord1[0] = 0;   coord1[1] = 0;
@@ -60,19 +60,58 @@ int main(void)
         ATaskSpot* ts2 = new TaskSpot<2,int>(coord4, s, cinq);
         ATaskSpot* ts3 = new TaskSpot<2,int>(coord5, u, cinq);
     	
-    	std::pair<AResource*, ATaskSpot*> pair;
-    	pair = std::make_pair(ts1, r1);
+    	std::pair<AResource*, ATaskSpot*> p_r1ts1, p_r1ts2, p_r1ts3, p_r2ts1, p_r2ts2, p_r2ts3;
+    	p_r1ts1 = std::make_pair(r1, ts1);
+    	p_r1ts2 = std::make_pair(r1, ts2);
+    	p_r1ts3 = std::make_pair(r1, ts3);
+    	p_r2ts1 = std::make_pair(r2, ts1);
+    	p_r2ts2 = std::make_pair(r2, ts2);
+    	p_r2ts3 = std::make_pair(r2, ts3);
     	std::map<std::pair<AResource*, ATaskSpot*>, int> map;
-    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (pair, 1));
-    	std::map<AResource*,ATaskSpot*> res;
-    	/*
-    	Kuhn k;
-    	res = k->operator()(map);
     	
-    	/*
-    	 if()
+    	
+    	// 1- Test with 1 resource & 1 taskSpot
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r1ts1, 1));
+    	std::map<AResource*,ATaskSpot*> res, wantedRes;
+    	
+    	Kuhn k;
+    	res = k.operator()(map);
+    	wantedRes.insert(std::pair<AResource*,ATaskSpot*>(r1, ts1));
+    	if(res != wantedRes)
             throw runtime_error("Error in expectations for first test");
-        //std::map<AResource*,ATaskSpot*> Kuhn::operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap)//*/
+            
+        // 2- Test with 2 resource & 2 taskSpot
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r1ts2, 5));
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r2ts1, 4));
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r2ts2, 1));
+        
+    	res = k.operator()(map);
+    	wantedRes.insert(std::pair<AResource*,ATaskSpot*>(r2, ts2));
+		
+    	if(res != wantedRes)
+		    throw runtime_error("Error in expectations for second test");
+            
+        // 3- Test with 2 resource & 3 taskSpot
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r1ts3, 6));
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r2ts3, 3));
+        
+    	res = k.operator()(map);
+		
+    	if(res != wantedRes)
+		    throw runtime_error("Error in expectations for third test");
+            
+        // 4- Test with 2 resource & 1 taskSpot
+    	map.clear();
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r1ts1, 1));
+    	map.insert(std::pair<std::pair<AResource*, ATaskSpot*>, int> (p_r2ts1, 4));
+        
+    	res = k.operator()(map);
+    	wantedRes.clear();
+    	wantedRes.insert(std::pair<AResource*,ATaskSpot*>(r1, ts1));
+		
+    	if(res != wantedRes)
+		    throw runtime_error("Error in expectations for fourth test");
+        
 
     }
     catch(exception& e)

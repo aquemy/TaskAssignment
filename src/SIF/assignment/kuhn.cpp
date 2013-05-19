@@ -58,16 +58,12 @@ namespace sif
 		if (sizeResources > sizeTaskSpots)
 		{
 			for (int i=0; i<sizeResources - sizeTaskSpots; i++)
-			{
 				_taskSpots.push_back(nullptr);
-			}
 		}
 		else if (sizeResources < sizeTaskSpots)
 		{
 			for (int i=0; i<sizeTaskSpots - sizeResources; i++)
-			{
 				_resources.push_back(nullptr);
-			}
 		}
 		// Cost Matrix
 		cost.resize(_resources.size());
@@ -164,7 +160,7 @@ namespace sif
 					}
 					else // cas exception
 					{
-						logger(Logger::INFO) << "Exception !";
+						//logger(Logger::INFO) << "Exception !";
 						i = mat.size() -1;
 						while (!b)
 						{
@@ -196,8 +192,6 @@ namespace sif
 					if (_continue)
 						_continue = markLines(mat, markedLines, markedRows);
 				}
-				/*-
-				logger(Logger::INFO) << " - ";//-*/
 				exception = isFullmarked(markedLines, markedRows);
 				/*-
 				logger(Logger::INFO) << " - ";
@@ -216,22 +210,11 @@ namespace sif
 					std::string msg;
 					for (int j=0; j<n ; j++)
 					{
-						msg += std::to_string(mat[i][j].first) + " ";
-					}
-					logger(Logger::INFO) << msg;
-				}//-*/
-				subtractionPartTable(mat, markedLines, markedRows);
-				/*-
-				logger(Logger::INFO) << " ---------------------";
-				for (int i=0; i<n; i++)
-				{
-					std::string msg;
-					for (int j=0; j<n ; j++)
-					{
 						msg += std::to_string(mat[i][j].second) + " ";
 					}
 					logger(Logger::INFO) << msg;
 				}//-*/
+				subtractionPartTable(mat, markedLines, markedRows);
 			}
 			else
 				repeat = false;
@@ -248,7 +231,8 @@ namespace sif
 			{
 				if (mat[i][j].second == Surrounded)
 				{
-					assignment.insert(std::pair<AResource*,ATaskSpot*> (_resources[i], _taskSpots[j]));
+					if (_resources[i] != nullptr && _taskSpots[j] != nullptr)
+						assignment.insert(std::pair<AResource*,ATaskSpot*> (_resources[i], _taskSpots[j]));
 					find = true;
 				}
 				j++;
@@ -262,13 +246,6 @@ namespace sif
     }
 
 	// --------------------------------------------------------------------
-	// --------------------------------------------------------------------
-	
-	void Kuhn::kuhn_loop(typeMat & mat)
-	{
-		
-	}
-		
 	// --------------------------------------------------------------------
 	
 	bool Kuhn::isFullmarked(std::vector<bool> & mdL, std::vector<bool> & mdR)
