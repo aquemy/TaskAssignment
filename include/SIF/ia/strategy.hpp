@@ -51,11 +51,6 @@ public :
     
     /**
      * Constructor
-     * @param _constraintEval Eval function for constraints
-     * @param _taskSpotEval Eval function for taskSpot
-     * @param _resourceEval Eval function for resource
-     * @param _globalResourceEval Global eval function for resource
-     * @param _evalSituation Eval function for the situation
      * @param _assignment Assigment algorithm
      */
     Strategy(Assignment& _assignment);

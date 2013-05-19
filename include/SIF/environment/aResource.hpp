@@ -55,7 +55,6 @@ public :
      * Constructor
      * @param _velocity Velocity of the resource
      * @param _busy Status of the resource
-     * @param _spa Shortest Path Algorithm
      */
     AResource(double _velocity, bool _busy);
     

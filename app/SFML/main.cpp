@@ -26,11 +26,33 @@ void SFML_Draw(sf::RenderWindow& window,
         // Add resources
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            sf::Vector2i pos = sf::Mouse::getPosition();
+            sf::Vector2i pos = sf::Mouse::getPosition(window);
             Coordonate<2, int> coord;
             coord[0] = pos.x;
             coord[1] = pos.y;
-            AResource* r = new Resource<2,int,int>(coord, 50 / 1000., false, spa);
+            AResource* r = new Resource<2,int,int>(coord, 5 / 1000., false, spa);
+            env2.addObject(*r);
+        }
+        
+        // Add TaskSpot
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+        {
+            sf::Vector2i pos = sf::Mouse::getPosition(window);
+            Coordonate<2, int> coord;
+            coord[0] = pos.x;
+            coord[1] = pos.y;
+            ATaskSpot* r = new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time)
+                { static double up = 0;
+                    up += _time*0.0001;
+                    if((int)up > 0)
+                    {
+                        up = 0;
+                        return i + 1; 
+                    }
+                    else 
+                        return i;
+                }
+            );
             env2.addObject(*r);
         }
         
@@ -97,7 +119,7 @@ int main(int argc, char *argv[])
         
         // Create some tasks and the constraintSystem
         Task t;
-        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 5000);
         ConstraintSystem constraintSystem;
         constraintSystem.push(&sc);
         
@@ -147,13 +169,13 @@ int main(int argc, char *argv[])
         Controller::addStep(envStep);
         
         // Step DUMP
-        unsigned dumpDelay = 100; // ms
+        unsigned dumpDelay = 5000; // ms
         auto dump = bind(&Environment<2,int,int>::dump, std::ref(env));
         Step dumpStep(dump, dumpDelay);
         Controller::addStep(dumpStep);
         
         // Step IA
-        unsigned iaDelay = 1000; // ms
+        unsigned iaDelay = 100; // ms
         auto iaController = bind(&IA<2,int>::update, std::ref(ia), placeholders::_1);
         Step iaStep(iaController, iaDelay);
         Controller::addStep(iaStep);

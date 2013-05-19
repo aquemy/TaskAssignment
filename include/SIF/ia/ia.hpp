@@ -49,6 +49,7 @@ public :
     /**
      * Constructor
      * @param _model Model of IA
+     * @param _constraintSystem Constraint system related to tasks
      */
     IA(Model<Dim, Type>& _model, ConstraintSystem& _constraintSystem);
     

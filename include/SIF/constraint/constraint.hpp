@@ -47,6 +47,7 @@ public :
 
     /**
      * Default constructor
+     * @param _t Task which is concerned by the constraint
      * @param _priority Constraint priority
      */ 
     Constraint(Task& _t, unsigned _priority);
@@ -76,6 +77,10 @@ public :
      */ 
     virtual bool operator()() = 0;
     
+    /**
+     * Get task
+     * @return Associated task
+     */ 
     const Task& getTask() const;
 
 protected :
