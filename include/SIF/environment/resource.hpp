@@ -76,7 +76,15 @@ public :
      */
     virtual void update(double _time);
     
-protected : 
+    ~Resource();
+    
+protected :
+
+    /**
+     * Move the resource along its path
+     * @param _time Ellapsed time since the last move
+     */
+    void move(double _time); 
 
     /**
      * Implementation of dump function

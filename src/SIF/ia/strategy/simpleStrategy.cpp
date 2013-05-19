@@ -88,6 +88,7 @@ namespace sif
         auto busy = [](AResource* i) { return i->isBusy(); };
         resources.erase(std::remove_if(std::begin(resources), std::end(resources), busy), std::end(resources));
         
+        Strategy<Dim, Type>::couples.clear();
         for(auto res : resources)
         {
             for(auto ts : taskSpotsTable)

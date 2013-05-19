@@ -26,8 +26,12 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include <string>
+#include <cmath>
+
 #include <SIF/environment/direction.hpp>
 #include <SIF/graph/movement.hpp>
+#include <SIF/utils/logger.hpp>
 
 namespace sif
 {
@@ -44,8 +48,11 @@ namespace sif
 	        bool way = true; // Up
 	        if(_from[i] > _to[i])
 	            way = false;
-	        path->emplace_back(Movement<Dim>(Direction<Dim>(i, way), _to[i]));
+	        path->emplace_back(Movement<Dim>(Direction<Dim>(i, way), abs(_to[i]-_from[i])));
 	    }
+	    
+	    std::string message = "SimpleSP : "+std::to_string(path->size());
+	    logger(Logger::INFO) << message;
 	    
 	    return path;
 	    

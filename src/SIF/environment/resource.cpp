@@ -63,6 +63,7 @@ namespace sif
             else if(path != nullptr)
             {
                 logger(Logger::INFO) << "Resource : moving.";
+                move(_time);
             }
             else
             {
@@ -76,6 +77,46 @@ namespace sif
         {
             logger(Logger::INFO) << "Resource : no assigment / wait.";
         }
+    }
+    
+    template <int Dim, class Type, class Data>
+    void Resource<Dim, Type, Data>::move(double _time)
+    {
+        unsigned remaining = _time*velocity;
+        
+        //using Movement = std::pair<Direction<Dim>, unsigned>;
+        Movement<Dim> move = path->back();
+        Coordonate<Dim, Type> resCoord = Object<Dim, Type>::getCoordonates();
+        Coordonate<Dim, Type> resCoord2 = resCoord;
+        if(move.first.getValue().second)
+            if(remaining < move.second)
+                resCoord[move.first.getValue().first] += remaining;
+            else
+                resCoord[move.first.getValue().first] += move.second;
+        else
+            if(remaining < move.second)
+                resCoord[move.first.getValue().first] -= remaining;
+            else
+                resCoord[move.first.getValue().first] -= move.second;
+
+        Object<Dim, Type>::coord = resCoord;
+        
+        std::string coordString1;
+        std::string coordString2;
+        for(auto e : resCoord2)
+            coordString1+= std::to_string(e) + " ";
+        for(auto e : Object<Dim, Type>::coord)
+            coordString2+= std::to_string(e) + " ";
+            
+        std::string message = "Moving from : ("+coordString1+") to: ("+coordString2+") - offset : "+std::to_string(move.second); 
+           
+        logger(Logger::INFO) << message;
+        path->pop_back();
+        if(path->empty())
+        {
+            delete path;
+        }
+        
     }
     
     template <int Dim, class Type, class Data>
@@ -93,6 +134,13 @@ namespace sif
 
         std::string message = std::to_string((long int)this)+" ( "+coordString+") | Status : "+status;
         logger(Logger::INFO) << message;
+    }
+    
+    template <int Dim, class Type, class Data>
+    Resource<Dim, Type, Data>::~Resource()
+    {
+        if(path != nullptr)
+            delete path;
     }
 }
 

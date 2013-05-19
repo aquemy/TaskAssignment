@@ -26,6 +26,8 @@
 // 
 //////////////////////////////////////////////////////////////////////////////
 
+#include <SIF/utils/logger.hpp>
+
 namespace sif
 {
 
@@ -33,6 +35,7 @@ namespace sif
     Path<Dim>* AStar::operator()(const Coordonate<Dim,Type>& _from,
                                  const Coordonate<Dim, Type>& _to)
 	{ 
+	    std::string message = "AStar";
 	    return new Path<Dim>;
 	}
     

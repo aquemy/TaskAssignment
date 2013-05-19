@@ -50,7 +50,7 @@ int main(void)
         Environment<2, int, int> env;
         
         // Add some resources randomly
-        AStar spa;
+        SimpleSP spa;
         Coordonate<2,int> coord;
 
         std::vector<AResource*> res;

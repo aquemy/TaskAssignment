@@ -37,11 +37,15 @@ namespace sif
     template <int Dim, class Type>
     std::map<AResource*,ATaskSpot*> Strategy<Dim, Type>::assign()
     { 
-        logger(Logger::PROGRESS) << "Strategy : assignment";
-        auto res = assignment(couples);
-        for(auto& couple : res)
-           couple.first->setAssignment(*couple.second);
-            
+        std::map<AResource*,ATaskSpot*> res;
+        if(couples.size() > 0)
+        {
+            logger(Logger::PROGRESS) << "Strategy : assignment";
+            res = assignment(couples);
+            for(auto& couple : res)
+               couple.first->setAssignment(*couple.second);
+        }
+          
         return res;
     }
     
