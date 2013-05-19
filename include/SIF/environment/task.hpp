@@ -58,7 +58,7 @@ public :
      * @param _time Ellapsed time since the last update
      * @param _f The result will remplace value and the int parameter will be the initial value
      */
-    void update(double _time, std::function<int(int&)> _f);
+    void update(double _time, std::function<int(int&, double _time)> _f);
     
     /**
      * Get the current value

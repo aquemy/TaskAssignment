@@ -29,6 +29,8 @@
 #include <SIF/environment/aEnvironment.hpp>
 #include <SIF/utils/logger.hpp>
 
+#include <iostream>
+
 namespace sif
 {
 

@@ -56,7 +56,7 @@ public :
      * @param _t The associated task
      * @param _f Function which serves to update the task
      */
-    ATaskSpot(Task& _t, std::function<int(int&)> _f);
+    ATaskSpot(Task& _t, std::function<int(int&, double _time)> _f);
 
     /**
      * Update Ressource
@@ -80,7 +80,7 @@ protected :
      */
     virtual void _dump() = 0;
     
-    std::function<int(int&)> f;
+    std::function<int(int&, double)> f;
 	Task& t;
     
 };

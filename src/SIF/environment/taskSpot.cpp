@@ -32,7 +32,7 @@ namespace sif
 {
     
     template <int Dim, class Type>
-    TaskSpot<Dim, Type>::TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&)> _f) :
+    TaskSpot<Dim, Type>::TaskSpot(Coordonate<Dim, Type> _coord, Task& _t, std::function<int(int&, double)> _f) :
         ATaskSpot(_t, _f),
         DynamicObject<Dim, Type>(_coord)
     { }

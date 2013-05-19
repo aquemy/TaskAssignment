@@ -35,11 +35,10 @@ namespace sif
     Task::Task(int _value) : value(_value)
     {}
     
-    void Task::update(double _time, std::function<int(int&)> _f)
+    void Task::update(double _time, std::function<int(int&, double _time)> _f)
     {
         logger(Logger::PROGRESS) << "Task : update";
-        (void)_time;
-        value = _f(value);
+        value = _f(value, _time);
     }
     
     int Task::getValue() const
