@@ -67,7 +67,9 @@ public :
     int getValue() const;
     
 protected :
-    int value;
+
+    int value;  ///< Value of the task
+    
 };
 
 

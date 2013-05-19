@@ -44,6 +44,7 @@ class AEnvironment;
 /** SpatialData : Contains the index of the objets and the partition of the space.
 
 This is the object that partition and index the environment. All objects that need this information need to use its interface.
+Final user should not see this class.
 
 */
 
@@ -51,24 +52,46 @@ class SpatialData
 {
 
 public : 
-
+    
+    /**
+     * Constructor
+     * @param _env Environment to work on
+     */
     SpatialData(AEnvironment* _env);
     
+    /**
+     * Start the partition of the environment
+     */
     void startPartitioning();
     
+    /**
+     * Start the indexation of the environment
+     */
     void startIndexing();
     
+    /**
+     * Get TaskSpots
+     * @return Tree that contains taskspots
+     */
     Tree<ATaskSpot>& getTaskSpots() const;
     
+    /**
+     * Get Resources
+     * @return Tree that contains Resources
+     */
     Tree<AResource>& getResources() const;
     
+    /**
+     * Destructor
+     */
     ~SpatialData();
 
 protected : 
 
-    SimpleIndex<ATaskSpot>* taskSpots;
-    SimpleIndex<AResource>* resources;
-    AEnvironment* env;
+    // TODO : Generic tree for indexes
+    SimpleIndex<ATaskSpot>* taskSpots;  ///< Indexed TaskSpots
+    SimpleIndex<AResource>* resources;  ///< Indexed Resource
+    AEnvironment* env;                  ///< Environment pointer in the case we would like to launch an algorithm once again
     
 };
 

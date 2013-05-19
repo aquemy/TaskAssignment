@@ -73,9 +73,9 @@ public :
 
 protected :
 
-    Model<Dim, Type>& model;
-    SpatialData* spatialData;
-    ConstraintSystem& constraintSystem;
+    Model<Dim, Type>& model;            ///< Model of the IA
+    SpatialData* spatialData;           ///< SpatialData
+    ConstraintSystem& constraintSystem; ///< Constraint system
     
 };
 

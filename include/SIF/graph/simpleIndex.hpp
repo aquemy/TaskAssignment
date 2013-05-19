@@ -39,7 +39,7 @@ namespace sif
 
 /** Simplexe : Stock information in vector
 
- * Simpliest indexing data ever.
+Simpliest indexing data ever. :)
 
 @see sif::Tree
 */
@@ -49,13 +49,21 @@ class SimpleIndex : public Tree<Data>
 {
 public :
     
+    /**
+     * Constructor
+     * @param _data Vector of data to index
+     */
     SimpleIndex(std::vector<Data*>& _data);
     
+    /**
+     * Get data - TODO : Get data with a predicate
+     * @return Vector of all data
+     */
     virtual std::vector<Data*> getData();
     
 protected :
     
-    std::vector<Data*>& data;
+    std::vector<Data*>& data;   ///< Indexed data
     
 };
 

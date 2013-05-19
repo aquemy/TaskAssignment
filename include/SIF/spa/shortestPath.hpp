@@ -38,6 +38,12 @@
 namespace sif
 {
 
+/**
+ * Shortest Path
+ * @param _from Origine
+ * @param _to Destination
+ * @return A Path between _from and _to
+ */
 template <int Dim, class Type>
 using ShortestPath = std::function<Path<Dim>*(const Coordonate<Dim, Type>& _from,
                                               const Coordonate<Dim, Type>& _to)>;

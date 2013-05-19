@@ -58,7 +58,7 @@ protected :
      */
     virtual bool _check();
     
-    unsigned steps;
+    unsigned steps; ///< Number of steps to reach
 };
 
 }

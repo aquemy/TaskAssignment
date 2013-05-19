@@ -118,11 +118,11 @@ protected :
      */
     static bool checkContinue();
     
-    static std::vector<Continue*> cont;
-    static std::list<std::pair<Step, unsigned>> steps;
-    static SpatialData* spatialData;
-    static bool initialized;
-    static AEnvironment* env;
+    static std::vector<Continue*> cont;                 ///< Continuators
+    static std::list<std::pair<Step, unsigned>> steps;  ///< Functions to call during the main loop
+    static SpatialData* spatialData;                    ///< SpatialData information
+    static bool initialized;                            ///< True if the controller has been initialized
+    static AEnvironment* env;                           ///< Environment of the simulation
 };
 
 }

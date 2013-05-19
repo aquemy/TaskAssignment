@@ -46,7 +46,7 @@ class AssignmentFactory
 public :
 
     /**
-     * Kuhn instanciation : tranform data into a cost matrix
+     * Kuhn instanciation
      * @param _resource Resources to assign
      * @param _taskSpot taskSpot to be affected
      * @return Kuhn instance (right-value)

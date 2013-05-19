@@ -80,8 +80,8 @@ protected :
      */
     virtual void _dump() = 0;
     
-    std::function<int(int&, double)> f;
-	Task& t;
+    std::function<int(int&, double)> f; ///< Function in order to update task
+	Task& t;                            ///< Attached task
     
 };
 

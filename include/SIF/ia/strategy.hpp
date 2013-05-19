@@ -72,7 +72,7 @@ public :
 protected :
    
     Assignment& assignment;                                     ///< Assignment algorithm
-    std::map<std::pair<AResource*, ATaskSpot*>, int> couples;
+    std::map<std::pair<AResource*, ATaskSpot*>, int> couples;   ///< Couples to be assigned
 };
 
 }

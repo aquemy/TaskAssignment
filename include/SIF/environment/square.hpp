@@ -46,8 +46,17 @@ class Square : public Obstacle<Dim, Type>
 {
 public :
     
+    /**
+     * Constructor
+     * @param _coord Coordonates
+     * @param _boundaries Boundaries in a Dim space
+     */
     Square(Coordonate<Dim, Type> _coord, std::vector<std::pair<Type,Type>> _boundaries);
 
+    /**
+     * Colliding
+     * @return Boolean to check collision
+     */
     virtual bool colliding(Coordonate<Dim, Type> _coord);
 
 protected :

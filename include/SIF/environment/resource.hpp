@@ -76,6 +76,9 @@ public :
      */
     virtual void update(double _time);
     
+    /**
+     * Destructor
+     */
     ~Resource();
     
 protected :
@@ -98,8 +101,8 @@ protected :
      */
     bool colliding(Direction<Dim> _dir);
     
-    ShortestPath<Dim, Type> spa;                          ///< Shortest path algorithm
-    Path<Dim>* path;
+    ShortestPath<Dim, Type> spa;    ///< Shortest path algorithm
+    Path<Dim>* path;                ///< Path to follow to reach the assigned taskSpot
 };
 
 

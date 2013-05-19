@@ -84,10 +84,10 @@ public :
 protected :
 
     ConstraintComp op;                      ///< Comparaison operator
-    int step;                                          ///< Value of the step
-    bool lastValue;                              ///< Value at the last check
-    int leftTolerance;                          ///< Value for the left tolerance
-    int rightTolerance;                       ///< Value for the right tolerance
+    int step;                               ///< Value of the step
+    bool lastValue;                         ///< Value at the last check
+    int leftTolerance;                      ///< Value for the left tolerance
+    int rightTolerance;                     ///< Value for the right tolerance
     
     std::function<void()> breakCondition;   ///< Called when the constraint is not satisfied
     std::function<void()> reachCondition;   ///< Called when the constraint is satisfied

@@ -85,7 +85,7 @@ public :
 
 protected :
 
-    Task& t;
+    Task& t;            ///< Task concerned by the constraint
     unsigned priority;  ///< Priority of the constraint
 
 };

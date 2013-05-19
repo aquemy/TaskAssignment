@@ -109,9 +109,9 @@ protected :
      */
     virtual void _dump() = 0;
 
-    std::vector<ATaskSpot*> taskSpots;
-    std::vector<AResource*> resources;
-    SpatialData* spatialData;
+    std::vector<ATaskSpot*> taskSpots;  ///< TaskSpots of the environment
+    std::vector<AResource*> resources;  ///< Resources of the environment
+    SpatialData* spatialData;           ///< SpatialData
     
 };
 
