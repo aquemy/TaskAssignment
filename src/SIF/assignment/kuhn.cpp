@@ -176,7 +176,7 @@ namespace sif
 						}
 					i++;
 					}
-					barZLocatedSameArea(mat, line, i);
+					strikeZLocatedSameArea(mat, line, i);
 				}
 				else
 					isPossible = false;
@@ -334,7 +334,7 @@ namespace sif
 	}
 	
 	// --------------------------------------------------------------------
-	void Kuhn::barZLocatedSameArea(typeMat & m, int l, int c)
+	void Kuhn::strikeZLocatedSameArea(typeMat & m, int l, int c)
 	{
 		for (int i=0; i<m.size(); i++)
 		{

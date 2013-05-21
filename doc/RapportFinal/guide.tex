@@ -1,0 +1,51 @@
+\section{Framework}
+\subsection{Compilation}
+Pour construire et compiler le framework il faut se placer dans un dossier build créé à la racine :
+
+\begin{verbatim}
+    > mkdir build
+    > cd build
+\end{verbatim}
+
+Il suffit ensuite de lancer CMake puis make. L'option -DINSTALL_TYPE=full permettra de générer également les tests.
+
+\begin{verbatim}
+    > cmake .. -DINSTALL_TYPE=full
+    > make
+\end{verbatim}
+
+\subsection{Lancer les tests}
+
+Les tests peuvent être lancés tous ensemble via la commande ctest :
+\begin{verbatim}
+    > ctest
+\end{verbatim}
+
+Ou indépendamment, en se placant dans le répertoire /build/test et en exécutant chaque test.
+
+\subsection{Leçon}
+Les leçons permettent d'apprendre un aspect du framework. Nous n'avons créée qu'une leçon, qui présente tout le processus de création d'une simulation basique.
+\subsubsection{Leçon 1 : simulation basique}
+
+
+\section{Application}
+\subsection{Compilation}
+La compilation de l'application requiert que la SFML soit installée. Si c'est le cas et qu'elle se trouve dans les chemins standards, elle peut être trouvé grâce à CMake.\\
+Pour construire et compiler l'application en même temps que le framwork, il faut rajouter l'option -DSFML_EXAMPLE lors de l'appel à cmake :\\\\
+
+\begin{verbatim}
+    > cmake .. -DSFML_EXAMPLE=true
+    > make
+\end{verbatim}
+
+\subsection{Lancement \& utilisation}
+
+L'application requiert une police d'écriture qui est présente et copiée dans la racine du dossier de construction. Ainsi pour lancer l'application il faut se trouver à la racine du build (et pas dans un dossier parent ou fils) :
+
+\begin{verbatim}
+    > ./app/SFML/sifExample
+\end{verbatim}
+
+La simulation dure 25 secondes et se terminera quoiqu'il arrive après 25 secondes.\\
+On peut ajouter des emplacements de travail en cliquant avec le bouton droit de la souris et des ressources avec le bouton gauche.\\
+Comme la seule contrainte définie est sur la tâche 1 et requiert que la tâche soit à plus de 5000, une fois la constrainte satisfaite, la stratégie implémentée n'affectera pas les nouvelles ressources crées, même si elles sont libres.

@@ -52,9 +52,10 @@ public :
     
     /**
      * Start the Kuhn method
+     * @param _mymap A map which associates a pair of resource / taskSpot with a cost
      * @return A map from resource to TaskSpot
      */
-    std::map<AResource*,ATaskSpot*> operator()(std::map<std::pair<AResource*, ATaskSpot*>, int>);
+    std::map<AResource*,ATaskSpot*> operator()(std::map<std::pair<AResource*, ATaskSpot*>, int> _mymap);
 
     
 protected :
@@ -70,15 +71,81 @@ protected :
 
 	typedef std::vector <std::vector<std::pair<int, state> > > typeMat;
 
+    /**
+     * Checks if the matrix is totally marked
+     * @param mdL Vector of boolean which enable to know if a line is marked
+     * @param mdR Vector of boolean which enable to know if a row is marked
+     * @return true if the 2 vectors are completely true (ie  only filled with 1), false otherwise
+     */
 	bool isFullmarked(std::vector<bool> & mdL, std::vector<bool> & mdR);
+	
+    /**
+     * Subtracts minimum on each row & column
+     * @param mat Cost matrix
+     */
 	void subtractionMins(typeMat & mat);
+	
+    /**
+     * Looks for the line with less zero with Normal state
+     * @param mat Cost matrix
+     * @return Index of the line with less zero
+     */
 	int lineWLessZUncrossed (typeMat & m);
-	void barZLocatedSameArea(typeMat & m, int l, int c);
+	
+    /**
+     * Changes state of the zero on line l and row c to Crossed
+     * @param mat Cost matrix
+     * @param value of the line to consider
+     * @param value of the row to consider
+     */
+	void strikeZLocatedSameArea(typeMat & m, int l, int c);
+	
+    /**
+     * Checks if there is one zero surrounded on each line & column
+     * @param mat Cost matrix
+     * @return true if there is a zero on each line & column, false otherwise
+     */
 	bool zeroOnAllRC(typeMat & m);
+	
+    /**
+     * Looks if there is already a zero on the row c
+     * @param mat Cost matrix
+     * @param c Index of the row to consider
+     * @return true if there is already a zero, false otherwise
+     */
 	bool ZSurrondSameCol(typeMat & m, int c);
+	
+    /**
+     * Marked all lines containing no zero surrounded
+     * @param mat Cost matrix
+     * @param mdL Vector marked lines
+     */
 	void markLinesInit(typeMat & m, std::vector<bool> & mdL);
+	
+    /**
+     * Marks all rows containing a zero crossed on a marked line
+     * @param mat Cost matrix
+     * @param mdL Vector marked lines
+     * @param mdR Vector marked rows
+     * @return true if there have been changes, false otherwise 
+     */
 	bool markLines(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
+	
+    /**
+     * Marks all lines containing a zero surrounded on a marked column
+     * @param mat Cost matrix
+     * @param mdL Vector marked lines
+     * @param mdR Vector marked rows
+     * @return true if there have been changes, false otherwise 
+     */
 	bool markRows(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
+	
+    /**
+     * Subtracts the minimum in the partial table
+     * @param mat Cost matrix
+     * @param mdL Vector marked lines
+     * @param mdR Vector marked rows
+     */
 	void subtractionPartTable(typeMat & m, std::vector<bool> & mdL, std::vector<bool> & mdR);
 
 };
