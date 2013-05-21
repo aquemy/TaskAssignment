@@ -40,8 +40,23 @@ int main(void)
      */
     try
     {
+    	/*/ Creation
+        Kuhn assignment;
+        SimpleStrategy<2,int> s1(assignment);
         
-
+        // Model creation
+        ManualModel<2,int> model(s1);
+        
+        // Test for update()
+        SpatialData* spd;
+        
+        Task t;
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        ConstraintSystem constraintSystem;
+        constraintSystem.push(&sc);
+        
+        model.update(0., *spd, constraintSystem);
+        //*/
     }
     catch(exception& e)
     {

@@ -41,16 +41,21 @@ namespace sif
     template <int Dim, class Type, class Data>
     void Resource<Dim, Type, Data>::move(Direction<Dim> _dir, double _time)
     { 
-        Coordonate<Dim, Type> tcoord = Object<Dim, Type>::coord;
-        // New position on the specified direction 
-        tcoord[_dir.getValue().first] += _dir.getValue().second*(velocity*_time); 
-        if(true) // TEST IN SPACE + NOT COLLIDING
-            Object<Dim, Type>::coord = tcoord;
+    	if(_time < 0.)
+    	{
+			logger(Logger::WARNING) << "Negative time, fix to 0";
+			_time = 0.;
+    	}
+	    Coordonate<Dim, Type> tcoord = Object<Dim, Type>::coord;
+	    // New position on the specified direction 
+	    tcoord[_dir.getValue().first] += _dir.getValue().second*(velocity*_time); 
+	    if(true) // TEST IN SPACE + NOT COLLIDING
+	        Object<Dim, Type>::coord = tcoord;
     }
     
     template <int Dim, class Type, class Data>
     void Resource<Dim, Type, Data>::update(double _time)
-    { 
+    {
         logger(Logger::PROGRESS) << "Resource : update";
         if(assignment != nullptr)
         {

@@ -40,9 +40,53 @@ int main(void)
      */
     try
     {
-      
-      	// Test for update()  
+      	SimpleSP spa;
+        Coordonate<2,int> coord;
+        
+      	// Test for addObject()
+      	
+        // Add some resources
+      	Environment<2, int, int> env;
 
+        std::vector<AResource*> res;
+        for(unsigned i = 0; i < 5; i++)
+        {
+            coord[0] = i;
+            coord[1] = 1;
+            res.push_back(new Resource<2,int,int>(coord, 100, false, spa));
+        }
+        
+        env.addObject(res);
+        
+        if(env.getResources() != res)
+			throw std::runtime_error("Error in expectations for first test");
+
+        // Add some taskSpots
+        Task t;
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        ConstraintSystem constraintSystem;
+        constraintSystem.push(&sc);
+        
+        std::vector<ATaskSpot*> ts;
+        for(unsigned i = 0; i < 5; i++)
+        {
+            coord[0] = i;
+            coord[1] = 4;
+            ts.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
+        }
+        
+        env.addObject(ts);
+        
+        if(env.getTaskSpots() != ts)
+			throw std::runtime_error("Error in expectations for second test");
+
+		// Test for update()
+		env.update(0);
+		env.update(-10);
+		env.update(10);
+			
+      	// Test for _dump()
+      	env.dump();
     }
     catch(exception& e)
     {

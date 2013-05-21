@@ -40,15 +40,71 @@ int main(void)
      */
     try
     {
-        
-		// Test for update()
+    	Kuhn assignment;
+        SimpleSP spa;
+        Coordonate<2,int> coord, c;
+        coord[0] = 1;
+        coord[1] = 1;
+        Resource<2,int,int>* res = new Resource<2,int,int>(coord, 100, false, spa);
 		
 		// Test for move()
+		Direction<2> d(1,true);
+		res->move(d, -1);
+
+		if(res->getCoordonates() != coord)
+			throw std::runtime_error("Error in expectations for test 1");
+			
+		res->move(d, 0);
+
+		if(res->getCoordonates() != coord)
+			throw std::runtime_error("Error in expectations for test 2");
+			
+		res->move(d, 1);
+
+		if(res->getCoordonates() == coord)
+			throw std::runtime_error("Error in expectations for test 3");
+
+		// Test for update()
+		logger(Logger::INFO) << "update without assignment";
+		res->update(-1.);
+		logger(Logger::INFO) << "------";
+		res->update(0.);
+		logger(Logger::INFO) << "------";
+		res->update(1.);
 		
-		// Test for isBusy()
+        // Add 1 taskSpot
+		Task t;
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        ConstraintSystem constraintSystem;
+        constraintSystem.push(&sc);
+        
+        coord[0] = 3;
+        coord[1] = 3;
+		TaskSpot<2,int>* ts = new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; });
 		
-		// Test for colliding()
-	
+		res->setAssignment(*ts);
+		
+		c = res->getCoordonates();
+		
+		logger(Logger::INFO) << "-------------------------";
+		logger(Logger::INFO) << "update an assignment";
+		res->update(-1.);
+		
+		if(res->getCoordonates() != c)
+			throw std::runtime_error("Error in expectations for test 4");
+			
+		logger(Logger::INFO) << "------";
+		res->update(0.);
+		
+		if(res->getCoordonates() != c)
+			throw std::runtime_error("Error in expectations for test 5");
+			
+		logger(Logger::INFO) << "------";
+		res->update(1.);
+		
+		if(res->getCoordonates() == c)
+			throw std::runtime_error("Error in expectations for test 6");
+		
     }
     catch(exception& e)
     {

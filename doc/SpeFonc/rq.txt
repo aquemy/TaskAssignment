@@ -1,15 +1,15 @@
-Rq :
 
-1- constraint/customConstraint
-	Initialisation lastValue ?
-
-2- constraint/stepConstraint
-	Test unitaire operator() ?
 
 3- graph/simpleIndex
-	Je vois pas quoi dire ..
+v<int> on vérifie qu'on retrouve bien ce qu'on a envoyé
 
 4- ia/strategy/simpleStrategy
-	Quelque chose ?
+	tester sur cas simple
+	1 task
+	1taskspot
+	1 resource
+	coord spécifiée (dist euclidienne ?)
+	system constraint (+constraint)
+	evalSituation : dist eucl entre taskspot & resource
 
 5- utils ?

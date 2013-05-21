@@ -40,7 +40,7 @@ int main(void)
      */
     try
     {
-        
+        // Test for evalSituation()
 
     }
     catch(exception& e)

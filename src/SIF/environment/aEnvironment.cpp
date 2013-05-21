@@ -37,8 +37,14 @@ namespace sif
     void AEnvironment::update(double _time)
     {
         logger(Logger::PROGRESS) << "Environment : UPDATE";
-        for(auto r : resources)
-            r->update(_time);
+        if (_time >= 0)
+	        for(auto r : resources)
+    	        r->update(_time);
+    	else
+    	{
+        	_time = 0;
+	        logger(Logger::WARNING) << "Negative time, change to 0";
+        }
     }
     
     void AEnvironment::addObject(std::vector<AResource*>& _resources)

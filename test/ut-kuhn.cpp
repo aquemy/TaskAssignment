@@ -112,7 +112,6 @@ int main(void)
     	if(res != wantedRes)
 		    throw runtime_error("Error in expectations for fourth test");
         
-
     }
     catch(exception& e)
     {

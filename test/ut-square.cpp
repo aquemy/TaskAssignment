@@ -40,7 +40,7 @@ int main(void)
      */
     try
     {
-        
+        // Test for colliding()
 	
     }
     catch(exception& e)

@@ -75,6 +75,7 @@ namespace sif
         // Obstacle info
         logger(Logger::INFO) << "--------------------------------------------";
     }
+    
 }
 
 
