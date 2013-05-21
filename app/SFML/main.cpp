@@ -43,7 +43,10 @@ using namespace sif;
 
 int main(int argc, char *argv[])
 {
-    (void) argc;
+    int simulTime = 25;
+    if(argc > 0)
+        simulTime = atoi(argv[1]);
+        
     
     const unsigned xsize = 590;
     const unsigned ysize = 590;
@@ -89,7 +92,7 @@ int main(int argc, char *argv[])
         IA<2,int> ia(model, constraintSystem);
         
         // Stop criterion
-        TimeContinue cont(25);
+        TimeContinue cont(simulTime);
         Controller::addContinue(cont);
         
         // Step Environment

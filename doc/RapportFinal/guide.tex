@@ -7,7 +7,7 @@ Pour construire et compiler le framework il faut se placer dans un dossier build
     > cd build
 \end{verbatim}
 
-Il suffit ensuite de lancer CMake puis make. L'option -DINSTALL_TYPE=full permettra de générer également les tests.
+Il suffit ensuite de lancer CMake puis make. L'option -DINSTALL\_TYPE=full permettra de générer également les tests.
 
 \begin{verbatim}
     > cmake .. -DINSTALL_TYPE=full
@@ -23,15 +23,146 @@ Les tests peuvent être lancés tous ensemble via la commande ctest :
 
 Ou indépendamment, en se placant dans le répertoire /build/test et en exécutant chaque test.
 
+\subsection{Utilisation dans un projet}
+
+Comme l'installation n'est pas prévue par CMake, il faudra donner directement le chemin du dossier des includes au compilateur ainsi que linker explicitement à à la librairie générée dans le dossier build.\\\\
+
+L'inclusion des headers complet du framework se faisant à l'aide de la commande suivante :
+\begin{verbatim}
+    #include <sif.hpp>
+\end{verbatim}
+
 \subsection{Leçon}
-Les leçons permettent d'apprendre un aspect du framework. Nous n'avons créée qu'une leçon, qui présente tout le processus de création d'une simulation basique.
+Les leçons permettent d'apprendre un aspect du framework. Nous n'avons créée qu'une leçon, qui présente tout le processus de création d'une simulation basique. Celle-ci donne un bon exemple d'utilisation des mécanismes basiques (et d'ailleurs les seuls implémentés !).
+
 \subsubsection{Leçon 1 : simulation basique}
 
+Tout d'abord nous créons un générateur aléatoire avec une distribution uniforme sur $[0,10]$ de sorte à placer aléatoirement des objets dans l'environnement.
+
+\begin{lstlisting}[label=nvi_code,caption=Générateur aléatoire,language=C++]
+        // Random engine
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(0, 10);
+\end{lstlisting}
+
+Nous créons un simple environnement 2D dont les coordonées seront des int. Le dernier template n'est pas utilisé pour l'implémentation à l'heure actuelle.
+
+\begin{lstlisting}[label=nvi_code,caption=Environnement,language=C++]
+        // Create simple 2D environment
+        Environment<2, int, int> env;
+\end{lstlisting}
+
+Nous ajoutons quelques ressources de manière aléatoire. Chaque resource a besoin d'un algorithme de plus court chemin. Nous choisissons l'algorithme le plus simple, qui ne tient pas compte des obstacles.\\
+La valeur 100 correspond à la vitesse en de la ressource et nous lui donnons un statut non-occupé par défaut. En dernier lieu nous ajoutons les resources ainsi créées à l'environnement.
+
+\begin{lstlisting}[label=nvi_code,caption=Création de ressources,language=C++]       
+        // Add some resources randomly
+        SimpleSP spa;
+        Coordonate<2,int> coord;
+
+        std::vector<AResource*> res;
+        for(unsigned i = 0; i < 5; i++)
+        {
+            coord[0] = dis(gen);
+            coord[1] = dis(gen);
+            res.push_back(new Resource<2,int,int>(coord, 100, false, spa));
+        }
+        
+        env.addObject(res);
+\end{lstlisting}
+
+Nous faisons de même avec des emplacements de travail que nous générons aléatoirement. Pour cela, il nous faut créer une tâche, et tant qu'à faire, une contrainte de seuil dessus qui sera ajoutée dans le système de contraintes.\\
+La contrainte est initialisée avec une priorité 0, utilisant la tâche $t$ qui doit être supérieur à 500.
+
+\begin{lstlisting}[label=nvi_code,caption=Création des tâches, contraintes et emplacements,language=C++]        
+        // Create some tasks and the constraintSystem
+        Task t;
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        ConstraintSystem constraintSystem;
+        constraintSystem.push(&sc);
+        
+        // Add some taskSpots
+        std::vector<ATaskSpot*> taskSpots;
+        for(unsigned i = 0; i < 5; i++)
+        {
+            coord[0] = dis(gen);
+            coord[1] = dis(gen);
+            taskSpots.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
+        }
+        
+        env.addObject(taskSpots);
+\end{lstlisting}
+
+Nous créons alors notre IA. Dans un premier temps nous choisisson un algorithme d'affectation pour la seule stratégie que nous donnerons à l'IA. Entre temps il faut créer un modèle qui sert, en temps normal, à agencer les stratégies.
+
+\begin{lstlisting}[label=nvi_code,caption=Déclaration de l'IA,language=C++]         
+        // Assignment
+        Kuhn assignment;
+        
+        // Strategies creation
+        SimpleStrategy<2,int> s1(assignment);
+        
+        // Model creation
+        ManualModel<2,int> model(s1);
+        
+        // IA Creation
+        IA<2,int> ia(model, constraintSystem);
+\end{lstlisting}
+ 
+La dernière étape consiste à définir les paramètres de la simulation : critères d'arrêts et étapes.
+ 
+\begin{lstlisting}[label=nvi_code,caption=Paramètrage de la simulation,language=C++]         
+        // Stop criterion
+        TimeContinue cont(5);
+        Controller::addContinue(cont);
+        
+        // Step Environment
+        unsigned envDelay = 500; // ms
+        auto envController = bind(&Environment<2,int,int>::update, std::ref(env), placeholders::_1);
+        Step envStep(envController, envDelay);
+        Controller::addStep(envStep);
+        
+        // Step DUMP
+        unsigned dumpDelay = 500; // ms
+        auto dump = bind(&Environment<2,int,int>::dump, std::ref(env));
+        Step dumpStep(dump, dumpDelay);
+        Controller::addStep(dumpStep);
+        
+        // Step IA
+        unsigned iaDelay = 1000; // ms
+        auto iaController = bind(&IA<2,int>::update, std::ref(ia), placeholders::_1);
+        Step iaStep(iaController, iaDelay);
+        Controller::addStep(iaStep);
+\end{lstlisting}
+
+Nous devons initialiser le contrôleur qui se chargera alors de lancer l'indexation et le partitionnement et transmettre les informations récoltées aux entitées en ayant besoin.
+
+\begin{lstlisting}[label=nvi_code,caption=Initialisation et lancement du contrôleur,language=C++]         
+        // Init and launch the simulation
+        Controller::init(ia, env);
+        Controller::run();
+\end{lstlisting}
+
+En dernier lieu nous libérons la mémoire liées à la création dynamique des différents objets.
+
+\begin{lstlisting}[label=nvi_code,caption=Libération des resources,language=C++]        
+        // Free Memory
+        for(auto e : taskSpots)
+            delete e;
+        for(auto e : res)
+            delete e;
+\end{lstlisting}
 
 \section{Application}
 \subsection{Compilation}
-La compilation de l'application requiert que la SFML soit installée. Si c'est le cas et qu'elle se trouve dans les chemins standards, elle peut être trouvé grâce à CMake.\\
-Pour construire et compiler l'application en même temps que le framwork, il faut rajouter l'option -DSFML_EXAMPLE lors de l'appel à cmake :\\\\
+La compilation de l'application requiert que la SFML 2.0 soit installée. Si c'est le cas et qu'elle se trouve dans les chemins standards, elle peut être trouvé grâce à CMake.\\\\
+
+Le site de la SFML est le suivant : http://www.sfml-dev.org/index-fr.php \\\\
+
+Elle peut être compilée via CMake mais se trouve normalement dans la plupart des dépôts des distributions Linux (attention à prendre la version 2.0 et pas 1.6). L'installation n'a pas été vérifiée sous Mac OS X.\\\\
+
+Pour construire et compiler l'application en même temps que le framwork, il faut rajouter l'option -DSFML\_EXAMPLE lors de l'appel à cmake :\\\\
 
 \begin{verbatim}
     > cmake .. -DSFML_EXAMPLE=true
@@ -43,9 +174,11 @@ Pour construire et compiler l'application en même temps que le framwork, il fau
 L'application requiert une police d'écriture qui est présente et copiée dans la racine du dossier de construction. Ainsi pour lancer l'application il faut se trouver à la racine du build (et pas dans un dossier parent ou fils) :
 
 \begin{verbatim}
-    > ./app/SFML/sifExample
+    > ./app/SFML/sifExample <time>
 \end{verbatim}
 
-La simulation dure 25 secondes et se terminera quoiqu'il arrive après 25 secondes.\\
+La simulation dure \textless time\textgreater secondes et se terminera quoiqu'il arrive après ce temps. Si aucun argument n'est spécifié, la durée est de 25 secondes.\\
 On peut ajouter des emplacements de travail en cliquant avec le bouton droit de la souris et des ressources avec le bouton gauche.\\
-Comme la seule contrainte définie est sur la tâche 1 et requiert que la tâche soit à plus de 5000, une fois la constrainte satisfaite, la stratégie implémentée n'affectera pas les nouvelles ressources crées, même si elles sont libres.
+Comme la seule contrainte définie est sur la tâche 1 et requiert que la tâche soit à plus de 5000, une fois la constrainte satisfaite, la stratégie implémentée n'affectera pas les nouvelles ressources crées, même si elles sont libres (un message s'affiche alors à l'écran).\\\\
+
+Le contrôleur graphique étant indépendant du contrôleur principal de la simulation, il est possible de faire l'interface graphique sans interrompre la simulation, en appuyant sur la touche echap. On peut également réouvrir l'interface en appuyant sur cette même touche.

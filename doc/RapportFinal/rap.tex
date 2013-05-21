@@ -1,6 +1,7 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
+\usepackage[final]{pdfpages} 
 \usepackage{insa}
 
 % --------------------------------------------------------------------
@@ -18,8 +19,14 @@
 \chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}
 \input{intro.tex}
 
-\chapter{Construction logiciel}
-\input{construction.tex}
+\chapter{Analyse des besoins}
+\input{besoins.tex}
+
+\chapter{Modélisation}
+\input{modelisation.tex}
+
+\chapter{Plan de tests} 
+\input{specFonc.tex}
 
 \chapter{Implémentation}
 \input{implementation.tex}
@@ -37,6 +44,8 @@
 %%- Annexes
 %\appendix \newpage
 %\input{Rap/annexesRK.tex}
+\addcontentsline{toc}{chapter}{Documentation complète}
+\includepdf[pages=1-130]{refman.pdf}
 
 \nocite{*}
 
