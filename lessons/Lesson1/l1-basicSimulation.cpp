@@ -118,7 +118,11 @@ int main(void)
         Controller::init(ia, env);
         Controller::run();
         
-        // Free Memory 
+        // Free Memory
+        for(auto e : taskSpots)
+            delete e;
+        for(auto e : res)
+            delete e;
     }
     catch(exception& e)
     {

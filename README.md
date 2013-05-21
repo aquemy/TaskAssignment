@@ -15,7 +15,7 @@ The basic installation procedure must be done in a separatly folder in order to 
 
 After unpacking the archive file, you should end up with the following structure:
 
-+ app               Applications
++ app                Applications
 + AUTHORS.md         Authors list 
 + cmake/             CMake directory
 + CMakeLists.txt     For building process
@@ -23,8 +23,8 @@ After unpacking the archive file, you should end up with the following structure
 + include            Include directory 
 + INSTALL.md         INSTALL file
 + lessons            Lessons directory
-+ LICENCE  		    Licence contents
-+ README.md		    README file
++ LICENCE  		     Licence contents
++ README.md		     README file
 + src                Sources directory
 + test               Tests directory
 

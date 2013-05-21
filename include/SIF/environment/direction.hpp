@@ -34,7 +34,7 @@
 namespace sif
 {
 
-/**Direction : Vector of an orthonormale base of the space
+/**Direction : Vector of an orthonormal base of the space
 
 @see sif::Environment, sif::Object, sif::Ressource
 */
@@ -44,13 +44,22 @@ class Direction
 {
 public :
     
+    /**
+     * Direction
+     * @param _pos Position of the vector in the base
+     * @param _way Indicate the way
+     */
     Direction(unsigned _pos, bool _way);
 
+    /**
+     * getValue
+     * @return Direction information
+     */
     std::pair<int, bool> getValue() const;
 
 protected :
 
-    std::pair<int, bool> dir;
+    std::pair<int, bool> dir;   ///< Direction information
 
 };
 

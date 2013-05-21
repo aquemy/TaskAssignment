@@ -79,9 +79,8 @@ protected :
      */
     void _dump();
 
-    Space<Dim,Type> space;
-    
-    std::vector<Obstacle<Dim, Type>> obstacles;
+    Space<Dim,Type> space;                      ///< Space
+    std::vector<Obstacle<Dim, Type>> obstacles; ///< Obstacle of the environment
 
 };
 

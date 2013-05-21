@@ -43,10 +43,16 @@ class ObservablePolicy
 {
 public :
 
+    /**
+     * Set change : the meaning of this function depends on the policy
+     */
     virtual void setChange() final;
     
 protected :
 
+    /**
+     * Implementation of setChange method
+     */
     virtual void _setChange() = 0;
     
 };

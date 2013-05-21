@@ -53,6 +53,12 @@ public :
      */
     SimpleStrategy(Assignment& _assignment);
     
+    /**
+     * Evaluation of the situation
+     * @param _spatialData SpatialData information
+     * @param _constraintSystem Constraint system
+     * @return Value of the situation
+     */
     virtual int evalSituation(SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
 
 protected :

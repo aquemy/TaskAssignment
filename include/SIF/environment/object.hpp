@@ -61,7 +61,7 @@ public :
 
 protected :
 
-    Coordonate<Dim, Type> coord;
+    Coordonate<Dim, Type> coord;    ///< Coordonates of the object
 
 };
 

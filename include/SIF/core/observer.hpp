@@ -44,6 +44,9 @@ class Observer
 {
 public :
 
+    /**
+     * Notify observable
+     */
     void notify();
 
 protected :

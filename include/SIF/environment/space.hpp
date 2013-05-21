@@ -77,6 +77,7 @@ public :
     bool inSpace(Coordonate<Dim,Type> _coord) const; 
     
     protected :
+    
         std::vector<std::pair<Type,Type>> boundaries; /// Boundaries
 };
 

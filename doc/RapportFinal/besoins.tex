@@ -1,0 +1,101 @@
+
+\section{Présentation du sujet}
+L'affectation est un problème d’optimisation combinatoire qui consiste, dans sa version simple, à affecter un certain nombre de ressources disponibles à un certain nombre de tâches dans l'objectif d'optimiser une fonction objectif. Il peut s'agir de minimiser des coûts ou maximiser les bénéfices. Ce problème peut être résolu en temps polynomial par la méthode hongroise également appelée algorithme de Kunh.\\
+On peut étendre ce problème par des objectifs multiples, des contraintes changeantes en temps réel ou encore des contraintes probabilités traduisant une observation ou une connaissance partielle de l'environnement. On peut alors parler plus largement de planification, qui est un domaine ouvert de l'intelligence artificielle où de nombreuses formulations font apparaître des problèmes de la classe NP-difficile ou NP-complet sur lesquels de nombreuses équipes de recherches travaillent.\\\\
+
+Dans le cadre de notre projet C++ nous avons choisi de réaliser un (début de) framework permettant la modélisation et l'implémentation de problème de planification spatiale sous contraintes. Il s'agira de proposer des briques logicielles permettant la création et la gestion d'IA pour la résolution de ce problème.\\
+Enfin, pour illustrer la résolution temps réel des problèmes, en plus du framework, une application de simulation d'une Intelligence Artificielle sera développée. Il s'agira d'une application graphique montrant des unités d'un jeu vidéo affectées à divers postes pour maximiser divers objectifs pouvant changer au court du temps (équilibrage de ressources, objectif de construction, par exemple).
+
+\section{Framework : Description du système et objectifs}
+
+Le système doit permettre pour l'utilisateur la création d'une intelligence artificielle pour résoudre le problème d'affectation.\\
+La création de l'IA se fait en plusieurs étapes :
+\begin{itemize}
+\item Définition de l'environnement (tâches, objectifs & contraintes, unités)
+\item Définition d'une méthode d'apprentissage et d'un modèle d'observation de l'environnement
+\item Création d'une ou plusieurs stratégies de résolution du problème d'affectation
+\end{itemize}
+
+Une stratégie classique consiste à :
+\begin{itemize}
+\item Discrétiser l'espace
+\item Indexer les unités, les tâches et en règle générale les objets de l'environnement
+\item Définir une fonction de coût
+\item Définir un algorithme d'affectation
+\end{itemize}
+
+Une stratégie peut être vu comme un algorithme dont on va pouvoir changer les briques évoquées ci-dessus.\\\\
+
+Cela fait apparaître plusieurs axes de travail qui seront autant de modules du projet :
+\begin{itemize}
+\item L'IA et l'environnement
+\item Un module d'algorithmes d'indexation spatiale et  de partitionnement spatial
+\item Un module d'algorithmes de plus court chemin (composant principal d'une fonction de coût)
+\item Un modèle d'algorithmes d'affectation
+\end{itemize}
+
+On pourrait imaginer un module dédié aux méthodes d'apprentissage et au modèle d'observation mais étant donné le temps à consacrer au projet, on choisira un modèle simple, déterministe et omniscient (c'est à dire que l'on aura pas d'apprentissage, que l'on considérera avoir toujours prit la bonne décision et l'ensemble de l'environnement est connu à chaque instant par l'IA).
+
+\subsection{Module d'IA et d'environnement}
+
+Il s'agit du module de plus « haut niveau » qui doit donner une API simple permettant de décrire un environnement spatial et ses objets (unités, tâches, obstacles), les contraintes liées aux tâches et enfin de quoi concevoir des stratégies données à l'IA (qu'on pourra intervertir pour par exemple constater de leurs différents effets).\\\\
+
+Il devrait également reposer sur une technique d'apprentissage (par exemple : Algorithmes d'apprentissage par renforcement)  et un modèle de prise de décision (par exemple : Processus de décision markovien partiellement observable) mais comme précisé plus haut, nous n'aurons jamais le temps d'envisager divers modèles de la sorte.
+
+\subsection{Module d'indexation spatiale et de partitionnement spatial}
+
+Ce module devra proposer deux choses :
+\begin{itemize}
+\item Des structures de données permettant l'indexation et le partitionnement spatial
+\item Des algorithmes permettant de réaliser l'indexation et le partitionnement
+\end{itemize}
+
+Il s'agira de proposer une API la plus unifiée possible pour permettre de changer de structures de données indépendamment de l'algorithme afin de pouvoir comparer leurs performances par exemple.\\\\
+
+On peut citer quelques structures de données qui pourront être étudiées : les Arbre kd, R Tree, Hilbert R Tree, BSP, QuadTree...\\\\
+
+L'objectif de ce module est d'avoir des algorithmes qui vont permettre à l'IA de transformer un environnement « brut », à savoir un plan avec une liste d'objets dessus, en une ou plusieurs structures plus intelligente pour réduire la complexité de certaines heuristiques de plus court chemin ou d'affectation.
+
+\subsection{Module d'algorithmes de plus court chemin}
+
+Étant donné que nous travaillons avec une dimension spatiale, les fonctions de coûts d'affectation d'une unité à une tâche vont être majoritairement basées sur la distance à parcourir. De plus, il faudra ensuite que chaque unité puisse se déplacer vers la tâche qui lui a été affectée le plus rapidement.\\\\
+
+L'objectif de ce module est donc de proposer divers algorithmes de plus court chemin, toujours avec une API la plus unifiée possible.
+
+\subsection{Module d'affectation}
+
+Il existe plusieurs approches pour l'affectation et ce module doit proposer plusieurs algorithmes pour résoudre le problème une fois l'évaluation des solutions possibles obtenues.\\
+On peut citer l'algorithme de Kuhn mais également la recherche des voisins les plus proches où l'algorithme des axes principaux.
+
+\subsection{Note sur l'implémentation et les objectifs}
+
+Le projet étant ambitieux à la vue de la multitude des algorithmes existants tant pour le plus court chemin que pour l'indexation spatiale voire pour la description des contraintes et objectifs, le travail réalisé sera axé sur la modélisation et l'architecture du framework. L'implémentation sera partielle mais les bonnes pratiques de développement occuperont une part importante de celle-ci dans le but de valoriser le livrable et permettre une implémentation complète en dehors du cadre de ce projet et d'ajouter de nouveaux algorithmes facilement.\\\\
+
+On choisira de n'implémenter qu'un algorithme de chaque module (pour pouvoir proposer une IA fonctionnelle). Notre choix s'est porté sur des algorithmes classiques et relativement simple d'implémentation :
+\begin{itemize}
+\item Partitionnement : Simple grille et QuadTree
+\item Indexation : R-Tree
+\item Plus Court Chemin : A*
+\item Affectation : Méthode hongroise
+\end{itemize}
+
+\section{Application : Description du système et objectifs}
+
+L'application servira de démonstration à l'IA construite avec le Framework. Il s'agira d'un petit jeu de stratégies en temps réel.\\
+L'environnement sera une carte 2D avec des murs (les obstacles), des ouvriers (les ressources), et des mines d'or et des mines de pierres (les tâches, qui sont donc au nombre de deux). L'action de miner durera un certain temps qui occupera un ouvrier et lui permettra de faire augmenter le compteur général d'or ou de pierres.\\\\
+
+Les fonctionnalités suivantes permettront à l'utilisateur d'interagir avec le monde pour voir la réaction de l'IA :
+\begin{itemize}
+\item Supprimer / Créer un ouvrier
+\item Augmenter / Diminuer le nombre d'or / pierres en réserve
+\item Fixer un ratio entre or et pierres
+\item Fixer un objectif à atteindre pour l'or ou/et la pierre
+\end{itemize}
+
+\section{{\color{red}{Notes sur les besoins}}}
+
+Le découpage en modules a été respectée et les besoins n'ont pas changés. Seuls l'implémentation a été encore un peu réduite par rapport à ce qui a été prévu, le rapport ayant été écrit lorsque nous pensions être 4 pour réaliser le projet.\\
+Pour le détail de l'implémentation, se référer à la section correspondante.\\\\
+
+Concernant l'application de démonstration, pour la même raison, elle a été abandonnée mais le temps nous a finalement permis d'en créer une version très simplifiée.
+

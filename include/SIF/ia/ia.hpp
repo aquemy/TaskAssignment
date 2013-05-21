@@ -49,6 +49,7 @@ public :
     /**
      * Constructor
      * @param _model Model of IA
+     * @param _constraintSystem Constraint system related to tasks
      */
     IA(Model<Dim, Type>& _model, ConstraintSystem& _constraintSystem);
     
@@ -72,9 +73,9 @@ public :
 
 protected :
 
-    Model<Dim, Type>& model;
-    SpatialData* spatialData;
-    ConstraintSystem& constraintSystem;
+    Model<Dim, Type>& model;            ///< Model of the IA
+    SpatialData* spatialData;           ///< SpatialData
+    ConstraintSystem& constraintSystem; ///< Constraint system
     
 };
 

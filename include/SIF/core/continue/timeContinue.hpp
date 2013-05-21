@@ -61,9 +61,9 @@ protected :
      */
     virtual bool _check();
     
-    bool start;
-    double sec;
-    std::chrono::steady_clock::time_point startTime;
+    bool start;                                         ///< Boolean to know if the chrono is started
+    double sec;                                         ///< Number of seconds to reach
+    std::chrono::steady_clock::time_point startTime;    ///< Time when the chrono has been started
 };
 
 }

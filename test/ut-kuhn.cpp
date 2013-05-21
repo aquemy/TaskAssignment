@@ -33,7 +33,7 @@
 using namespace std;
 using namespace sif;
 
-int cinq (int i, double _time)
+int cinq (int& i, double _time)
 { return 5; }
 
 int main(void)

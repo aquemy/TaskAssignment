@@ -60,6 +60,7 @@ public :
      * Update Model
      * @param _time Ellapsed time since the last update
      * @param _spatialData Data
+     * @param _constraintSystem Constraint system related to tasks
      */
     virtual void update(double _time, SpatialData& _spatialData, ConstraintSystem& _constraintSystem);
     

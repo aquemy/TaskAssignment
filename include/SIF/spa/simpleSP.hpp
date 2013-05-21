@@ -50,7 +50,6 @@ public :
      * Start the shortest path computation
      * @param _from Origin
      * @param _to Goal
-     * @param _data Spatial data
      * @return A path
      */  
     template<int Dim, class Type>

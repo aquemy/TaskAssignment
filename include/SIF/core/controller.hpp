@@ -90,6 +90,7 @@ public :
     /**
      * Static initialization
      * @param _ia IA for the simulation
+     * @param _env Environment for the simulation
      */
     template <int Dim, class Type, class Data>
     static void init(IA<Dim, Type>& _ia, Environment<Dim, Type, Data>& _env);
@@ -117,11 +118,11 @@ protected :
      */
     static bool checkContinue();
     
-    static std::vector<Continue*> cont;
-    static std::list<std::pair<Step, unsigned>> steps;
-    static SpatialData* spatialData;
-    static bool initialized;
-    static AEnvironment* env;
+    static std::vector<Continue*> cont;                 ///< Continuators
+    static std::list<std::pair<Step, unsigned>> steps;  ///< Functions to call during the main loop
+    static SpatialData* spatialData;                    ///< SpatialData information
+    static bool initialized;                            ///< True if the controller has been initialized
+    static AEnvironment* env;                           ///< Environment of the simulation
 };
 
 }

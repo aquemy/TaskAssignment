@@ -1,0 +1,52 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[final]{pdfpages} 
+\usepackage{insa}
+
+% --------------------------------------------------------------------
+\begin{document}
+\pageDeGarde{Département Génie Mathématique}{Affectation spatiale sous contraintes}{}{Adeline Bailly, \& Alexandre Quemy}{\textbf{Rapport final} \\Janvier 2013 - Juin 2013}
+\pageINSA
+
+\thispagestyle{empty}
+
+%%- Table des matières
+\tableofcontents
+\thispagestyle{empty} \setcounter{page}{0}
+
+%%- Introduction
+\chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}
+\input{intro.tex}
+
+\chapter{Analyse des besoins}
+\input{besoins.tex}
+
+\chapter{Modélisation}
+\input{modelisation.tex}
+
+\chapter{Plan de tests} 
+\input{specFonc.tex}
+
+\chapter{Implémentation}
+\input{implementation.tex}
+
+\chapter{Application}
+\input{application.tex}
+
+\chapter{Guide utilisateur}
+\input{guide.tex}
+
+%%- Conclusion
+\chapter*{Conclusion} \addcontentsline{toc}{chapter}{Conclusion}
+\input{ccl.tex}
+
+%%- Annexes
+%\appendix \newpage
+%\input{Rap/annexesRK.tex}
+\addcontentsline{toc}{chapter}{Documentation complète}
+\includepdf[pages=1-130]{refman.pdf}
+
+\nocite{*}
+
+\end{document}

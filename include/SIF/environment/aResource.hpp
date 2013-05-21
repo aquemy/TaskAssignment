@@ -55,7 +55,6 @@ public :
      * Constructor
      * @param _velocity Velocity of the resource
      * @param _busy Status of the resource
-     * @param _spa Shortest Path Algorithm
      */
     AResource(double _velocity, bool _busy);
     
@@ -103,7 +102,7 @@ protected :
     
     bool busy;									///< Status of the resource
     double velocity;                            ///< Velocity of the ressource
-    SpatialData* spatialData;
+    SpatialData* spatialData;                   ///< SpatialData
     ATaskSpot* assignment;                      ///< Assignment
 };
 
