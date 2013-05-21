@@ -2,61 +2,63 @@
 \subsection{Licence}
 Le code source a été placé sous licence CECILL, équivalente française de la GPL. Il interdit l'utilisation commercial du code.
 \subsection{Gestionnaire de version}
-L'ensemble de l'avancement du projet a été versionné grâce au système Git et un dépôt crée sur Bitbucket.\\\\
+L'ensemble de l'avancement du projet a été versionné grâce au système Git et un dépôt crée sur Bitbucket.\\
 
-L'adresse du dépôt est la suivante : https://bitbucket.org/aquemy/taskassignment\\\\
+L'adresse du dépôt est la suivante~: https://bitbucket.org/aquemy/taskassignment\\\\
 
 \subsubsection{Architecture du dépôt}
-Le dépôt est constitué des répertoires suivants :
+Le dépôt est constitué des répertoires suivants~:
 \begin{itemize}
-\item app : Applications utilisant le framework
-\item cmake : Fichiers de construction du framework
-\item include : Fichiers d'entête du framework
-\item lessons : Leçons d'apprentissage sur le framework
-\item src : Sources du framework
-\item test : Ensemble de tests
+\item app~: Applications utilisant le framework
+\item cmake~: Fichiers de construction du framework
+\item include~: Fichiers d'entête du framework
+\item lessons~: Leçons d'apprentissage sur le framework
+\item src~: Sources du framework
+\item test~: Ensemble de tests\\
 \end{itemize}
 
-Quelques fichiers sont présents à la racine, écrit pour la plupart en Markdown : auteurs du projet, guide d'installation, licence, notes et liste des tâches à effectuer.
+Quelques fichiers sont présents à la racine, écrit pour la plupart en Markdown~: auteurs du projet, guide d'installation, licence, notes et liste des tâches à effectuer.
 
 \subsection{Systeme de construction}
 Un système de construction a été mis en place pour le livrable grâce à CMake et les outils gravitants autour.
 CMake permet de gérer l'ensemble des dépendances, générer les exécutables pour les tests, les binaires de librairies, etc.\\\\
 
 Le système de build mis en place est principalement localisé dans le dossier cmake de la racine du projet.\\
-Il comprend les fichiers suivant :
+
+Il comprend les fichiers suivant~:
 \begin{itemize}
 \item Config.cmake, qui gère les différentes options de compilation
 \item Files.cmake, qui liste l'ensemble des fichiers nécessaires à la création de la bibliothèque. Notamment, il liste à la fois les fichiers .cpp ne contenant que l'implémentation mais également les fichiers .hpp des classes templatées qui appellent eux même l'implémentation.
 \item Macro.cmake, qui comprends les commandes personnalisées. La seule commande disponible permet d'ajouter facilement de nouvelles lessons.
 \item Package.cmake, qui gère le packaging basique.
-\item Target.cmake, comprenant des cibles personnalisées, notamment quelques raccourcis d'utilisation.
+\item Target.cmake, comprenant des cibles personnalisées, notamment quelques raccourcis d'utilisation.\\
 \end{itemize}
 
 Le livrable n'étant pas complètement implémenté, le processus d'installation n'a pas été ajouté.
 
 \subsection{Documentation}
-La documentation est générée par doxygen grâce à un fichier de configuration présent dans le dossier doc.\\
-L'ensemble des rapports et des fichiers de modélisation (sous argoUML) a également été versionné et est présent dans le dossier doc.
+La documentation est générée par doxygen grâce à un fichier de configuration présent dans le dossier \texttt{doc}.\\
+
+L'ensemble des rapports et des fichiers de modélisation (sous argoUML) a également été versionné et est présent dans le dossier \texttt{doc}.
 
 \section{Détail de l'implémentation}
-\subsection{Les princpales fonctionnalités}
+\subsection{Les principales fonctionnalités}
 L'implémentation est très incomplète par rapport à l'ensemble de la modélisation effectuée. Cependant, un certain nombre d'éléments essentiels au principal cycle d'affectation sont présents, permettant de fournir un framework fonctionnel avec un exemple d'application graphique l'utilisant.
 
 \subsubsection{Le logger}
 Le logger est mis en place afin de garder une trace de l'ensemble des étapes de la simulation. Différents niveaux de verbosités sont présents afin de permettre à l'utilisation de gérer le degré d'information qu'il souhaite. De même, un système de sérialisation par fichier permet de régler séparemment les informations à afficher dans le terminal et celles à directement enregistrer dans un fichier.
 
-Les niveaux de logs sont les suivants :
+Les niveaux de logs sont les suivants~:
 \begin{itemize}
-\item PROGRESS : Indique une étape de progression de la simulation
-\item ERROR : Indique une erreur qui va arrêter la simulation
-\item DEBUG : Affiche des informations supplémentaires utiles pour le débugage
-\item WARNING : Affiche un avertissement ou une modification de comportement pour éviter une erreur. Par exemple dans le cas où une fonction d'update reçoit une valeur de temps négative, celle-ci est mise à 0 avant tout traitement et un message de niveau WARNING est envoyé afin de ne pas interrompre la simulation.
-\item INFO : Information supplémentaires, généralement liées à une étape de progression. Ces informations ne sont pas liées directements aux résultats de la simulation qui sont plutôt affichées sur PROGRESS.
+\item PROGRESS~: Indique une étape de progression de la simulation
+\item ERROR~: Indique une erreur qui va arrêter la simulation
+\item DEBUG~: Affiche des informations supplémentaires utiles pour le débugage
+\item WARNING~: Affiche un avertissement ou une modification de comportement pour éviter une erreur. Par exemple dans le cas où une fonction d'update reçoit une valeur de temps négative, celle-ci est mise à 0 avant tout traitement et un message de niveau WARNING est envoyé afin de ne pas interrompre la simulation.
+\item INFO~: Informations supplémentaires, généralement liées à une étape de progression. Ces informations ne sont pas liées directements aux résultats de la simulation qui sont plutôt affichées sur PROGRESS.\\
 \end{itemize}
 
-Quelques exemples d'utilisation :
-\begin{lstlisting}[label=nvi_code,caption=Utilisation du logger,language=C++]
+Quelques exemples d'utilisation~:
+\begin{lstlisting}[label=nvi_code, caption=Utilisation du logger, language=C++, inputencoding=utf8]
     // Desactivation du mode DEBUG
     logger.startSerialize("log.txt"); // On sérialize tout dans log.txt
     logger.setQuiet(Logger::PROGRESS); // Pas de message de progression affiché
@@ -72,12 +74,12 @@ Quelques exemples d'utilisation :
 \end{lstlisting}
 
 \subsubsection{Contrôleur}
-Le contrôleur de l'application est la classe centrale du framework. C'est le point d'entrée de toute simulation.
-Il s'agit d'une classe dont toutes les méthodes et membres sont statiques. L'utilisateur définit ses critères d'arrêts de la simulation (en temps ou en étapes pour les critères implémentés), ainsi que les étapes qui doivent être effectués à chaque tour de boucle. Chaque étape doit être paramétrée par un temps de rafraichissement. Ainsi, on peut rafraichir l'environnement toutes les 100ms alors qu'on ne souhaite effectuer un cycle d'affectation toutes les 500ms et un affichage d'informations toutes les secondes.\\
-De plus, chaque étape, lorsqu'elle est appelée, reçoit le temps qui s'est écoulée, en millisecondes, depuis le dernier appel, permettant de gérer correctement le temps réel (par exemple, le déplacement d'une unité ne dépendra pas du temps de rafraichissement de sa méthode d'update, mais uniquement de sa vitesse, le déplacement étant pondéré par la durée depuis le dernier appel de la fonction d'update.\\\\
+Le contrôleur de l'application est la classe centrale du framework. C'est le point d'entrée de toute simulation.\\
+Il s'agit d'une classe dont toutes les méthodes et membres sont statiques. L'utilisateur définit ses critères d'arrêts de la simulation (en temps ou en étapes pour les critères implémentés), ainsi que les étapes qui doivent être effectuées à chaque tour de boucle. Chaque étape doit être paramétrée par un temps de rafraîchissement. Ainsi, on peut rafraîchir l'environnement toutes les 100ms alors qu'on ne souhaite effectuer un cycle d'affectation toutes les 500ms et un affichage d'informations toutes les secondes.\\
+De plus, chaque étape, lorsqu'elle est appelée, reçoit le temps qui s'est écoulé, en millisecondes, depuis le dernier appel, permettant de gérer correctement le temps réel (par exemple, le déplacement d'une unité ne dépendra pas du temps de rafraichissement de sa méthode d'update, mais uniquement de sa vitesse, le déplacement étant pondéré par la durée depuis le dernier appel de la fonction d'update.\\\\
 
-Une fonction d'initialisation qui prend en paramètre l'IA et l'environment de la simulation, permet d'effectuer l'étape de partitionnement et d'indexation et de créer un objet SpatialData invisible à l'utilisateur, qui est passés à tous les objets qui doivent accéder aux informations de l'environment (resources et IA principalement).\\\\
-Voici un exemple de définition de critères et d'étapes :
+Une fonction d'initialisation qui prend en paramètre l'IA et l'environment de la simulation, permet d'effectuer l'étape de partitionnement et d'indexation et de créer un objet SpatialData invisible à l'utilisateur, qui est passé à tous les objets qui doivent accéder aux informations de l'environment (resources et IA principalement).\\\\
+Voici un exemple de définition de critères et d'étapes~:
 
 \begin{lstlisting}[label=nvi_code,caption=Paramètres du contrôleur,language=C++]
 // Stop criterion
@@ -102,66 +104,68 @@ Step dumpStep(dump, dumpDelay);
 \subsubsection{IA \& Modèle}
 
 La classe principale représentant l'IA est implémentée. Il ne s'agit que d'un receptacle prenant un modèle.\\
-La classe abstraite représentant un modèle est implémentée ainsi qu'un modèle très basique : simple conteneur de stratégies.\\\\
+La classe abstraite représentant un modèle est implémentée ainsi qu'un modèle très basique~: simple conteneur de stratégies.\\\\
 
-Seule l'étape d'évaluation de la situation et d'affectation est mise en place et ce travail est effectuée par la stratégie courante du modèle. Les étapes d'apprentissage et de décision ne sont pas implémentée, tout simplement par manque de temps et parce que l'objectif du modèle implémenté est d'être manuel (les stratégies peuvent être changées uniquement par demande de l'utilisateur).\\
+Seule l'étape d'évaluation de la situation et d'affectation est mise en place et ce travail est effectuée par la stratégie courante du modèle. Les étapes d'apprentissage et de décision ne sont pas implémentées, tout simplement par manque de temps et parce que l'objectif du modèle implémenté est d'être manuel (les stratégies peuvent être changées uniquement par demande de l'utilisateur).\\
 Cependant, ces étapes sont indiquées dans le logger pour montrer qu'il ne reste plus qu'à implémenter ces étapes pour d'autres modèles pour lesquels elles sont nécessaires.
 
 \subsubsection{Stratégie}
 
 La classe abstraite des stratégies est implémentée ainsi qu'une stratégie dite simple.\\
 Cette stratégie recherche la première contrainte non satisfaite et repère la tâche associée. Si cette contrainte existe, elle cherche les emplacements de travails relatifs à cette tâche.\\
-Elle va ensuite chercher toutes les ressources libres et créer tous les couples possibles (resources libres / emplacements) qu'elle va évaluer en utilisant la distance de manhattan entre les deux entitéses de chaque couple.\\\\
+Elle va ensuite chercher toutes les ressources libres et créer tous les couples possibles (resources libres / emplacements) qu'elle va évaluer en utilisant la distance de manhattan entre les deux entitées de chaque couple.\\\\
 
-La liste de couples et leur coût evalué est ensuite envoyé au modèle qui va lui même la transmettre à l'algorithme d'affectation choisi. L'évaluation de la situation est représentée par un entier qui est la somme des coûts de tous les couples. Ainsi, au fur et à mesure que les unités se déplacent vers leur affectation, la stratégie renverra une valeur d'autant plus faible. C'est assez basique : on pourrait imaginer un estimateur des moindres carrés avec correction par rapport au nombre de couples, etc.
+La liste de couples et leur coût evalué est ensuite envoyé au modèle qui va lui même la transmettre à l'algorithme d'affectation choisi. L'évaluation de la situation est représentée par un entier qui est la somme des coûts de tous les couples. Ainsi, au fur et à mesure que les unités se déplacent vers leur affectation, la stratégie renverra une valeur d'autant plus faible. C'est assez basique~: on pourrait imaginer un estimateur des moindres carrés avec correction par rapport au nombre de couples, etc.
 
 \subsubsection{Dimension et politique multithread}
 
-Il s'agit plus d'une astuce permettant de faciliter la vie de l'utilisateur qu'une réelle fonctionalité, d'autant ce celle-ci est partiellement implémentée.\\
-La plupart des classes sont templatées avec deux attributs : l'un entier, représentant la dimension de l'espace utilisé pour la simulation, et le second le type des coordonnées utilisées. De même, une politique multithread était envisagée dans la modélisation, ce qui rajouterait un template.\\\\
+Il s'agit plus d'une astuce permettant de faciliter la vie de l'utilisateur qu'une réelle fonctionnalité, d'autant que celle-ci est partiellement implémentée.\\
+La plupart des classes sont templatées avec deux attributs~: l'un entier, représentant la dimension de l'espace utilisé pour la simulation, et le second le type des coordonnées utilisées. De même, une politique multithread était envisagée dans la modélisation, ce qui rajouterait un template.\\\\
 
 Pour une utilisation donnée, tous ces templates vont être identiques et il est possible grâce à CMake de définir la valeur de ces templates par défault.\\
-Une constante du préprocesseur définie une dimension et un type par défaut, ainsi qu'une politique multithread par défaut. Ces constantes sont ensuite utlisée pour créer un alias sur une classe qui viendra remplacer l'ensemble des arguments par défaut des templates.\\\\
+Une constante du préprocesseur définie une dimension et un type par défaut, ainsi qu'une politique multithread par défaut. Ces constantes sont ensuite utlisées pour créer un alias sur une classe qui viendra remplacer l'ensemble des arguments par défaut des templates.\\\\
 
 L'intérêt est que ces constantes peuvent être redéfinie par l'utilisateur dans son code mais aussi et surtout via CMake au moment de la construction logicielle. Ainsi, si l'on est sur une machine multi-thread on pourra par défault l'activer au moment de la compilation, et si l'on veut principalement travailler en dimension 4 sur des coordonnées entières, on peut compiler l'ensemble du framework pour que ce soit le comportement par défaut et ainsi s'affranchir de l'écriture explicite de tous les paramètres des templates. 
 
 \subsubsection{Algorithme d'affectation}
 
-L'algorithme d'affectation implémentée est la méthode de Khun. Il s'agit d'une méthode en $O(n^4)$ dans sa version implémentée, mais des implémentations existent en $O(n^3)$, notamment en utilisant des graphes bipartis.\\\\
-L'algorithme va transformer les couples de (ressources / emplacements) en une matrice de coût et affecter à un emplacement une seule ressource. S'il y a plus de resources que de tâches, elles devront attendre le prochain passage afin d'être affectées. Ce comportement pourrait être amélioré en utilisant l'algorithme plusieurs fois sur des sous-matrices de coûts mais la contrepartie est que s'il y a un nombre de ressources trop important, l'application peut être fortement ralenti puisque l'algorithme a une complexité tout de même élevée. La version de base est donc un bon compris entre la fluidité et l'efficacité.\\
+L'algorithme d'affectation implémenté est la méthode de Khun. Il s'agit d'une méthode en $O(n^4)$ dans sa version implémentée, mais des implémentations existent en $O(n^3)$, notamment en utilisant des graphes bipartis.\\\\
+L'algorithme va transformer les couples de (ressources / emplacements) en une matrice de coûts et affecter à un emplacement une seule ressource. S'il y a plus de resources que de tâches, elles devront attendre le prochain passage afin d'être affectées. Ce comportement pourrait être amélioré en utilisant l'algorithme plusieurs fois sur des sous-matrices de coûts mais la contrepartie est que s'il y a un nombre de ressources trop important, l'application peut être fortement ralenti puisque l'algorithme a une complexité tout de même élevée. La version de base est donc un bon compris entre la fluidité et l'efficacité.\\
 S'il y a plus d'emplacements que de ressources, les emplacements en trop sont ignorés.
 
 \subsubsection{Algorithme d'indexation}
 
-Le seul algorithme d'indexation utilisée est l'identité : l'environnement fourni ses conteneurs comportants les différents objets et l'algorithme va les stocker sous forme de conteneurs identiques (et non d'un arbre interessant pour l'accès à telle ou telle donnée). Il s'agit clairement d'un manque de temps mais l'interface globale des algorithmes est implémentée.\\
-Comme précisé dans les modifications de la modélisation, la fabrique est supprimée et les algorithmes demandées se retrouve être de simples std::function avec le bon type de retour et les bons arguments.\\
-Cela permet à l'utilisateur de définir ses propres classes qui n'ont rien à voir avec celles de base du framework et de ne pas avoir de hierarchie de foncteurs héritant d'un foncteur abstrait (ce qui peut poser des problèmes à l'utilisation).
+Le seul algorithme d'indexation utilisé est l'identité~: l'environnement fourni ses conteneurs comportants les différents objets et l'algorithme va les stocker sous forme de conteneurs identiques (et non d'un arbre intéressant pour l'accès à telle ou telle donnée). Il s'agit clairement d'un manque de temps mais l'interface globale des algorithmes est implémentée.\\
+
+Comme précisé dans les modifications de la modélisation, la fabrique est supprimée et les algorithmes demandés se retrouve être de simples std::function avec le bon type de retour et les bons arguments.\\
+
+Cela permet à l'utilisateur de définir ses propres classes qui n'ont rien à voir avec celles de base du framework et de ne pas avoir de hiérarchie de foncteurs héritant d'un foncteur abstrait (ce qui peut poser des problèmes à l'utilisation).
 
 \subsubsection{Déplacements basiques}
 
-Toujours par manque de temps, seuls des déplacements basiques ont été implémentés, ne tenant pas compte des collisions, d'une part au moment du déplacement des ressources et d'autre part lors du calcul du plus cours chemin.\\\\
+Toujours par manque de temps, seuls des déplacements basiques ont été implémentés, ne tenant pas compte des collisions, d'une part au moment du déplacement des ressources et d'autre part lors du calcul du plus court chemin.\\
 
-Le plus cours chemin ne tient pas compte des obstacles de l'environment, et va simplement créer un chemin en utilisant des mouvements en norme $1$. Pour rappel, le mouvement a été ajouté à la modélisation par la suite et est constitué d'une direction et d'une norme. Le chemin étant alors une liste de mouvement.\\\\
+Le plus court chemin ne tient pas compte des obstacles de l'environment, et va simplement créer un chemin en utilisant des mouvements en norme $1$. Pour rappel, le mouvement a été ajouté à la modélisation par la suite et est constitué d'une direction et d'une norme. Le chemin étant alors une liste de mouvement.\\
 
 Les unités se déplacent alors le long du chemin en calculant la distance qu'elles peuvent effectuer à cette itération (vitesse pondérée par le temps depuis la dernière mise à jour) grâce au mouvement courant. Une fois le point indiqué par le mouvement atteint, il est retiré de la liste.
 
 
 \subsection{Les défauts de l'implémentation}
 Beaucoup de choses n'ont pas pu être implémenté par manque de temps. \\
-Certaines choses sont codés en \og dur \fg{} dans certaines classes (notamment les foncteurs de distance, la structure d'indexation dans SpatialData qui est SimpleIndex, etc.). A chaque fois, une note TODO est présente en commentaire pour rappeler qu'il faudra généraliser le comportement ou le compléter.\\\\
+Certaines choses sont codées en \og dur \fg{} dans certaines classes (notamment les foncteurs de distance, la structure d'indexation dans SpatialData qui est SimpleIndex, etc.). A chaque fois, une note TODO est présente en commentaire pour rappeler qu'il faudra généraliser le comportement ou le compléter.\\
 
-Voici une liste des principales fonctionnalités manquantes :
+Voici une liste des principales fonctionnalités manquantes~:
 \subsubsection{Les obstacles et collisions}
 
-Les obstacles n'ont pas été créés, ainsi que les collisions entre les objets dynamiques. Ainsi, les resources, modélisés par un simple pixel, peuvent se chevaucher.\\
+Les obstacles n'ont pas été créés, ainsi que les collisions entre les objets dynamiques. Ainsi, les resources, modélisées par un simple pixel, peuvent se chevaucher.\\
 Le manque d'obstacle fait que l'algorithme de plus court chemin est très basique.
 
 \subsubsection{Espace}
 L'espace de l'environnement n'est pas implémenté (en tout cas partiellement mais pas utilisé). Son utilité première est de définir des bornes à l'espace.\\
-Dans la version actuelle, l'espace est infinie dans toutes ses dimensions et donc aucune vérification lors de l'ajout d'un objet dans l'environnement n'est effectuée pour savoir s'il est bien dans l'espace.
+Dans la version actuelle, l'espace est infini dans toutes ses dimensions et donc aucune vérification lors de l'ajout d'un objet dans l'environnement n'est effectuée pour savoir s'il est bien dans l'espace.
 
 \subsubsection{Partionnement}
-Comme il n'y a pas d'obstacle, il n'y a pas non plus d'algorithme de partitionnement. Il s'agit la encore d'un manque de temps et la fonctionnalité n'est pas essentielle pour avoir une simulation fonctionnelle. Elle permettrait simplement de réduire le coût de calcul des heuristiques de plus court chemin.
+Comme il n'y a pas d'obstacle, il n'y a pas non plus d'algorithme de partitionnement. Il s'agit là encore d'un manque de temps et la fonctionnalité n'est pas essentielle pour avoir une simulation fonctionnelle. Elle permettrait simplement de réduire le coût de calcul des heuristiques de plus court chemin.
 
 \subsubsection{Observateur / Observé}
 

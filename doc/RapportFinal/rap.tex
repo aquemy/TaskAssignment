@@ -1,8 +1,30 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc}
-\usepackage[francais]{babel}
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
 \usepackage[final]{pdfpages} 
 \usepackage{insa}
+
+\usepackage{amsfonts}
+\usepackage{listingsutf8}
+
+\lstset{
+literate=%
+{é}{{\'e}}1
+{è}{{\`e}}1
+{É}{{\'E}}1
+{ê}{{\^e}}1
+{à}{{\`a}}1,
+}
+
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+breaklinks=true,
+urlcolor= blue,
+linkcolor= black,
+bookmarksopen=true,
+}
 
 % --------------------------------------------------------------------
 \begin{document}
@@ -14,6 +36,7 @@
 %%- Table des matières
 \tableofcontents
 \thispagestyle{empty} \setcounter{page}{0}
+\renewcommand{\labelitemi}{$\bullet$}
 
 %%- Introduction
 \chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}

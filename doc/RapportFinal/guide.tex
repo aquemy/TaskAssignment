@@ -46,15 +46,15 @@ Tout d'abord nous créons un générateur aléatoire avec une distribution unifo
         std::uniform_int_distribution<> dis(0, 10);
 \end{lstlisting}
 
-Nous créons un simple environnement 2D dont les coordonées seront des int. Le dernier template n'est pas utilisé pour l'implémentation à l'heure actuelle.
+Nous créons un simple environnement 2D dont les coordonées seront des \texttt{int}. Le dernier template n'est pas utilisé pour l'implémentation à l'heure actuelle.
 
 \begin{lstlisting}[label=nvi_code,caption=Environnement,language=C++]
         // Create simple 2D environment
         Environment<2, int, int> env;
 \end{lstlisting}
 
-Nous ajoutons quelques ressources de manière aléatoire. Chaque resource a besoin d'un algorithme de plus court chemin. Nous choisissons l'algorithme le plus simple, qui ne tient pas compte des obstacles.\\
-La valeur 100 correspond à la vitesse en de la ressource et nous lui donnons un statut non-occupé par défaut. En dernier lieu nous ajoutons les resources ainsi créées à l'environnement.
+Nous ajoutons quelques ressources de manière aléatoire. Chaque ressource a besoin d'un algorithme de plus court chemin. Nous choisissons l'algorithme le plus simple, qui ne tient pas compte des obstacles.\\
+La valeur 100 correspond à la vitesse de la ressource et nous lui donnons un statut non-occupé par défaut. En dernier lieu nous ajoutons les ressources ainsi créées à l'environnement.
 
 \begin{lstlisting}[label=nvi_code,caption=Création de ressources,language=C++]       
         // Add some resources randomly
@@ -73,9 +73,9 @@ La valeur 100 correspond à la vitesse en de la ressource et nous lui donnons un
 \end{lstlisting}
 
 Nous faisons de même avec des emplacements de travail que nous générons aléatoirement. Pour cela, il nous faut créer une tâche, et tant qu'à faire, une contrainte de seuil dessus qui sera ajoutée dans le système de contraintes.\\
-La contrainte est initialisée avec une priorité 0, utilisant la tâche $t$ qui doit être supérieur à 500.
+La contrainte est initialisée avec une priorité 0, utilisant la tâche $t$ qui doit être supérieure à 500.
 
-\begin{lstlisting}[label=nvi_code,caption=Création des tâches, contraintes et emplacements,language=C++]        
+\begin{lstlisting}[label=nvi_code,caption=Création des tâches / contraintes et emplacements,language=C++]        
         // Create some tasks and the constraintSystem
         Task t;
         StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
@@ -136,7 +136,7 @@ La dernière étape consiste à définir les paramètres de la simulation : crit
         Controller::addStep(iaStep);
 \end{lstlisting}
 
-Nous devons initialiser le contrôleur qui se chargera alors de lancer l'indexation et le partitionnement et transmettre les informations récoltées aux entitées en ayant besoin.
+Nous devons initialiser le contrôleur qui se chargera alors de lancer l'indexation et le partitionnement et transmettre les informations récoltées aux entités en ayant besoin.
 
 \begin{lstlisting}[label=nvi_code,caption=Initialisation et lancement du contrôleur,language=C++]         
         // Init and launch the simulation
@@ -144,7 +144,7 @@ Nous devons initialiser le contrôleur qui se chargera alors de lancer l'indexat
         Controller::run();
 \end{lstlisting}
 
-En dernier lieu nous libérons la mémoire liées à la création dynamique des différents objets.
+En dernier lieu nous libérons la mémoire liée à la création dynamique des différents objets.
 
 \begin{lstlisting}[label=nvi_code,caption=Libération des resources,language=C++]        
         // Free Memory
@@ -179,6 +179,6 @@ L'application requiert une police d'écriture qui est présente et copiée dans 
 
 La simulation dure \textless time\textgreater secondes et se terminera quoiqu'il arrive après ce temps. Si aucun argument n'est spécifié, la durée est de 25 secondes.\\
 On peut ajouter des emplacements de travail en cliquant avec le bouton droit de la souris et des ressources avec le bouton gauche.\\
-Comme la seule contrainte définie est sur la tâche 1 et requiert que la tâche soit à plus de 5000, une fois la constrainte satisfaite, la stratégie implémentée n'affectera pas les nouvelles ressources crées, même si elles sont libres (un message s'affiche alors à l'écran).\\\\
+Comme la seule contrainte définie est sur la tâche 1 et requiert que la tâche soit à plus de 5000, une fois la constrainte satisfaite, la stratégie implémentée n'affectera pas les nouvelles ressources créées, même si elles sont libres (un message s'affiche alors à l'écran).\\\\
 
 Le contrôleur graphique étant indépendant du contrôleur principal de la simulation, il est possible de faire l'interface graphique sans interrompre la simulation, en appuyant sur la touche echap. On peut également réouvrir l'interface en appuyant sur cette même touche.

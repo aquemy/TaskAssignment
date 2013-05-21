@@ -4,7 +4,6 @@
 \subsection{Module d'IA et d'environnement}
 
 Dans ce module, on distingue plusieurs entités~:
-\renewcommand{\labelitemi}{$\bullet$}
 \begin{itemize}
 \setlength{\itemsep}{5pt}
 \item L'environnement, espace dans lequel évolue les objets. En pratique, généralement $\mathbb{R}^2$ ou $\mathbb{R}^3$.
@@ -335,7 +334,7 @@ Certains arbres peuvent se constuire de plusieurs manières, c'est pourquoi on p
 \end{figure}
 
 \newpage
-\subsection{{\color{red}Environnement}}}
+\subsection{{\color{blue}Environnement}}
 Une erreur de copié / collé avait fait disparaitre le diagramme de classe du rapport sur la modélisation...
 \begin{figure}[!h]\centering
    \includegraphics[angle=90, scale=0.5]{images/c_environnement.png}
@@ -653,13 +652,13 @@ GraphAdjMT c; // Adjacence, MultiThread
 La classe Graph fait appelle à l'aveugle à sa politique de thread ainsi qu'à sa politique de représentation. La bonne écriture d'une politique est guidée par l'API de la classe abstraite en haut de la hiérarchie mais aucune vérification de type n'est effectuée par la classe Graph. Ainsi, un utilisateur pourrait écrire sa propre politique qui ne serait pas basée sur une des classes abstraites.\\
 La partie \verb|using| n'est pas du simple sucre synthaxique puisqu'il contribue également à la maintenabilité de l'application. L'utilisateur final utilise des types en \og{} dur \fg, sans template, ce qui permet, si le besoin s'en fait sentir, de ne changer le template qu'à un unique endroit.
 
-\section{{\color{red}{Notes sur la modélisation}}}
+\section{{\color{blue}{Notes sur la modélisation}}}
 
 Quelques petites choses ont changé lors de l'implémentation. Notamment, la fabrique pour les algorithmes de plus court chemin a été supprimé puisqu'elle n'avait pas d'intérêt.\\\\
 
 En règle générale, des interfaces, sous la forme de classe abstraite (ie. avec des méthodes virtuelles pures) ont été rajoutées pour la plupart des entitées templatées, afin de pouvoir les manipuler de manière plus générique (et éviter la multiplication des templates dans des classes qui n'en ont pas besoin).\\\\
 
-Les modélisation des chemins, directions et mouvements n'avait pas été faite.
+Les modélisations des chemins, directions et mouvements n'avaient pas été faites.
 
 \subsection{Direction}
 
