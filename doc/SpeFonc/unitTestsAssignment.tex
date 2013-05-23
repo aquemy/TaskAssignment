@@ -5,16 +5,16 @@
 
 
 % -------------------------
-\subsection{AssignmentFactory}
+%\subsection{AssignmentFactory}
 % -------------------------
 
-On testera la fonction \texttt{KuhnInstance(std::map<Resource<Dim, Type, Data>*, int> \_resource, std::vector<TaskSpot<Dim, Type>*> \_taskSpot)} sur un cas simple~: une ressource et une tâche dont il est facile de calculer le coût.\\
-Ainsi qu'un cas où une ressource (ou une tâche) n'existe pas. La fonction devrait alors retourner une erreur.
+%On testera la fonction \texttt{KuhnInstance(std::map<Resource<Dim, Type, Data>*, int> \_resource, std::vector<TaskSpot<Dim, Type>*> \_taskSpot)} sur un cas simple~: une ressource et une tâche dont il est facile de calculer le coût.\\
+%oAinsi qu'un cas où une ressource (ou une tâche) n'existe pas. La fonction devrait alors retourner une erreur.
 
 % -------------------------
 \subsection{Kuhn}
 % -------------------------
 
 On va tester la fonction \texttt{operator()}, deux cas sont à tester.\\
-Cas simple où l'on a une ressource pour une tâche. C'est à dire un cas où l'on peut connaître facilement l'affectation que l'on aura.\\
-Cas où l'on a pas le même nombre de ressources que de tâches.
+Cas simple où l'on a une ressource pour une tâche, voir deux ressources et deux tâches. C'est à dire un cas où l'on peut connaître facilement l'affectation que l'on aura.\\
+Cas où l'on a pas le même nombre de ressources que de tâches~: 2 ressources pour 3 tâches~; 3 ressources pour 2 tâches\ldots

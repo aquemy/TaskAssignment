@@ -65,7 +65,6 @@ int main(void)
 			throw std::runtime_error("Error in expectations for test 3");
 
 		// Test for update()
-		logger(Logger::INFO) << "update without assignment";
 		res->update(-1.);
 		logger(Logger::INFO) << "------";
 		res->update(0.);
@@ -87,7 +86,6 @@ int main(void)
 		c = res->getCoordonates();
 		
 		logger(Logger::INFO) << "-------------------------";
-		logger(Logger::INFO) << "update an assignment";
 		res->update(-1.);
 		
 		if(res->getCoordonates() != c)

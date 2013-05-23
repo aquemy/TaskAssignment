@@ -16,7 +16,7 @@ set (TEST_LIST
         ##ut-direction
         ##ut-environment
         ##ut-eval
-        ##ut-ia
+        ut-ia
         ##ut-kuhn
         ##ut-logger
         ##ut-manualModel
@@ -28,8 +28,7 @@ set (TEST_LIST
         #ut-rTree
         ##ut-resource
         #ut-shortestPath
-        #ut-shortestPathFactory
-        ut-simpleIndex
+        ##ut-simpleIndex
         ##ut-simpleStrategy
         ##ut-space
         #ut-spatialData

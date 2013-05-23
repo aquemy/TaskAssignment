@@ -1,4 +1,5 @@
 
+
 % -------------------------
 \subsection{Environnement}
 % -------------------------
@@ -8,8 +9,10 @@ On doit tester la fonction \texttt{update(double \_time)}, cette fonction met à
 \begin{itemize}
 \item Cas d'erreur~: Si on passe un paramètre négatif, une erreur doit apparaître. En effet, cela reviendrait à un retour dans le passé.
 \item Cas aux limites~: Si le paramètre passé est nul, on doit obtenir le même environnement qu'avant la mise à jour.
-\item Cas nominal~: Enfin, si on passe un paramètre positif, l'environnement peut être différent, en effet celui-ci change avec le temps.
+\item Cas nominal~: Enfin, si on passe un paramètre positif, l'environnement peut être différent, en effet celui-ci change avec le temps.\\
 \end{itemize}
+
+On va également tester les différentes fonctions \texttt{addObject()}. Pour cela on va ajouter différents éléments et vérifier que l'on récupère bien ce qu'on a ajouté à l'aide des \texttt{getter}.\\
 
 % -------------------------
 \subsection{Eval}
