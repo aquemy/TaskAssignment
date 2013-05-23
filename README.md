@@ -10,6 +10,12 @@ The basic installation procedure must be done in a separatly folder in order to 
     cd build
     cmake ..
     make
+    
+# DOCUMENTATION
+
+To generate the documentation, in build directory :
+
+    make doc
 
 # DIRECTORY STRUCTURE
 
