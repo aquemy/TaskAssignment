@@ -16,10 +16,10 @@ set (TEST_LIST
         ##ut-direction
         ##ut-environment
         ##ut-eval
-        #ut-ia
+        ##ut-ia
         ##ut-kuhn
         ##ut-logger
-        #ut-manualModel
+        ##ut-manualModel
         #ut-model
         #ut-object
         #ut-observer
@@ -30,7 +30,8 @@ set (TEST_LIST
         #ut-shortestPath
         #ut-shortestPathFactory
         ut-simpleIndex
-        #ut-simpleStrategy
+        ##ut-simpleStrategy
+        ##ut-space
         #ut-spatialData
         #ut-strategy
         ##ut-task

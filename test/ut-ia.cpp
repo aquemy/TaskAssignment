@@ -40,7 +40,7 @@ int main(void)
      */
     try
     {
-        /*/ Create some tasks and the constraintSystem
+        // Create some tasks and the constraintSystem
       	SimpleSP spa;
         Coordonate<2,int> coord;
         Task t;
@@ -48,8 +48,6 @@ int main(void)
         ConstraintSystem constraintSystem;
         constraintSystem.push(&sc);
         Kuhn assignment;
-        SimpleStrategy<2,int> s1(assignment);
-        ManualModel<2,int> model(s1);
         
         AEnvironment* env = new Environment<2, int, int>();
         std::vector<AResource*> res;
@@ -62,13 +60,18 @@ int main(void)
         coord[0] = 2;
         coord[1] = 2;
         ts.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
-        
         env->addObject(ts);
+
         SpatialData* spd = new SpatialData(env);
+        spd->startIndexing();
+        
+        SimpleStrategy<2,int> s1(assignment);
+        ManualModel<2,int> model(s1);
         
         IA<2,int> ia(model, constraintSystem);
+		ia.setSpatialData(*spd);
 		
-		ia.update(0);
+		ia.update(1.);
 		//*/
     }
     catch(exception& e)

@@ -40,17 +40,29 @@ int main(void)
      */
     try
     {
-    	/*/ Creation
+    	// Creation
         Kuhn assignment;
         SimpleStrategy<2,int> s1(assignment);
+
+        SimpleSP spa;
+        Task t;
+		
+        Coordonate<2,int> coord;
+		AEnvironment* env = new Environment<2,int,int>();
+		
+        std::vector<ATaskSpot*> ts;
+        coord[0] = 1;
+        coord[1] = 1;
+        ts.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
+        
+        env->addObject(ts);
         
         // Model creation
         ManualModel<2,int> model(s1);
         
-        // Test for update()
-        SpatialData* spd;
+		SpatialData* spd = new SpatialData(env);
+	    spd->startIndexing();
         
-        Task t;
         StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
         ConstraintSystem constraintSystem;
         constraintSystem.push(&sc);

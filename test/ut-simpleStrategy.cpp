@@ -41,6 +41,48 @@ int main(void)
     try
     {
         // Test for evalSituation()
+		Kuhn assignment;
+        SimpleSP spa;
+        Task t;
+		
+        Coordonate<2,int> coord;
+		AEnvironment* env = new Environment<2,int,int>();
+		
+        std::vector<ATaskSpot*> ts;
+        coord[0] = 1;
+        coord[1] = 4;
+        ts.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
+        coord[0] = 2;
+        coord[1] = 2;
+        ts.push_back(new TaskSpot<2,int>(coord, std::ref(t), [](int& i, double _time){ return i+0.001*_time; }));
+        
+        env->addObject(ts);
+		SpatialData* sd = new SpatialData(env);
+	    sd->startIndexing();
+		
+        StepConstraint sc(0, t, ConstraintComp::GREATER, 500);
+        ConstraintSystem constraintSystem;
+        constraintSystem.push(&sc);
+
+		SimpleStrategy<2,int> sst(assignment);
+		
+		int res = sst.evalSituation(*sd, constraintSystem);
+		
+		// We don't have any resource so res needs to be null
+        if(res != 0)
+            throw runtime_error("Error in expectations for first test");
+
+        std::vector<AResource*> resourc;
+        coord[0] = 3;
+        coord[1] = 2;
+        resourc.push_back(new Resource<2,int,int>(coord, 100, false, spa));
+        
+        env->addObject(resourc);
+        
+		res = sst.evalSituation(*sd, constraintSystem);
+		
+        if(res != 5) // 4 + 1
+            throw runtime_error("Error in expectations for first test");
 
     }
     catch(exception& e)

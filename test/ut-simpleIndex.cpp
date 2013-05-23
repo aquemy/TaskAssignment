@@ -50,7 +50,9 @@ int main(void)
         obs.push_back(&s1);
         
         SimpleIndex<Square<2,int>> ind(obs);
-
+		
+		if(ind.getData() != obs)
+			throw runtime_error("Error in expectations for first test");
     }
     catch(exception& e)
     {

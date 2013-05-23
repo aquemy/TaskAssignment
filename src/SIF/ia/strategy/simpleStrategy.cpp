@@ -77,17 +77,15 @@ namespace sif
             
             
             logger(Logger::PROGRESS) << "SimpleStrategy : Eval taskSpot";
-            logger(Logger::INFO) << "SimpleStrategy : A"; 
             std::vector<ATaskSpot*> taskSpots = _spatialData.getTaskSpots().getData();
-            logger(Logger::INFO) << "SimpleStrategy : B"; 
             taskSpotsTable = EvalLoop(taskSpotEval, taskSpots);
-            logger(Logger::INFO) << "SimpleStrategy : C"; 
             
             for(auto e : taskSpotsTable)
             {
                 std::string message = std::to_string((long int)e.first)+" ("+std::to_string(e.second)+")";
                 logger(Logger::INFO) << message;
             }
+            logger(Logger::PROGRESS) << "C";
             
             logger(Logger::PROGRESS) << "SimpleStrategy : Eval (resources / taskSpots)";
             std::vector<AResource*> resources = _spatialData.getResources().getData();

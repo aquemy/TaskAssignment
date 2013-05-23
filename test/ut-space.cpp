@@ -41,7 +41,27 @@ int main(void)
     try
     {
 		// Test for inSpace()
-	
+		Space<2,int> sp;
+		
+		sp.setBoundaries(0, 0, 5);
+		sp.setBoundaries(1, 0, 5);
+		
+		Coordonate<2,int> coord;
+        coord[0] = 1; coord[1] = 1;
+        
+		if(!sp.inSpace(coord))
+            throw runtime_error("Error in expectations for first test");
+        
+        coord[0] = -1; coord[1] = 1;
+        
+		if(sp.inSpace(coord))
+            throw runtime_error("Error in expectations for second test");
+
+        coord[0] = 6; coord[1] = 1;
+        
+		if(sp.inSpace(coord))
+            throw runtime_error("Error in expectations for third test");
+
     }
     catch(exception& e)
     {
